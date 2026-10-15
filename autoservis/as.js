@@ -28,7 +28,6 @@
 		return { label: 'Zatvorené', sub: next, color: '#8A8F96' };
 	};
 	window.AS_STATUS = status;
-	const st = status();
 
 	const proto = document.getElementById( 'proto' );
 	if ( proto ) {
@@ -40,10 +39,6 @@
 
 	const hdr = document.getElementById( 'hdr' );
 	if ( hdr ) {
-		const top = document.createElement( 'div' );
-		top.className = 'topbar';
-		top.innerHTML = `<div class="wrap"><span style="display:inline-flex;align-items:center;gap:10px"><span class="dot" style="background:${ st.color };color:${ st.color }"></span><span style="color:#fff">${ st.label }</span> <span>· ${ st.sub }</span></span><span class="tb-hide">Technická 5957/7A, 821 04 Bratislava – Ružinov</span><span class="tb-hide">pvsbratislava@gmail.com</span></div>`;
-		hdr.before( top );
 		hdr.className = 'hdr';
 		const links = PAGES.map( ( [ h, n ] ) => `<a class="nav-a${ h === here || h === parent ? ' on' : '' }" href="${ h }">${ n }</a>` ).join( '' );
 		hdr.innerHTML = `<div class="wrap">
