@@ -120,19 +120,30 @@
 </section>
 
 <!-- PROCESS -->
-<section class="sec sec-g" id="proces">
-	<div class="wrap g-proc">
-		<div><div class="sticky">
-			<h2 class="h2 rv" style="margin-bottom:24px">Ako to<br>prebieha<span class="red">?</span></h2>
-			<div class="rv" style="position:relative;overflow:hidden;aspect-ratio:4/5;max-height:560px;margin-top:40px"><img class="par" src="img/as-karoq.jpg" alt="Škoda Karoq s tabuľkou PV Autoservis v dielni" style="width:100%;height:100%;object-fit:cover"></div>
-		</div></div>
-		<div style="display:flex;flex-direction:column;padding-top:160px" class="steps">
-			<div class="rv step"><span class="cond">1</span><div><h3 class="h3">Rezervujte si termín online alebo telefonicky</h3><p class="txt" style="font-size:17px">Vyberte si presný čas a službu. Rezervácia vám zaberie menej než 1 minútu. Následne vás budeme kontaktovať s presnou cenovou ponukou.</p></div></div>
-			<div class="rv step"><span class="cond">2</span><div><h3 class="h3">Príďte do servisu</h3><p class="txt" style="font-size:17px">Nájdete nás na ulici Technická 5957/7A. Auto nám môžete nechať, alebo počkať priamo u nás pri káve v prijímacej kancelárii.</p></div></div>
-			<div class="rv step"><span class="cond">3</span><div><h3 class="h3">Vyzdvihnite si opravené vozidlo</h3><p class="txt" style="font-size:17px">Práce vykonáme podľa dohody, bez čakania a stresu. Všetko vám prehľadne vysvetlíme a body vernostného programu pripíšeme na váš účet.</p></div></div>
-			<div class="rv" style="display:flex;flex-wrap:wrap;gap:12px;padding-top:32px;border-top:1px solid #D7DADE"><a class="btn btn-red" data-book href="#">Rezervovať termín online</a><a class="btn btn-out" href="kontakt.html#form">Potrebujem konzultáciu</a></div>
+<section class="sec sec-g" id="proces" style="padding-block:96px">
+	<div class="wrap">
+		<div class="sec-head rv" style="margin-bottom:40px"><h2 class="h2" style="font-size:clamp(40px,4.4vw,64px)">Ako to prebieha<span class="red">?</span></h2><p class="side-note">Od rezervácie po odovzdanie auta – tri jednoduché kroky.</p></div>
+		<div class="proc">
+			<div class="proc-img rv"><img class="par" src="img/as-karoq.jpg" alt="Škoda Karoq s tabuľkou PV Autoservis v dielni"></div>
+			<div class="proc-steps">
+				<div class="rv step"><span class="cond">1</span><div><h3 class="h3">Rezervujte si termín</h3><p class="txt">Online alebo telefonicky za menej než minútu. Potom vás kontaktujeme s presnou cenovou ponukou.</p></div></div>
+				<div class="rv step"><span class="cond">2</span><div><h3 class="h3">Príďte do servisu</h3><p class="txt">Technická 5957/7A. Auto nám nechajte, alebo počkajte u nás pri káve v prijímacej kancelárii.</p></div></div>
+				<div class="rv step"><span class="cond">3</span><div><h3 class="h3">Vyzdvihnite si auto</h3><p class="txt">Všetko prehľadne vysvetlíme a body vernostného programu pripíšeme na váš účet.</p></div></div>
+				<div class="rv" style="display:flex;flex-wrap:wrap;gap:12px;padding-top:24px;border-top:1px solid #D7DADE"><a class="btn btn-red" data-book href="#">Rezervovať termín online</a><a class="btn btn-out" href="kontakt.html#form">Potrebujem konzultáciu</a></div>
+			</div>
 		</div>
-		<style>.step { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 8px; padding: 48px 0; border-top: 1px solid #D7DADE; } .step > span { font-size: 64px; font-weight: 800; line-height: .85; color: var(--red); } .step h3 { margin-bottom: 14px; } @media (max-width: 1060px) { .steps { padding-top: 0 !important; } } @media (max-width: 640px) { .step { grid-template-columns: 56px minmax(0, 1fr); } .step > span { font-size: 48px; } }</style>
+		<style>
+			.proc { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 64px; align-items: stretch; }
+			.proc-img { position: relative; overflow: hidden; min-height: 360px; max-height: 560px; }
+			.proc-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+			.proc-steps { display: flex; flex-direction: column; }
+			.step { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 8px; padding: 24px 0; border-top: 1px solid #D7DADE; }
+			.step > span { font-size: 48px; font-weight: 800; line-height: .85; color: var(--red); }
+			.step h3 { margin-bottom: 8px; font-size: 26px; }
+			.step .txt { font-size: 16px; }
+			@media (max-width: 1060px) { .proc { grid-template-columns: minmax(0, 1fr); gap: 32px; } .proc-img { min-height: 0; aspect-ratio: 16 / 10; } }
+			@media (max-width: 640px) { .step { grid-template-columns: 44px minmax(0, 1fr); } .step > span { font-size: 40px; } }
+		</style>
 	</div>
 </section>
 
