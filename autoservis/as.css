@@ -57,10 +57,16 @@ h1, h2, h3 { text-wrap: balance; }
 .nav-a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--red); transform: scaleX(0); transform-origin: left; transition: transform 260ms var(--ease); }
 @media (hover: hover) { .nav-a:hover::after { transform: scaleX(1); } }
 .nav-a.on { color: var(--red); }
-.burger { display: none; width: 52px; height: 52px; border: 2px solid var(--ink); background: var(--white); cursor: pointer; align-items: center; justify-content: center; }
+.burger { display: none; height: 48px; padding: 0 14px; gap: 10px; border: 2px solid var(--ink); background: var(--white); color: var(--ink); cursor: pointer; align-items: center; justify-content: center; font: 700 14px var(--cond); letter-spacing: .06em; text-transform: uppercase; -webkit-appearance: none; appearance: none; border-radius: 0; }
+.burger .bl { display: flex; flex-direction: column; gap: 4px; width: 18px; }
+.burger .bl i { display: block; height: 2px; background: var(--ink); transition: transform 240ms var(--ease), opacity 200ms ease; }
+.hdr.open .burger .bl i:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.hdr.open .burger .bl i:nth-child(2) { opacity: 0; }
+.hdr.open .burger .bl i:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 .mnav { display: none; border-top: 1px solid var(--line2); background: var(--white); }
 .mnav a { display: block; padding: 16px 0; border-bottom: 1px solid var(--line2); text-decoration: none; font: 700 22px var(--cond); text-transform: uppercase; }
 .hdr.open .mnav { display: block; }
+.hdr .mnav .wrap { display: block; height: auto; padding-block: 8px 20px; }
 
 /* Buttons */
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-height: 56px; padding: 0 28px; font: 700 15px/1 var(--cond); letter-spacing: .04em; text-transform: uppercase; text-decoration: none; cursor: pointer; border: 2px solid var(--red); transition: transform 160ms var(--ease), background-color 200ms ease, color 200ms ease, border-color 200ms ease; }

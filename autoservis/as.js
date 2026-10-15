@@ -50,7 +50,7 @@
 			<div style="display:flex;align-items:center;gap:10px">
 				<a class="btn btn-out btn-sm tb-hide" href="moj-ucet.html" title="Vernostný program">Môj účet</a>
 				<a class="btn btn-red btn-sm hdr-cta" href="${ BOOK }">Rezervovať</a>
-				<button type="button" class="burger" aria-label="Menu" aria-expanded="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+				<button type="button" class="burger" aria-label="Otvoriť menu" aria-expanded="false"><span class="bl" aria-hidden="true"><i></i><i></i><i></i></span><span class="bt">Menu</span></button>
 			</div>
 		</div>
 		<div class="mnav"><div class="wrap">${ PAGES.map( ( [ h, n ] ) => `<a href="${ h }">${ n }</a>` ).join( '' ) }<a href="moj-ucet.html">Môj účet</a><a href="${ BOOK }" style="color:#CC4133">Rezervovať termín</a></div></div>`;

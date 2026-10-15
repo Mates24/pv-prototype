@@ -52,10 +52,16 @@ h1, h2, h3 { text-wrap: balance; }
 .lang { display: flex; gap: 2px; padding: 3px; border-radius: 999px; background: var(--grey); }
 .lang button { height: 34px; padding: 0 12px; border: 0; border-radius: 999px; cursor: pointer; font: 500 13px var(--font); background: transparent; color: var(--sub); }
 .lang button.on { background: var(--white); color: var(--ink); box-shadow: 0 1px 3px rgba(0, 0, 0, .12); }
-.burger { display: none; width: 46px; height: 46px; border-radius: 999px; border: 1px solid var(--line); background: var(--white); cursor: pointer; align-items: center; justify-content: center; }
+.burger { display: none; width: 46px; height: 46px; padding: 0; border-radius: 999px; border: 1px solid var(--line); background: var(--white); color: var(--ink); cursor: pointer; align-items: center; justify-content: center; -webkit-appearance: none; appearance: none; }
+.burger .bl { display: flex; flex-direction: column; gap: 4px; width: 18px; }
+.burger .bl i { display: block; height: 2px; border-radius: 2px; background: var(--ink); transition: transform 240ms var(--ease), opacity 200ms ease; }
+.hdr.open .burger .bl i:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.hdr.open .burger .bl i:nth-child(2) { opacity: 0; }
+.hdr.open .burger .bl i:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 .mnav { display: none; border-top: 1px solid var(--line2); background: var(--white); }
 .mnav a { display: block; padding: 16px 0; border-bottom: 1px solid var(--line2); text-decoration: none; font-size: 17px; }
 .hdr.open .mnav { display: block; }
+.hdr .mnav .wrap { display: block; height: auto; padding-block: 8px 20px; }
 
 /* Buttons */
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 54px; padding: 0 30px; border-radius: 999px; font: 500 16px/1 var(--font); text-decoration: none; cursor: pointer; border: 0; transition: transform 160ms var(--ease), background-color 200ms ease, color 200ms ease, box-shadow 200ms ease; }

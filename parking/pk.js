@@ -32,7 +32,7 @@
 			<div class="hdr-r">
 				<div class="lang" role="group" aria-label="Jazyk"><button type="button" class="on">SK</button><button type="button">EN</button></div>
 				<a class="btn btn-red btn-sm" href="rezervacia.html">Rezervovať</a>
-				<button type="button" class="burger" aria-label="Menu" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+				<button type="button" class="burger" aria-label="Otvoriť menu" aria-expanded="false"><span class="bl" aria-hidden="true"><i></i><i></i><i></i></span></button>
 			</div>
 		</div>
 		<div class="mnav"><div class="wrap">${ PAGES.map( ( [ h, n ] ) => `<a href="${ h }">${ n }</a>` ).join( '' ) }<a href="rezervacia.html" style="color:var(--red);font-weight:600">Rezervovať parkovanie</a><div style="padding:16px 0" class="lang-m">SK · <a href="#" style="display:inline;border:0;padding:0">EN</a></div></div></div>`;
