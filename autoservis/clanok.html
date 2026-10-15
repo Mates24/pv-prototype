@@ -9,46 +9,82 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap">
 <link rel="stylesheet" href="as.css">
 <style>
-	.art { max-width: 760px; margin: 0 auto; }
+	.art-head { padding-block: 72px 48px; }
+	.art-head .eyebrow { margin-bottom: 22px; }
+	.art-head .h1 { font-size: clamp(38px, 4.4vw, 68px); max-width: 22ch; line-height: .95; }
+	.meta { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: 24px; font-size: 14px; color: var(--muted); }
+	.meta a { color: var(--red); text-decoration: none; font-weight: 500; }
+	.art-img { position: relative; overflow: hidden; aspect-ratio: 21 / 9; max-width: 100%; }
+	.art-img img { width: 100%; height: 100%; object-fit: cover; }
+	.art-g { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 72px; align-items: start; padding-block: 64px 130px; }
+	.art { max-width: 720px; min-width: 0; }
 	.art p, .art li { font-size: 18px; line-height: 1.75; color: #2A2D31; font-weight: 300; }
+	.art .intro { margin-top: 0; font-size: 22px; line-height: 1.55; font-weight: 400; color: var(--ink); }
 	.art h2 { margin: 56px 0 16px; font: 800 34px/1 var(--cond); text-transform: uppercase; }
-	.art ul { padding-left: 0; list-style: none; }
-	.art ul li { display: grid; grid-template-columns: 18px minmax(0, 1fr); gap: 14px; }
-	.art ul li::before { content: ""; width: 14px; height: 6px; margin-top: 13px; background: var(--red); transform: skewX(-20deg); }
-	.calc { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border: 2px solid var(--ink); margin: 40px 0; }
-	.calc > div { padding: 24px; display: flex; flex-direction: column; gap: 8px; }
-	.calc > div + div { border-left: 2px solid var(--ink); }
-	.calc b { font: 800 48px/.9 var(--cond); }
+	.art b { font-weight: 500; color: var(--ink); }
+	.steps3 { list-style: none; margin: 0; padding: 0; counter-reset: s; }
+	.steps3 li { counter-increment: s; display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 12px; padding: 18px 0; border-top: 1px solid var(--line); }
+	.steps3 li::before { content: counter(s, decimal-leading-zero); font: 800 22px var(--cond); color: var(--red); line-height: 1.6; }
+	.marks { list-style: none; margin: 0; padding: 0; }
+	.marks li { display: grid; grid-template-columns: 18px minmax(0, 1fr); gap: 14px; padding: 6px 0; }
+	.marks li::before { content: ""; width: 14px; height: 6px; margin-top: 13px; background: var(--red); transform: skewX(-20deg); }
+	.terms { margin-top: 48px; background: var(--grey); padding: 24px; font-size: 14px !important; line-height: 1.6 !important; color: var(--muted) !important; }
+	.art-side { position: sticky; top: 120px; display: flex; flex-direction: column; gap: 12px; }
+	.calc { border: 2px solid var(--ink); margin-bottom: 8px; }
+	.calc > div { padding: 18px 22px; display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+	.calc > div + div { border-top: 1px solid var(--line); }
+	.calc .tot { background: var(--ink); color: #fff; }
+	.calc .tot span { color: #C9CCD0; }
+	.calc b { font: 800 36px/1 var(--cond); }
 	.calc span { font-size: 14px; color: var(--muted); }
-	.terms { background: var(--grey); padding: 24px; font-size: 14px !important; line-height: 1.6 !important; color: var(--muted) !important; }
-	@media (max-width: 640px) { .calc { grid-template-columns: minmax(0, 1fr); } .calc > div + div { border-left: 0; border-top: 2px solid var(--ink); } }
+	@media (max-width: 1060px) { .art-g { grid-template-columns: minmax(0, 1fr); gap: 40px; } .art-side { position: static; order: -1; } }
+	@media (max-width: 640px) { .art-head { padding-block: 48px 32px; } .art-img { aspect-ratio: 4 / 3; } .art .intro { font-size: 19px; } .art h2 { font-size: 28px; } }
 </style>
 </head>
 <body data-page="clanok.html" data-parent="blog.html">
 <div id="proto"></div>
 <header id="hdr"></header>
 <main>
-	<section class="phero" style="border:0;padding-bottom:40px">
-		<div class="wrap art">
-			<div class="eyebrow in d1" style="margin-bottom:22px"><span class="slash"></span>Akcia do 31. 10. 2026</div>
-			<h1 class="h1 in d2" style="font-size:clamp(40px,5vw,72px)">Kontrola vozidla za 50 €. Pri oprave u nás ju máte zadarmo.</h1>
+	<section class="art-head">
+		<div class="wrap">
+			<div class="eyebrow in d1"><span class="slash"></span>Akcia do 31. 10. 2026</div>
+			<h1 class="h1 in d2">Kontrola vozidla za 50 €. Pri oprave u nás ju máte zadarmo.</h1>
+			<div class="meta in d3"><span>Október 2026</span><span>3 min čítania</span><a href="blog.html">← Späť na blog</a></div>
 		</div>
 	</section>
-	<div class="wrap" style="padding-bottom:64px"><div class="rv" style="position:relative;overflow:hidden;aspect-ratio:21/9;max-width:100%"><img class="par" src="img/as-lift.jpg" alt="Auto na zdviháku počas všeobecnej kontroly" style="width:100%;height:100%;object-fit:cover"></div></div>
-	<article class="wrap" style="padding-bottom:130px">
-		<div class="art">
-			<p style="font-size:21px;font-weight:400">Dajte si skontrolovať auto. Ak bude potrebovať opravu, kontrolu máte od nás zadarmo. Ak bude úplne v poriadku, získate voucher 50 € na ďalšie služby.</p>
-			<div class="calc rv"><div><span>Cena kontroly</span><b class="num">50 €</b></div><div><span>Zľava pri oprave u nás</span><b class="num red">−50 €</b></div><div><span>Výsledná cena kontroly</span><b class="num">0 €</b></div></div>
+	<div class="wrap"><div class="art-img rv"><img class="par" src="img/as-lift.jpg" alt="Auto na zdviháku počas všeobecnej kontroly"></div></div>
+	<div class="wrap art-g">
+		<article class="art">
+			<p class="intro">Dajte si skontrolovať auto. Ak bude potrebovať opravu, kontrolu máte od nás zadarmo. Ak bude úplne v poriadku, získate voucher 50 € na ďalšie služby.</p>
 			<h2>Ako akcia funguje</h2>
-			<p><b>1. Objednáte sa na všeobecnú kontrolu.</b> Mechanici preveria najdôležitejšie časti vozidla. Kontrolu uhradíte po jej vykonaní.</p>
-			<p><b>2. Dostanete prehľadný report.</b> Vysvetlíme vám, čo vyriešiť čo najskôr, čo je dôležité pre bezpečnosť a čo môže počkať.</p>
-			<p><b>3. Ak si auto necháte opraviť u nás, 50 € odpočítame.</b> Kontrola vás tak v konečnom dôsledku nebude stáť nič.</p>
+			<ol class="steps3">
+				<li><span><b>Objednáte sa na všeobecnú kontrolu.</b> Mechanici preveria najdôležitejšie časti vozidla. Kontrolu uhradíte po jej vykonaní.</span></li>
+				<li><span><b>Dostanete prehľadný report.</b> Vysvetlíme vám, čo vyriešiť čo najskôr, čo je dôležité pre bezpečnosť a čo môže počkať.</span></li>
+				<li><span><b>Ak si auto necháte opraviť u nás, 50 € odpočítame.</b> Kontrola vás tak v konečnom dôsledku nebude stáť nič.</span></li>
+			</ol>
 			<h2>Čo skontrolujeme</h2>
-			<ul><li>podvozok a riadenie – čapy, silentbloky a ďalšie súčasti,</li><li>brzdový systém – kotúče, platničky a brzdovú kvapalinu,</li><li>pneumatiky – stav, opotrebenie a hĺbku dezénu,</li><li>osvetlenie a elektroniku – svetlá a diagnostiku chýb,</li><li>batériu – aktuálny stav,</li><li>prevádzkové kvapaliny a filtre.</li></ul>
-			<div style="display:flex;flex-wrap:wrap;gap:12px;margin:40px 0"><a class="btn btn-red" data-book href="#">Objednať kontrolu</a><a class="btn btn-out" href="tel:+421910623111">0910 623 111</a></div>
-			<p class="terms">Podmienky akcie: Kontrola sa uhrádza v plnej výške 50 €. Pri následnej realizácii odporúčanej opravy v PV Autoservise bude suma odpočítaná z ceny opravy. Ak kontrola neodhalí potrebu opravy, zákazník dostane voucher v hodnote 50 €. Ak sa zákazník rozhodne opravu nerealizovať, cena kontroly sa nevracia. Akcia trvá do 31. 10. 2026.</p>
-		</div>
-	</article>
+			<ul class="marks">
+				<li>podvozok a riadenie – čapy, silentbloky a ďalšie súčasti</li>
+				<li>brzdový systém – kotúče, platničky a brzdovú kvapalinu</li>
+				<li>pneumatiky – stav, opotrebenie a hĺbku dezénu</li>
+				<li>osvetlenie a elektroniku – svetlá a diagnostiku chýb</li>
+				<li>batériu – aktuálny stav</li>
+				<li>prevádzkové kvapaliny a filtre</li>
+			</ul>
+			<h2>A čo ak je auto v poriadku?</h2>
+			<p>To je najlepšia správa. Ak kontrola neodhalí nič, čo by bolo treba opraviť, dostanete voucher 50 € na ďalšie služby – napríklad na prezutie pneumatík.</p>
+			<p class="terms"><b>Podmienky akcie.</b> Kontrola sa uhrádza v plnej výške 50 €. Pri následnej realizácii odporúčanej opravy v PV Autoservise bude suma odpočítaná z ceny opravy. Ak kontrola neodhalí potrebu opravy, zákazník dostane voucher v hodnote 50 €. Ak sa zákazník rozhodne opravu nerealizovať, cena kontroly sa nevracia. Akcia trvá do 31. 10. 2026.</p>
+		</article>
+		<aside class="art-side">
+			<div class="calc rv">
+				<div><span>Cena kontroly</span><b class="num">50 €</b></div>
+				<div><span>Zľava pri oprave u nás</span><b class="num red">−50 €</b></div>
+				<div class="tot"><span>Výsledná cena kontroly</span><b class="num">0 €</b></div>
+			</div>
+			<a class="btn btn-red" data-book href="#" style="width:100%">Objednať kontrolu</a>
+			<a class="btn btn-out" href="tel:+421910623111" style="width:100%">Zavolať 0910 623 111</a>
+		</aside>
+	</div>
 </main>
 <footer id="ftr"></footer>
 <script src="as.js"></script>
