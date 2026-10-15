@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PV redesign prototyp</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Roboto+Condensed:wght@700;800&family=Roboto:wght@400;500&display=swap">
+<style>
+	[hidden] { display: none !important; }
+	/* Hub: two sister sites side by side; parking speaks Poppins, autoservis condensed caps. */
+	:root {
+		--bg: #FFFFFF;
+		--ink: #1A1A19;
+		--muted: #5A5C62;
+		--line: #E4E5E8;
+		--grey: #F3F4F6;
+		--red: #C93C2E;
+		--p: 'Poppins', system-ui, sans-serif;
+		--c: 'Roboto Condensed', 'Arial Narrow', sans-serif;
+		color-scheme: light;
+	}
+	* { box-sizing: border-box; }
+	body { margin: 0; background: var(--bg); color: var(--ink); font-family: 'Roboto', system-ui, sans-serif; }
+	.wrap { max-width: 1240px; margin: 0 auto; padding-inline: 24px; padding-block: 56px 96px; }
+	h1 { margin: 0; font: 600 clamp(36px, 5vw, 64px)/1 var(--p); letter-spacing: -.035em; text-wrap: balance; }
+	.intro { max-width: 640px; margin: 18px 0 0; font-size: 17px; line-height: 1.65; color: var(--muted); }
+	.sites { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: 48px; }
+	.site { border: 1px solid var(--line); display: flex; flex-direction: column; min-width: 0; }
+	.site.pk { border-radius: 28px; overflow: hidden; }
+	.site header { padding: 28px; display: flex; flex-direction: column; gap: 10px; background: var(--grey); }
+	.site.as header { background: var(--ink); color: #fff; }
+	.site h2 { margin: 0; }
+	.pk h2 { font: 600 30px/1 var(--p); letter-spacing: -.03em; }
+	.as h2 { font: 800 34px/1 var(--c); text-transform: uppercase; }
+	.site header p { margin: 0; font-size: 14px; line-height: 1.55; color: var(--muted); }
+	.site.as header p { color: #C9CCD0; }
+	.site ul { list-style: none; margin: 0; padding: 8px 28px 24px; }
+	.site li a { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--line); text-decoration: none; color: var(--ink); font-size: 16px; }
+	.site li a small { color: var(--muted); font-size: 13px; }
+	.site li a:hover { color: var(--red); }
+	.site li a:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+	.go { display: inline-flex; align-self: flex-start; align-items: center; min-height: 46px; padding: 0 22px; background: var(--red); color: #fff; text-decoration: none; font-weight: 500; font-size: 15px; }
+	.pk .go { border-radius: 999px; font-family: var(--p); }
+	.as .go { font: 700 14px var(--c); letter-spacing: .05em; text-transform: uppercase; }
+	.notes { margin-top: 56px; border-top: 3px solid var(--ink); padding-top: 28px; display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 32px; }
+	.notes h2 { margin: 0; font: 600 26px/1.1 var(--p); letter-spacing: -.02em; }
+	.notes ol { margin: 0; padding-left: 20px; display: grid; gap: 14px; font-size: 16px; line-height: 1.6; }
+	.notes b { font-weight: 500; }
+	@media (max-width: 860px) { .sites, .notes { grid-template-columns: minmax(0, 1fr); } }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+	<h1>PV redesign – prototyp oboch webov</h1>
+	<p class="intro">Klikateľný návrh všetkých stránok PV airport parking a PV Autoservis podľa nového dizajnu. Funguje na počítači aj na mobile. Formuláre sú len ukážka – nič sa neodosiela.</p>
+
+	<div class="sites">
+		<section class="site pk">
+			<header><h2>PV airport parking</h2><p>pvparking.sk · zaoblené karty, palubný lístok, trasa na letisko</p><a class="go" href="parking/index.html">Otvoriť web</a></header>
+			<ul>
+				<li><a href="parking/index.html">Domov <small>cenník, výpočet ceny, FAQ</small></a></li>
+				<li><a href="parking/rezervacia.html">Rezervácia <small>3 kroky, IČO, zľavový kód</small></a></li>
+				<li><a href="parking/sluzby.html">Služby <small>VIP, čistenie, transfery</small></a></li>
+				<li><a href="parking/cennik.html">Cenník <small>zimná a letná sezóna</small></a></li>
+				<li><a href="parking/ako-sa-k-nam-dostat.html">Ako sa k nám dostať</a></li>
+				<li><a href="parking/upravit-rezervaciu.html">Upraviť rezerváciu <small>nájsť, zrušiť</small></a></li>
+				<li><a href="parking/kontakt.html">Kontakt</a></li>
+				<li><a href="parking/vop.html">Obchodné podmienky</a></li>
+				<li><a href="parking/404.html">Stránka 404</a></li>
+			</ul>
+		</section>
+		<section class="site as">
+			<header><h2>PV Autoservis</h2><p>pvs1.sk · ostré hrany, kondenzované písmo, červená šikmá linka</p><a class="go" href="autoservis/index.html">Otvoriť web</a></header>
+			<ul>
+				<li><a href="autoservis/index.html">Úvod <small>služby, čísla, recenzie</small></a></li>
+				<li><a href="autoservis/sluzby.html">Služby</a></li>
+				<li><a href="autoservis/sluzba-pneuservis.html">Pneuservis a geometria</a></li>
+				<li><a href="autoservis/sluzba-kontrola.html">Všeobecná kontrola vozidla</a></li>
+				<li><a href="autoservis/sluzba-brzdy.html">Brzdy</a></li>
+				<li><a href="autoservis/sluzba-olej.html">Olej a filtre</a></li>
+				<li><a href="autoservis/zimne-baliky.html">Zimné balíky <small>Silver, Gold, Diamond</small></a></li>
+				<li><a href="autoservis/cennik.html">Cenník</a></li>
+				<li><a href="autoservis/blog.html">Blog</a></li>
+				<li><a href="autoservis/clanok.html">Článok <small>akcia kontrola za 50 €</small></a></li>
+				<li><a href="autoservis/kontakt.html">Kontakt <small>hodiny, formulár</small></a></li>
+				<li><a href="autoservis/moj-ucet.html">Môj účet <small>vernostný program</small></a></li>
+				<li><a href="autoservis/404.html">Stránka 404</a></li>
+			</ul>
+		</section>
+	</div>
+
+	<section class="notes">
+		<h2>Na potvrdenie od majiteľa</h2>
+		<ol>
+			<li><b>Ceny parkovania.</b> V návrhu sú sezónne ceny z aktuálneho cenníka (zima od 24 €, leto od 28 €). Podklady pre dizajn uvádzali aj iný zoznam od 20 €. Ktorý platí?</li>
+			<li><b>Platba.</b> Všade je „platíte na mieste – kartou alebo v hotovosti“. Online platba nie je.</li>
+			<li><b>Kľúče.</b> Pri parkovaní si kľúče necháte; pri čistení a kontrole ich potrebujeme. Je to tak správne?</li>
+			<li><b>Vernostný program.</b> Koľko bodov za návštevu a aké odmeny? V návrhu sú ukážkové hodnoty.</li>
+			<li><b>Zimné balíky.</b> Dokedy platí ponuka?</li>
+			<li><b>Fotky a logá firiem.</b> Fotky sú zatiaľ zmenšené z webu – na spustenie pošlite originály a logá klientov do pásu „Firmy, ktoré nám zverili svoje vozidlá“.</li>
+		</ol>
+	</section>
+</div>
+</body>
+</html>

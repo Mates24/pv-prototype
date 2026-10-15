@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Upraviť rezerváciu – PV airport parking</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="pk.css">
+<style>
+	.box { background: #fff; border-radius: 28px; padding: clamp(24px, 4vw, 40px); display: flex; flex-direction: column; gap: 22px; }
+	.kv { display: flex; justify-content: space-between; gap: 16px; padding: 14px 0; border-top: 1px solid var(--line2); font-size: 15px; font-variant-numeric: tabular-nums; }
+	.kv span { color: var(--muted); }
+	.kv b { font-weight: 600; text-align: right; }
+	.pill { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; font-size: 13px; font-weight: 500; background: #EAF8F0; color: #1d6b40; }
+	.pill.x { background: #FDECEA; color: var(--red-dark); }
+	.flights-box { display: flex; flex-direction: column; gap: 14px; padding-top: 8px; }
+	.fl-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 12px; }
+	.flights-box .flc-set { display: none; }
+	.confirm { border: 1.5px solid var(--red); border-radius: 20px; padding: 20px; display: flex; flex-direction: column; gap: 14px; background: #FFF8F7; }
+</style>
+</head>
+<body data-page="upravit-rezervaciu.html">
+<div id="proto"></div>
+<header id="hdr"></header>
+<main>
+	<section class="phero">
+		<div class="wrap">
+			<nav class="crumbs in d1" aria-label="Omrvinky"><a href="index.html">Domov</a><span>/</span><span>Upraviť rezerváciu</span></nav>
+			<div class="phero-g">
+				<h1 class="h1 in d2">Upraviť alebo zrušiť rezerváciu</h1>
+				<p class="lead in d3">Zadajte číslo rezervácie a e-mail. Pošleme vám odkaz, cez ktorý rezerváciu zobrazíte alebo zrušíte. Zmenu termínu vybavíme telefonicky.</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="sec-g" style="padding-block:72px 130px">
+		<div class="wrap g-2" style="gap:20px;grid-template-columns:repeat(auto-fit,minmax(min(420px,100%),1fr))">
+			<form class="box rv" id="find" novalidate>
+				<h2 class="h3" style="font-size:28px">Nájsť rezerváciu</h2>
+				<div class="f"><label for="ref">Číslo rezervácie</label><input class="inp" id="ref" placeholder="P-20123" autocomplete="off"><span class="errt" hidden>Číslo má tvar P-20123. Nájdete ho v potvrdzovacom e-maile.</span></div>
+				<div class="f"><label for="mail">E-mail z rezervácie</label><input class="inp" id="mail" type="email" autocomplete="email"><span class="errt" hidden>Zadajte e-mail, na ktorý prišlo potvrdenie.</span></div>
+				<button class="btn btn-red" type="submit" style="align-self:flex-start">Poslať odkaz na rezerváciu</button>
+				<div class="ok-note" id="sent" hidden role="status">Ak rezervácia s týmto číslom a e-mailom existuje, odkaz sme vám práve poslali. Pozrite aj priečinok Spam.</div>
+				<p class="hint" style="margin:0">Termín vám zmeníme na čísle <b style="color:var(--ink)">+421 904 440 660</b>, nonstop.</p>
+			</form>
+
+			<div class="box rv" id="ukazka">
+				<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><span class="lbl">Ukážka: stránka z odkazu v e-maile</span><span class="pill" id="state">● Aktívna</span></div>
+				<h2 class="h3" style="font-size:28px">Rezervácia <span class="red">P-20123</span></h2>
+				<div>
+					<div class="kv"><span>Príchod</span><b>st 21. 10. 2026, 05:30</b></div>
+					<div class="kv"><span>Návrat</span><b>st 28. 10. 2026, 22:15</b></div>
+					<div class="kv"><span>Autá</span><b>BL 123 AB (kryté VIP)</b></div>
+					<div class="kv"><span>Osoby v transfere</span><b>2</b></div>
+					<div class="kv"><span>Parkovanie · 8 dní</span><b>65,00 €</b></div>
+					<div class="kv"><span>Kryté VIP</span><b>40,00 €</b></div>
+					<div class="kv" style="font-size:18px"><span style="color:var(--ink)">Spolu, platíte na mieste</span><b>105,00 €</b></div>
+				</div>
+				<div class="flights-box">
+					<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><h3 class="h3" style="font-size:20px">Vaše lety</h3><span class="hint" id="flUpd">Načítavam stav letov…</span></div>
+					<div class="fl-grid" id="flCards"></div>
+					<p class="ok-note" id="flLate" hidden>Váš let späť mešká. Vidíme to aj my – vyzdvihneme vás podľa skutočného príletu, netreba nám volať kvôli zmene.</p>
+					<button type="button" class="btn btn-line btn-sm" id="flRefresh" style="align-self:flex-start">Obnoviť stav letov</button>
+				</div>
+				<div style="display:flex;flex-wrap:wrap;gap:12px" id="acts"><button class="btn btn-line" type="button" id="cancel">Zrušiť rezerváciu</button><a class="btn btn-dark" href="tel:+421904440660">Zmeniť termín – zavolať</a></div>
+				<div class="confirm" id="conf" hidden>
+					<b style="font-size:17px">Naozaj zrušiť rezerváciu P-20123?</b>
+					<p class="txt" style="font-size:15px;margin:0">Zrušenie je zdarma, lebo do príchodu ostáva viac ako 24 hodín. Potvrdenie pošleme e-mailom.</p>
+					<div style="display:flex;flex-wrap:wrap;gap:10px"><button class="btn btn-red btn-sm" type="button" id="yes">Áno, zrušiť</button><button class="btn btn-line btn-sm" type="button" id="no">Nechať rezerváciu</button></div>
+				</div>
+				<div class="ok-note" id="done" hidden role="status">Rezervácia P-20123 je zrušená. Potvrdenie sme poslali e-mailom.</div>
+			</div>
+		</div>
+	</section>
+</main>
+<footer id="ftr"></footer>
+<script src="pk.js"></script>
+<script src="flights.js"></script>
+<script>
+( function () {
+	const $ = ( id ) => document.getElementById( id );
+	$( 'find' ).addEventListener( 'submit', ( e ) => {
+		e.preventDefault();
+		const okRef = /^P-?\d{5,}$/i.test( $( 'ref' ).value.trim() );
+		const okMail = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test( $( 'mail' ).value );
+		[ [ 'ref', okRef ], [ 'mail', okMail ] ].forEach( ( [ id, ok ] ) => { $( id ).classList.toggle( 'err', ! ok ); $( id ).nextElementSibling.hidden = ok; } );
+		$( 'sent' ).hidden = ! ( okRef && okMail );
+	} );
+	// Flight status for this booking (in the real system: the flights saved with the booking).
+	const today = new Date(); const iso = today.getFullYear() + '-' + String( today.getMonth() + 1 ).padStart( 2, '0' ) + '-' + String( today.getDate() ).padStart( 2, '0' );
+	const loadFlights = async () => {
+		$( 'flUpd' ).textContent = 'Načítavam stav letov…';
+		const [ a, b ] = await Promise.all( [ window.PVF.lookup( 'FR 8231', iso ), window.PVF.lookup( 'FR 8232', iso ) ] );
+		$( 'flCards' ).innerHTML = ( a.ok ? window.PVF.card( a.flight, 'out' ) : '' ) + ( b.ok ? window.PVF.card( b.flight, 'in' ) : '' );
+		$( 'flLate' ).hidden = ! ( b.ok && b.flight.delay > 0 );
+		const t = new Date();
+		$( 'flUpd' ).textContent = 'Aktualizované o ' + String( t.getHours() ).padStart( 2, '0' ) + ':' + String( t.getMinutes() ).padStart( 2, '0' );
+	};
+	$( 'flRefresh' ).onclick = loadFlights;
+	loadFlights();
+	$( 'cancel' ).onclick = () => { $( 'conf' ).hidden = false; $( 'acts' ).hidden = true; };
+	$( 'no' ).onclick = () => { $( 'conf' ).hidden = true; $( 'acts' ).hidden = false; };
+	$( 'yes' ).onclick = () => {
+		$( 'conf' ).hidden = true; $( 'done' ).hidden = false;
+		$( 'state' ).textContent = '● Zrušená'; $( 'state' ).classList.add( 'x' );
+	};
+} )();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="motion.js"></script>
+</body>
+</html>

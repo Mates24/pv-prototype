@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cenník – PV Autoservis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap">
+<link rel="stylesheet" href="as.css">
+<style>
+	.cats { position: sticky; top: 92px; z-index: 10; background: rgba(255,255,255,.96); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line2); }
+	.cats .wrap { display: flex; gap: 6px; overflow-x: auto; padding-block: 12px; scrollbar-width: none; }
+	.cats a { flex: none; padding: 10px 16px; border: 1px solid var(--line); font: 700 14px var(--cond); text-transform: uppercase; letter-spacing: .04em; text-decoration: none; color: var(--ink); }
+	.cats a.on, .cats a:hover { background: var(--ink); border-color: var(--ink); color: #fff; }
+	.cat { display: grid; grid-template-columns: 320px minmax(0, 1fr); gap: 56px; padding-block: 64px; border-top: 1px solid var(--line); scroll-margin-top: 170px; }
+	.cat h2 { margin: 0; font: 800 40px/.95 var(--cond); text-transform: uppercase; }
+	.cat .n { font: 800 15px var(--cond); color: var(--red); display: block; margin-bottom: 18px; }
+	.warn { background: var(--red); color: #fff; padding: 20px 24px; font-size: 15px; line-height: 1.5; display: flex; gap: 14px; align-items: flex-start; }
+	@media (max-width: 1060px) { .cat { grid-template-columns: minmax(0, 1fr); gap: 24px; } .cats { top: 76px; } }
+</style>
+</head>
+<body data-page="cennik.html">
+<div id="proto"></div>
+<header id="hdr"></header>
+<main>
+	<section class="phero" style="border-bottom:0;padding-bottom:48px">
+		<div class="wrap">
+			<div class="sec-head" style="margin:0">
+				<h1 class="h1 in d2">Cenník<br>služieb<span class="red">.</span></h1>
+				<p class="side-note in d3">Ceny sú s DPH. Pri servise oleja a náplní uvádzame cenu práce, materiál naceníme podľa EČV vášho auta.</p>
+			</div>
+		</div>
+	</section>
+	<nav class="cats" aria-label="Kategórie cenníka"><div class="wrap" id="catNav"></div></nav>
+	<section style="padding-bottom:110px">
+		<div class="wrap">
+			<div class="warn rv" style="margin-top:40px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" aria-hidden="true" style="flex:none"><path d="M12 3 2 21h20L12 3z"/><path d="M12 10v5M12 18v.5"/></svg><span>Pri dodaní vlastného materiálu zákazníkom sa cena práce navyšuje o 100 %.</span></div>
+			<div id="cats"></div>
+		</div>
+	</section>
+	<section class="sec-k" style="padding-block:96px">
+		<div class="wrap" style="display:flex;flex-wrap:wrap;gap:32px;align-items:center;justify-content:space-between">
+			<h2 class="h2 rv" style="font-size:clamp(36px,4vw,56px)">Termín máte<br><span style="color:var(--red-light)">za minútu</span></h2>
+			<div class="rv" style="display:flex;flex-wrap:wrap;gap:12px"><a class="btn btn-red" data-book href="#">Rezervovať online</a><a class="btn btn-white" href="tel:+421910623111">0910 623 111</a></div>
+		</div>
+	</section>
+</main>
+<footer id="ftr"></footer>
+<script>
+( function () {
+	const D = [
+		{ id: 'pneu', t: 'Výmena pneumatík s vyvážením', note: 'Cena za 4 ks', cols: [ 'Rozmer', 'Osobné auto', 'SUV' ], rows: [ [ '12″, 13″, 14″', '50 €', '55 €' ], [ '15″, 16″', '55 €', '60 €' ], [ '17″, 18″', '65 €', '70 €' ], [ '19″, 20″', '75 €', '80 €' ], [ '21″, 22″ a viac', '85 €', '90 €' ] ] },
+		{ id: 'kolesa', t: 'Výmena kolies s vyvážením', note: 'Cena za 4 ks', cols: [ 'Rozmer', 'Osobné auto', 'SUV' ], rows: [ [ '12″, 13″, 14″', '40 €', '45 €' ], [ '15″, 16″', '45 €', '50 €' ], [ '17″, 18″', '55 €', '60 €' ], [ '19″, 20″', '65 €', '70 €' ], [ '21″, 22″ a viac', '75 €', '80 €' ] ] },
+		{ id: 'uskladnenie', t: 'Uskladnenie', cols: [ 'Služba', 'Cena' ], rows: [ [ 'Sezónne uskladnenie pneumatík (4 ks)', '50 €' ], [ 'Sezónne uskladnenie pneumatík s diskom (4 ks)', '60 €' ], [ 'Uskladnenie vozidla <small>na 1 deň (24 h)</small>', '30 €' ] ] },
+		{ id: 'geometria', t: 'Geometria kolies', cols: [ 'Služba', 'Cena' ], rows: [ [ 'Kontrola nastavenia geometrie', '25 €' ], [ 'Geometria prednej nápravy – osobné auto', '35 €' ], [ 'Geometria prednej a zadnej nápravy – osobné auto', '65 €' ], [ 'Geometria prednej nápravy – SUV, VAN, dodávka', '45 €' ], [ 'Geometria prednej a zadnej nápravy – SUV, VAN, dodávka', '80 €' ] ] },
+		{ id: 'kontrola', t: 'Kontrola vozidla', cols: [ 'Služba', 'Cena' ], rows: [ [ 'Všeobecná kontrola vozidla', '50 €' ], [ 'Dymová skúška netesností v motorovom priestore', '30 €' ], [ 'Kontrola podvozku a náprav', '30 €' ], [ 'Kontrola pred STK + EK', '30 €' ], [ 'Diagnostika vozidla – autodiagnostika', '30 €' ], [ 'Kontrola motorového priestoru', '30 €' ], [ 'Kontrola elektriky a osvetlenia vozidla', '30 €' ] ] },
+		{ id: 'podvozok', t: 'Podvozok a nápravy', cols: [ 'Služba', 'Cena' ], rows: [ [ 'Kontrola podvozku a náprav', '20 €' ], [ 'Tlmiče, uloženia, pružiny, ramená, čapy, silentbloky, ložiská…<small>Individuálna cenová ponuka na prácu a materiál</small>', 'ponuka' ] ] },
+		{ id: 'brzdy', t: 'Brzdy', cols: [ 'Služba', 'Cena' ], rows: [ [ 'Kontrola bŕzd', '30 €' ], [ 'Výmena brzdovej kvapaliny', '40 €' ], [ 'Predné kotúče, platničky a vodiace puzdrá', '80 €' ], [ 'Predné platničky a vodiace puzdrá', '40 €' ], [ 'Zadné kotúče, platničky a vodiace puzdrá', '80 €' ], [ 'Zadné platničky a vodiace puzdrá', '40 €' ] ] },
+		{ id: 'klima', t: 'Klimatizácia', cols: [ 'Služba', 'Cena' ], rows: [ [ 'Dezinfekcia interiéru ozónom <small>Zničí 99,9 % baktérií, vírusov, zápachov a plesní</small>', '20 €' ], [ 'Kontrola a plnenie – chladivo R134a <small>Bez materiálu, chladivo 0,20 € / g</small>', '50 €' ], [ 'Kontrola a plnenie – chladivo R1234YF <small>Bez materiálu, chladivo 0,35 € / g</small>', '60 €' ] ] },
+		{ id: 'stk', t: 'STK + EK', cols: [ 'Služba', 'Cena' ], rows: [ [ 'Kontrola pred STK + EK', '50 €' ], [ 'Vykonanie kontroly STK + EK', '125 €' ] ] },
+		{ id: 'olej', t: 'Olejový servis', note: 'Cena za prácu, materiál naceníme po zaslaní EČV', cols: [ 'Služba', 'Práca' ], rows: [ [ 'Olej + olejový filter', '30 €' ], [ 'Olej + olejový + vzduchový filter', '40 €' ], [ 'Olej + olejový + vzduchový + kabínový filter', '50 €' ], [ 'Olej + všetky filtre vrátane palivového', '60 €' ] ] },
+		{ id: 'naplne', t: 'Výmena náplní', note: 'Cena za prácu, materiál naceníme po zaslaní EČV', cols: [ 'Služba', 'Práca' ], rows: [ [ 'Automatická prevodovka', 'od 60 €' ], [ 'Manuálna prevodovka', 'od 60 €' ], [ 'Diferenciál', '60 €' ], [ 'Rozvodovka', '60 €' ], [ 'Haldex', '60 €' ] ] },
+		{ id: 'cistenie', t: 'Čistenie a umývanie', cols: [ 'Služba', 'Malé auto', 'Stredné', 'Veľké' ], rows: [ [ 'Čistenie vozidla <small>Exteriér, interiér, plasty, koža, okná, rámy dverí</small>', '40 €', '50 €', '60 €' ], [ 'Tepovanie vozidla <small>Hĺbkové tepovanie, vyčistenie a ošetrenie kože</small>', '70 €', '80 €', '90 €' ], [ 'Čistenie + tepovanie <small>Zvýhodnená ponuka</small>', '100 €', '120 €', '140 €' ] ] },
+	];
+	document.getElementById( 'catNav' ).innerHTML = D.map( ( c ) => `<a href="#${ c.id }">${ c.t.replace( /s vyvážením|vozidla|a nápravy/g, '' ).trim() }</a>` ).join( '' );
+	document.getElementById( 'cats' ).innerHTML = D.map( ( c, i ) => `<section class="cat rv" id="${ c.id }"><div><span class="n">${ String( i + 1 ).padStart( 2, '0' ) }</span><h2>${ c.t }</h2>${ c.note ? `<p class="txt" style="margin-top:12px;font-size:14px">${ c.note }</p>` : '' }</div><div class="tscroll"><table class="ptable"><tr>${ c.cols.map( ( h ) => `<th>${ h }</th>` ).join( '' ) }</tr>${ c.rows.map( ( r ) => `<tr>${ r.map( ( v ) => `<td>${ v }</td>` ).join( '' ) }</tr>` ).join( '' ) }</table></div></section>` ).join( '' );
+	// Highlight the category in view.
+	const links = [ ...document.querySelectorAll( '#catNav a' ) ];
+	const io = new IntersectionObserver( ( es ) => es.forEach( ( e ) => { if ( e.isIntersecting ) { links.forEach( ( a ) => a.classList.toggle( 'on', a.hash === '#' + e.target.id ) ); } } ), { rootMargin: '-40% 0px -55% 0px' } );
+	document.querySelectorAll( '.cat' ).forEach( ( c ) => io.observe( c ) );
+} )();
+</script>
+<script src="as.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="motion.js"></script>
+</body>
+</html>

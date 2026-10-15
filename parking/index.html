@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PV airport parking – Letisko Bratislava</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="pk.css">
+</head>
+<body data-page="index.html">
+<div id="proto"></div>
+<header id="hdr"></header>
+
+<main>
+<!-- HERO -->
+<section class="hero">
+	<div class="wrap hero-g">
+		<div class="hero-t">
+			<h1 class="h1 in d1">Zaparkujte pri Letisku Bratislava rýchlo, bezpečne <span class="red">a bez stresu.</span></h1>
+			<p class="lead in d2" style="max-width:520px">Rezervujte si parkovanie online za pár minút. Po príchode vás odvezieme na letisko a vaše auto zostane zaparkované v uzavretom monitorovanom areáli.</p>
+			<div class="in d3" style="display:flex;flex-wrap:wrap;gap:12px">
+				<a class="btn btn-red" href="rezervacia.html">Rezervovať parkovanie <svg class="arr" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+				<a class="btn btn-line" href="cennik.html">Cenník parkovania</a>
+			</div>
+		</div>
+		<div class="hero-v">
+			<div class="hero-photo photo-in"><img class="par" src="img/p-van.jpg" alt="Šofér PV airport parking pri transferovej dodávke pred letiskom"></div>
+			<!-- Decorative ticket: a picture of what you get, not a form. -->
+			<div class="pass land stub" aria-hidden="true">
+				<div style="padding:22px 26px 18px">
+					<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px"><img src="img/logo-p.png" alt="" style="height:24px;width:auto"><span class="lbl">Parkovací lístok</span></div>
+					<div style="display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:center">
+						<div><div style="font-size:30px;font-weight:700;letter-spacing:-.03em;line-height:1">PV</div><div style="font-size:11px;color:var(--sub);margin-top:4px">Stará Vajnorská 39</div></div>
+						<div style="position:relative;height:24px;display:flex;align-items:center"><div style="flex:1;border-top:2px dotted #C9CACF"></div><svg width="22" height="22" viewBox="0 0 24 24" fill="#C93C2E" aria-hidden="true" style="position:absolute;left:50%;margin-left:-11px;transform:rotate(90deg)"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z"/></svg></div>
+						<div style="text-align:right"><div style="font-size:30px;font-weight:700;letter-spacing:-.03em;line-height:1">BTS</div><div style="font-size:11px;color:var(--sub);margin-top:4px">Letisko M. R. Štefánika</div></div>
+					</div>
+				</div>
+				<div class="perf"></div>
+				<div class="stub-f"><div><span class="lbl">Transfer</span><b>5 min</b></div><div><span class="lbl">Cena transferu</span><b>0 €</b></div><div><span class="lbl">Parkovanie</span><b>od 24 €</b></div></div>
+			</div>
+		</div>
+	</div>
+	<style>
+		.hero { position: relative; padding-block: 40px 96px; overflow: hidden; }
+		.hero-g { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr); gap: 56px; align-items: center; }
+		.hero .h1 { font-size: clamp(38px, 3.9vw, 60px); }
+		.hero-t { display: flex; flex-direction: column; gap: 30px; padding-block: 40px; }
+		.hero-v { position: relative; padding-bottom: 72px; }
+		.hero-photo { position: relative; height: clamp(440px, 70vh, 680px); border-radius: 32px; overflow: hidden; clip-path: inset(0 0 0 0 round 32px); }
+		.hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 60% 40%; }
+		.stub { position: absolute; left: -48px; bottom: 0; width: min(440px, 88%); }
+		.stub-f { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); padding: 18px 26px 22px; gap: 12px; }
+		.stub-f b { display: block; margin-top: 6px; font-size: 24px; font-weight: 600; letter-spacing: -.03em; }
+		@media (max-width: 1100px) {
+			.hero-g { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+			.stub { left: 0; }
+		}
+		@media (max-width: 640px) {
+			.hero-v { padding-bottom: 96px; }
+			.hero-photo { height: 380px; border-radius: 24px; clip-path: inset(0 0 0 0 round 24px); }
+			.stub { width: calc(100% - 16px); }
+			.stub-f b { font-size: 20px; }
+			.stub-f { padding: 16px 20px 20px; gap: 8px; }
+			.stub-f .lbl { font-size: 10px; letter-spacing: .06em; white-space: nowrap; }
+		}
+	</style>
+</section>
+
+<!-- USP TICKER -->
+<section aria-label="Výhody" style="background:var(--ink);color:#fff;padding:22px 0;overflow:hidden">
+	<div class="mq" id="usp"></div>
+</section>
+
+<!-- WHY -->
+<section class="sec" style="padding-bottom:120px">
+	<div class="wrap">
+		<div class="sec-head rv"><h2 class="h2">Prečo parkovať u nás?</h2><p>U nás vybavíte parkovanie rýchlo, prehľadne a bez zbytočných komplikácií.</p></div>
+		<div class="g-bento">
+			<article class="b1 rv-s card" style="position:relative;min-height:620px;color:#fff;display:flex;flex-direction:column;justify-content:flex-end">
+				<img class="par" src="img/p-gate.jpg" alt="Uzavretý areál PV airport parking s bránou pri západe slnka" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+				<div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,20,20,0) 40%,rgba(20,20,20,.82))"></div>
+				<div style="position:relative;padding:36px">
+					<span style="display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:.1em;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.16);margin-bottom:16px"><span style="width:7px;height:7px;border-radius:50%;background:#FF5B4A"></span>REC 24/7</span>
+					<h3 style="margin:0 0 10px;font-size:30px;font-weight:600;letter-spacing:-.02em">Uzavretý a monitorovaný areál</h3>
+					<p style="margin:0;font-size:16px;line-height:1.6;color:rgba(255,255,255,.85);max-width:440px">Vaše auto zostane počas parkovania v uzavretom areáli pod kamerovým dohľadom so záznamom.</p>
+				</div>
+			</article>
+			<article class="rv-s card" style="grid-column:span 2;background:var(--grey);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr))">
+				<div style="padding:36px;display:flex;flex-direction:column;justify-content:space-between;gap:24px">
+					<div style="font-size:64px;font-weight:600;letter-spacing:-.05em;line-height:.9">24/7</div>
+					<div><h3 class="h3" style="margin-bottom:10px">Transfer na letisko 24/7</h3><p class="txt" style="font-size:15px;font-weight:400">Transfer na letisko a späť je v cene parkovania a jazdí nonstop – počas pracovných dní, víkendov aj sviatkov. Máme 4 moderné 9-miestne dodávky, aj pre väčšie skupiny.</p></div>
+				</div>
+				<div style="position:relative;min-height:280px;overflow:hidden"><img src="img/p-van.jpg" alt="Transferová dodávka a šofér PV airport parking" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%"></div>
+			</article>
+			<article class="rv-s card" style="background:#E8DCC8;position:relative;min-height:320px;display:flex;flex-direction:column;justify-content:flex-end">
+				<img src="img/p-phone.jpg" alt="Mobilný telefón s rezervačným formulárom PV airport parking" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+				<div style="position:relative;margin:16px;padding:20px 22px;border-radius:20px;background:#fff">
+					<h3 style="margin:0 0 6px;font-size:19px;font-weight:600">Rýchla online rezervácia</h3>
+					<p style="margin:0;font-size:14px;line-height:1.6;color:var(--muted)">Termín vyberiete online za pár minút. Platíte až na mieste – kartou alebo v hotovosti.</p>
+				</div>
+			</article>
+			<article class="rv-s card" style="background:var(--ink);color:#fff;position:relative;min-height:320px;padding:28px;display:flex;flex-direction:column;justify-content:space-between">
+				<svg viewBox="0 0 300 150" width="100%" height="150" fill="none" aria-hidden="true">
+					<path d="M0 120 L300 70" stroke="#3A3A38" stroke-width="14"/>
+					<path d="M20 116 C 90 104, 120 70, 150 60 S 240 40, 280 24" stroke="rgba(255,255,255,.12)" stroke-width="6" stroke-linecap="round"/>
+					<path class="draw" d="M20 116 C 90 104, 120 70, 150 60 S 240 40, 280 24" stroke="#E25A4B" stroke-width="3" stroke-linecap="round" stroke-dasharray="1000"/>
+					<circle cx="20" cy="116" r="7" fill="#fff"/><circle cx="280" cy="24" r="7" fill="#E25A4B"/>
+					<text x="12" y="146" fill="#B9BBC1" font-size="12" font-family="Poppins">D1 · Zlaté Piesky</text>
+					<text x="226" y="14" fill="#B9BBC1" font-size="12" font-family="Poppins">Letisko</text>
+				</svg>
+				<div><h3 style="margin:0 0 6px;font-size:19px;font-weight:600">Výborná dostupnosť</h3><p style="margin:0;font-size:14px;line-height:1.6;color:#B9BBC1">Rýchlo z diaľnice D1 a na letisko transferom približne za 5 minút.</p></div>
+			</article>
+		</div>
+	</div>
+</section>
+
+<!-- PRICE + RESERVATION -->
+<section class="sec sec-g" id="cennik" style="--notch:var(--grey)">
+	<div class="wrap">
+		<div class="sec-head rv"><h2 class="h2">Rýchly cenník</h2><p>Kliknite na počet dní alebo zadajte termín. Cena vrátane transferu sa prepočíta hneď.</p></div>
+		<div class="g-price">
+			<div style="display:flex;flex-direction:column;gap:48px;min-width:0">
+				<div style="display:flex;flex-direction:column;gap:16px">
+					<div class="seasons" role="group" aria-label="Sezóna">
+						<button type="button" class="season" data-season="w"><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v20M4.9 6l14.2 12M19.1 6 4.9 18M9 3.5 12 6l3-2.5M9 20.5 12 18l3 2.5"/></svg></span><span class="sn">Zimná sezóna</span><span class="sd">16. 9. – 31. 5.</span><span class="sp">od 24 € / deň</span><span class="now">platí teraz</span></button>
+						<button type="button" class="season" data-season="s"><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg></span><span class="sn">Letná sezóna</span><span class="sd">1. 6. – 15. 9.</span><span class="sp">od 28 € / deň</span><span class="now">platí teraz</span></button>
+					</div>
+					<style>
+						.seasons { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+						.season { position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-rows: auto auto auto; column-gap: 14px; row-gap: 2px; align-items: center; padding: 18px 20px; border-radius: 20px; border: 1px solid var(--line); background: #fff; color: var(--ink); cursor: pointer; text-align: left; font: inherit; transition: background-color 240ms ease, color 240ms ease, border-color 240ms ease, transform 160ms var(--ease); }
+						.season:active { transform: scale(.98); }
+						.season .ic { grid-row: 1 / 4; width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; background: var(--grey); color: var(--ink); transition: background-color 240ms ease, color 240ms ease; }
+						.season .sn { font-size: 17px; font-weight: 600; letter-spacing: -.01em; }
+						.season .sd { font-size: 13px; color: var(--sub); }
+						.season .sp { font-size: 14px; font-weight: 500; margin-top: 4px; }
+						.season .now { position: absolute; top: 14px; right: 16px; font-size: 11px; font-weight: 500; padding: 4px 9px; border-radius: 999px; background: #EAF8F0; color: #1d6b40; display: none; }
+						.season.is-now .now { display: inline-block; }
+						.season.on { background: var(--ink); border-color: var(--ink); color: #fff; }
+						.season.on .ic { background: var(--red); color: #fff; }
+						.season.on .sd { color: #B9BBC1; }
+						.season.on .now { background: rgba(255,255,255,.14); color: #fff; }
+						@media (max-width: 520px) { .seasons { grid-template-columns: minmax(0, 1fr); } }
+					</style>
+					<div class="g-tiles rv" id="tiles"></div>
+					<p class="hint" style="margin:0">Nad 16 dní: každý ďalší začatý deň + 5 € (zima) / + 6 € (leto). Sezónu určuje deň príchodu.</p>
+				</div>
+				<div class="rv">
+					<h3 class="h3" style="margin-bottom:8px">Prémiové služby</h3>
+					<p class="txt" style="font-size:15px;font-weight:400;margin-bottom:18px">Pridajte k rezervácii – ceny sú s DPH.</p>
+					<div id="extras"></div>
+				</div>
+			</div>
+			<div class="sticky rv">
+				<div class="pass" style="padding:32px">
+					<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px"><span class="lbl">Vaša rezervácia</span><span style="font-size:13px;color:var(--green);font-weight:500">● voľné miesta</span></div>
+					<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-bottom:24px">
+						<label class="fld"><span class="lbl">Príchod</span><input class="pin" type="date" id="sFrom"></label>
+						<label class="fld"><span class="lbl">Návrat</span><input class="pin" type="date" id="sTo"></label>
+					</div>
+					<div class="num" style="display:flex;justify-content:space-between;padding:14px 0;border-top:1px solid var(--line2);font-size:15px"><span style="color:var(--muted)" id="sParkL">Parkovanie · 7 dní</span><b style="font-weight:600" id="sPark">59,00 €</b></div>
+					<div style="display:flex;justify-content:space-between;padding:14px 0;border-top:1px solid var(--line2);font-size:15px"><span style="color:var(--muted)">Transfer na letisko a späť</span><b style="font-weight:600;color:var(--green)">zdarma</b></div>
+					<div id="sLines"></div>
+					<div class="perf" style="margin:8px -8px 0"></div>
+					<div style="display:flex;justify-content:space-between;align-items:flex-end;padding:26px 0 22px"><span style="font-size:15px;color:var(--muted)">Spolu s DPH</span><span class="big" id="sTotal">59,00 €</span></div>
+					<div style="display:flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 16px;border-radius:999px;background:var(--grey);margin-bottom:14px;font-size:14px;font-weight:500;text-align:center">Platíte na mieste – kartou alebo v hotovosti</div>
+					<a class="btn btn-red btn-full" href="rezervacia.html" id="sGo">Pokračovať na rezerváciu</a>
+					<p style="margin:14px 0 0;text-align:center;font-size:12px;color:var(--sub)">Potvrdenie pošleme e-mailom a SMS. Rezerváciu môžete zrušiť cez odkaz v e-maile.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- HOW -->
+<section class="sec" style="padding-bottom:120px">
+	<div class="wrap g-2">
+		<div class="rv sticky">
+			<h2 class="h2" style="margin-bottom:24px">Ako prebieha rezervácia?</h2>
+			<p class="lead" style="margin-bottom:32px;max-width:420px">Rezervácia je navrhnutá tak, aby ste ju vybavili rýchlo a bez zbytočných krokov.</p>
+			<div style="display:flex;gap:6px" aria-hidden="true" id="bars"><span></span><span></span><span></span><span></span></div>
+		</div>
+		<div class="accs" data-single id="steps">
+			<div class="acc open"><button class="acc-b" aria-expanded="true"><span class="pl"></span><span>1. Vyberiete si termín parkovania</span></button><div class="acc-p"><div><p>Zvolíte dátum a čas príchodu na parkovisko aj návratu. Cenu vrátane transferu vidíte okamžite.</p></div></div></div>
+			<div class="acc"><button class="acc-b" aria-expanded="false"><span class="pl"></span><span>2. Vyplníte krátky formulár</span></button><div class="acc-p"><div><p>Kontaktné údaje, ŠPZ vozidla a číslo letu. Ak parkujete na firmu, stačí zadať IČO – fakturačné údaje doplníme sami.</p></div></div></div>
+			<div class="acc"><button class="acc-b" aria-expanded="false"><span class="pl"></span><span>3. Zvolíte si doplnkové služby</span></button><div class="acc-p"><div><p>Podľa potreby pridáte kryté VIP parkovanie, vyzdvihnutie vozidla na letisku, kontrolu alebo čistenie vozidla.</p></div></div></div>
+			<div class="acc"><button class="acc-b" aria-expanded="false"><span class="pl"></span><span>4. Dokončíte rezerváciu online</span></button><div class="acc-p"><div><p>Potvrdenie príde e-mailom a SMS, deň pred príchodom vám pripomenieme termín. Platíte až na mieste – kartou alebo v hotovosti.</p></div></div></div>
+		</div>
+	</div>
+</section>
+
+<!-- ROUTE -->
+<section id="poloha" style="padding-bottom:130px">
+	<div class="wrap">
+		<div class="rv-s" style="border-radius:32px;overflow:hidden;background:var(--ink);color:#fff;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(420px,100%),1fr))">
+			<div style="padding:clamp(28px,5vw,56px);display:flex;flex-direction:column;justify-content:space-between;gap:40px">
+				<div>
+					<h2 style="margin:0 0 20px;font-size:clamp(34px,4vw,56px);line-height:1.02;letter-spacing:-.035em;font-weight:600">Poloha parkoviska</h2>
+					<p style="margin:0;font-size:16px;line-height:1.75;color:#B9BBC1;font-weight:300;max-width:460px">Naše parkovisko na Starej Vajnorskej 39 má výbornú polohu pre vodičov prichádzajúcich do Bratislavy po diaľnici D1. Po zjazde smer Zlaté Piesky sa k nám dostanete rýchlo, jednoducho a bez zbytočného blúdenia mestom.</p>
+				</div>
+				<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px">
+					<div><div style="font-size:13px;color:var(--sub);margin-bottom:6px">Prevádzka</div><div style="font-size:16px;line-height:1.5">Stará Vajnorská 39<br>831 04 Bratislava</div></div>
+					<div><div style="font-size:13px;color:var(--sub);margin-bottom:6px">Transfer</div><div style="font-size:16px;line-height:1.5">≈ 5 minút na terminál<br>detské sedačky v každom aute</div></div>
+				</div>
+				<div style="display:flex;flex-wrap:wrap;gap:12px"><a class="btn btn-red" href="https://maps.google.com/?q=Star%C3%A1+Vajnorsk%C3%A1+3060%2F39+Bratislava">Otvoriť v Mapách</a><a class="btn btn-line" href="ako-sa-k-nam-dostat.html" style="background:transparent;color:#fff;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.6)">Ako sa k nám dostať</a></div>
+			</div>
+			<div id="routeMap"></div>
+		</div>
+	</div>
+</section>
+
+<!-- REVIEWS -->
+<section class="sec sec-g" id="recenzie">
+	<div class="wrap">
+		<div class="sec-head rv" style="align-items:center;margin-bottom:48px"><h2 class="h2">Naše recenzie</h2><span style="display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:#fff;background:#2E6B47;padding:8px 14px;border-radius:6px">Overené cez Trustindex · Google</span></div>
+		<div class="rv" style="background:#fff;border-radius:32px;padding:clamp(28px,5vw,72px);display:flex;flex-direction:column;gap:40px">
+			<div style="display:flex;gap:4px" aria-label="5 z 5 hviezdičiek" id="stars"></div>
+			<div style="display:grid;min-height:190px" id="quotes"></div>
+			<div style="display:flex;flex-wrap:wrap;gap:10px" role="tablist" aria-label="Vybrať recenziu" id="whos"></div>
+		</div>
+	</div>
+</section>
+
+<!-- FAQ -->
+<section class="sec">
+	<div class="wrap g-2">
+		<div class="rv sticky">
+			<h2 class="h2" style="margin-bottom:24px">Často kladené otázky</h2>
+			<p class="lead" style="margin-bottom:32px;max-width:400px">Nenašli ste odpoveď? Zavolajte nám, sme k dispozícii nonstop.</p>
+			<a class="btn btn-line" href="tel:+421904440660">+421 904 440 660</a>
+		</div>
+		<div class="accs" data-single id="faq"></div>
+	</div>
+</section>
+
+<!-- CROSS-SELL -->
+<section style="padding-bottom:120px">
+	<div class="wrap">
+		<a class="rv-s" href="../autoservis/" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(400px,100%),1fr));border-radius:32px;overflow:hidden;text-decoration:none;color:var(--ink);background:var(--grey)">
+			<div style="position:relative;min-height:360px;overflow:hidden"><img class="par" src="img/as-sign.jpg" alt="Audi Q5 pred dielňou PV Autoservis" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></div>
+			<div style="padding:clamp(28px,5vw,56px);display:flex;flex-direction:column;justify-content:center;gap:20px">
+				<img src="img/logo-as.png" alt="PV Autoservis" style="height:64px;width:auto;align-self:flex-start">
+				<h3 style="margin:0;font-size:clamp(30px,3vw,44px);line-height:1.05;letter-spacing:-.03em;font-weight:600">Kým ste na dovolenke, <span class="red">auto môže ísť do servisu.</span></h3>
+				<p class="txt" style="font-weight:400;max-width:460px">Sesterský PV Autoservis na Technickej – diagnostika, prezutie, klimatizácia či príprava na STK. Vrátite sa k autu pripravenému na cestu.</p>
+				<span style="display:inline-flex;align-items:center;gap:8px;font-weight:600">pvs1.sk <svg class="arr" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
+			</div>
+		</a>
+	</div>
+</section>
+
+<!-- FINAL CTA -->
+<section style="padding-bottom:130px;text-align:center">
+	<div class="wrap rv" style="display:flex;flex-direction:column;align-items:center;gap:22px">
+		<h2 style="margin:0;font-size:clamp(34px,4.2vw,60px);line-height:1.05;letter-spacing:-.035em;font-weight:600;max-width:820px">Rezervujte si parkovanie online ešte dnes</h2>
+		<p class="lead">Vyberte si termín, odošlite rezerváciu a o zvyšok sa postaráme my.</p>
+		<a class="btn btn-red" href="rezervacia.html">Rezervovať parkovanie <svg class="arr" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+	</div>
+</section>
+</main>
+
+<footer id="ftr"></footer>
+<script src="pk.js"></script>
+<script src="route.js"></script>
+<script>
+( function () {
+	const P = window.PV;
+	const PLANE = '<svg width="20" height="20" viewBox="0 0 24 24" fill="#E25A4B" aria-hidden="true" style="transform:rotate(90deg)"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z"/></svg>';
+	const usp = [ 'transfer zdarma', 'platba kartou aj v hotovosti na mieste', 'vyzdvihnutie vozidla na letisku', '5 minút na letisko', 'strážený areál' ];
+	document.getElementById( 'usp' ).innerHTML = usp.concat( usp ).map( ( u ) => `<span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-size:20px;font-weight:500;white-space:nowrap">${ u }${ PLANE }</span>` ).join( '' );
+
+	// Dates: next week, one week long.
+	const a = new Date(); a.setDate( a.getDate() + 7 );
+	const b = new Date( a ); b.setDate( b.getDate() + 7 );
+	const st = { from: P.iso( a ), to: P.iso( b ), fromT: '05:30', toT: '22:15', extras: { 0: true }, season: null };
+
+	const X = [
+		{ t: 'Kryté VIP parkovanie', v: 5, day: true, pl: '5 € / deň' },
+		{ t: 'VIP vyzdvihnutie vozidla na letisku', v: 20, pl: '20 €' },
+		{ t: 'Všeobecná kontrola vozidla', v: 50, pl: '50 €' },
+		{ t: 'Kompletné čistenie vozidla', v: 60, pl: 'od 60 €' },
+		{ t: 'Kompletné čistenie s tepovaním', v: 120, pl: 'od 120 €' },
+		{ t: 'Nabíjanie elektromobilu', v: null, pl: 'na mieste' },
+	];
+	const CHECK = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+
+	const $ = ( id ) => document.getElementById( id );
+	const calc = () => {
+		const s = new Date( st.from + 'T' + st.fromT ), e = new Date( st.to + 'T' + st.toT );
+		const bad = ! ( e - s > 0 );
+		const days = bad ? 0 : P.days( s, e );
+		const summer = P.isSummer( s );
+		return { bad, days, summer, park: bad ? 0 : P.price( days, summer ) };
+	};
+	const render = () => {
+		const c = calc();
+		const season = st.season ?? ( c.summer ? 's' : 'w' );
+		document.querySelectorAll( '[data-season]' ).forEach( ( x ) => x.classList.toggle( 'on', x.dataset.season === season ) );
+		$( 'tiles' ).innerHTML = P.table( season === 's' ).map( ( p, i ) => `<button type="button" class="tile${ i + 1 === c.days && season === ( c.summer ? 's' : 'w' ) ? ' on' : '' }" data-n="${ i + 1 }" aria-pressed="${ i + 1 === c.days }"><span class="d">${ P.dl( i + 1 ) }</span><span class="p">${ P.eur( p ) }</span></button>` ).join( '' );
+		let sum = 0; const lines = [];
+		$( 'extras' ).innerHTML = X.map( ( x, i ) => {
+			const on = !! st.extras[ i ];
+			if ( on ) {
+				const cost = x.v == null ? null : x.day ? x.v * Math.max( c.days, 1 ) : x.v;
+				if ( cost != null ) sum += cost;
+				lines.push( `<div class="num" style="display:flex;justify-content:space-between;gap:12px;padding:14px 0;border-top:1px solid var(--line2);font-size:15px"><span style="color:var(--muted)">${ x.t }</span><b style="font-weight:600;white-space:nowrap">${ cost == null ? 'na mieste' : P.eur( cost ) }</b></div>` );
+			}
+			return `<button type="button" class="xtra${ on ? ' on' : '' }" data-x="${ i }" aria-pressed="${ on }"><span class="bx">${ CHECK }</span><span>${ x.t }</span><span class="pr">${ x.pl }</span></button>`;
+		} ).join( '' );
+		$( 'sLines' ).innerHTML = lines.join( '' );
+		$( 'sParkL' ).textContent = 'Parkovanie · ' + ( c.bad ? '— dní' : P.dl( c.days ) );
+		$( 'sPark' ).textContent = c.bad ? '—' : P.eur( c.park );
+		$( 'sTotal' ).textContent = c.bad ? '—' : P.eur( c.park + sum );
+		$( 'sFrom' ).value = st.from;
+		$( 'sTo' ).value = st.to;
+	};
+	document.addEventListener( 'click', ( e ) => {
+		const t = e.target.closest( '.tile' );
+		if ( t ) {
+			const d = new Date( st.from + 'T00:00' ); d.setDate( d.getDate() + Number( t.dataset.n ) );
+			st.to = P.iso( d ); st.toT = st.fromT; render();
+		}
+		const x = e.target.closest( '.xtra' );
+		if ( x ) { st.extras[ x.dataset.x ] = ! st.extras[ x.dataset.x ]; render(); }
+		const s = e.target.closest( '[data-season]' );
+		if ( s ) {
+			st.season = s.dataset.season;
+			const y = new Date().getFullYear() + 1;
+			const from = s.dataset.season === 's' ? new Date( y, 6, 10 ) : new Date( y, 1, 10 );
+			const to = new Date( from ); to.setDate( to.getDate() + 7 );
+			st.from = P.iso( from ); st.to = P.iso( to ); st.season = null; render();
+		}
+	} );
+	[ [ 'sFrom', 'from' ], [ 'sTo', 'to' ] ].forEach( ( [ id, k ] ) => $( id ).addEventListener( 'change', ( e ) => { st[ k ] = e.target.value; render(); } ) );
+	document.querySelector( `[data-season="${ P.isSummer( new Date() ) ? 's' : 'w' }"]` ).classList.add( 'is-now' );
+	render();
+
+	// Step progress bars follow the open step.
+	const bars = [ ...$( 'bars' ).children ];
+	const steps = [ ...$( 'steps' ).children ];
+	const paint = () => { const i = steps.findIndex( ( s ) => s.classList.contains( 'open' ) ); bars.forEach( ( b, j ) => { b.style.cssText = `height:4px;flex:1;border-radius:4px;transition:background-color 300ms ease;background:${ j <= i ? 'var(--red)' : 'var(--line)' }`; } ); };
+	$( 'steps' ).addEventListener( 'pv-acc', paint ); paint();
+
+	// Reviews.
+	const STAR = '<svg width="26" height="26" viewBox="0 0 24 24" fill="#F4B400" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg>';
+	$( 'stars' ).innerHTML = STAR.repeat( 5 );
+	const R = [
+		{ n: 'Marcela Krnacova', i: 'M', c: '#6E7781', q: 'Parkovisko sme využili na 12 dní počas našej dovolenky. Perfektný prístup. Zaplatila som až na mieste v deň príchodu – kartou. Ihneď nás odviezli…' },
+		{ n: 'Aneta Vyšná', i: 'A', c: '#7D52C2', q: 'Všetko prebehlo hladko, načas, od prebratia auta na letisku až po jeho opätovné pristavenie po dovolenke na odovzdanie. Veľká spokojnosť.' },
+		{ n: 'Ervin Virag', i: 'E', c: '#2F7D8C', q: 'Ochota, profesionalita! Najlepšia cena. Za nás majú títo páni 100 bodov zo 100. Ďakujeme a prajeme veľa úspechov, určite sa vrátime.' },
+		{ n: 'stefan mede', i: 'S', c: '#D9772B', q: 'Využili sme parkovanie u PV AIRPORT PARKING. Proste nie je čo vytknúť, 5 z 5 – bezpečné parkovanie, ústretový personál, rýchlosť a profesionalita.' },
+	];
+	let rev = 0;
+	const drawR = () => {
+		$( 'quotes' ).innerHTML = R.map( ( r, i ) => `<blockquote aria-hidden="${ i !== rev }" style="grid-area:1/1;margin:0;font-size:clamp(22px,2.6vw,38px);line-height:1.35;letter-spacing:-.02em;font-weight:400;transition:opacity 420ms ease,transform 520ms var(--ease),filter 420ms ease;${ i === rev ? 'opacity:1;transform:none;filter:none' : 'opacity:0;transform:translateY(16px);filter:blur(6px);pointer-events:none' }">„${ r.q }“</blockquote>` ).join( '' );
+		$( 'whos' ).innerHTML = R.map( ( r, i ) => `<button type="button" role="tab" aria-selected="${ i === rev }" data-r="${ i }" style="display:flex;align-items:center;gap:12px;padding:10px 18px 10px 10px;border-radius:999px;border:1px solid ${ i === rev ? 'var(--ink)' : 'var(--line)' };background:${ i === rev ? 'var(--ink)' : '#fff' };color:${ i === rev ? '#fff' : 'var(--ink)' };cursor:pointer;font:500 14px var(--font);transition:all 200ms ease"><span style="width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;background:${ r.c }">${ r.i }</span>${ r.n }</button>` ).join( '' );
+	};
+	$( 'whos' ).addEventListener( 'click', ( e ) => { const b = e.target.closest( '[data-r]' ); if ( b ) { rev = Number( b.dataset.r ); drawR(); } } );
+	drawR();
+
+	// FAQ.
+	const FAQ = [
+		[ 'Ako prebieha rezervácia parkovania?', 'Vyberiete si termín príchodu a návratu, vyplníte krátky formulár, zvolíte doplnkové služby a rezerváciu dokončíte online. Potvrdenie dostanete e-mailom a SMS.' ],
+		[ 'Je transfer na letisko v cene parkovania?', 'Áno. Transfer na letisko a späť je zahrnutý v cene parkovania a je k dispozícii nonstop.' ],
+		[ 'Ako ďaleko je parkovisko od letiska Bratislava?', 'Na letisko vás náš transfer dovezie približne za 5 minút.' ],
+		[ 'Ako sa k vám dostanem autom?', 'Po diaľnici D1 zíďte na výjazde smer Zlaté Piesky. Parkovisko nájdete na adrese Stará Vajnorská 39, 831 04 Bratislava.' ],
+		[ 'Je parkovisko strážené a monitorované?', 'Áno. Areál je uzavretý a pod kamerovým dohľadom so záznamom.' ],
+		[ 'Môžem si rezerváciu upraviť alebo zrušiť?', 'Áno. Zrušiť ju môžete cez odkaz v potvrdzovacom e-maile, zmenu termínu vám urobíme telefonicky. Bezplatne do 24 hodín pred príchodom.' ],
+		[ 'Ako prebieha platba?', 'Platíte na mieste pri príchode – kartou alebo v hotovosti. Online nič neplatíte.' ],
+		[ 'Aké doplnkové služby ponúkate?', 'Kryté VIP parkovanie, VIP vyzdvihnutie vozidla na letisku, všeobecnú kontrolu vozidla, kompletné čistenie s tepovaním aj bez neho a nabíjanie elektromobilov.' ],
+		[ 'Je parkovanie vhodné aj na dlhšie cesty?', 'Áno, ponúkame krátkodobé aj dlhodobé parkovanie – na dovolenku aj na pracovnú cestu.' ],
+		[ 'Môžem parkovanie využiť aj pri skorom rannom alebo neskorom prílete?', 'Áno. Sme otvorení nonstop, 7 dní v týždni, vrátane víkendov a sviatkov.' ],
+		[ 'Máte k dispozícii detské autosedačky?', 'Áno, každé transferové vozidlo je vybavené detskými sedačkami pre rôzne vekové kategórie.' ],
+		[ 'Čo ak potrebujem pomôcť s rezerváciou?', 'Zavolajte nám na +421 904 440 660 alebo napíšte na pvairportparking@gmail.com.' ],
+	];
+	$( 'faq' ).innerHTML = FAQ.map( ( q, i ) => `<div class="acc${ i === 1 ? ' open' : '' }"><button class="acc-b" aria-expanded="${ i === 1 }"><span class="pl"></span><span>${ q[ 0 ] }</span></button><div class="acc-p"><div><p>${ q[ 1 ] }</p></div></div></div>` ).join( '' );
+	$( 'faq' ).querySelectorAll( '.acc-b' ).forEach( ( b ) => b.addEventListener( 'click', () => {
+		const acc = b.closest( '.acc' ), open = ! acc.classList.contains( 'open' );
+		$( 'faq' ).querySelectorAll( '.acc' ).forEach( ( x ) => x.classList.remove( 'open' ) );
+		acc.classList.toggle( 'open', open );
+	} ) );
+} )();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="motion.js"></script>
+</body>
+</html>

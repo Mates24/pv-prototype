@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Blog – PV Autoservis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap">
+<link rel="stylesheet" href="as.css">
+<style>
+	.feat { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); text-decoration: none; color: var(--ink); background: var(--grey); }
+	.feat .im { position: relative; min-height: 420px; overflow: hidden; }
+	.feat .im img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+	.feat .tx { padding: clamp(28px, 5vw, 56px); display: flex; flex-direction: column; gap: 20px; justify-content: center; }
+	.chip { align-self: flex-start; background: var(--red); color: #fff; font: 700 12px var(--cond); text-transform: uppercase; letter-spacing: .08em; padding: 6px 10px; }
+	.posts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px 24px; }
+	.post { text-decoration: none; color: var(--ink); display: flex; flex-direction: column; gap: 14px; }
+	.post .im { aspect-ratio: 4 / 3; overflow: hidden; background: var(--grey); }
+	.post .im img { width: 100%; height: 100%; object-fit: cover; transition: transform 900ms var(--ease); }
+	.post h3 { margin: 0; font: 800 24px/1.05 var(--cond); text-transform: uppercase; }
+	.post time { font-size: 13px; color: var(--sub); }
+	@media (hover: hover) { .post:hover .im img { transform: scale(1.05); } .post:hover h3 { color: var(--red); } }
+	@media (max-width: 1060px) { .feat { grid-template-columns: minmax(0, 1fr); } .posts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+	@media (max-width: 640px) { .posts { grid-template-columns: minmax(0, 1fr); } }
+</style>
+</head>
+<body data-page="blog.html">
+<div id="proto"></div>
+<header id="hdr"></header>
+<main>
+	<section class="phero">
+		<div class="wrap">
+			<div class="sec-head" style="margin:0"><h1 class="h1 in d2">Rady<br>a akcie<span class="red">.</span></h1><p class="side-note in d3">Tipy na údržbu auta, sezónne ponuky a novinky z dielne.</p></div>
+		</div>
+	</section>
+	<section class="sec" style="padding-top:72px">
+		<div class="wrap" style="display:flex;flex-direction:column;gap:72px">
+			<a class="feat rv" href="clanok.html">
+				<div class="im"><img class="par" src="img/as-lift.jpg" alt="Auto na zdviháku počas kontroly"></div>
+				<div class="tx"><span class="chip">Akcia do 31. 10.</span><h2 class="h2" style="font-size:clamp(34px,3.6vw,52px)">Kontrola vozidla za 50 €. Pri oprave u nás ju máte zadarmo.</h2><p class="txt" style="font-size:17px">Ak bude auto v poriadku, dostanete voucher 50 € na ďalšie služby.</p><span class="cond" style="display:inline-flex;align-items:center;gap:10px;font-weight:700;color:var(--red)">Čítať článok <svg class="arr" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span></div>
+			</a>
+			<div class="posts">
+				<a class="post rv" href="clanok.html"><div class="im"><img src="img/as-tyre.jpg" alt="" loading="lazy"></div><time>apríl 2026</time><h3>5 dôvodov, prečo si dať skontrolovať geometriu vozidla</h3></a>
+				<a class="post rv" href="clanok.html"><div class="im"><img src="img/as-workshop.jpg" alt="" loading="lazy"></div><time>marec 2026</time><h3>Jarná údržba auta: 5 krokov, ktoré by ste nemali zanedbať</h3></a>
+				<a class="post rv" href="clanok.html"><div class="im"><img src="img/as-octavia.jpg" alt="" loading="lazy"></div><time>marec 2026</time><h3>Autoservis na splátky s 0 % úrokom a bez navýšenia</h3></a>
+				<a class="post rv" href="clanok.html"><div class="im"><img src="img/as-sign.jpg" alt="" loading="lazy"></div><time>február 2026</time><h3>Parkujete auto vonku? Toto si po zime dajte skontrolovať</h3></a>
+				<a class="post rv" href="clanok.html"><div class="im"><img src="img/as-oil.jpg" alt="" loading="lazy"></div><time>február 2026</time><h3>Prečo meniť všetky filtre pri výmene oleja?</h3></a>
+				<a class="post rv" href="clanok.html"><div class="im"><img src="img/p-wash.jpg" alt="" loading="lazy"></div><time>január 2026</time><h3>Umývanie a tepovanie: starostlivosť, ktorá predlžuje život auta</h3></a>
+			</div>
+		</div>
+	</section>
+</main>
+<footer id="ftr"></footer>
+<script src="as.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="motion.js"></script>
+</body>
+</html>

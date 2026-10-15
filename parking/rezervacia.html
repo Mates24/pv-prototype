@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rezervácia – PV airport parking</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="pk.css">
+<style>
+	.stepper { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 28px; }
+	.stp { display: flex; align-items: center; gap: 10px; padding: 8px 16px 8px 8px; border-radius: 999px; background: var(--grey); font-size: 14px; font-weight: 500; color: var(--muted); }
+	.stp i { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-style: normal; font-size: 13px; background: #fff; color: var(--ink); }
+	.stp.on { background: var(--ink); color: #fff; }
+	.stp.on i { background: var(--red); color: #fff; }
+	.stp.done i { background: var(--green); color: #fff; }
+	.panel { background: #fff; border-radius: 28px; padding: clamp(24px, 4vw, 40px); display: flex; flex-direction: column; gap: 28px; }
+	.panel h2 { margin: 0; font-size: 26px; font-weight: 600; letter-spacing: -.02em; }
+	.when { display: grid; grid-template-columns: 1.5fr 1fr 1.5fr 1fr; gap: 14px 18px; align-items: end; }
+	.car { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 16px; align-items: center; padding: 16px 0; border-top: 1px solid var(--line2); }
+	.car .no { width: 36px; height: 36px; border-radius: 12px; background: var(--grey); display: grid; place-items: center; font-weight: 600; }
+	.qty { display: inline-flex; align-items: center; gap: 4px; padding: 4px; border-radius: 999px; background: var(--grey); }
+	.qty button { width: 40px; height: 40px; border-radius: 50%; border: 0; background: #fff; cursor: pointer; font: 600 18px var(--font); color: var(--ink); }
+	.qty button:disabled { opacity: .4; cursor: not-allowed; }
+	.qty span { min-width: 32px; text-align: center; font-weight: 600; }
+	.radios { display: inline-flex; gap: 4px; padding: 4px; border-radius: 999px; background: var(--grey); }
+	.radios label { display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 999px; cursor: pointer; font-size: 14px; font-weight: 500; color: var(--muted); }
+	.radios input { position: absolute; opacity: 0; pointer-events: none; }
+	.radios label:has(input:checked) { background: var(--ink); color: #fff; }
+	.radios label:has(input:focus-visible) { outline: 2px solid var(--red); outline-offset: 2px; }
+	.ico-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; align-items: end; }
+	.code-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; }
+	.sumrow { display: flex; justify-content: space-between; gap: 12px; padding: 13px 0; border-top: 1px solid var(--line2); font-size: 15px; font-variant-numeric: tabular-nums; }
+	.sumrow span { color: var(--muted); }
+	.sumrow b { font-weight: 600; white-space: nowrap; }
+	.done-ic { width: 72px; height: 72px; border-radius: 50%; background: var(--green); display: grid; place-items: center; }
+	.next { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; counter-reset: n; }
+	.next li { counter-increment: n; display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 12px; padding: 18px 0; border-top: 1px solid var(--line2); font-size: 15px; line-height: 1.6; color: #3a3c40; }
+	.next li::before { content: counter(n); width: 32px; height: 32px; border-radius: 50%; background: var(--grey); display: grid; place-items: center; font-weight: 600; color: var(--ink); }
+	@media (max-width: 760px) { .when { grid-template-columns: 1.4fr 1fr; } }
+</style>
+</head>
+<body data-page="rezervacia.html">
+<div id="proto"></div>
+<header id="hdr"></header>
+<main>
+	<section class="phero" style="padding-bottom:40px">
+		<div class="wrap">
+			<nav class="crumbs in d1" aria-label="Omrvinky"><a href="index.html">Domov</a><span>/</span><span>Rezervácia</span></nav>
+			<h1 class="h1 in d2" style="font-size:clamp(38px,4.4vw,64px)">Rezervácia parkovania</h1>
+			<div class="stepper in d3" aria-label="Kroky rezervácie"><span class="stp on" data-s="1"><i>1</i>Termín a autá</span><span class="stp" data-s="2"><i>2</i>Vaše údaje</span><span class="stp" data-s="3"><i>3</i>Hotovo</span></div>
+		</div>
+	</section>
+
+	<section class="sec-g" style="padding-block:56px 130px;--notch:var(--grey)">
+		<div class="wrap g-price">
+			<div style="display:flex;flex-direction:column;gap:20px;min-width:0">
+				<!-- STEP 1 -->
+				<form class="panel" id="s1" novalidate>
+					<div style="display:flex;flex-direction:column;gap:18px">
+						<h2>Kedy parkujete?</h2>
+						<div class="when">
+							<label class="fld"><span class="lbl">Príchod</span><input class="pin" type="date" id="from"></label>
+							<label class="fld"><span class="lbl">Čas</span><input class="pin" type="time" id="fromT" value="05:30" step="900"></label>
+							<label class="fld"><span class="lbl">Návrat</span><input class="pin" type="date" id="to"></label>
+							<label class="fld"><span class="lbl">Čas</span><input class="pin" type="time" id="toT" value="22:15" step="900"></label>
+						</div>
+						<p role="alert" id="dateErr" class="errt" hidden>Návrat musí byť neskôr ako príchod.</p>
+						<p class="hint" style="margin:0">Odporúčame prísť aspoň 2 hodiny pred odletom. Každý začatý 24-hodinový úsek je 1 deň.</p>
+					</div>
+					<div style="display:flex;flex-direction:column;gap:14px">
+						<h2>Váš let <span style="font-size:14px;font-weight:400;color:var(--sub);letter-spacing:0">nepovinné</span></h2>
+						<p class="hint" style="margin:0">Zadajte číslo letu – ukážeme čas odletu a príletu aj meškanie a časy parkovania nastavíme za vás. Na ukážku skúste FR 8231 a FR 8232.</p>
+						<div class="f-grid" style="align-items:start">
+							<div><div class="fl-row"><div class="f"><label for="flOut">Let tam</label><input class="inp" id="flOut" placeholder="napr. FR 8231" autocomplete="off" style="text-transform:uppercase"></div><button type="button" class="btn btn-line" data-fl="out" style="min-height:54px">Overiť</button></div><div class="fl-out" id="flOutRes" aria-live="polite"></div></div>
+							<div><div class="fl-row"><div class="f"><label for="flIn">Let späť</label><input class="inp" id="flIn" placeholder="napr. FR 8232" autocomplete="off" style="text-transform:uppercase"></div><button type="button" class="btn btn-line" data-fl="in" style="min-height:54px">Overiť</button></div><div class="fl-out" id="flInRes" aria-live="polite"></div></div>
+						</div>
+					</div>
+					<div>
+						<div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:6px">
+							<h2>Koľko áut?</h2>
+							<div class="qty"><button type="button" id="carMinus" aria-label="Menej áut">−</button><span id="carN">1</span><button type="button" id="carPlus" aria-label="Viac áut">+</button></div>
+						</div>
+						<div id="cars"></div>
+					</div>
+					<div>
+						<h2 style="margin-bottom:10px">Doplnkové služby</h2>
+						<div id="extras"></div>
+					</div>
+					<div>
+						<h2 style="margin-bottom:12px">Zľavový kód</h2>
+						<div class="code-row"><input class="inp" id="code" placeholder="napr. LETO10" autocomplete="off" aria-label="Zľavový kód"><button type="button" class="btn btn-line" id="codeBtn" style="min-height:54px">Použiť</button></div>
+						<p class="hint" id="codeMsg" style="margin:8px 0 0">Zľava platí na cenu parkovania, nie na doplnkové služby. Na ukážku skúste LETO10.</p>
+					</div>
+					<button class="btn btn-red" type="submit" style="align-self:flex-start">Pokračovať – vaše údaje <svg class="arr" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+				</form>
+
+				<!-- STEP 2 -->
+				<form class="panel" id="s2" novalidate hidden>
+					<div style="display:flex;flex-direction:column;gap:18px">
+						<h2>Kontakt</h2>
+						<div class="f-grid">
+							<div class="f" style="grid-column:1/-1"><label for="name">Meno a priezvisko <b>*</b></label><input class="inp" id="name" autocomplete="name" value="Jana Nováková"><span class="errt" hidden>Zadajte meno a priezvisko.</span></div>
+							<div class="f"><label for="phone">Telefón <b>*</b></label><input class="inp" id="phone" type="tel" autocomplete="tel" value="+421 905 123 456"><span class="errt" hidden>Zadajte telefón, pošleme naň SMS s potvrdením.</span></div>
+							<div class="f"><label for="email">E-mail <b>*</b></label><input class="inp" id="email" type="email" autocomplete="email" value="jana.novakova@example.sk"><span class="errt" hidden>Zadajte platný e-mail.</span></div>
+						</div>
+					</div>
+					<div style="display:flex;flex-direction:column;gap:18px">
+						<h2>Vozidlo a cestujúci</h2>
+						<div class="f-grid" id="plates"></div>
+						<div class="f-grid">
+							<div class="f"><label for="adults">Počet osôb v transfere</label><select class="inp" id="adults"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9 a viac</option></select></div>
+							<div class="f"><label for="kids">Z toho deti (autosedačky máme)</label><select class="inp" id="kids"><option selected>0</option><option>1</option><option>2</option><option>3</option><option>4</option></select></div>
+						</div>
+					</div>
+					<div style="display:flex;flex-direction:column;gap:18px">
+						<div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap"><h2>Fakturácia</h2>
+							<div class="radios" role="radiogroup" aria-label="Typ zákazníka"><label><input type="radio" name="who" value="p" checked>Súkromná osoba</label><label><input type="radio" name="who" value="c">Firma</label></div></div>
+						<p class="hint" style="margin:0" id="billHint">Doklad dostanete na mieste. Firemné údaje vyplníte, ak chcete doklad na firmu.</p>
+						<div id="company" hidden style="display:flex;flex-direction:column;gap:18px">
+							<div class="ico-row"><div class="f"><label for="ico">IČO</label><input class="inp" id="ico" inputmode="numeric" value="55783660"></div><button type="button" class="btn btn-dark" id="icoBtn" style="min-height:54px">Načítať údaje</button></div>
+							<div class="ok-note" id="icoOk" hidden>Údaje firmy sme doplnili z registra. Skontrolujte ich.</div>
+							<div class="f-grid">
+								<div class="f" style="grid-column:1/-1"><label for="cName">Obchodné meno</label><input class="inp" id="cName"></div>
+								<div class="f"><label for="dic">DIČ</label><input class="inp" id="dic"></div>
+								<div class="f"><label for="icdph">IČ DPH</label><input class="inp" id="icdph"></div>
+								<div class="f" style="grid-column:1/-1"><label for="street">Ulica a číslo</label><input class="inp" id="street"></div>
+								<div class="f"><label for="zip">PSČ</label><input class="inp" id="zip"></div>
+								<div class="f"><label for="city">Mesto</label><input class="inp" id="city"></div>
+							</div>
+						</div>
+					</div>
+					<div class="f"><label for="note">Poznámka</label><textarea class="inp" id="note" placeholder="Napr. cestujeme s veľkou batožinou alebo bicyklom."></textarea></div>
+					<div style="display:flex;flex-direction:column;gap:12px">
+						<label class="chk"><input type="checkbox" id="terms"><span>Súhlasím so <a href="vop.html">všeobecnými obchodnými podmienkami</a> a beriem na vedomie spracovanie osobných údajov. <b style="color:var(--red);font-weight:500">*</b></span></label>
+						<span class="errt" id="termsErr" hidden>Bez súhlasu s podmienkami rezerváciu nemôžeme vytvoriť.</span>
+						<label class="chk"><input type="checkbox" id="mkt"><span>Chcem dostávať ponuky a zľavy e-mailom.</span></label>
+					</div>
+					<div style="display:flex;flex-wrap:wrap;gap:12px"><button class="btn btn-red" type="submit">Potvrdiť rezerváciu</button><button class="btn btn-line" type="button" id="back">Späť</button></div>
+				</form>
+
+				<!-- STEP 3 -->
+				<section class="panel" id="s3" hidden aria-live="polite">
+					<div class="done-ic"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+					<div><span class="lbl">Rezervácia potvrdená</span><h2 style="font-size:clamp(30px,3.4vw,44px);letter-spacing:-.035em;margin-top:8px">Ďakujeme, <span id="dName">Jana</span>. Vaše číslo je <span class="red">P-20123</span>.</h2></div>
+					<p class="txt">Potvrdenie sme poslali na <b id="dMail" style="font-weight:600;color:var(--ink)"></b> a SMS na <b id="dPhone" style="font-weight:600;color:var(--ink)"></b>. Deň pred príchodom vám pripomenieme termín.</p>
+					<ol class="next">
+						<li>Prídite na Starú Vajnorskú 39 v čase príchodu. Zaplatíte na mieste – kartou alebo v hotovosti.</li>
+						<li>Odvezieme vás na terminál, cesta trvá asi 5 minút.</li>
+						<li>Po prílete zavolajte na +421 904 440 660 a vyzdvihneme vás. Váš let späť sledujeme – ak bude meškať, počkáme.</li>
+					</ol>
+					<div style="display:flex;flex-wrap:wrap;gap:12px"><a class="btn btn-red" href="upravit-rezervaciu.html#ukazka">Zobraziť rezerváciu</a><a class="btn btn-line" href="ako-sa-k-nam-dostat.html">Ako sa k nám dostať</a></div>
+				</section>
+			</div>
+
+			<!-- SUMMARY -->
+			<aside class="sticky">
+				<div class="pass" style="padding:32px">
+					<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:22px"><span class="lbl">Vaša rezervácia</span><span style="font-size:13px;color:var(--green);font-weight:500" id="free">● voľné miesta</span></div>
+					<div style="display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:center;margin-bottom:20px">
+						<div><div style="font-size:26px;font-weight:700;letter-spacing:-.03em;line-height:1">PV</div><div class="num" style="font-size:12px;color:var(--sub);margin-top:6px" id="sumFrom"></div></div>
+						<div style="position:relative;height:24px;display:flex;align-items:center"><div style="flex:1;border-top:2px dotted #C9CACF"></div><svg width="20" height="20" viewBox="0 0 24 24" fill="#C93C2E" aria-hidden="true" style="position:absolute;left:50%;margin-left:-10px;transform:rotate(90deg)"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z"/></svg></div>
+						<div style="text-align:right"><div style="font-size:26px;font-weight:700;letter-spacing:-.03em;line-height:1">BTS</div><div class="num" style="font-size:12px;color:var(--sub);margin-top:6px" id="sumTo"></div></div>
+					</div>
+					<div id="sumLines"></div>
+					<div class="perf" style="margin:8px -8px 0"></div>
+					<div style="display:flex;justify-content:space-between;align-items:flex-end;padding:24px 0 20px"><span style="font-size:15px;color:var(--muted)">Spolu s DPH</span><span class="big" id="sumTotal"></span></div>
+					<div style="display:flex;align-items:center;justify-content:center;min-height:48px;padding:0 16px;border-radius:999px;background:var(--grey);font-size:14px;font-weight:500;text-align:center">Platíte na mieste – kartou alebo v hotovosti</div>
+					<p style="margin:14px 0 0;text-align:center;font-size:12px;color:var(--sub)">Zrušenie zdarma do 24 hodín pred príchodom.</p>
+				</div>
+			</aside>
+		</div>
+	</section>
+</main>
+<footer id="ftr"></footer>
+<script src="pk.js"></script>
+<script src="flights.js"></script>
+<script>
+( function () {
+	const P = window.PV, $ = ( id ) => document.getElementById( id );
+	const a = new Date(); a.setDate( a.getDate() + 7 );
+	const b = new Date( a ); b.setDate( b.getDate() + 7 );
+	const st = { from: P.iso( a ), to: P.iso( b ), fromT: '05:30', toT: '22:15', cars: [ { vip: false } ], extras: {}, code: null, step: 1 };
+	const X = [
+		{ t: 'VIP vyzdvihnutie vozidla na letisku', v: 20, pl: '20 €' },
+		{ t: 'Všeobecná kontrola vozidla', v: 50, pl: '50 €' },
+		{ t: 'Kompletné čistenie vozidla', v: 60, pl: 'od 60 €' },
+		{ t: 'Kompletné čistenie s tepovaním', v: 120, pl: 'od 120 €' },
+		{ t: 'Nabíjanie elektromobilu', v: null, pl: 'na mieste' },
+	];
+	const CHECK = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+	st.flights = {};
+	const row = ( l, v, c ) => `<div class="sumrow"><span>${ l }</span><b${ c ? ` style="color:${ c }"` : '' }>${ v }</b></div>`;
+
+	const render = () => {
+		const s = new Date( st.from + 'T' + st.fromT ), e = new Date( st.to + 'T' + st.toT );
+		const bad = ! ( e - s > 0 ), days = bad ? 0 : P.days( s, e ), summer = P.isSummer( s );
+		const per = bad ? 0 : P.price( days, summer );
+		$( 'dateErr' ).hidden = ! bad;
+		$( 'carN' ).textContent = st.cars.length;
+		$( 'carMinus' ).disabled = st.cars.length < 2;
+		$( 'carPlus' ).disabled = st.cars.length > 5;
+		$( 'cars' ).innerHTML = st.cars.map( ( c, i ) => `<div class="car"><span class="no">${ i + 1 }</span><span style="font-size:15px">Auto ${ i + 1 }<br><span class="hint">${ summer ? 'Letná' : 'Zimná' } sezóna · ${ bad ? '—' : P.eur( per ) }</span></span><button type="button" class="xtra${ c.vip ? ' on' : '' }" data-vip="${ i }" aria-pressed="${ c.vip }" style="border:0;width:auto;min-height:44px;padding:0"><span class="bx">${ CHECK }</span><span>Kryté VIP</span><span class="pr">+5 € / deň</span></button></div>` ).join( '' );
+		$( 'extras' ).innerHTML = X.map( ( x, i ) => `<button type="button" class="xtra${ st.extras[ i ] ? ' on' : '' }" data-x="${ i }" aria-pressed="${ !! st.extras[ i ] }"><span class="bx">${ CHECK }</span><span>${ x.t }</span><span class="pr">${ x.pl }</span></button>` ).join( '' );
+		$( 'plates' ).innerHTML = st.cars.map( ( c, i ) => `<div class="f"><label for="plate${ i }">ŠPZ – auto ${ i + 1 } <b>*</b></label><input class="inp" id="plate${ i }" value="${ c.plate || ( i ? '' : 'BL 123 AB' ) }" style="text-transform:uppercase"><span class="errt" hidden>Zadajte ŠPZ.</span></div>` ).join( '' );
+
+		const park = per * st.cars.length;
+		const vipN = st.cars.filter( ( c ) => c.vip ).length;
+		const vip = vipN * 5 * days;
+		const disc = st.code ? Math.round( park * st.code.pct ) / 100 : 0;
+		let lines = row( `Parkovanie · ${ bad ? '— dní' : P.dl( days ) }${ st.cars.length > 1 ? ' × ' + st.cars.length + ' autá' : '' }`, bad ? '—' : P.eur( park ) );
+		lines += row( 'Transfer na letisko a späť', 'zdarma', 'var(--green)' );
+		if ( vip ) lines += row( `Kryté VIP${ vipN > 1 ? ' × ' + vipN : '' }`, P.eur( vip ) );
+		let ex = 0;
+		X.forEach( ( x, i ) => { if ( st.extras[ i ] ) { if ( x.v ) ex += x.v; lines += row( x.t, x.v ? P.eur( x.v ) : 'na mieste' ); } } );
+		if ( st.flights.out ) lines += row( `Let tam ${ st.flights.out.number }`, 'odlet ' + st.flights.out.dep );
+		if ( st.flights.in ) lines += row( `Let späť ${ st.flights.in.number }`, 'prílet ' + st.flights.in.arr );
+		if ( disc ) lines += row( `Zľava ${ st.code.name } (−${ st.code.pct } % z parkovania)`, '−' + P.eur( disc ), 'var(--green)' );
+		$( 'sumLines' ).innerHTML = lines;
+		$( 'sumTotal' ).textContent = bad ? '—' : P.eur( park + vip + ex - disc );
+		$( 'sumFrom' ).textContent = `${ P.sk( st.from ) } · ${ st.fromT }`;
+		$( 'sumTo' ).textContent = `${ P.sk( st.to ) } · ${ st.toT }`;
+		[ 'from', 'to', 'fromT', 'toT' ].forEach( ( k ) => ( $( k ).value = st[ k ] ) );
+		$( 'from' ).min = P.iso( new Date() );
+		$( 'to' ).min = st.from;
+	};
+	const go = ( n ) => {
+		st.step = n;
+		[ 1, 2, 3 ].forEach( ( i ) => ( $( 's' + i ).hidden = i !== n ) );
+		document.querySelectorAll( '.stp' ).forEach( ( s ) => {
+			const i = Number( s.dataset.s );
+			s.classList.toggle( 'on', i === n );
+			s.classList.toggle( 'done', i < n );
+		} );
+		window.scrollTo( { top: 0, behavior: 'smooth' } );
+	};
+
+	document.addEventListener( 'click', ( e ) => {
+		const v = e.target.closest( '[data-vip]' );
+		if ( v ) { const c = st.cars[ v.dataset.vip ]; c.vip = ! c.vip; render(); return; }
+		const x = e.target.closest( '[data-x]' );
+		if ( x ) { st.extras[ x.dataset.x ] = ! st.extras[ x.dataset.x ]; render(); }
+	} );
+	// Flight lookup: show the flight, then set the parking time from it with one click.
+	const flLookup = async ( kind ) => {
+		const input = $( kind === 'out' ? 'flOut' : 'flIn' ), box = $( kind === 'out' ? 'flOutRes' : 'flInRes' );
+		const btn = document.querySelector( `[data-fl="${ kind }"]` );
+		btn.textContent = 'Hľadám…'; btn.disabled = true;
+		const r = await window.PVF.lookup( input.value, kind === 'out' ? st.from : st.to );
+		btn.textContent = 'Overiť'; btn.disabled = false;
+		if ( ! r.ok ) { delete st.flights[ kind ]; box.innerHTML = `<p class="fl-err" role="alert">${ r.message }</p>`; render(); return; }
+		st.flights[ kind ] = r.flight;
+		box.innerHTML = window.PVF.card( r.flight, kind );
+		render();
+	};
+	document.querySelectorAll( '[data-fl]' ).forEach( ( b ) => b.addEventListener( 'click', () => flLookup( b.dataset.fl ) ) );
+	[ 'flOut', 'flIn' ].forEach( ( id ) => $( id ).addEventListener( 'keydown', ( e ) => { if ( e.key === 'Enter' ) { e.preventDefault(); flLookup( id === 'flOut' ? 'out' : 'in' ); } } ) );
+	document.addEventListener( 'click', ( e ) => {
+		const b = e.target.closest( '.flc-set' );
+		if ( ! b || b.classList.contains( 'done' ) ) return;
+		st[ b.dataset.set === 'out' ? 'fromT' : 'toT' ] = b.dataset.time;
+		render();
+		b.classList.add( 'done' );
+		b.innerHTML = `✓ ${ b.dataset.set === 'out' ? 'Príchod' : 'Návrat' } nastavený na ${ b.dataset.time }<small>Môžete ho ešte upraviť hore.</small>`;
+	} );
+	$( 'carPlus' ).onclick = () => { st.cars.push( { vip: false } ); render(); };
+	$( 'carMinus' ).onclick = () => { st.cars.pop(); render(); };
+	[ 'from', 'to', 'fromT', 'toT' ].forEach( ( k ) => $( k ).addEventListener( 'change', ( e ) => {
+		st[ k ] = e.target.value;
+		const kind = k === 'from' ? 'out' : k === 'to' ? 'in' : null;
+		if ( kind && st.flights[ kind ] ) { delete st.flights[ kind ]; $( kind === 'out' ? 'flOutRes' : 'flInRes' ).innerHTML = '<p class="hint" style="margin:8px 0 0">Dátum sa zmenil – overte let znova.</p>'; }
+		render();
+	} ) );
+	$( 'codeBtn' ).onclick = () => {
+		const c = $( 'code' ).value.trim().toUpperCase();
+		$( 'code' ).value = c;
+		if ( c === 'LETO10' ) { st.code = { name: c, pct: 10 }; $( 'codeMsg' ).textContent = 'Kód LETO10 je použitý: −10 % z ceny parkovania.'; $( 'codeMsg' ).style.color = 'var(--green)'; }
+		else { st.code = null; $( 'codeMsg' ).textContent = c ? `Kód ${ c } nepoznáme alebo už neplatí. Skontrolujte ho.` : 'Zadajte kód.'; $( 'codeMsg' ).style.color = 'var(--red-dark)'; }
+		render();
+	};
+	$( 's1' ).addEventListener( 'submit', ( e ) => {
+		e.preventDefault();
+		const s = new Date( st.from + 'T' + st.fromT ), en = new Date( st.to + 'T' + st.toT );
+		if ( ! ( en - s > 0 ) ) { $( 'dateErr' ).hidden = false; return; }
+		go( 2 );
+	} );
+	$( 'back' ).onclick = () => go( 1 );
+
+	// Company: IČO lookup fills the billing data (in the real form it reads the public registry).
+	document.querySelectorAll( 'input[name=who]' ).forEach( ( r ) => r.addEventListener( 'change', () => {
+		$( 'company' ).hidden = r.value !== 'c' || ! r.checked;
+	} ) );
+	$( 'icoBtn' ).onclick = () => {
+		$( 'icoBtn' ).textContent = 'Načítavam…';
+		setTimeout( () => {
+			Object.entries( { cName: 'PV-S1 s. r. o.', dic: '2122091917', icdph: 'SK2122091917', street: 'Technická 5957/7A', zip: '821 04', city: 'Bratislava' } ).forEach( ( [ k, v ] ) => ( $( k ).value = v ) );
+			$( 'icoOk' ).hidden = false;
+			$( 'icoBtn' ).textContent = 'Načítať údaje';
+		}, 500 );
+	};
+
+	$( 's2' ).addEventListener( 'submit', ( e ) => {
+		e.preventDefault();
+		let ok = true;
+		const need = ( el, cond ) => {
+			const err = el.parentElement.querySelector( '.errt' );
+			el.classList.toggle( 'err', ! cond );
+			if ( err ) err.hidden = cond;
+			if ( ! cond ) ok = false;
+		};
+		need( $( 'name' ), $( 'name' ).value.trim().length > 2 );
+		need( $( 'phone' ), $( 'phone' ).value.replace( /\D/g, '' ).length >= 9 );
+		need( $( 'email' ), /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test( $( 'email' ).value ) );
+		st.cars.forEach( ( c, i ) => { c.plate = $( 'plate' + i ).value; need( $( 'plate' + i ), c.plate.trim().length > 3 ); } );
+		$( 'termsErr' ).hidden = $( 'terms' ).checked;
+		if ( ! $( 'terms' ).checked ) ok = false;
+		if ( ! ok ) return;
+		$( 'dName' ).textContent = $( 'name' ).value.trim().split( ' ' )[ 0 ];
+		$( 'dMail' ).textContent = $( 'email' ).value;
+		$( 'dPhone' ).textContent = $( 'phone' ).value;
+		go( 3 );
+	} );
+	render();
+} )();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="motion.js"></script>
+</body>
+</html>

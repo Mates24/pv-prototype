@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cenník – PV airport parking</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="pk.css">
+<style>
+	.seasons { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+	.season { background: #fff; border-radius: 28px; padding: 32px; border: 1px solid var(--line); transition: border-color 300ms ease, box-shadow 300ms ease; }
+	.season.now { border-color: var(--ink); box-shadow: 0 30px 60px -40px rgba(29,29,27,.45); }
+	.season h2 { margin: 0; font-size: 28px; font-weight: 600; letter-spacing: -.02em; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+	.shead { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 16px; align-items: center; }
+	.shead .ic { width: 52px; height: 52px; border-radius: 16px; display: grid; place-items: center; background: var(--grey); color: var(--ink); }
+	.season.now .shead .ic { background: var(--red); color: #fff; }
+	.season.now { background: var(--ink); color: #fff; }
+	.season.now .hint { color: #B9BBC1; }
+	.season.now .row { border-color: rgba(255,255,255,.12); }
+	.season.now .more { background: rgba(255,255,255,.08); }
+	.badge { font-size: 12px; font-weight: 500; padding: 5px 10px; border-radius: 999px; background: #EAF8F0; color: #1d6b40; letter-spacing: 0; }
+	.rows { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 32px; margin-top: 24px; }
+	.row { display: flex; justify-content: space-between; padding: 12px 0; border-top: 1px solid var(--line2); font-size: 15px; font-variant-numeric: tabular-nums; }
+	.row b { font-weight: 600; }
+	.more { margin-top: 18px; padding: 14px 16px; border-radius: 14px; background: var(--grey); font-size: 14px; display: flex; justify-content: space-between; gap: 12px; }
+	@media (max-width: 1100px) { .seasons { grid-template-columns: minmax(0, 1fr); } }
+	@media (max-width: 480px) { .rows { grid-template-columns: minmax(0, 1fr); } }
+</style>
+</head>
+<body data-page="cennik.html">
+<div id="proto"></div>
+<header id="hdr"></header>
+<main>
+	<section class="phero">
+		<div class="wrap">
+			<nav class="crumbs in d1" aria-label="Omrvinky"><a href="index.html">Domov</a><span>/</span><span>Cenník</span></nav>
+			<div class="phero-g">
+				<h1 class="h1 in d2">Cenník parkovania</h1>
+				<div class="in d3" style="display:flex;flex-direction:column;gap:18px">
+					<p class="lead">Ku každému parkovaniu máte transfer na letisko a späť zdarma, 24/7. Ceny platia pre všetky typy vozidiel a sú s DPH.</p>
+					<p class="hint" style="margin:0">Každý začatý 24-hodinový úsek sa počíta ako 1 deň. Sezónu určuje deň príchodu.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="sec sec-g" style="padding-top:96px">
+		<div class="wrap">
+			<div class="seasons">
+				<article class="season rv" id="w">
+					<div class="shead"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 2v20M4.9 6l14.2 12M19.1 6 4.9 18M9 3.5 12 6l3-2.5M9 20.5 12 18l3 2.5"/></svg></span><div><h2>Zimný cenník <span class="badge" hidden>platí teraz</span></h2><p class="hint" style="margin:4px 0 0">16. 9. – 31. 5. · od 24 € / deň</p></div></div>
+					<div class="rows" data-t="w"></div>
+					<div class="more"><span>Viac ako 16 dní</span><b>+ 5 € za každý ďalší začatý deň</b></div>
+				</article>
+				<article class="season rv" id="s">
+					<div class="shead"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg></span><div><h2>Letný cenník <span class="badge" hidden>platí teraz</span></h2><p class="hint" style="margin:4px 0 0">1. 6. – 15. 9. · od 28 € / deň</p></div></div>
+					<div class="rows" data-t="s"></div>
+					<div class="more"><span>Viac ako 16 dní</span><b>+ 6 € za každý ďalší začatý deň</b></div>
+				</article>
+			</div>
+		</div>
+	</section>
+
+	<section class="sec">
+		<div class="wrap g-2">
+			<div class="rv">
+				<h2 class="h2" style="margin-bottom:24px">Prémiové služby a starostlivosť o auto</h2>
+				<p class="lead">Pridáte ich pri rezervácii. Čistenie a kontrolu robí náš PV Autoservis, preto pri nich necháte kľúče.</p>
+			</div>
+			<div class="rv">
+				<div class="row" style="padding:18px 0;font-size:16px"><span>Kryté VIP parkovanie</span><b>5 € / deň</b></div>
+				<div class="row" style="padding:18px 0;font-size:16px"><span>VIP vyzdvihnutie vozidla na letisku</span><b>20 €</b></div>
+				<div class="row" style="padding:18px 0;font-size:16px"><span>Všeobecná kontrola vozidla</span><b>50 €</b></div>
+				<div class="row" style="padding:18px 0;font-size:16px"><span>Kompletné čistenie vozidla</span><b>od 60 €</b></div>
+				<div class="row" style="padding:18px 0;font-size:16px"><span>Kompletné čistenie s tepovaním</span><b>od 120 €</b></div>
+				<div class="row" style="padding:18px 0;font-size:16px"><span>Nabíjanie elektromobilu</span><b>na mieste</b></div>
+				<div class="row" style="padding:18px 0;font-size:16px;border-bottom:1px solid var(--line2)"><span>Zľavový kód</span><b>% z ceny parkovania</b></div>
+			</div>
+		</div>
+	</section>
+
+	<section style="padding-bottom:130px">
+		<div class="wrap">
+			<div class="rv-s" style="border-radius:32px;background:var(--ink);color:#fff;padding:clamp(28px,5vw,64px);display:flex;flex-wrap:wrap;gap:32px;align-items:center;justify-content:space-between">
+				<div style="max-width:620px"><h2 style="margin:0 0 12px;font-size:clamp(30px,3.6vw,48px);line-height:1.05;letter-spacing:-.035em;font-weight:600">Platíte až na mieste</h2><p style="margin:0;color:#B9BBC1;font-size:16px;line-height:1.7;font-weight:300">Kartou alebo v hotovosti pri príchode na parkovisko. Online nič neplatíte a rezerváciu zrušíte zdarma do 24 hodín pred príchodom.</p></div>
+				<div style="display:flex;flex-wrap:wrap;gap:12px"><a class="btn btn-red" href="rezervacia.html">Rezervovať parkovanie</a><a class="btn btn-line" href="ako-sa-k-nam-dostat.html" style="background:transparent;color:#fff;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.6)">Ako sa k nám dostať</a></div>
+			</div>
+		</div>
+	</section>
+</main>
+<footer id="ftr"></footer>
+<script src="pk.js"></script>
+<script>
+( function () {
+	const P = window.PV;
+	document.querySelectorAll( '[data-t]' ).forEach( ( el ) => {
+		el.innerHTML = P.table( el.dataset.t === 's' ).map( ( p, i ) => `<div class="row"><span>${ P.dl( i + 1 ) }</span><b>${ P.eur( p ) }</b></div>` ).join( '' );
+	} );
+	const now = document.getElementById( P.isSummer( new Date() ) ? 's' : 'w' );
+	now.classList.add( 'now' );
+	now.querySelector( '.badge' ).hidden = false;
+} )();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="motion.js"></script>
+</body>
+</html>

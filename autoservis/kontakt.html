@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kontakt – PV Autoservis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap">
+<link rel="stylesheet" href="as.css">
+<style>
+	.form { background: var(--grey); padding: clamp(24px, 4vw, 48px); scroll-margin-top: 120px; }
+	.addr { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 3px solid var(--ink); }
+	.addr > div { padding: 28px 24px 0 0; display: flex; flex-direction: column; gap: 6px; }
+	.addr small { font: 700 13px var(--cond); text-transform: uppercase; letter-spacing: .06em; color: var(--red); }
+	.addr b { font-size: 19px; font-weight: 500; }
+	@media (max-width: 760px) { .addr { grid-template-columns: minmax(0, 1fr); } }
+</style>
+</head>
+<body data-page="kontakt.html">
+<div id="proto"></div>
+<header id="hdr"></header>
+<main>
+	<section class="phero">
+		<div class="wrap">
+			<h1 class="h1 in d2" style="margin-bottom:48px">Kontakt<span class="red">.</span></h1>
+			<div class="addr in d3">
+				<div><small>Adresa</small><b>Technická 5957/7A<br>821 04 Bratislava – Ružinov</b><a href="https://maps.google.com/?q=PV+Autoservis+Technick%C3%A1+5957%2F7A+Bratislava" style="font-size:14px;margin-top:6px">Navigovať</a></div>
+				<div><small>Telefón a WhatsApp</small><b class="num">+421 910 623 111</b></div>
+				<div><small>E-mail</small><b>pvsbratislava@gmail.com</b></div>
+			</div>
+		</div>
+	</section>
+
+	<section class="sec">
+		<div class="wrap">
+			<div class="opts">
+				<a class="opt main rv" data-book href="#"><span class="oi"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><rect x="3" y="5" width="18" height="16"/><path d="M3 10h18M8 3v4M16 3v4M8 14h3v3H8z"/></svg></span><span class="ok">Najrýchlejšie</span><h3>Online rezervácia</h3><p>Presný termín a služba za menej ako minútu, aj večer a cez víkend.</p><span class="go">Vybrať termín <svg class="arr" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span></a>
+				<a class="opt rv" href="#form"><span class="oi"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M4 4h16v12H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg></span><span class="ok">Neviete, čo autu je?</span><h3>Konzultácia</h3><p>Opíšte problém a ozveme sa s cenou a termínom.</p><span class="go">Napísať nám <svg class="arr" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span></a>
+				<a class="opt rv" href="tel:+421910623111"><span class="oi"><svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.2 15.2 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg></span><span class="ok">Telefón alebo WhatsApp</span><span class="tel num">0910 623 111</span><p>Po – Pi počas otváracích hodín spolu nájdeme termín.</p><span class="go">Zavolať <svg class="arr" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span></a>
+			</div>
+			<div class="place">
+				<div class="rv" id="hoursBox" style="background:var(--ink);color:#fff;padding:clamp(24px,4vw,36px)"></div>
+				<div class="addr rv"><div><span class="cond" style="font-size:13px;font-weight:700;letter-spacing:.08em;color:var(--red)">ADRESA</span><p class="cond" style="margin:10px 0 0;font-size:34px;font-weight:800;line-height:1">Technická 5957/7A<br>821 04 Bratislava</p><p class="txt" style="margin-top:12px">Ružinov, areál pri Prievozskej. Parkovanie pred dielňou.</p></div><div style="display:flex;flex-wrap:wrap;gap:10px"><a class="btn btn-dark btn-sm" href="https://maps.google.com/?q=PV+Autoservis+Technick%C3%A1+5957%2F7A+Bratislava">Navigovať</a><span style="align-self:center;font-size:15px;color:var(--muted)">pvsbratislava@gmail.com</span></div></div>
+			</div>
+		</div>
+	</section>
+	<section class="sec sec-g" style="padding-top:110px">
+		<div class="wrap g-2">
+			<div class="rv"><h2 class="h2">Napíšte<br>nám<span class="red">.</span></h2><p class="side-note" style="margin-top:28px">Opíšte problém alebo službu, ktorú potrebujete. Ozveme sa s cenou a termínom, zvyčajne v ten istý deň.</p></div>
+			<div class="form rv" id="form" style="background:#fff">
+				<div id="sentBox" hidden style="min-height:520px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:20px">
+					<span style="width:64px;height:64px;background:var(--red);display:flex;align-items:center;justify-content:center"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="square" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+					<h3 class="cond" style="margin:0;font-size:40px;font-weight:800" id="thanks">Ďakujeme.</h3>
+					<p style="margin:0;font-size:17px;color:var(--muted);max-width:420px;line-height:1.6">Správu sme prijali. Čoskoro vás budeme kontaktovať s cenovou ponukou a termínom.</p>
+					<button class="btn btn-out" type="button" id="again">Poslať ďalšiu správu</button>
+				</div>
+				<form id="cf" novalidate>
+					<h3 class="cond" style="margin:0 0 8px;font-size:32px;font-weight:800">Napíšte nám</h3>
+					<p style="margin:0 0 32px;color:var(--muted);font-size:16px">Čoskoro vás budeme kontaktovať.</p>
+					<div style="display:flex;flex-direction:column;gap:18px">
+						<div class="g-2f">
+							<div class="fld"><label for="f-meno">Meno <b>*</b></label><input id="f-meno" class="inp" autocomplete="given-name"><span class="errt" hidden>Zadajte meno.</span></div>
+							<div class="fld"><label for="f-priez">Priezvisko <b>*</b></label><input id="f-priez" class="inp" autocomplete="family-name"><span class="errt" hidden>Zadajte priezvisko.</span></div>
+							<div class="fld"><label for="f-email">E-mail <b>*</b></label><input id="f-email" type="email" class="inp" autocomplete="email"><span class="errt" hidden>Zadajte platný e-mail.</span></div>
+							<div class="fld"><label for="f-tel">Telefón <b>*</b></label><input id="f-tel" type="tel" class="inp" autocomplete="tel"><span class="errt" hidden>Zadajte telefón.</span></div>
+						</div>
+						<div class="fld"><label for="f-msg">Vaša správa <b>*</b></label><textarea id="f-msg" class="inp" placeholder="Napr. Škoda Octavia 2019, pri brzdení piští predná náprava…"></textarea><span class="errt" hidden>Opíšte, s čím potrebujete pomôcť.</span></div>
+						<label class="chk"><input type="checkbox" id="f-fin">Mám záujem o financovanie s 0 % úrokom.</label>
+						<label class="chk"><input type="checkbox" id="f-gdpr"><span>Súhlasím so Zásadami spracovania osobných údajov. <b style="color:var(--red);font-weight:500">*</b></span></label>
+						<span class="errt" id="gdprErr" hidden>Bez súhlasu vám nemôžeme odpovedať.</span>
+						<div><button class="btn btn-red" type="submit">Odoslať správu <svg class="arr" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button></div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</section>
+</main>
+<footer id="ftr"></footer>
+<script src="as.js"></script>
+<script src="hours.js"></script>
+<script>
+( function () {
+	const $ = ( id ) => document.getElementById( id );
+	$( 'cf' ).addEventListener( 'submit', ( e ) => {
+		e.preventDefault();
+		const checks = [ [ 'f-meno', $( 'f-meno' ).value.trim() ], [ 'f-priez', $( 'f-priez' ).value.trim() ], [ 'f-email', /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test( $( 'f-email' ).value ) ], [ 'f-tel', $( 'f-tel' ).value.replace( /\D/g, '' ).length >= 9 ], [ 'f-msg', $( 'f-msg' ).value.trim().length > 2 ] ];
+		let ok = true;
+		checks.forEach( ( [ id, v ] ) => { const good = !! v; $( id ).classList.toggle( 'err', ! good ); $( id ).nextElementSibling.hidden = good; if ( ! good ) ok = false; } );
+		$( 'gdprErr' ).hidden = $( 'f-gdpr' ).checked; if ( ! $( 'f-gdpr' ).checked ) ok = false;
+		if ( ! ok ) return;
+		$( 'thanks' ).textContent = `Ďakujeme, ${ $( 'f-meno' ).value.trim() }.`;
+		$( 'cf' ).hidden = true; $( 'sentBox' ).hidden = false;
+	} );
+	$( 'again' ).onclick = () => { $( 'cf' ).reset(); $( 'cf' ).hidden = false; $( 'sentBox' ).hidden = true; };
+} )();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="motion.js"></script>
+</body>
+</html>

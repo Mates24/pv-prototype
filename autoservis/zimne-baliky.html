@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Zimné balíky – PV Autoservis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap">
+<link rel="stylesheet" href="as.css">
+<style>
+	.pk { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border: 2px solid var(--ink); }
+	.pkg { padding: 36px 32px; display: flex; flex-direction: column; gap: 22px; background: #fff; position: relative; }
+	.pkg + .pkg { border-left: 2px solid var(--ink); }
+	.pkg.best { background: var(--ink); color: #fff; }
+	.pkg .tag { position: absolute; top: -2px; right: -2px; background: var(--red); color: #fff; font: 700 13px var(--cond); letter-spacing: .06em; text-transform: uppercase; padding: 8px 14px; }
+	.pkg h2 { margin: 0; font: 800 44px/.9 var(--cond); text-transform: uppercase; }
+	.pkg .old { font-size: 18px; color: var(--sub); text-decoration: line-through; }
+	.pkg .now { font: 800 72px/.85 var(--cond); color: var(--red); }
+	.pkg.best .now { color: var(--red-light); }
+	.pkg ul { list-style: none; margin: 0; padding: 0; flex: 1; }
+	.pkg li { display: grid; grid-template-columns: 16px minmax(0, 1fr); gap: 12px; padding: 12px 0; border-top: 1px solid var(--line); font-size: 15px; line-height: 1.45; }
+	.pkg.best li { border-color: rgba(255,255,255,.14); }
+	.pkg li::before { content: ""; width: 12px; height: 5px; margin-top: 8px; background: var(--red); transform: skewX(-20deg); }
+	.pkg li.gift { color: var(--red); font-weight: 500; }
+	.pkg.best li.gift { color: var(--red-light); }
+	.dur { font-size: 14px; color: var(--sub); }
+	@media (max-width: 1060px) { .pk { grid-template-columns: minmax(0, 1fr); } .pkg + .pkg { border-left: 0; border-top: 2px solid var(--ink); } }
+</style>
+</head>
+<body data-page="zimne-baliky.html">
+<div id="proto"></div>
+<header id="hdr"></header>
+<main>
+	<section class="phero">
+		<div class="wrap">
+			<div class="eyebrow in d1" style="margin-bottom:24px"><span class="slash"></span>Špeciálna ponuka</div>
+			<div class="sec-head" style="margin:0">
+				<h1 class="h1 in d2">Príprava vozidla<br><span class="red">pred zimou</span></h1>
+				<p class="side-note in d3">Tri balíky podľa toho, koľko starostlivosti vaše auto potrebuje. Ceny sú s DPH.</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="sec">
+		<div class="wrap">
+			<div class="pk rv">
+				<article class="pkg">
+					<div><span class="dur">Trvanie približne 3 hodiny</span><h2 style="margin-top:12px">Silver</h2></div>
+					<div><span class="old">479 €</span><div class="now num">389 €</div></div>
+					<ul><li>Ročná servisná prehliadka – výmena oleja + všetkých filtrov</li><li>Výmena brzdovej kvapaliny</li><li>Výmena chladiacej kvapaliny (zimná zmes do −35 °C)</li><li>Prezutie vozidla</li><li>3D geometria náprav a kolies</li><li>Kontrola podvozku</li><li class="gift">Darček: zimná náplň do ostrekovačov</li></ul>
+					<a class="btn btn-out" data-book href="#">Objednať Silver</a>
+				</article>
+				<article class="pkg best">
+					<span class="tag">Najobľúbenejší</span>
+					<div><span class="dur">Trvanie 4 – 4,5 hodiny</span><h2 style="margin-top:12px">Gold</h2></div>
+					<div><span class="old">589 €</span><div class="now num">489 €</div></div>
+					<ul><li>Ročná servisná prehliadka – výmena oleja + všetkých filtrov</li><li>Výmena brzdovej kvapaliny</li><li>Výmena chladiacej kvapaliny (zimná zmes do −35 °C)</li><li>Prezutie vozidla</li><li>3D geometria náprav a kolies</li><li>Všeobecná kontrola vozidla</li><li>Základné čistenie vozidla</li><li class="gift">Darček: zimná náplň do ostrekovačov</li></ul>
+					<a class="btn btn-red" data-book href="#">Objednať Gold</a>
+				</article>
+				<article class="pkg">
+					<div><span class="dur">Trvanie 5 – 6 hodín</span><h2 style="margin-top:12px">Diamond</h2></div>
+					<div><span class="old">689 €</span><div class="now num">589 €</div></div>
+					<ul><li>Ročná servisná prehliadka – výmena oleja + všetkých filtrov</li><li>Výmena brzdovej kvapaliny</li><li>Výmena chladiacej kvapaliny (zimná zmes do −35 °C)</li><li>Prezutie vozidla</li><li>3D geometria náprav a kolies</li><li>Všeobecná kontrola vozidla</li><li>Základné čistenie + hĺbkové tepovanie</li><li class="gift">Darček: zimná náplň do ostrekovačov</li><li class="gift">Darček: dezinfekcia vozidla ozónom</li></ul>
+					<a class="btn btn-out" data-book href="#">Objednať Diamond</a>
+				</article>
+			</div>
+			<p class="txt rv" style="margin-top:24px;font-size:14px">Balíky si objednáte v servise, telefonicky alebo cez online rezerváciu. Platnosť ponuky doplní majiteľ.</p>
+		</div>
+	</section>
+
+	<section class="sec sec-g" style="padding-block:110px">
+		<div class="wrap" style="display:flex;flex-wrap:wrap;gap:32px;align-items:center;justify-content:space-between">
+			<h2 class="h2 rv" style="font-size:clamp(36px,4vw,56px)">Neviete, ktorý balík<span class="red">?</span></h2>
+			<div class="rv" style="display:flex;flex-wrap:wrap;gap:12px"><a class="btn btn-red" href="tel:+421910623111">Zavolať 0910 623 111</a><a class="btn btn-out" href="kontakt.html#form">Napísať nám</a></div>
+		</div>
+	</section>
+</main>
+<footer id="ftr"></footer>
+<script src="as.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="motion.js"></script>
+</body>
+</html>
