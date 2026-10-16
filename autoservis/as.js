@@ -69,7 +69,7 @@
 			<div class="col"><span class="cols-h">Kontakt</span><b>+421 910 623 111</b><br>pvsbratislava@gmail.com<br>Technická 5957/7A<br>821 04 Bratislava – Ružinov<br>Po – Št 7:00 – 16:00, Pi 7:00 – 14:00</div>
 			<div class="col"><span class="cols-h">Firma</span><b>PV-S1 s. r. o.</b><br>IČO: 55783660 · DIČ: 2122091917<br>IČ DPH: SK2122091917<br>OR Mestského súdu Bratislava III, oddiel Sro, vložka 173085/B<br><a href="#">Ochrana osobných údajov</a> · <a href="#">Cookies</a></div>
 		</div>
-		<div class="ftr-bar"><div class="wrap"><span>pvs1.sk © 2026</span><a href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false">Hore ↑</a></div></div>`;
+		<div class="ftr-bar"><div class="wrap"><span>pvautoservis.sk © 2026</span><a href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false">Hore ↑</a></div></div>`;
 	}
 
 	// Shared snippet: the three-step process strip used on service pages.
