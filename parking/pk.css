@@ -294,3 +294,242 @@ select.inp { appearance: none; background-image: url("data:image/svg+xml,%3Csvg 
 .rm-bts { position: absolute; left: 54.66%; top: 74.75%; transform: translate(-50%, 18px); display: flex; align-items: center; gap: 8px; padding: 7px 12px 7px 9px; border-radius: 999px; background: var(--white); color: var(--ink); font-size: 13px; font-weight: 600; white-space: nowrap; box-shadow: 0 10px 24px -10px rgba(0, 0, 0, .6); }
 .rm-min { position: absolute; left: 37.5%; top: 53.5%; transform: translate(-50%, -50%); font-size: 12px; padding: 5px 10px; border-radius: 999px; background: var(--ink); color: var(--white); font-weight: 600; border: 1px solid rgba(255, 255, 255, .25); }
 .rm-osm { position: absolute; right: 8px; bottom: 6px; font-size: 10px; color: rgba(255, 255, 255, .55); }
+
+/* ---- Date fields and our calendar (pk.js; same as the WordPress theme) ---- */
+
+.dfield .dshow {
+	appearance: none;
+	-webkit-appearance: none;
+	text-align: left;
+	color: inherit;
+	background: transparent;
+	cursor: pointer;
+}
+
+.dfield input {
+	pointer-events: none;
+}
+
+.pvcal {
+	position: absolute;
+	z-index: 1000;
+	width: 324px;
+	padding: 18px;
+	border-radius: calc(14px + 10px);
+	background: var(--white);
+	color: var(--ink);
+	box-shadow: 0 2px 0 rgba(29, 29, 27, .04), 0 30px 70px -24px rgba(29, 29, 27, .45);
+	border: 1px solid var(--line2, var(--line));
+	animation: pvcalIn 220ms var(--ease) both;
+}
+
+@keyframes pvcalIn {
+	from { opacity: 0; transform: translateY(8px); }
+}
+
+.pvcal-h {
+	display: grid;
+	grid-template-columns: 40px minmax(0, 1fr) 40px;
+	align-items: center;
+	gap: 8px;
+	margin-bottom: 12px;
+}
+
+.pvcal-m {
+	text-align: center;
+	font-size: 17px;
+	font-weight: 600;
+	letter-spacing: -.01em;
+	line-height: 1.2;
+	text-transform: capitalize;
+}
+
+.pvcal-m small {
+	display: block;
+	font-size: 11px;
+	font-weight: 600;
+	letter-spacing: .14em;
+	text-transform: uppercase;
+	color: var(--red);
+}
+
+.pvcal-nav {
+	width: 40px;
+	height: 40px;
+	display: grid;
+	place-items: center;
+	border: 0;
+	border-radius: 999px;
+	background: var(--grey);
+	color: var(--ink);
+	cursor: pointer;
+	transition: background-color 200ms ease, color 200ms ease;
+}
+
+.pvcal-nav:hover:not(:disabled) {
+	background: var(--ink);
+	color: var(--white);
+}
+
+.pvcal-nav:disabled {
+	opacity: .35;
+	cursor: default;
+}
+
+.pvcal-w,
+.pvcal-g {
+	display: grid;
+	grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+.pvcal-w span {
+	padding: 6px 0;
+	text-align: center;
+	font-size: 11px;
+	font-weight: 600;
+	letter-spacing: .08em;
+	text-transform: uppercase;
+	color: var(--sub);
+}
+
+.pvcal-g {
+	row-gap: 2px;
+}
+
+.pvcal-d {
+	position: relative;
+	height: 40px;
+	border: 0;
+	border-radius: 14px;
+	background: transparent;
+	color: var(--ink);
+	font: inherit;
+	font-size: 15px;
+	font-weight: 500;
+	font-variant-numeric: tabular-nums;
+	cursor: pointer;
+	transition: background-color 160ms ease, color 160ms ease;
+}
+
+.pvcal-d:hover:not(:disabled) {
+	background: var(--grey);
+}
+
+.pvcal-d:disabled {
+	color: #C9CACF;
+	cursor: default;
+}
+
+.pvcal-d.is-today::after {
+	content: "";
+	position: absolute;
+	left: 50%;
+	bottom: 5px;
+	width: 4px;
+	height: 4px;
+	margin-left: -2px;
+	border-radius: 50%;
+	background: var(--red);
+}
+
+.pvcal-d.is-in {
+	border-radius: 0;
+	background: #FDECEA;
+}
+
+.pvcal-d.is-start,
+.pvcal-d.is-end,
+.pvcal-d.is-sel,
+.pvcal-d.is-start:hover,
+.pvcal-d.is-end:hover,
+.pvcal-d.is-sel:hover {
+	background: var(--red);
+	color: var(--white);
+}
+
+.pvcal-d.is-start {
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+.pvcal-d.is-end {
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+.pvcal-d.is-start.is-today::after,
+.pvcal-d.is-end.is-today::after,
+.pvcal-d.is-sel.is-today::after {
+	background: var(--white);
+}
+
+.pvcal-d:focus-visible {
+	outline: 2px solid var(--ink);
+	outline-offset: 1px;
+	z-index: 1;
+}
+
+.pvcal-close {
+	display: none;
+}
+
+/* Phones: a sheet from the bottom of the screen. */
+.pvcal-back {
+	position: fixed;
+	inset: 0;
+	z-index: 999;
+	background: rgba(29, 29, 27, .45);
+	animation: pvcalFade 200ms ease both;
+}
+
+@keyframes pvcalFade {
+	from { opacity: 0; }
+}
+
+.pvcal.is-sheet {
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	top: auto;
+	width: auto;
+	padding: 20px 16px calc(16px + env(safe-area-inset-bottom, 0px));
+	border-radius: calc(14px + 10px) calc(14px + 10px) 0 0;
+	animation-name: pvcalUp;
+	animation-duration: 320ms;
+}
+
+@keyframes pvcalUp {
+	from { transform: translateY(100%); }
+}
+
+.pvcal.is-sheet .pvcal-d {
+	height: 46px;
+	font-size: 16px;
+}
+
+.pvcal.is-sheet .pvcal-close {
+	display: block;
+	width: 100%;
+	min-height: 50px;
+	margin-top: 14px;
+	border: 0;
+	border-radius: 999px;
+	background: var(--grey);
+	color: var(--ink);
+	font: inherit;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.pvcal,
+	.pvcal-back {
+		animation: none;
+	}
+}
+
+/* Stays longer than the price table */
+.tile.tile-more { grid-column: 1 / -1; flex-direction: row; align-items: center; min-height: 64px; }
+.tile.tile-more .p { font-size: 15px; font-weight: 500; }
+.tile.tile-more.on .p { font-size: 19px; font-weight: 600; }

@@ -297,6 +297,9 @@
 		const season = st.season ?? ( c.summer ? 's' : 'w' );
 		document.querySelectorAll( '[data-season]' ).forEach( ( x ) => x.classList.toggle( 'on', x.dataset.season === season ) );
 		$( 'tiles' ).innerHTML = P.table( season === 's' ).map( ( p, i ) => `<button type="button" class="tile${ i + 1 === c.days && season === ( c.summer ? 's' : 'w' ) ? ' on' : '' }" data-n="${ i + 1 }" aria-pressed="${ i + 1 === c.days }"><span class="d">${ P.dl( i + 1 ) }</span><span class="p">${ P.eur( p ) }</span></button>` ).join( '' );
+		// Longer than the price table: one wide tile that shows the real stay and opens the return date.
+		const long = ! c.bad && c.days > 16 && season === ( c.summer ? 's' : 'w' );
+		$( 'tiles' ).insertAdjacentHTML( 'beforeend', `<button type="button" class="tile tile-more${ long ? ' on' : '' }" data-more aria-pressed="${ long }"><span class="d">${ long ? P.dl( c.days ) : 'Viac ako 16 dní' }</span><span class="p">${ long ? P.eur( c.park ) : 'vybrať dátum návratu' }</span></button>` );
 		let sum = 0; const lines = [];
 		$( 'extras' ).innerHTML = X.map( ( x, i ) => {
 			const on = !! st.extras[ i ];
@@ -315,6 +318,15 @@
 		$( 'sTo' ).value = st.to;
 	};
 	document.addEventListener( 'click', ( e ) => {
+		if ( e.target.closest( '[data-more]' ) ) {
+			if ( calc().days <= 16 ) {
+				const d = new Date( st.from + 'T00:00' ); d.setDate( d.getDate() + 17 );
+				st.to = P.iso( d ); st.toT = st.fromT;
+			}
+			render();
+			$( 'sTo' ).closest( '.dfield' ).querySelector( '.dshow' ).click();
+			return;
+		}
 		const t = e.target.closest( '.tile' );
 		if ( t ) {
 			const d = new Date( st.from + 'T00:00' ); d.setDate( d.getDate() + Number( t.dataset.n ) );
