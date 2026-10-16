@@ -1,23 +1,21 @@
-/* Real map (OpenStreetMap, darkened to the brand) with the shuttle leg PV → BTS drawn on top.
-   Pins sit at their true positions on the image; the red line draws in as it scrolls into view.
-   On the live site this block can be an interactive Google map instead. */
+/* Real map (OpenStreetMap, darkened to the brand) with the real driving route PV → terminal
+   (OSRM on OpenStreetMap roads, 5.6 km), drawn in as it scrolls into view. Same markup as the
+   WordPress site (tools/port/pages.mjs). */
 document.querySelectorAll( '#routeMap' ).forEach( ( el ) => {
+	el.className = 'route-map';
 	el.setAttribute( 'role', 'img' );
 	el.setAttribute( 'aria-label', 'Mapa: parkovisko PV na Starej Vajnorskej 39 a cesta transferom na Letisko M. R. Štefánika' );
-	el.style.cssText = 'position:relative;background:#181817;overflow:hidden;min-height:0;display:flex;align-items:center';
-	const path = 'M431 274 C 470 340, 520 470, 731 626';
-	el.innerHTML = `<div style="position:relative;width:100%;aspect-ratio:1049/839;max-width:100%">
-		<img src="img/p-map.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
-		<svg viewBox="0 0 1049 839" preserveAspectRatio="none" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%">
-			<path d="${ path }" stroke="rgba(226,90,75,.25)" stroke-width="14" fill="none" stroke-linecap="round"/>
-			<path class="draw" d="${ path }" stroke="#E25A4B" stroke-width="5" fill="none" stroke-linecap="round" stroke-dasharray="1000"/>
+	el.innerHTML = `<div class="rm-in"><div class="rm-z">
+		<img src="img/p-map.jpg" alt="" loading="lazy">
+		<svg viewBox="0 0 1049 839" preserveAspectRatio="none" aria-hidden="true">
+			<path d="M431.3 281.9 L456.3 280.4 L460.3 282.3 L514.9 278.5 L536.8 263.9 L542.7 263.4 L541.6 252.4 L543.7 249.3 L573.0 244.0 L578.1 248.2 L588.0 307.7 L591.0 347.4 L586.6 357.5 L569.8 380.5 L540.2 411.2 L512.5 444.1 L473.9 500.0 L453.6 535.9 L429.9 584.0 L408.6 639.6 L404.8 644.5 L399.7 646.5 L394.1 645.1 L390.5 640.9 L390.2 634.9 L394.5 629.0 L427.4 614.7 L524.6 596.6 L536.9 599.5 L545.3 607.3 L556.7 632.9 L554.4 639.7 L557.6 645.4 L561.4 644.9 L561.8 639.8 L573.4 627.2" stroke="rgba(226,90,75,.25)" stroke-width="14" fill="none" stroke-linecap="round"/>
+			<path class="draw" d="M431.3 281.9 L456.3 280.4 L460.3 282.3 L514.9 278.5 L536.8 263.9 L542.7 263.4 L541.6 252.4 L543.7 249.3 L573.0 244.0 L578.1 248.2 L588.0 307.7 L591.0 347.4 L586.6 357.5 L569.8 380.5 L540.2 411.2 L512.5 444.1 L473.9 500.0 L453.6 535.9 L429.9 584.0 L408.6 639.6 L404.8 644.5 L399.7 646.5 L394.1 645.1 L390.5 640.9 L390.2 634.9 L394.5 629.0 L427.4 614.7 L524.6 596.6 L536.9 599.5 L545.3 607.3 L556.7 632.9 L554.4 639.7 L557.6 645.4 L561.4 644.9 L561.8 639.8 L573.4 627.2" stroke="#E25A4B" stroke-width="5" fill="none" stroke-linecap="round" stroke-dasharray="1200"/>
 		</svg>
-		<div style="position:absolute;left:41.06%;top:32.7%;transform:translate(-50%,-100%);display:flex;flex-direction:column;align-items:center">
-			<span style="padding:8px 14px;border-radius:12px;background:#C93C2E;color:#fff;font-size:13px;font-weight:600;white-space:nowrap;box-shadow:0 10px 24px -10px rgba(0,0,0,.6)">PV airport parking</span>
-			<span style="width:2px;height:12px;background:#C93C2E"></span><span style="width:12px;height:12px;border-radius:50%;background:#C93C2E;box-shadow:0 0 0 5px rgba(201,60,46,.3);margin-top:-6px"></span>
-		</div>
-		<div style="position:absolute;left:69.67%;top:74.59%;transform:translate(-50%,-50%);display:flex;align-items:center;gap:8px;padding:7px 12px 7px 9px;border-radius:999px;background:#fff;color:#1D1D1B;font-size:13px;font-weight:600;white-space:nowrap;box-shadow:0 10px 24px -10px rgba(0,0,0,.6)"><svg width="16" height="16" viewBox="0 0 24 24" fill="#1D1D1B" aria-hidden="true"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z"/></svg>Letisko BTS</div>
-		<div style="position:absolute;left:58%;top:49%;transform:translate(-50%,-50%);font-size:12px;padding:5px 10px;border-radius:999px;background:#1D1D1B;color:#fff;font-weight:600;border:1px solid rgba(255,255,255,.25)">≈ 5 min</div>
-		<span style="position:absolute;right:8px;bottom:6px;font-size:10px;color:rgba(255,255,255,.55)">© OpenStreetMap</span>
+		<div class="rm-pv"><span>PV airport parking</span><i></i><b></b></div>
+		<div class="rm-bts"><svg width="16" height="16" viewBox="0 0 24 24" fill="#1D1D1B" aria-hidden="true"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z"/></svg>Letisko BTS</div>
+		<b class="rm-end"></b>
+		<div class="rm-min">5,6 km</div>
+	</div>
+		<span class="rm-osm">© OpenStreetMap</span>
 	</div>`;
 } );

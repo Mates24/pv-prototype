@@ -276,3 +276,21 @@ select.inp { appearance: none; background-image: url("data:image/svg+xml,%3Csvg 
 .flc-set:active { transform: scale(.98); }
 .flc-set.done { background: #EAF8F0; color: #1d6b40; cursor: default; }
 .fl-err { margin: 8px 0 0; font-size: 13px; color: var(--red-dark); }
+
+/* Map with the shuttle route (OpenStreetMap picture). */
+.route-map { position: relative; background: #181817; overflow: hidden; display: flex; align-items: stretch; min-height: 360px; }
+.rm-in { position: relative; flex: 1; min-height: 360px; overflow: hidden; container-type: size; }
+/* The map picture keeps its proportions (1049 × 839) and covers the frame at least 1.6× zoomed,
+   with the route's middle (x 490, y 445 of the picture) in the frame's centre; pins and the route
+   are placed in % of the picture, so they stay on the roads at any frame size. */
+.rm-z { --w: max(160cqw, calc(130cqh * 1049 / 839)); position: absolute; width: var(--w); aspect-ratio: 1049 / 839; left: calc(50cqw - var(--w) * .4672); top: calc(50cqh - var(--w) * 839 / 1049 * .5304); }
+.rm-z > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.rm-z > svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.rm-pv { position: absolute; left: 41.11%; top: 33.6%; transform: translate(-50%, -100%); display: flex; flex-direction: column; align-items: center; }
+.rm-pv span { padding: 8px 14px; border-radius: 12px; background: var(--red); color: var(--white); font-size: 13px; font-weight: 600; white-space: nowrap; box-shadow: 0 10px 24px -10px rgba(0, 0, 0, .6); }
+.rm-pv i { width: 2px; height: 12px; background: var(--red); }
+.rm-pv b { width: 12px; height: 12px; border-radius: 50%; background: var(--red); box-shadow: 0 0 0 5px rgba(201, 60, 46, .3); margin-top: -6px; }
+.rm-end { position: absolute; left: 54.66%; top: 74.75%; width: 12px; height: 12px; margin: -6px 0 0 -6px; border-radius: 50%; background: var(--white); box-shadow: 0 0 0 4px rgba(226, 90, 75, .55); }
+.rm-bts { position: absolute; left: 54.66%; top: 74.75%; transform: translate(-50%, 18px); display: flex; align-items: center; gap: 8px; padding: 7px 12px 7px 9px; border-radius: 999px; background: var(--white); color: var(--ink); font-size: 13px; font-weight: 600; white-space: nowrap; box-shadow: 0 10px 24px -10px rgba(0, 0, 0, .6); }
+.rm-min { position: absolute; left: 37.5%; top: 53.5%; transform: translate(-50%, -50%); font-size: 12px; padding: 5px 10px; border-radius: 999px; background: var(--ink); color: var(--white); font-weight: 600; border: 1px solid rgba(255, 255, 255, .25); }
+.rm-osm { position: absolute; right: 8px; bottom: 6px; font-size: 10px; color: rgba(255, 255, 255, .55); }
