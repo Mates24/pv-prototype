@@ -12,7 +12,7 @@
 		[ 'kontakt.html', 'Kontakt' ],
 	];
 	const EXTRA = [
-		[ 'sluzba-pneuservis.html', 'Pneuservis' ], [ 'sluzba-kontrola.html', 'Kontrola' ], [ 'sluzba-brzdy.html', 'Brzdy' ], [ 'sluzba-olej.html', 'Olej a filtre' ],
+		[ 'sluzba-pneuservis.html', 'Pneuservis' ], [ 'sluzba-kontrola.html', 'Kontrola' ], [ 'sluzba-brzdy.html', 'Brzdy' ], [ 'sluzba-olej.html', 'Olej a filtre' ], [ 'sluzba-klima.html', 'Klimatizácia' ], [ 'sluzba-stk.html', 'STK a EK' ],
 		[ 'clanok.html', 'Článok' ], [ 'moj-ucet.html', 'Môj účet' ], [ '404.html', '404' ],
 	];
 	const here = document.body.dataset.page || 'index.html';

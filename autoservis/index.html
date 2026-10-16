@@ -245,8 +245,8 @@
 		{ t: 'Všeobecná kontrola vozidla', s: 'kontrolu', d: 'Prehliadka podvozku, bŕzd, pneumatík, osvetlenia, elektroniky a kvapalín. Dostanete prehľadný report.', img: 'as-lift', pos: '50% 50%', href: 'sluzba-kontrola.html' },
 		{ t: 'Brzdy', s: 'brzdy', d: 'Výmena platničiek a kotúčov, brzdová kvapalina a diagnostika celého brzdového systému.', img: 'as-brakes', pos: '50% 50%', href: 'sluzba-brzdy.html' },
 		{ t: 'Olej a filtre', s: 'olej a filtre', d: 'Výmena oleja podľa špecifikácie výrobcu a všetkých filtrov. Kvalitné značkové oleje a ekologická likvidácia.', img: 'as-oil', pos: '50% 50%', href: 'sluzba-olej.html' },
-		{ t: 'Klimatizácia – plnenie, dezinfekcia', s: 'klimatizáciu', d: 'Servis klimatizácie vrátane plnenia a dezinfekcie ozónom zabezpečí čistý a zdravý vzduch v aute.', img: 'as-sign', pos: '50% 70%', href: 'cennik.html#klima' },
-		{ t: 'Príprava na STK a emisnú kontrolu', s: 'STK a EK', d: 'Kompletná príprava vozidla na STK a emisnú kontrolu zaručí, že prejde bez problémov.', img: 'as-octavia', pos: '40% 50%', href: 'cennik.html#stk' },
+		{ t: 'Klimatizácia – plnenie, dezinfekcia', s: 'klimatizáciu', d: 'Servis klimatizácie vrátane plnenia a dezinfekcie ozónom zabezpečí čistý a zdravý vzduch v aute.', img: 'as-sign', pos: '50% 70%', href: 'sluzba-klima.html' },
+		{ t: 'Príprava na STK a emisnú kontrolu', s: 'STK a EK', d: 'Kompletná príprava vozidla na STK a emisnú kontrolu zaručí, že prejde bez problémov.', img: 'as-octavia', pos: '40% 50%', href: 'sluzba-stk.html' },
 	];
 	const tabs = document.getElementById( 'tabs' ), shots = document.getElementById( 'shots' );
 	tabs.innerHTML = S.map( ( s, i ) => `<div><button class="svc" role="tab" data-i="${ i }"><span class="n">0${ i + 1 }</span><span>${ s.t }</span><svg class="ic" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#CC4133" stroke-width="2.2" stroke-linecap="square" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button><div class="svc-bar"></div></div>` ).join( '' );
