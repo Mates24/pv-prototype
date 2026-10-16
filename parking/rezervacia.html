@@ -71,10 +71,10 @@
 					</div>
 					<div style="display:flex;flex-direction:column;gap:14px">
 						<h2>Váš let <span style="font-size:14px;font-weight:400;color:var(--sub);letter-spacing:0">nepovinné</span></h2>
-						<p class="hint" style="margin:0">Zadajte číslo letu – ukážeme čas odletu a príletu aj meškanie a časy parkovania nastavíme za vás. Na ukážku skúste FR 8231 a FR 8232.</p>
+						<p class="hint" style="margin:0">Číslo letu späť nám pomôže, ak sa váš let oneskorí – počkáme na vás.</p>
 						<div class="f-grid" style="align-items:start">
-							<div><div class="fl-row"><div class="f"><label for="flOut">Let tam</label><input class="inp" id="flOut" placeholder="napr. FR 8231" autocomplete="off" style="text-transform:uppercase"></div><button type="button" class="btn btn-line" data-fl="out" style="min-height:54px">Overiť</button></div><div class="fl-out" id="flOutRes" aria-live="polite"></div></div>
-							<div><div class="fl-row"><div class="f"><label for="flIn">Let späť</label><input class="inp" id="flIn" placeholder="napr. FR 8232" autocomplete="off" style="text-transform:uppercase"></div><button type="button" class="btn btn-line" data-fl="in" style="min-height:54px">Overiť</button></div><div class="fl-out" id="flInRes" aria-live="polite"></div></div>
+							<div class="f"><label for="flOut">Let tam</label><input class="inp" id="flOut" placeholder="napr. FR 8231" autocomplete="off" style="text-transform:uppercase"></div>
+							<div class="f"><label for="flIn">Let späť</label><input class="inp" id="flIn" placeholder="napr. FR 8232" autocomplete="off" style="text-transform:uppercase"></div>
 						</div>
 					</div>
 					<div>
@@ -175,7 +175,6 @@
 </main>
 <footer id="ftr"></footer>
 <script src="pk.js"></script>
-<script src="flights.js"></script>
 <script>
 ( function () {
 	const P = window.PV, $ = ( id ) => document.getElementById( id );
@@ -190,7 +189,6 @@
 		{ t: 'Nabíjanie elektromobilu', v: null, pl: 'na mieste' },
 	];
 	const CHECK = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
-	st.flights = {};
 	const row = ( l, v, c ) => `<div class="sumrow"><span>${ l }</span><b${ c ? ` style="color:${ c }"` : '' }>${ v }</b></div>`;
 
 	const render = () => {
@@ -214,8 +212,9 @@
 		if ( vip ) lines += row( `Kryté VIP${ vipN > 1 ? ' × ' + vipN : '' }`, P.eur( vip ) );
 		let ex = 0;
 		X.forEach( ( x, i ) => { if ( st.extras[ i ] ) { if ( x.v ) ex += x.v; lines += row( x.t, x.v ? P.eur( x.v ) : 'na mieste' ); } } );
-		if ( st.flights.out ) lines += row( `Let tam ${ st.flights.out.number }`, 'odlet ' + st.flights.out.dep );
-		if ( st.flights.in ) lines += row( `Let späť ${ st.flights.in.number }`, 'prílet ' + st.flights.in.arr );
+		const flOut = $( 'flOut' ).value.trim().toUpperCase(), flIn = $( 'flIn' ).value.trim().toUpperCase();
+		if ( flOut ) lines += row( 'Let tam', flOut );
+		if ( flIn ) lines += row( 'Let späť', flIn );
 		if ( disc ) lines += row( `Zľava ${ st.code.name } (−${ st.code.pct } % z parkovania)`, '−' + P.eur( disc ), 'var(--green)' );
 		$( 'sumLines' ).innerHTML = lines;
 		$( 'sumTotal' ).textContent = bad ? '—' : P.eur( park + vip + ex - disc );
@@ -242,34 +241,11 @@
 		const x = e.target.closest( '[data-x]' );
 		if ( x ) { st.extras[ x.dataset.x ] = ! st.extras[ x.dataset.x ]; render(); }
 	} );
-	// Flight lookup: show the flight, then set the parking time from it with one click.
-	const flLookup = async ( kind ) => {
-		const input = $( kind === 'out' ? 'flOut' : 'flIn' ), box = $( kind === 'out' ? 'flOutRes' : 'flInRes' );
-		const btn = document.querySelector( `[data-fl="${ kind }"]` );
-		btn.textContent = 'Hľadám…'; btn.disabled = true;
-		const r = await window.PVF.lookup( input.value, kind === 'out' ? st.from : st.to );
-		btn.textContent = 'Overiť'; btn.disabled = false;
-		if ( ! r.ok ) { delete st.flights[ kind ]; box.innerHTML = `<p class="fl-err" role="alert">${ r.message }</p>`; render(); return; }
-		st.flights[ kind ] = r.flight;
-		box.innerHTML = window.PVF.card( r.flight, kind );
-		render();
-	};
-	document.querySelectorAll( '[data-fl]' ).forEach( ( b ) => b.addEventListener( 'click', () => flLookup( b.dataset.fl ) ) );
-	[ 'flOut', 'flIn' ].forEach( ( id ) => $( id ).addEventListener( 'keydown', ( e ) => { if ( e.key === 'Enter' ) { e.preventDefault(); flLookup( id === 'flOut' ? 'out' : 'in' ); } } ) );
-	document.addEventListener( 'click', ( e ) => {
-		const b = e.target.closest( '.flc-set' );
-		if ( ! b || b.classList.contains( 'done' ) ) return;
-		st[ b.dataset.set === 'out' ? 'fromT' : 'toT' ] = b.dataset.time;
-		render();
-		b.classList.add( 'done' );
-		b.innerHTML = `✓ ${ b.dataset.set === 'out' ? 'Príchod' : 'Návrat' } nastavený na ${ b.dataset.time }<small>Môžete ho ešte upraviť hore.</small>`;
-	} );
+	[ 'flOut', 'flIn' ].forEach( ( id ) => $( id ).addEventListener( 'input', render ) );
 	$( 'carPlus' ).onclick = () => { st.cars.push( { vip: false } ); render(); };
 	$( 'carMinus' ).onclick = () => { st.cars.pop(); render(); };
 	[ 'from', 'to', 'fromT', 'toT' ].forEach( ( k ) => $( k ).addEventListener( 'change', ( e ) => {
 		st[ k ] = e.target.value;
-		const kind = k === 'from' ? 'out' : k === 'to' ? 'in' : null;
-		if ( kind && st.flights[ kind ] ) { delete st.flights[ kind ]; $( kind === 'out' ? 'flOutRes' : 'flInRes' ).innerHTML = '<p class="hint" style="margin:8px 0 0">Dátum sa zmenil – overte let znova.</p>'; }
 		render();
 	} ) );
 	$( 'codeBtn' ).onclick = () => {
