@@ -27,7 +27,7 @@
 		hdr.className = 'hdr';
 		const links = PAGES.map( ( [ href, name ] ) => `<a class="nav-a${ href === here ? ' on' : '' }" href="${ href }">${ name }</a>` ).join( '' );
 		hdr.innerHTML = `<div class="wrap">
-			<a class="logo" href="index.html" aria-label="PV airport parking – domov"><img src="img/logo-p.png" alt="PV airport parking" width="159" height="44"></a>
+			<a class="logo" href="index.html" aria-label="PV airport parking – domov"><img src="img/logo-p.svg" alt="PV airport parking" width="185" height="26"></a>
 			<nav class="navlinks" aria-label="Hlavná navigácia">${ links }</nav>
 			<div class="hdr-r">
 				<div class="lang" role="group" aria-label="Jazyk"><button type="button" class="on">SK</button><button type="button">EN</button></div>
@@ -50,7 +50,7 @@
 		ftr.className = 'ftr';
 		ftr.innerHTML = `<div class="wrap g-foot">
 			<div>
-				<img src="img/logo-p.png" alt="PV airport parking" style="height:52px;width:auto;margin-bottom:20px">
+				<img src="img/logo-p.svg" alt="PV airport parking" style="height:30px;width:auto;margin-bottom:20px">
 				<p class="txt" style="font-size:15px;line-height:1.6;max-width:300px;margin-bottom:24px">Zaparkujte pri letisku Bratislava rýchlo, bezpečne a bez stresu.</p>
 				<div style="display:flex;gap:10px">
 					<a class="soc" href="https://www.facebook.com/pvairportparking" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="#C93C2E"><path d="M14 8V6.5c0-.8.2-1.5 1.5-1.5H17V2h-2.6C11.6 2 11 3.8 11 6v2H9v3h2v11h3V11h2.4l.6-3z"/></svg></a>
