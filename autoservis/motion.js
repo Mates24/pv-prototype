@@ -40,10 +40,11 @@
 		// Route lines draw in; the van follows the red leg.
 		gsap.utils.toArray( '.draw' ).forEach( ( p ) => {
 			const len = p.getTotalLength ? p.getTotalLength() : 1000;
-			gsap.fromTo( p, { strokeDasharray: len, strokeDashoffset: len }, {
-				strokeDashoffset: 0, ease: 'none',
-				scrollTrigger: { trigger: p.closest( 'svg' ), start: 'top 80%', end: 'bottom 45%', scrub: 0.6 },
-			} );
+			// The big map draws with the scroll; small drawings play once when they come into view.
+			const onMap = p.closest( '.route-map, #routeMap' );
+			gsap.fromTo( p, { strokeDasharray: len, strokeDashoffset: len }, onMap
+				? { strokeDashoffset: 0, ease: 'none', scrollTrigger: { trigger: p.closest( 'svg' ), start: 'top 80%', end: 'bottom 45%', scrub: 0.6 } }
+				: { strokeDashoffset: 0, duration: 1.8, ease: 'power2.inOut', scrollTrigger: { trigger: p.closest( 'svg' ), start: 'top 85%', once: true } } );
 		} );
 		gsap.utils.toArray( '.ride' ).forEach( ( v ) => {
 			gsap.fromTo( v, { offsetDistance: '0%' }, {
