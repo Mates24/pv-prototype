@@ -50,8 +50,9 @@ h1, h2, h3 { text-wrap: balance; }
 .nav-a.on::after { transform: scaleX(1); }
 .hdr-r { display: flex; align-items: center; gap: 12px; }
 .lang { display: flex; gap: 2px; padding: 3px; border-radius: 999px; background: var(--grey); }
-.lang button { height: 34px; padding: 0 12px; border: 0; border-radius: 999px; cursor: pointer; font: 500 13px var(--font); background: transparent; color: var(--sub); }
-.lang button.on { background: var(--white); color: var(--ink); box-shadow: 0 1px 3px rgba(0, 0, 0, .12); }
+.lang a, .lang span { display: inline-flex; align-items: center; height: 34px; padding: 0 12px; border-radius: 999px; font: 500 13px var(--font); text-decoration: none; color: var(--sub); }
+.lang a:hover { color: var(--ink); }
+.lang .on { background: var(--white); color: var(--ink); box-shadow: 0 1px 3px rgba(0, 0, 0, .12); }
 .burger { display: none; width: 46px; height: 46px; padding: 0; border-radius: 999px; border: 1px solid var(--line); background: var(--white); color: var(--ink); cursor: pointer; align-items: center; justify-content: center; -webkit-appearance: none; appearance: none; }
 .burger .bl { display: flex; flex-direction: column; gap: 4px; width: 18px; }
 .burger .bl i { display: block; height: 2px; border-radius: 2px; background: var(--ink); transition: transform 240ms var(--ease), opacity 200ms ease; }

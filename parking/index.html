@@ -10,7 +10,6 @@
 <link rel="stylesheet" href="pk.css">
 </head>
 <body data-page="index.html">
-<div id="proto"></div>
 <header id="hdr"></header>
 
 <main>
@@ -316,6 +315,12 @@
 		$( 'sTotal' ).textContent = c.bad ? '—' : P.eur( c.park + sum );
 		$( 'sFrom' ).value = st.from;
 		$( 'sTo' ).value = st.to;
+		// The booking form opens with these dates and extras (Kryté VIP is the first car's switch there).
+		const q = new URLSearchParams( { from: st.from, to: st.to, ft: st.fromT, tt: st.toT } );
+		if ( st.extras[ 0 ] ) q.set( 'vip', '1' );
+		const xs = Object.keys( st.extras ).filter( ( k ) => st.extras[ k ] && k > 0 ).map( ( k ) => k - 1 );
+		if ( xs.length ) q.set( 'x', xs.join( ',' ) );
+		$( 'sGo' ).href = 'rezervacia.html?' + q;
 	};
 	document.addEventListener( 'click', ( e ) => {
 		if ( e.target.closest( '[data-more]' ) ) {

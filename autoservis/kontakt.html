@@ -5,20 +5,17 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Kontakt – PV Autoservis</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap">
 <link rel="stylesheet" href="as.css">
 <style>
-	.form { background: var(--grey); padding: clamp(24px, 4vw, 48px); scroll-margin-top: 120px; }
+	.form { background: var(--grey); padding: clamp(19px, 3.1vw, 37px); scroll-margin-top: 120px; }
 	.addr { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 3px solid var(--ink); }
 	.addr > div { padding: 28px 24px 0 0; display: flex; flex-direction: column; gap: 6px; }
-	.addr small { font: 700 13px var(--cond); text-transform: uppercase; letter-spacing: .06em; color: var(--red); }
+	.addr small { font: 600 13px var(--cond); letter-spacing: 0; color: var(--red); }
 	.addr b { font-size: 19px; font-weight: 500; }
 	@media (max-width: 760px) { .addr { grid-template-columns: minmax(0, 1fr); } }
 </style>
 </head>
 <body data-page="kontakt.html">
-<div id="proto"></div>
 <header id="hdr"></header>
 <main>
 	<section class="phero">
@@ -41,7 +38,7 @@
 			</div>
 			<div class="place">
 				<div class="rv" id="hoursBox" style="background:var(--ink);color:#fff;padding:clamp(24px,4vw,36px)"></div>
-				<div class="addr rv"><div><span class="cond" style="font-size:13px;font-weight:700;letter-spacing:.08em;color:var(--red)">ADRESA</span><p class="cond" style="margin:10px 0 0;font-size:34px;font-weight:800;line-height:1">Technická 5957/7A<br>821 04 Bratislava</p><p class="txt" style="margin-top:12px">Ružinov, areál pri Prievozskej. Parkovanie pred dielňou.</p></div><div style="display:flex;flex-wrap:wrap;gap:10px"><a class="btn btn-dark btn-sm" href="https://maps.google.com/?q=PV+Autoservis+Technick%C3%A1+5957%2F7A+Bratislava">Navigovať</a><span style="align-self:center;font-size:15px;color:var(--muted)">pvsbratislava@gmail.com</span></div></div>
+				<div class="addr rv"><div><span class="cond" style="font-size:13px;font-weight:700;letter-spacing: 0;color:var(--red)">ADRESA</span><p class="cond" style="margin:10px 0 0;font-size:29px;font-weight:600;line-height:1">Technická 5957/7A<br>821 04 Bratislava</p><p class="txt" style="margin-top:12px">Ružinov, areál pri Prievozskej. Parkovanie pred dielňou.</p></div><div style="display:flex;flex-wrap:wrap;gap:10px"><a class="btn btn-dark btn-sm" href="https://maps.google.com/?q=PV+Autoservis+Technick%C3%A1+5957%2F7A+Bratislava">Navigovať</a><span style="align-self:center;font-size:15px;color:var(--muted)">pvsbratislava@gmail.com</span></div></div>
 			</div>
 		</div>
 	</section>
@@ -51,12 +48,12 @@
 			<div class="form rv" id="form" style="background:#fff">
 				<div id="sentBox" hidden style="min-height:520px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:20px">
 					<span style="width:64px;height:64px;background:var(--red);display:flex;align-items:center;justify-content:center"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="square" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
-					<h3 class="cond" style="margin:0;font-size:40px;font-weight:800" id="thanks">Ďakujeme.</h3>
+					<h3 class="cond" style="margin:0;font-size:34px;font-weight:600" id="thanks">Ďakujeme.</h3>
 					<p style="margin:0;font-size:17px;color:var(--muted);max-width:420px;line-height:1.6">Správu sme prijali. Čoskoro vás budeme kontaktovať s cenovou ponukou a termínom.</p>
 					<button class="btn btn-out" type="button" id="again">Poslať ďalšiu správu</button>
 				</div>
 				<form id="cf" novalidate>
-					<h3 class="cond" style="margin:0 0 8px;font-size:32px;font-weight:800">Napíšte nám</h3>
+					<h3 class="cond" style="margin:0 0 8px;font-size:27px;font-weight:600">Napíšte nám</h3>
 					<p style="margin:0 0 32px;color:var(--muted);font-size:16px">Čoskoro vás budeme kontaktovať.</p>
 					<div style="display:flex;flex-direction:column;gap:18px">
 						<div class="g-2f">

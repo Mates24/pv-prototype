@@ -42,7 +42,6 @@
 </style>
 </head>
 <body data-page="rezervacia.html">
-<div id="proto"></div>
 <header id="hdr"></header>
 <main>
 	<section class="phero" style="padding-bottom:40px">
@@ -101,9 +100,9 @@
 					<div style="display:flex;flex-direction:column;gap:18px">
 						<h2>Kontakt</h2>
 						<div class="f-grid">
-							<div class="f" style="grid-column:1/-1"><label for="name">Meno a priezvisko <b>*</b></label><input class="inp" id="name" autocomplete="name" value="Jana Nováková"><span class="errt" hidden>Zadajte meno a priezvisko.</span></div>
-							<div class="f"><label for="phone">Telefón <b>*</b></label><input class="inp" id="phone" type="tel" autocomplete="tel" value="+421 905 123 456"><span class="errt" hidden>Zadajte telefón, pošleme naň SMS s potvrdením.</span></div>
-							<div class="f"><label for="email">E-mail <b>*</b></label><input class="inp" id="email" type="email" autocomplete="email" value="jana.novakova@example.sk"><span class="errt" hidden>Zadajte platný e-mail.</span></div>
+							<div class="f" style="grid-column:1/-1"><label for="name">Meno a priezvisko <b>*</b></label><input class="inp" id="name" autocomplete="name"><span class="errt" hidden>Zadajte meno a priezvisko.</span></div>
+							<div class="f"><label for="phone">Telefón <b>*</b></label><input class="inp" id="phone" type="tel" autocomplete="tel" placeholder="+421 9xx xxx xxx"><span class="errt" hidden>Zadajte telefón, pošleme naň SMS s potvrdením.</span></div>
+							<div class="f"><label for="email">E-mail <b>*</b></label><input class="inp" id="email" type="email" autocomplete="email"><span class="errt" hidden>Zadajte platný e-mail.</span></div>
 						</div>
 					</div>
 					<div style="display:flex;flex-direction:column;gap:18px">
@@ -119,7 +118,7 @@
 							<div class="radios" role="radiogroup" aria-label="Typ zákazníka"><label><input type="radio" name="who" value="p" checked>Súkromná osoba</label><label><input type="radio" name="who" value="c">Firma</label></div></div>
 						<p class="hint" style="margin:0" id="billHint">Doklad dostanete na mieste. Firemné údaje vyplníte, ak chcete doklad na firmu.</p>
 						<div id="company" hidden style="display:flex;flex-direction:column;gap:18px">
-							<div class="ico-row"><div class="f"><label for="ico">IČO</label><input class="inp" id="ico" inputmode="numeric" value="55783660"></div><button type="button" class="btn btn-dark" id="icoBtn" style="min-height:54px">Načítať údaje</button></div>
+							<div class="ico-row"><div class="f"><label for="ico">IČO</label><input class="inp" id="ico" inputmode="numeric" placeholder="8 číslic"></div><button type="button" class="btn btn-dark" id="icoBtn" style="min-height:54px">Načítať údaje</button></div>
 							<div class="ok-note" id="icoOk" hidden>Údaje firmy sme doplnili z registra. Skontrolujte ich.</div>
 							<div class="f-grid">
 								<div class="f" style="grid-column:1/-1"><label for="cName">Obchodné meno</label><input class="inp" id="cName"></div>
@@ -143,14 +142,14 @@
 				<!-- STEP 3 -->
 				<section class="panel" id="s3" hidden aria-live="polite">
 					<div class="done-ic"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
-					<div><span class="lbl">Rezervácia potvrdená</span><h2 style="font-size:clamp(30px,3.4vw,44px);letter-spacing:-.035em;margin-top:8px">Ďakujeme, <span id="dName">Jana</span>. Vaše číslo je <span class="red">P-20123</span>.</h2></div>
+					<div><span class="lbl">Rezervácia potvrdená</span><h2 style="font-size:clamp(30px,3.4vw,44px);letter-spacing:-.035em;margin-top:8px">Ďakujeme, <span id="dName">Jana</span>. Vaše číslo je <span class="red" id="dRef">P-20123</span>.</h2></div>
 					<p class="txt">Potvrdenie sme poslali na <b id="dMail" style="font-weight:600;color:var(--ink)"></b> a SMS na <b id="dPhone" style="font-weight:600;color:var(--ink)"></b>. Deň pred príchodom vám pripomenieme termín.</p>
 					<ol class="next">
 						<li>Prídite na Starú Vajnorskú 39 v čase príchodu. Zaplatíte na mieste – kartou alebo v hotovosti.</li>
 						<li>Odvezieme vás na terminál, cesta trvá asi 5 minút.</li>
 						<li>Po prílete zavolajte na +421 904 440 660 a vyzdvihneme vás. Váš let späť sledujeme – ak bude meškať, počkáme.</li>
 					</ol>
-					<div style="display:flex;flex-wrap:wrap;gap:12px"><a class="btn btn-red" href="upravit-rezervaciu.html#ukazka">Zobraziť rezerváciu</a><a class="btn btn-line" href="ako-sa-k-nam-dostat.html">Ako sa k nám dostať</a></div>
+					<div style="display:flex;flex-wrap:wrap;gap:12px"><a class="btn btn-red" href="upravit-rezervaciu.html" id="dLink">Zobraziť rezerváciu</a><a class="btn btn-line" href="ako-sa-k-nam-dostat.html">Ako sa k nám dostať</a></div>
 				</section>
 			</div>
 
@@ -181,6 +180,15 @@
 	const a = new Date(); a.setDate( a.getDate() + 7 );
 	const b = new Date( a ); b.setDate( b.getDate() + 7 );
 	const st = { from: P.iso( a ), to: P.iso( b ), fromT: '05:30', toT: '22:15', cars: [ { vip: false } ], extras: {}, code: null, step: 1 };
+	// Dates and extras chosen in the price tool on the home page.
+	const q = new URLSearchParams( location.search );
+	if ( /^\d{4}-\d{2}-\d{2}$/.test( q.get( 'from' ) || '' ) && /^\d{4}-\d{2}-\d{2}$/.test( q.get( 'to' ) || '' ) ) {
+		st.from = q.get( 'from' ); st.to = q.get( 'to' );
+		if ( /^\d{2}:\d{2}$/.test( q.get( 'ft' ) || '' ) ) st.fromT = q.get( 'ft' );
+		if ( /^\d{2}:\d{2}$/.test( q.get( 'tt' ) || '' ) ) st.toT = q.get( 'tt' );
+	}
+	if ( q.get( 'vip' ) === '1' ) st.cars[ 0 ].vip = true;
+	( q.get( 'x' ) || '' ).split( ',' ).filter( Boolean ).forEach( ( i ) => ( st.extras[ i ] = true ) );
 	const X = [
 		{ t: 'VIP vyzdvihnutie vozidla na letisku', v: 20, pl: '20 €' },
 		{ t: 'Všeobecná kontrola vozidla', v: 50, pl: '50 €' },
@@ -201,7 +209,7 @@
 		$( 'carPlus' ).disabled = st.cars.length > 5;
 		$( 'cars' ).innerHTML = st.cars.map( ( c, i ) => `<div class="car"><span class="no">${ i + 1 }</span><span style="font-size:15px">Auto ${ i + 1 }<br><span class="hint">${ summer ? 'Letná' : 'Zimná' } sezóna · ${ bad ? '—' : P.eur( per ) }</span></span><button type="button" class="xtra${ c.vip ? ' on' : '' }" data-vip="${ i }" aria-pressed="${ c.vip }" style="border:0;width:auto;min-height:44px;padding:0"><span class="bx">${ CHECK }</span><span>Kryté VIP</span><span class="pr">+5 € / deň</span></button></div>` ).join( '' );
 		$( 'extras' ).innerHTML = X.map( ( x, i ) => `<button type="button" class="xtra${ st.extras[ i ] ? ' on' : '' }" data-x="${ i }" aria-pressed="${ !! st.extras[ i ] }"><span class="bx">${ CHECK }</span><span>${ x.t }</span><span class="pr">${ x.pl }</span></button>` ).join( '' );
-		$( 'plates' ).innerHTML = st.cars.map( ( c, i ) => `<div class="f"><label for="plate${ i }">ŠPZ – auto ${ i + 1 } <b>*</b></label><input class="inp" id="plate${ i }" value="${ c.plate || ( i ? '' : 'BL 123 AB' ) }" style="text-transform:uppercase"><span class="errt" hidden>Zadajte ŠPZ.</span></div>` ).join( '' );
+		$( 'plates' ).innerHTML = st.cars.map( ( c, i ) => `<div class="f"><label for="plate${ i }">ŠPZ – auto ${ i + 1 } <b>*</b></label><input class="inp" id="plate${ i }" value="${ c.plate || '' }" placeholder="napr. BL 123 AB" style="text-transform:uppercase"><span class="errt" hidden>Zadajte ŠPZ.</span></div>` ).join( '' );
 
 		const park = per * st.cars.length;
 		const vipN = st.cars.filter( ( c ) => c.vip ).length;
@@ -295,6 +303,21 @@
 		$( 'dName' ).textContent = $( 'name' ).value.trim().split( ' ' )[ 0 ];
 		$( 'dMail' ).textContent = $( 'email' ).value;
 		$( 'dPhone' ).textContent = $( 'phone' ).value;
+		// Saved in this browser so "Upraviť rezerváciu" can find it (the real site stores it on the server).
+		const ref = 'P-' + ( 20200 + Math.floor( Math.random() * 9000 ) );
+		const token = Math.random().toString( 36 ).slice( 2, 12 );
+		const booking = {
+			ref, token, status: 'confirmed', created: new Date().toISOString(),
+			from: st.from, fromT: st.fromT, to: st.to, toT: st.toT,
+			cars: st.cars.map( ( c ) => ( { plate: c.plate.trim().toUpperCase(), vip: c.vip } ) ),
+			adults: $( 'adults' ).value, kids: $( 'kids' ).value,
+			name: $( 'name' ).value.trim(), email: $( 'email' ).value.trim(), phone: $( 'phone' ).value.trim(),
+			flOut: $( 'flOut' ).value.trim().toUpperCase(), flIn: $( 'flIn' ).value.trim().toUpperCase(),
+			lines: $( 'sumLines' ).innerHTML, total: $( 'sumTotal' ).textContent,
+		};
+		window.PVB.save( booking );
+		$( 'dRef' ).textContent = ref;
+		$( 'dLink' ).href = `upravit-rezervaciu.html?ref=${ ref }&t=${ token }`;
 		go( 3 );
 	} );
 	render();

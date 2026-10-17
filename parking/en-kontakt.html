@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Contact – PV airport parking</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="pk.css">
+<style>
+	.ci { display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 16px; align-items: center; padding: 22px 0; border-top: 1px solid var(--line2); }
+	.ci .ic { width: 52px; height: 52px; border-radius: 16px; background: var(--grey); display: grid; place-items: center; }
+	.ci small { display: block; font-size: 13px; color: var(--sub); }
+	.ci b { font-size: 19px; font-weight: 600; letter-spacing: -.01em; word-break: break-word; }
+	.formbox { background: var(--grey); border-radius: 32px; padding: clamp(24px, 4vw, 48px); display: flex; flex-direction: column; gap: 18px; }
+</style>
+</head>
+<body data-page="en-kontakt.html">
+<header id="hdr"></header>
+<main>
+	<section class="phero">
+		<div class="wrap">
+			<nav class="crumbs in d1" aria-label="Breadcrumbs"><a href="en-index.html">Home</a><span>/</span><span>Contact</span></nav>
+			<div class="phero-g">
+				<h1 class="h1 in d2">Contact us</h1>
+				<p class="lead in d3">Questions about your booking, arriving at the car park or extras? We are available around the clock.</p>
+			</div>
+		</div>
+	</section>
+
+	<section style="padding-bottom:130px">
+		<div class="wrap g-2">
+			<div class="rv">
+				<div class="ci"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="#C93C2E" aria-hidden="true"><path d="M6.6 10.8a15.2 15.2 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"></path></svg></span><span><small>Phone, 24/7</small><b class="num">+421 904 440 660</b></span></div>
+				<div class="ci"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C93C2E" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"></rect><path d="m4 7 8 6 8-6"></path></svg></span><span><small>Email</small><b>pvairportparking@gmail.com</b></span></div>
+				<div class="ci"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C93C2E" stroke-width="2" aria-hidden="true"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg></span><span><small>Car park</small><b>Stará Vajnorská 39, 831 04 Bratislava</b></span></div>
+				<div class="ci" style="border-bottom:1px solid var(--line2)"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C93C2E" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></span><span><small>Open</small><b>Monday – Sunday, 00:00 – 23:59</b></span></div>
+				<p class="txt" style="margin-top:28px;font-size:14px">PV Airport Parking s. r. o. · Technická 5957/7A, 821 04 Bratislava – Ružinov · Company ID 57630089 · Tax ID 2122855515</p>
+			</div>
+			<form class="formbox rv" id="cf" novalidate>
+				<h2 class="h3" style="font-size:30px">Write to us</h2>
+				<div class="f-grid">
+					<div class="f"><label for="n">Name <b>*</b></label><input class="inp" id="n" autocomplete="name"><span class="errt" hidden>Enter your name.</span></div>
+					<div class="f"><label for="m">Email <b>*</b></label><input class="inp" id="m" type="email" autocomplete="email"><span class="errt" hidden>Enter a valid email.</span></div>
+					<div class="f"><label for="t">Phone</label><input class="inp" id="t" type="tel" autocomplete="tel"></div>
+					<div class="f"><label for="r">Booking number</label><input class="inp" id="r" placeholder="if you have one"></div>
+				</div>
+				<div class="f"><label for="q">Message <b>*</b></label><textarea class="inp" id="q" placeholder="How can we help?"></textarea><span class="errt" hidden>Tell us how we can help.</span></div>
+				<label class="chk"><input type="checkbox" id="g"><span>I agree to the processing of my personal data so you can reply. <b style="color:var(--red);font-weight:500">*</b></span></label>
+				<span class="errt" id="gErr" hidden>We can't reply without your consent.</span>
+				<button class="btn btn-red" type="submit" style="align-self:flex-start">Send message</button>
+				<div class="ok-note" id="ok" hidden role="status">We have your message. We'll reply as soon as we can, usually within a few hours.</div>
+			</form>
+		</div>
+	</section>
+
+	<section class="sec sec-g">
+		<div class="wrap g-2">
+			<div class="rv sticky"><h2 class="h2" style="margin-bottom:24px">Common questions</h2><p class="lead">More answers are on the <a href="en-index.html#cennik">home page</a>.</p></div>
+			<div class="accs" data-single>
+				<div class="acc open"><button class="acc-b" aria-expanded="true"><span class="pl"></span><span>How do I pay?</span></button><div class="acc-p"><div><p>You pay on site when you arrive – by card or in cash. Nothing is paid online.</p></div></div></div>
+				<div class="acc"><button class="acc-b" aria-expanded="false"><span class="pl"></span><span>Can I cancel my booking?</span></button><div class="acc-p"><div><p>Yes, through the link in the confirmation email, free of charge up to 24 hours before arrival. We change dates by phone.</p></div></div></div>
+				<div class="acc"><button class="acc-b" aria-expanded="false"><span class="pl"></span><span>I need a receipt for my company.</span></button><div class="acc-p"><div><p>When booking, choose “Company” and enter the company ID – we fill in the billing details. You get the receipt on site.</p></div></div></div>
+			</div>
+		</div>
+	</section>
+</main>
+<footer id="ftr"></footer>
+<script src="pk.js"></script>
+<script>
+document.getElementById( 'cf' ).addEventListener( 'submit', ( e ) => {
+	e.preventDefault();
+	const $ = ( id ) => document.getElementById( id );
+	let ok = true;
+	[ [ 'n', $( 'n' ).value.trim().length > 1 ], [ 'm', /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test( $( 'm' ).value ) ], [ 'q', $( 'q' ).value.trim().length > 2 ] ].forEach( ( [ id, v ] ) => {
+		$( id ).classList.toggle( 'err', ! v ); $( id ).nextElementSibling.hidden = v; if ( ! v ) ok = false;
+	} );
+	$( 'gErr' ).hidden = $( 'g' ).checked; if ( ! $( 'g' ).checked ) ok = false;
+	$( 'ok' ).hidden = ! ok;
+} );
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="motion.js"></script>
+</body>
+</html>

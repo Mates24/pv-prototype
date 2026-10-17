@@ -1,16 +1,21 @@
 /* PV airport parking — prototype behaviour shared by every page: header, footer, accordions,
    language switch, mobile menu and the price rules used by the price tools. */
 ( function () {
+	// English pages are en-<page>.html; the switch goes to the same page in the other language.
+	const EN = document.documentElement.lang.startsWith( 'en' );
+	const t = ( sk, en ) => ( EN ? en : sk );
+	const page = ( h ) => ( EN ? 'en-' + h : h );
 	const PAGES = [
-		[ 'index.html', 'Domov' ],
-		[ 'sluzby.html', 'Služby' ],
-		[ 'cennik.html', 'Cenník' ],
-		[ 'ako-sa-k-nam-dostat.html', 'Ako sa k nám dostať' ],
-		[ 'kontakt.html', 'Kontakt' ],
-		[ 'upravit-rezervaciu.html', 'Upraviť rezerváciu' ],
+		[ 'index.html', t( 'Domov', 'Home' ) ],
+		[ 'sluzby.html', t( 'Služby', 'Services' ) ],
+		[ 'cennik.html', t( 'Cenník', 'Prices' ) ],
+		[ 'ako-sa-k-nam-dostat.html', t( 'Ako sa k nám dostať', 'Directions' ) ],
+		[ 'kontakt.html', t( 'Kontakt', 'Contact' ) ],
+		[ 'upravit-rezervaciu.html', t( 'Upraviť rezerváciu', 'Change booking' ) ],
 	];
 	const EXTRA_PAGES = [ [ 'rezervacia.html', 'Rezervácia' ], [ 'vop.html', 'VOP' ], [ '404.html', '404' ] ];
-	const here = document.body.dataset.page || 'index.html';
+	const here = ( document.body.dataset.page || 'index.html' ).replace( /^en-/, '' );
+	const other = ( EN ? '' : 'en-' ) + here + location.search;
 	const ARR = '<svg class="arr" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
 	window.PV_ARR = ARR;
 
@@ -18,31 +23,31 @@
 	if ( proto ) {
 		proto.className = 'proto';
 		proto.innerHTML = '<div class="wrap"><b>Prototyp</b>' +
-			PAGES.concat( EXTRA_PAGES ).map( ( [ href, name ] ) => `<a href="${ href }"${ href === here ? ' class="on"' : '' }>${ name }</a>` ).join( '' ) +
+			PAGES.concat( EXTRA_PAGES ).map( ( [ href, name ] ) => `<a href="${ page( href ) }"${ href === here ? ' class="on"' : '' }>${ name }</a>` ).join( '' ) +
 			'<a href="../autoservis/">PV Autoservis →</a></div>';
 	}
 
 	const hdr = document.getElementById( 'hdr' );
 	if ( hdr ) {
 		hdr.className = 'hdr';
-		const links = PAGES.map( ( [ href, name ] ) => `<a class="nav-a${ href === here ? ' on' : '' }" href="${ href }">${ name }</a>` ).join( '' );
+		const links = PAGES.map( ( [ href, name ] ) => `<a class="nav-a${ href === here ? ' on' : '' }" href="${ page( href ) }">${ name }</a>` ).join( '' );
+		const lang = EN
+			? `<a href="${ other }" hreflang="sk" lang="sk">SK</a><span class="on" aria-current="true">EN</span>`
+			: `<span class="on" aria-current="true">SK</span><a href="${ other }" hreflang="en" lang="en">EN</a>`;
 		hdr.innerHTML = `<div class="wrap">
-			<a class="logo" href="index.html" aria-label="PV airport parking – domov"><img src="img/logo-p.svg" alt="PV airport parking" width="185" height="26"></a>
-			<nav class="navlinks" aria-label="Hlavná navigácia">${ links }</nav>
+			<a class="logo" href="${ page( 'index.html' ) }" aria-label="${ t( 'PV airport parking – domov', 'PV airport parking – home' ) }"><img src="img/logo-p.svg" alt="PV airport parking" width="185" height="26"></a>
+			<nav class="navlinks" aria-label="${ t( 'Hlavná navigácia', 'Main navigation' ) }">${ links }</nav>
 			<div class="hdr-r">
-				<div class="lang" role="group" aria-label="Jazyk"><button type="button" class="on">SK</button><button type="button">EN</button></div>
-				<a class="btn btn-red btn-sm" href="rezervacia.html">Rezervovať</a>
-				<button type="button" class="burger" aria-label="Otvoriť menu" aria-expanded="false"><span class="bl" aria-hidden="true"><i></i><i></i><i></i></span></button>
+				<div class="lang" role="group" aria-label="${ t( 'Jazyk', 'Language' ) }">${ lang }</div>
+				<a class="btn btn-red btn-sm" href="${ page( 'rezervacia.html' ) }">${ t( 'Rezervovať', 'Book now' ) }</a>
+				<button type="button" class="burger" aria-label="${ t( 'Otvoriť menu', 'Open menu' ) }" aria-expanded="false"><span class="bl" aria-hidden="true"><i></i><i></i><i></i></span></button>
 			</div>
 		</div>
-		<div class="mnav"><div class="wrap">${ PAGES.map( ( [ h, n ] ) => `<a href="${ h }">${ n }</a>` ).join( '' ) }<a href="rezervacia.html" style="color:var(--red);font-weight:600">Rezervovať parkovanie</a><div style="padding:16px 0" class="lang-m">SK · <a href="#" style="display:inline;border:0;padding:0">EN</a></div></div></div>`;
+		<div class="mnav"><div class="wrap">${ PAGES.map( ( [ h, n ] ) => `<a href="${ page( h ) }">${ n }</a>` ).join( '' ) }<a href="${ page( 'rezervacia.html' ) }" style="color:var(--red);font-weight:600">${ t( 'Rezervovať parkovanie', 'Book parking' ) }</a><div style="padding:16px 0" class="lang-m">${ EN ? `<a href="${ other }" style="display:inline;border:0;padding:0">SK</a> · EN` : `SK · <a href="${ other }" style="display:inline;border:0;padding:0">EN</a>` }</div></div></div>`;
 		hdr.querySelector( '.burger' ).addEventListener( 'click', ( e ) => {
 			const open = hdr.classList.toggle( 'open' );
 			e.currentTarget.setAttribute( 'aria-expanded', String( open ) );
 		} );
-		hdr.querySelectorAll( '.lang button' ).forEach( ( b, i, all ) => b.addEventListener( 'click', () => {
-			all.forEach( ( x ) => x.classList.toggle( 'on', x === b ) );
-		} ) );
 	}
 
 	const ftr = document.getElementById( 'ftr' );
@@ -51,17 +56,17 @@
 		ftr.innerHTML = `<div class="wrap g-foot">
 			<div>
 				<img src="img/logo-p.svg" alt="PV airport parking" style="height:30px;width:auto;margin-bottom:20px">
-				<p class="txt" style="font-size:15px;line-height:1.6;max-width:300px;margin-bottom:24px">Zaparkujte pri letisku Bratislava rýchlo, bezpečne a bez stresu.</p>
+				<p class="txt" style="font-size:15px;line-height:1.6;max-width:300px;margin-bottom:24px">${ t( 'Zaparkujte pri letisku Bratislava rýchlo, bezpečne a bez stresu.', 'Park at Bratislava Airport quickly, safely and stress-free.' ) }</p>
 				<div style="display:flex;gap:10px">
 					<a class="soc" href="https://www.facebook.com/pvairportparking" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="#C93C2E"><path d="M14 8V6.5c0-.8.2-1.5 1.5-1.5H17V2h-2.6C11.6 2 11 3.8 11 6v2H9v3h2v11h3V11h2.4l.6-3z"/></svg></a>
 					<a class="soc" href="https://www.instagram.com/pv_airport_parking" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C93C2E" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></svg></a>
 				</div>
 			</div>
-			<div class="col"><b>Služby</b><a href="sluzby.html">Parkovanie a transfer</a><br><a href="sluzby.html#vip">Kryté VIP parkovanie</a><br><a href="sluzby.html#cistenie">Čistenie vozidla</a><br><a href="vop.html">Všeobecné obchodné podmienky</a></div>
-			<div class="col"><b>Sídlo</b>PV Airport Parking s. r. o.<br>Technická 5957/7A<br>821 04 Bratislava – Ružinov<br>IČO 57630089</div>
-			<div class="col"><b>Prevádzka</b>Stará Vajnorská 39, 831 04 Bratislava<br>pvairportparking@gmail.com<br>+421 904 440 660<br>Po – Ne: 00:00 – 23:59</div>
+			<div class="col"><b>${ t( 'Služby', 'Services' ) }</b><a href="${ page( 'sluzby.html' ) }">${ t( 'Parkovanie a transfer', 'Parking and shuttle' ) }</a><br><a href="${ page( 'sluzby.html' ) }#vip">${ t( 'Kryté VIP parkovanie', 'Covered VIP parking' ) }</a><br><a href="${ page( 'sluzby.html' ) }#cistenie">${ t( 'Čistenie vozidla', 'Car cleaning' ) }</a><br><a href="${ page( 'vop.html' ) }">${ t( 'Všeobecné obchodné podmienky', 'Terms and conditions' ) }</a></div>
+			<div class="col"><b>${ t( 'Sídlo', 'Registered office' ) }</b>PV Airport Parking s. r. o.<br>Technická 5957/7A<br>821 04 Bratislava – Ružinov<br>${ t( 'IČO', 'Company ID' ) } 57630089</div>
+			<div class="col"><b>${ t( 'Prevádzka', 'Car park' ) }</b>Stará Vajnorská 39, 831 04 Bratislava<br>pvairportparking@gmail.com<br>+421 904 440 660<br>${ t( 'Po – Ne: 00:00 – 23:59', 'Mon – Sun: 00:00 – 23:59' ) }</div>
 		</div>
-		<div class="ftr-bar">© 2026 PV Airport Parking s. r. o. · Všetky práva vyhradené.</div>`;
+		<div class="ftr-bar">© 2026 PV Airport Parking s. r. o. · ${ t( 'Všetky práva vyhradené.', 'All rights reserved.' ) }</div>`;
 	}
 
 	const $$ = ( sel, root = document ) => Array.from( root.querySelectorAll( sel ) );
@@ -70,7 +75,7 @@
 	   in the site's design). The date input stays in the form (value, events, min); a button shows
 	   "št 22. 10. 2026" and opens the calendar. Two date fields in one form are a range: the days
 	   between arrival and return are marked, and after the arrival the return calendar opens. */
-	const en = document.documentElement.lang.startsWith( 'en' );
+	const en = EN;
 	const DAYS = en ? [ 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat' ] : [ 'ne', 'po', 'ut', 'st', 'št', 'pi', 'so' ];
 	const MONTHS = en
 		? [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ]
@@ -386,6 +391,39 @@
 		const md = ( d.getMonth() + 1 ) * 100 + d.getDate();
 		return md >= 601 && md <= 915;
 	};
+	// Bookings made in this prototype, kept in the browser (the real site keeps them on the server).
+	// P-20123 is a sample so "Upraviť rezerváciu" can be tried without booking first.
+	const KEY = 'pv-pk-bookings';
+	const iso = ( d ) => d.getFullYear() + '-' + String( d.getMonth() + 1 ).padStart( 2, '0' ) + '-' + String( d.getDate() ).padStart( 2, '0' );
+	const sample = () => {
+		const a = new Date(); a.setDate( a.getDate() + 5 );
+		const b = new Date( a ); b.setDate( b.getDate() + 7 );
+		return {
+			ref: 'P-20123', token: 'ukazka', status: 'confirmed', from: iso( a ), fromT: '05:30', to: iso( b ), toT: '22:15',
+			cars: [ { plate: 'BL123AB', vip: true } ], adults: '2', kids: '0', name: 'Jana Nováková', email: 'jana.novakova@example.sk',
+			phone: '+421 905 123 456', flOut: 'FR 8231', flIn: 'FR 8232',
+			lines: '<div class="sumrow"><span>Parkovanie · 8 dní</span><b>65,00 €</b></div><div class="sumrow"><span>Transfer na letisko a späť</span><b style="color:var(--green)">zdarma</b></div><div class="sumrow"><span>Kryté VIP</span><b>40,00 €</b></div>',
+			total: '105,00 €',
+		};
+	};
+	const all = () => {
+		try {
+			return JSON.parse( localStorage.getItem( KEY ) || '{}' );
+		} catch ( e ) {
+			return {};
+		}
+	};
+	window.PVB = {
+		save: ( b ) => {
+			const list = all();
+			list[ b.ref ] = b;
+			try {
+				localStorage.setItem( KEY, JSON.stringify( list ) );
+			} catch ( e ) {}
+		},
+		get: ( ref ) => all()[ ref ] || ( ref === 'P-20123' ? sample() : null ),
+	};
+
 	window.PV = {
 		WINTER,
 		SUMMER,
@@ -396,12 +434,12 @@
 			return n <= 16 ? t[ n - 1 ] : t[ 15 ] + ( n - 16 ) * ( summer ? 6 : 5 );
 		},
 		days: ( a, b ) => Math.max( 1, Math.ceil( ( b - a ) / 86400000 ) ),
-		eur: ( n ) => n.toFixed( 2 ).replace( '.', ',' ) + ' €',
-		dl: ( n ) => n + ( n === 1 ? ' deň' : n < 5 ? ' dni' : ' dní' ),
+		eur: ( n ) => ( EN ? '€' + n.toFixed( 2 ) : n.toFixed( 2 ).replace( '.', ',' ) + ' €' ),
+		dl: ( n ) => ( EN ? n + ( n === 1 ? ' day' : ' days' ) : n + ( n === 1 ? ' deň' : n < 5 ? ' dni' : ' dní' ) ),
 		iso: ( d ) => d.getFullYear() + '-' + String( d.getMonth() + 1 ).padStart( 2, '0' ) + '-' + String( d.getDate() ).padStart( 2, '0' ),
 		sk: ( iso ) => {
 			const [ y, m, d ] = iso.split( '-' ).map( Number );
-			return `${ d }. ${ m }. ${ y }`;
+			return EN ? `${ d }/${ m }/${ y }` : `${ d }. ${ m }. ${ y }`;
 		},
 	};
 } )();

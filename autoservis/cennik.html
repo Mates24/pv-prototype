@@ -5,23 +5,20 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Cenník – PV Autoservis</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap">
 <link rel="stylesheet" href="as.css">
 <style>
 	.cats { position: sticky; top: 92px; z-index: 10; background: rgba(255,255,255,.96); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line2); }
 	.cats .wrap { display: flex; gap: 6px; overflow-x: auto; padding-block: 12px; scrollbar-width: none; }
-	.cats a { flex: none; padding: 10px 16px; border: 1px solid var(--line); font: 700 14px var(--cond); text-transform: uppercase; letter-spacing: .04em; text-decoration: none; color: var(--ink); }
+	.cats a { flex: none; padding: 10px 16px; border: 1px solid var(--line); font: 600 14px var(--cond); letter-spacing: 0; text-decoration: none; color: var(--ink); }
 	.cats a.on, .cats a:hover { background: var(--ink); border-color: var(--ink); color: #fff; }
 	.cat { display: grid; grid-template-columns: 320px minmax(0, 1fr); gap: 56px; padding-block: 64px; border-top: 1px solid var(--line); scroll-margin-top: 170px; }
-	.cat h2 { margin: 0; font: 800 40px/.95 var(--cond); text-transform: uppercase; }
-	.cat .n { font: 800 15px var(--cond); color: var(--red); display: block; margin-bottom: 18px; }
+	.cat h2 { margin: 0; font: 600 34px/.95 var(--cond); }
+	.cat .n { font: 600 15px var(--cond); color: var(--red); display: block; margin-bottom: 18px; }
 	.warn { background: var(--red); color: #fff; padding: 20px 24px; font-size: 15px; line-height: 1.5; display: flex; gap: 14px; align-items: flex-start; }
 	@media (max-width: 1060px) { .cat { grid-template-columns: minmax(0, 1fr); gap: 24px; } .cats { top: 76px; } }
 </style>
 </head>
 <body data-page="cennik.html">
-<div id="proto"></div>
 <header id="hdr"></header>
 <main>
 	<section class="phero" style="border-bottom:0;padding-bottom:48px">
@@ -41,7 +38,7 @@
 	</section>
 	<section class="sec-k" style="padding-block:96px">
 		<div class="wrap" style="display:flex;flex-wrap:wrap;gap:32px;align-items:center;justify-content:space-between">
-			<h2 class="h2 rv" style="font-size:clamp(36px,4vw,56px)">Termín máte<br><span style="color:var(--red-light)">za minútu</span></h2>
+			<h2 class="h2 rv" style="font-size:clamp(28px, 3.1vw, 44px)">Termín máte<br><span style="color:var(--red-light)">za minútu</span></h2>
 			<div class="rv" style="display:flex;flex-wrap:wrap;gap:12px"><a class="btn btn-red" data-book href="#">Rezervovať online</a><a class="btn btn-white" href="tel:+421910623111">0910 623 111</a></div>
 		</div>
 	</section>

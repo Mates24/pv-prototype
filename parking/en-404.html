@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Page not found – PV airport parking</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="pk.css">
+<style>
+	.gate { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .9fr); gap: 56px; align-items: center; padding-block: 72px 130px; }
+	.board { background: var(--ink); color: #fff; border-radius: 28px; padding: 32px; font-variant-numeric: tabular-nums; }
+	.board .r { display: grid; grid-template-columns: 70px minmax(0, 1fr) auto; gap: 16px; padding: 14px 0; border-top: 1px solid rgba(255,255,255,.12); font-size: 15px; align-items: center; }
+	.board .r:first-of-type { border-top: 0; }
+	.st { font-size: 12px; font-weight: 600; padding: 5px 10px; border-radius: 6px; background: #3A3A38; white-space: nowrap; }
+	.st.x { background: var(--red); }
+	@media (max-width: 1100px) { .gate { grid-template-columns: minmax(0, 1fr); } }
+</style>
+</head>
+<body data-page="en-404.html">
+<header id="hdr"></header>
+<main>
+	<div class="wrap gate">
+		<div style="display:flex;flex-direction:column;gap:26px">
+			<span class="lbl in d1">Error 404</span>
+			<h1 class="h1 in d2">This flight does not exist.</h1>
+			<p class="lead in d3">We could not find the page you are looking for. The link is wrong or the page has moved.</p>
+			<div class="in d4" style="display:flex;flex-wrap:wrap;gap:12px"><a class="btn btn-red" href="en-index.html">To the home page</a><a class="btn btn-line" href="en-rezervacia.html">Book parking</a></div>
+		</div>
+		<div class="board in d4" aria-hidden="true">
+			<div class="lbl" style="color:#B9BBC1;margin-bottom:12px">Departures · BTS</div>
+			<div class="r"><b>PV 101</b><span>Home</span><span class="st">OK</span></div>
+			<div class="r"><b>PV 204</b><span>Prices</span><span class="st">OK</span></div>
+			<div class="r"><b>PV 404</b><span>Page you wanted</span><span class="st x">CANCELLED</span></div>
+			<div class="r"><b>PV 505</b><span>Booking</span><span class="st">OK</span></div>
+		</div>
+	</div>
+</main>
+<footer id="ftr"></footer>
+<script src="pk.js"></script>
+</body>
+</html>

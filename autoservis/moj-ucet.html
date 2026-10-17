@@ -5,34 +5,37 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Môj účet – PV Autoservis</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap">
 <link rel="stylesheet" href="as.css">
 <style>
 	.login { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); border: 2px solid var(--ink); }
-	.login > div { padding: clamp(28px, 5vw, 56px); display: flex; flex-direction: column; gap: 22px; }
+	.login > div { padding: clamp(22px, 3.9vw, 44px); display: flex; flex-direction: column; gap: 22px; }
 	.login > div + div { background: var(--grey); }
 	.how li { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 12px; padding: 16px 0; border-top: 1px solid var(--line); font-size: 16px; line-height: 1.5; }
-	.how li span { font: 800 22px var(--cond); color: var(--red); }
+	.how li span { font: 600 22px var(--cond); color: var(--red); }
 	.dash { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 24px; }
-	.pts { background: var(--ink); color: #fff; padding: clamp(28px, 5vw, 48px); display: flex; flex-direction: column; gap: 18px; position: relative; overflow: hidden; }
+	.pts { background: var(--ink); color: #fff; padding: clamp(22px, 3.9vw, 37px); display: flex; flex-direction: column; gap: 18px; position: relative; overflow: hidden; }
 	.pts::after { content: ""; position: absolute; right: -40px; top: 0; bottom: 0; width: 120px; background: var(--red); transform: skewX(-20deg); opacity: .9; }
 	.pts > * { position: relative; z-index: 1; }
 	.rw { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 18px 0; border-top: 1px solid var(--line); }
-	.rw .cond { font-weight: 800; font-size: 20px; }
+	.rw .cond { font-weight: 600; font-size: 20px; }
 	.hist td:last-child { color: #1C6B3E; font-weight: 600; }
-	.state { display: inline-block; font: 700 12px var(--cond); letter-spacing: .06em; text-transform: uppercase; padding: 6px 10px; background: var(--grey); }
+	.state { display: inline-block; font: 600 12px var(--cond); letter-spacing: 0; padding: 6px 10px; background: var(--grey); }
 	.state.ok { background: var(--red); color: #fff; }
 	@media (max-width: 1060px) { .login, .dash { grid-template-columns: minmax(0, 1fr); } }
+	.mail { border: 1px solid var(--line); background: var(--white); padding: 20px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 18px 40px -30px rgba(0, 0, 0, .5); }
+	.mail-h { display: flex; justify-content: space-between; font-size: 13px; color: var(--sub); }
+	.mail-h span { color: var(--ink); font-weight: 600; }
+	.mail p { margin: 0; font-size: 15px; line-height: 1.55; color: var(--muted); }
+	.mail .btn { align-self: flex-start; }
+	#sent[hidden] { display: none !important; }
 </style>
 </head>
 <body data-page="moj-ucet.html">
-<div id="proto"></div>
 <header id="hdr"></header>
 <main>
 	<section class="phero">
 		<div class="wrap">
-			<div class="sec-head" style="margin:0"><h1 class="h1 in d2" style="font-size:clamp(38px,4.4vw,64px);line-height:.95">Vernostný program<span class="red">.</span></h1><p class="side-note in d3">Za každú návštevu servisu body. Prihlásite sa e-mailom, bez hesla – pošleme vám odkaz.</p></div>
+			<div class="sec-head" style="margin:0"><h1 class="h1 in d2" style="font-size:clamp(30px, 3.4vw, 50px);line-height:1.04">Vernostný program<span class="red">.</span></h1><p class="side-note in d3">Za každú návštevu servisu body. Prihlásite sa e-mailom, bez hesla – pošleme vám odkaz.</p></div>
 		</div>
 	</section>
 
@@ -40,12 +43,20 @@
 		<div class="wrap">
 			<div class="login rv">
 				<div>
-					<h2 class="h3" style="font-size:28px">Prihlásenie</h2>
+					<h2 class="h3" style="font-size:24px">Prihlásenie</h2>
 					<form id="lf" novalidate style="display:flex;flex-direction:column;gap:18px">
-						<div class="fld"><label for="lmail">E-mail, ktorý ste uviedli v servise</label><input class="inp" id="lmail" type="email" autocomplete="email" value="jan.novak@example.sk"><span class="errt" hidden>Zadajte platný e-mail.</span></div>
+						<div class="fld"><label for="lmail">E-mail, ktorý ste uviedli v servise</label><input class="inp" id="lmail" type="email" autocomplete="email" placeholder="napr. jan.novak@gmail.com"><span class="errt" hidden>Zadajte platný e-mail.</span></div>
 						<button class="btn btn-red" type="submit" style="align-self:flex-start">Poslať prihlasovací odkaz</button>
 					</form>
-					<div class="ok-note" id="sent" hidden>Odkaz sme poslali na <b id="sentTo" style="margin:0 4px"></b>. Platí 30 minút. Na ukážku <button type="button" id="demo" style="border:0;background:none;color:var(--red);font:inherit;font-weight:600;cursor:pointer;padding:0;text-decoration:underline">otvorte účet</button>.</div>
+					<div id="sent" hidden style="display:flex;flex-direction:column;gap:16px">
+						<div class="ok-note">Odkaz na prihlásenie sme poslali na <b id="sentTo" style="margin:0 4px"></b>. Platí 30 minút.</div>
+						<div class="mail" aria-label="Náhľad e-mailu">
+							<div class="mail-h"><span>PV Autoservis</span><small>práve teraz</small></div>
+							<b>Prihlásenie do vernostného programu</b>
+							<p>Dobrý deň, tu je váš odkaz na prihlásenie. Uvidíte v ňom svoje body a históriu návštev.</p>
+							<button type="button" class="btn btn-red btn-sm" id="demo">Prihlásiť sa</button>
+						</div>
+					</div>
 					<p class="txt" style="font-size:14px">Ešte nie ste členom? Povedzte nám e-mail pri ďalšej návšteve servisu a body vám začneme pripisovať.</p>
 				</div>
 				<div>
@@ -55,23 +66,22 @@
 						<li><span>02</span>Za každé euro práce dostanete 1 bod. Pripíšeme ich po oprave a pošleme e-mail.</li>
 						<li><span>03</span>Body vymeníte za zľavu na ďalší servis alebo prezutie.</li>
 					</ol>
-					<p class="txt" style="font-size:13px">Počet bodov a odmeny sú v prototype ukážkové – nastaví ich majiteľ v administrácii.</p>
-				</div>
+									</div>
 			</div>
 		</div>
 	</section>
 
-	<section class="sec sec-g" id="ucet">
+	<section class="sec sec-g" id="ucet" hidden>
 		<div class="wrap">
-			<div class="sec-head rv" style="margin-bottom:40px"><h2 class="h2" style="font-size:clamp(28px,2.8vw,40px)">Dobrý deň, Ján</h2><span class="state">Ukážka prihláseného účtu</span></div>
+			<div class="sec-head rv" style="margin-bottom:40px"><h2 class="h2" style="font-size:clamp(22px, 2.2vw, 31px)">Dobrý deň, <span id="who">Ján</span></h2><span class="state">Prihlásený</span></div>
 			<div class="dash">
 				<div class="pts rv">
-					<span style="font-size:13px;color:#A7ACB3;letter-spacing:.1em;text-transform:uppercase">Vaše body</span>
-					<div class="cond num" style="font-size:clamp(60px,6.5vw,96px);font-weight:800;line-height:.85"><span data-count="840">840</span></div>
+					<span style="font-size:13px;color:#A7ACB3;letter-spacing:.1em;">Vaše body</span>
+					<div class="cond num" style="font-size:clamp(47px, 5.1vw, 75px);font-weight:600;line-height:.85"><span data-count="840">840</span></div>
 					<div style="height:6px;background:rgba(255,255,255,.12);max-width:420px"><b data-bar style="display:block;height:100%;width:84%;background:var(--red-light)"></b></div>
 					<p style="margin:0;color:#C9CCD0;font-size:16px">Ešte 160 bodov do zľavy 20 €.</p>
 				</div>
-				<div class="rv" style="background:#fff;padding:clamp(24px,4vw,40px)">
+				<div class="rv" style="background:#fff;padding:clamp(19px, 3.1vw, 31px)">
 					<h3 class="h3" style="font-size:22px;margin-bottom:12px">Odmeny</h3>
 					<div class="rw"><span><span class="cond">Zľava 10 €</span><br><span class="txt" style="font-size:14px">500 bodov</span></span><span class="state ok">K dispozícii</span></div>
 					<div class="rw"><span><span class="cond">Zľava 20 €</span><br><span class="txt" style="font-size:14px">1 000 bodov</span></span><span class="state">Chýba 160</span></div>
@@ -79,7 +89,7 @@
 					<p class="txt" style="font-size:14px;margin-top:16px">Odmenu uplatníte pri platbe v servise.</p>
 				</div>
 			</div>
-			<div class="rv" style="background:#fff;padding:clamp(24px,4vw,40px);margin-top:24px">
+			<div class="rv" style="background:#fff;padding:clamp(19px, 3.1vw, 31px);margin-top:24px">
 				<h3 class="h3" style="font-size:22px;margin-bottom:16px">História návštev</h3>
 				<div class="tscroll"><table class="ptable hist"><tr><th>Dátum</th><th>Služba</th><th>Vozidlo</th><th>Body</th></tr>
 					<tr><td>12. 10. 2026</td><td>Prezutie pneumatík</td><td>BL 123 AB</td><td>+55</td></tr>
@@ -97,14 +107,26 @@
 <script>
 ( function () {
 	const $ = ( id ) => document.getElementById( id );
+	// Signed in = the email is remembered in this browser (the real site uses a one-time link).
+	const KEY = 'pv-as-login';
+	const store = { get: () => { try { return localStorage.getItem( KEY ); } catch ( e ) { return null; } }, set: ( v ) => { try { v ? localStorage.setItem( KEY, v ) : localStorage.removeItem( KEY ); } catch ( e ) {} } };
+	const nameOf = ( mail ) => { const n = mail.split( '@' )[ 0 ].split( /[._-]/ )[ 0 ]; return n ? n[ 0 ].toUpperCase() + n.slice( 1 ) : 'Ján'; };
+	const show = ( mail ) => {
+		$( 'loginSec' ).hidden = !! mail;
+		$( 'ucet' ).hidden = ! mail;
+		if ( mail ) { $( 'who' ).textContent = nameOf( mail ); }
+		window.scrollTo( { top: 0 } );
+		window.ScrollTrigger?.refresh();
+	};
 	$( 'lf' ).addEventListener( 'submit', ( e ) => {
 		e.preventDefault();
 		const ok = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test( $( 'lmail' ).value );
 		$( 'lmail' ).classList.toggle( 'err', ! ok ); $( 'lmail' ).nextElementSibling.hidden = ok;
-		if ( ok ) { $( 'sentTo' ).textContent = $( 'lmail' ).value; $( 'sent' ).hidden = false; }
+		if ( ok ) { $( 'sentTo' ).textContent = $( 'lmail' ).value; $( 'sent' ).hidden = false; $( 'lf' ).hidden = true; }
 	} );
-	$( 'demo' ).onclick = () => $( 'ucet' ).scrollIntoView( { behavior: 'smooth' } );
-	$( 'logout' ).onclick = () => $( 'loginSec' ).scrollIntoView( { behavior: 'smooth' } );
+	$( 'demo' ).onclick = () => { store.set( $( 'lmail' ).value ); show( $( 'lmail' ).value ); };
+	$( 'logout' ).onclick = () => { store.set( null ); $( 'lf' ).hidden = false; $( 'sent' ).hidden = true; show( null ); };
+	if ( store.get() ) { show( store.get() ); }
 } )();
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>

@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Change booking – PV airport parking</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="pk.css">
+<style>
+	.box { background: #fff; border-radius: 28px; padding: clamp(24px, 4vw, 40px); display: flex; flex-direction: column; gap: 22px; }
+	.kv { display: flex; justify-content: space-between; gap: 16px; padding: 14px 0; border-top: 1px solid var(--line2); font-size: 15px; font-variant-numeric: tabular-nums; }
+	.kv span { color: var(--muted); }
+	.kv b { font-weight: 600; text-align: right; }
+	.pill { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; font-size: 13px; font-weight: 500; background: #EAF8F0; color: #1d6b40; }
+	.pill.x { background: #FDECEA; color: var(--red-dark); }
+	.flights-box { display: flex; flex-direction: column; gap: 14px; padding-top: 8px; }
+	.fl-st { font-size: 12px; font-weight: 600; padding: 5px 10px; border-radius: 999px; background: #FFF1DB; color: #8a5300; }
+	.confirm { border: 1.5px solid var(--red); border-radius: 20px; padding: 20px; display: flex; flex-direction: column; gap: 14px; background: #FFF8F7; }
+	.mail { border: 1px solid var(--line); border-radius: 18px; background: var(--white); padding: 20px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 18px 40px -30px rgba(0, 0, 0, .5); }
+	.mail-h { display: flex; justify-content: space-between; font-size: 13px; color: var(--sub); }
+	.mail-h span { color: var(--ink); font-weight: 600; }
+	.mail p { margin: 0; font-size: 15px; line-height: 1.55; color: var(--muted); }
+	.mail .btn { align-self: flex-start; }
+	.next { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; counter-reset: n; }
+	.next li { counter-increment: n; display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 12px; padding: 18px 0; border-top: 1px solid var(--line2); font-size: 15px; line-height: 1.6; color: #3a3c40; }
+	.next li::before { content: counter(n); width: 32px; height: 32px; border-radius: 50%; background: var(--grey); display: grid; place-items: center; font-weight: 600; color: var(--ink); }
+</style>
+</head>
+<body data-page="en-upravit-rezervaciu.html">
+<header id="hdr"></header>
+<main>
+	<section class="phero">
+		<div class="wrap">
+			<nav class="crumbs in d1" aria-label="Breadcrumbs"><a href="en-index.html">Home</a><span>/</span><span>Change booking</span></nav>
+			<div class="phero-g">
+				<h1 class="h1 in d2">Change or cancel a booking</h1>
+				<p class="lead in d3">Enter your booking number and email. We send you a link to view or cancel the booking. We change dates by phone.</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="sec-g" style="padding-block:72px 130px">
+		<div class="wrap g-2" style="gap:20px;grid-template-columns:repeat(auto-fit,minmax(min(420px,100%),1fr))">
+			<form class="box rv" id="find" novalidate>
+				<h2 class="h3" style="font-size:28px">Find your booking</h2>
+				<div class="f"><label for="ref">Booking number</label><input class="inp" id="ref" placeholder="P-20123" autocomplete="off"><span class="errt" hidden>The number looks like P-20123. You'll find it in the confirmation email.</span></div>
+				<div class="f"><label for="mail">Email used for the booking</label><input class="inp" id="mail" type="email" autocomplete="email"><span class="errt" hidden>Enter the email the confirmation was sent to.</span></div>
+				<button class="btn btn-red" type="submit" style="align-self:flex-start">Send me a link to the booking</button>
+				<div class="ok-note" id="sent" hidden role="status">If a booking with this number and email exists, we have just sent you a link. Check your spam folder too.</div>
+				<div class="mail" id="mailPrev" hidden aria-label="Email preview">
+					<div class="mail-h"><span>PV airport parking</span><small>just now</small></div>
+					<b>Your booking <span id="mRef"></span></b>
+					<p>Hello, use this link to view or cancel your booking.</p>
+					<a class="btn btn-red btn-sm" id="mLink" href="#">View booking</a>
+				</div>
+				<p class="hint" style="margin:0">We change dates on <b style="color:var(--ink)">+421 904 440 660</b>, 24/7.</p>
+			</form>
+
+			<div class="box rv" id="view" hidden>
+				<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><span class="lbl">Your booking</span><span class="pill" id="state">● Confirmed</span></div>
+				<h2 class="h3" style="font-size:28px">Booking <span class="red" id="vRef"></span></h2>
+				<div id="vRows"></div>
+				<div class="flights-box" id="vFlight" hidden>
+					<h3 class="h3" style="font-size:20px">Your flight back</h3>
+					<p class="txt num" style="margin:0" id="vFlightTxt"></p>
+				</div>
+				<div style="display:flex;flex-wrap:wrap;gap:12px" id="acts"><button class="btn btn-line" type="button" id="cancel">Cancel booking</button><a class="btn btn-dark" href="tel:+421904440660">Change dates – call us</a></div>
+				<p class="hint" id="late" hidden style="margin:0">Your arrival is less than 24 hours away, so the booking can now only be cancelled by phone on +421 904 440 660.</p>
+				<div class="confirm" id="conf" hidden>
+					<b style="font-size:17px">Cancel booking <span class="cRef"></span>?</b>
+					<p class="txt" style="font-size:15px;margin:0">Cancelling is free because your arrival is more than 24 hours away. We confirm it by email.</p>
+					<div style="display:flex;flex-wrap:wrap;gap:10px"><button class="btn btn-red btn-sm" type="button" id="yes">Yes, cancel</button><button class="btn btn-line btn-sm" type="button" id="no">Keep the booking</button></div>
+				</div>
+				<div class="ok-note" id="done" hidden role="status">Booking <span class="cRef"></span> is cancelled. We sent a confirmation by email.</div>
+			</div>
+
+			<div class="box rv" id="help">
+				<h2 class="h3" style="font-size:28px">How it works</h2>
+				<ol class="next" style="margin:0">
+					<li>Enter the booking number from the confirmation and the email you booked with.</li>
+					<li>We send you a link. Use it to view or cancel the booking – free up to 24 hours before arrival.</li>
+					<li>To change dates or the number of cars, call +421 904 440 660, 24/7.</li>
+				</ol>
+				<a class="btn btn-line" href="en-rezervacia.html" style="align-self:flex-start">New booking</a>
+			</div>
+
+			<div class="box rv" id="trip" hidden>
+				<h2 class="h3" style="font-size:28px">Before you travel</h2>
+				<ol class="next" style="margin:0">
+					<li>Come to Stará Vajnorská 39 at your arrival time. You pay on site – by card or in cash.</li>
+					<li>We drive you to the terminal, it takes about 5 minutes.</li>
+					<li>When you land, call +421 904 440 660 and we pick you up.</li>
+				</ol>
+				<a class="btn btn-line" href="en-ako-sa-k-nam-dostat.html" style="align-self:flex-start">How to get here</a>
+			</div>
+		</div>
+	</section>
+</main>
+<footer id="ftr"></footer>
+<script src="pk.js"></script>
+<script>
+( function () {
+	const $ = ( id ) => document.getElementById( id );
+	const P = window.PV;
+	const DAYS = [ 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat' ];
+	const when = ( d, t ) => `${ DAYS[ new Date( d + 'T12:00' ).getDay() ] } ${ P.sk( d ) }, ${ t }`;
+	const plate = ( p ) => p.replace( /^([A-Z]{2})(\d{3})([A-Z]{2})$/, '$1 $2 $3' );
+
+	$( 'find' ).addEventListener( 'submit', ( e ) => {
+		e.preventDefault();
+		const ref = $( 'ref' ).value.trim().toUpperCase().replace( /^P-?/, 'P-' );
+		const okRef = /^P-\d{5,}$/.test( ref );
+		const okMail = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test( $( 'mail' ).value );
+		[ [ 'ref', okRef ], [ 'mail', okMail ] ].forEach( ( [ id, ok ] ) => { $( id ).classList.toggle( 'err', ! ok ); $( id ).nextElementSibling.hidden = ok; } );
+		if ( ! okRef || ! okMail ) return;
+		$( 'sent' ).hidden = false;
+		// Same answer whether or not the booking exists; the email only comes when it does.
+		const b = window.PVB.get( ref );
+		const match = b && b.email.toLowerCase() === $( 'mail' ).value.trim().toLowerCase();
+		$( 'mailPrev' ).hidden = ! match;
+		if ( match ) {
+			$( 'mRef' ).textContent = b.ref;
+			$( 'mLink' ).href = `?ref=${ b.ref }&t=${ b.token }`;
+		}
+	} );
+
+	// Opened from the link in the email.
+	const q = new URLSearchParams( location.search );
+	const b = q.get( 'ref' ) && window.PVB.get( q.get( 'ref' ) );
+	if ( ! b || b.token !== q.get( 't' ) ) return;
+	$( 'find' ).hidden = true;
+	$( 'help' ).hidden = true;
+	$( 'view' ).hidden = false;
+	$( 'trip' ).hidden = false;
+	document.querySelectorAll( '.cRef' ).forEach( ( el ) => ( el.textContent = b.ref ) );
+	$( 'vRef' ).textContent = b.ref;
+	const row = ( l, v ) => `<div class="kv"><span>${ l }</span><b>${ v }</b></div>`;
+	const lines = new DOMParser().parseFromString( b.lines, 'text/html' );
+	$( 'vRows' ).innerHTML = row( 'Arrival', when( b.from, b.fromT ) ) + row( 'Return', when( b.to, b.toT ) )
+		+ row( b.cars.length > 1 ? 'Cars' : 'Car', b.cars.map( ( c ) => plate( c.plate ) + ( c.vip ? ' (covered VIP)' : '' ) ).join( ', ' ) )
+		+ row( 'People in the shuttle', b.adults + ( b.kids !== '0' ? `, of them children ${ b.kids }` : '' ) )
+		+ [ ...lines.querySelectorAll( '.sumrow' ) ].filter( ( r ) => ! /^(Let |Flight )/.test( r.children[ 0 ].textContent ) ).map( ( r ) => row( r.children[ 0 ].textContent, r.children[ 1 ].textContent ) ).join( '' )
+		+ `<div class="kv" style="font-size:18px"><span style="color:var(--ink)">Total, paid on site</span><b>${ b.total }</b></div>`;
+	if ( b.flIn ) {
+		$( 'vFlight' ).hidden = false;
+		$( 'vFlightTxt' ).textContent = `${ b.flIn } · on the day you return you will see the landing time and any delay here.`;
+	}
+	const cancelled = () => {
+		$( 'state' ).textContent = '● Cancelled'; $( 'state' ).classList.add( 'x' );
+		$( 'acts' ).hidden = true; $( 'late' ).hidden = true;
+	};
+	if ( b.status === 'cancelled' ) {
+		cancelled();
+	} else if ( new Date( b.from + 'T' + b.fromT ) - new Date() < 864e5 ) {
+		$( 'cancel' ).hidden = true; $( 'late' ).hidden = false;
+	}
+	$( 'cancel' ).onclick = () => { $( 'conf' ).hidden = false; $( 'acts' ).hidden = true; };
+	$( 'no' ).onclick = () => { $( 'conf' ).hidden = true; $( 'acts' ).hidden = false; };
+	$( 'yes' ).onclick = () => {
+		b.status = 'cancelled';
+		window.PVB.save( b );
+		$( 'conf' ).hidden = true; $( 'done' ).hidden = false;
+		cancelled();
+	};
+} )();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="motion.js"></script>
+</body>
+</html>

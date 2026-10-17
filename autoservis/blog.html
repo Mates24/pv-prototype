@@ -5,20 +5,18 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Blog – PV Autoservis</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap">
 <link rel="stylesheet" href="as.css">
 <style>
 	.feat { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); text-decoration: none; color: var(--ink); background: var(--grey); }
 	.feat .im { position: relative; min-height: 420px; overflow: hidden; }
 	.feat .im img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-	.feat .tx { padding: clamp(28px, 5vw, 56px); display: flex; flex-direction: column; gap: 20px; justify-content: center; }
-	.chip { align-self: flex-start; background: var(--red); color: #fff; font: 700 12px var(--cond); text-transform: uppercase; letter-spacing: .08em; padding: 6px 10px; }
+	.feat .tx { padding: clamp(22px, 3.9vw, 44px); display: flex; flex-direction: column; gap: 20px; justify-content: center; }
+	.chip { align-self: flex-start; background: var(--red); color: #fff; font: 600 12px var(--cond); letter-spacing: 0; padding: 6px 10px; }
 	.posts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px 24px; }
 	.post { text-decoration: none; color: var(--ink); display: flex; flex-direction: column; gap: 14px; }
 	.post .im { aspect-ratio: 4 / 3; overflow: hidden; background: var(--grey); }
 	.post .im img { width: 100%; height: 100%; object-fit: cover; transition: transform 900ms var(--ease); }
-	.post h3 { margin: 0; font: 800 24px/1.05 var(--cond); text-transform: uppercase; }
+	.post h3 { margin: 0; font: 600 24px/1.05 var(--cond); }
 	.post time { font-size: 13px; color: var(--sub); }
 	@media (hover: hover) { .post:hover .im img { transform: scale(1.05); } .post:hover h3 { color: var(--red); } }
 	@media (max-width: 1060px) { .feat { grid-template-columns: minmax(0, 1fr); } .posts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
@@ -26,7 +24,6 @@
 </style>
 </head>
 <body data-page="blog.html">
-<div id="proto"></div>
 <header id="hdr"></header>
 <main>
 	<section class="phero">
@@ -38,21 +35,42 @@
 		<div class="wrap" style="display:flex;flex-direction:column;gap:72px">
 			<a class="feat rv" href="clanok.html">
 				<div class="im"><img class="par" src="img/as-lift.jpg" alt="Auto na zdviháku počas kontroly"></div>
-				<div class="tx"><span class="chip">Akcia do 31. 10.</span><h2 class="h2" style="font-size:clamp(34px,3.6vw,52px)">Kontrola vozidla za 50 €. Pri oprave u nás ju máte zadarmo.</h2><p class="txt" style="font-size:17px">Ak bude auto v poriadku, dostanete voucher 50 € na ďalšie služby.</p><span class="cond" style="display:inline-flex;align-items:center;gap:10px;font-weight:700;color:var(--red)">Čítať článok <svg class="arr" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span></div>
+				<div class="tx"><span class="chip">Akcia do 31. 10.</span><h2 class="h2" style="font-size:clamp(27px, 2.8vw, 41px)">Kontrola vozidla za 50 €. Pri oprave u nás ju máte zadarmo.</h2><p class="txt" style="font-size:17px">Ak bude auto v poriadku, dostanete voucher 50 € na ďalšie služby.</p><span class="cond" style="display:inline-flex;align-items:center;gap:10px;font-weight:700;color:var(--red)">Čítať článok <svg class="arr" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span></div>
 			</a>
 			<div class="posts">
-				<a class="post rv" href="clanok.html"><div class="im"><img src="img/as-tyre.jpg" alt="" loading="lazy"></div><time>apríl 2026</time><h3>5 dôvodov, prečo si dať skontrolovať geometriu vozidla</h3></a>
-				<a class="post rv" href="clanok.html"><div class="im"><img src="img/as-workshop.jpg" alt="" loading="lazy"></div><time>marec 2026</time><h3>Jarná údržba auta: 5 krokov, ktoré by ste nemali zanedbať</h3></a>
-				<a class="post rv" href="clanok.html"><div class="im"><img src="img/as-octavia.jpg" alt="" loading="lazy"></div><time>marec 2026</time><h3>Autoservis na splátky s 0 % úrokom a bez navýšenia</h3></a>
-				<a class="post rv" href="clanok.html"><div class="im"><img src="img/as-sign.jpg" alt="" loading="lazy"></div><time>február 2026</time><h3>Parkujete auto vonku? Toto si po zime dajte skontrolovať</h3></a>
-				<a class="post rv" href="clanok.html"><div class="im"><img src="img/as-oil.jpg" alt="" loading="lazy"></div><time>február 2026</time><h3>Prečo meniť všetky filtre pri výmene oleja?</h3></a>
-				<a class="post rv" href="clanok.html"><div class="im"><img src="img/p-wash.jpg" alt="" loading="lazy"></div><time>január 2026</time><h3>Umývanie a tepovanie: starostlivosť, ktorá predlžuje život auta</h3></a>
+				<a class="post rv" href="clanok-kontrola-vozidla-za-polovicu-pripravte-svoje-auto-na-jesen-uz-za-25-e.html"><div class="im"><img src="img/as-lift.jpg" alt="" loading="lazy"></div><time>september 2026</time><h3>Kontrola vozidla za polovicu: Pripravte svoje auto na jeseň už za 25 €!</h3></a>
+				<a class="post rv" href="clanok-kontrola-vozidla-za-polovicu-pripravte-auto-na-dovolenkovu-sezonu-uz-za-25-e.html"><div class="im"><img src="img/as-lift.jpg" alt="" loading="lazy"></div><time>máj 2026</time><h3>Kontrola vozidla za polovicu: Pripravte auto na dovolenkovú sezónu už za 25 €</h3></a>
+				<a class="post rv" href="clanok-5-dovodov-preco-si-dat-skontrolovat-geometriu-vozidla.html"><div class="im"><img src="img/as-tyre.jpg" alt="" loading="lazy"></div><time>apríl 2026</time><h3>5 dôvodov, prečo si dať skontrolovať geometriu vozidla</h3></a>
+				<a class="post rv" href="clanok-jarna-udrzba-auta-5-krokov-ktore-by-ste-nemali-zanedbat.html"><div class="im"><img src="img/as-workshop.jpg" alt="" loading="lazy"></div><time>apríl 2026</time><h3>Jarná údržba auta: 5 krokov, ktoré by ste nemali zanedbať</h3></a>
+				<a class="post rv" href="clanok-autoservis-na-splatky-s-0-urokom-a-bez-navysenia.html"><div class="im"><img src="img/as-octavia.jpg" alt="" loading="lazy"></div><time>marec 2026</time><h3>Autoservis na splátky s 0 % úrokom a bez navýšenia</h3></a>
+				<a class="post rv" href="clanok-jarna-kontrola-vozidla-za-polovicu-pripravte-auto-na-novu-sezonu-uz-za-25-e.html"><div class="im"><img src="img/as-lift.jpg" alt="" loading="lazy"></div><time>marec 2026</time><h3>Jarná kontrola vozidla za polovicu: Pripravte auto na novú sezónu už za 25 €</h3></a>
+				<a class="post rv" href="clanok-mate-problem-s-autom-opytajte-sa-cez-chat-nasho-odbornika.html"><div class="im"><img src="img/as-workshop.jpg" alt="" loading="lazy"></div><time>marec 2026</time><h3>Máte problém s autom? Opýtajte sa cez chat nášho odborníka</h3></a>
+				<a class="post rv" href="clanok-parkujete-svoje-auto-vonku-toto-si-po-zime-dajte-urcite-skontrolovat.html"><div class="im"><img src="img/blog/147a0287-1024x683.jpg" alt="" loading="lazy"></div><time>február 2026</time><h3>Parkujete svoje auto vonku? TOTO si po zime dajte určite skontrolovať</h3></a>
+				<a class="post rv" href="clanok-februarova-zlava-12-na-vymenu-oleja-najlacnejsia-ochrana-motora-ktora-potesi-vasu-penazenku.html"><div class="im"><img src="img/blog/7e8510ff-9432-472a-9a52-a9d594b6ac97.jpg" alt="" loading="lazy"></div><time>február 2026</time><h3>Februárová zľava 12 % na výmenu oleja. Najlacnejšia ochrana motora, ktorá poteší vašu peňaženku</h3></a>
+				<a class="post rv" href="clanok-umyvanie-a-tepovanie-vozidla-starostlivost-ktora-chrani-a-predlzuje-zivot-auta.html" data-more hidden><div class="im"><img src="img/blog/pexels-isaac-mitchell-278678383-17356572-683x1024-1.jpg" alt="" loading="lazy"></div><time>január 2026</time><h3>Umývanie a tepovanie vozidla: Starostlivosť, ktorá chráni a predlžuje život auta</h3></a>
+				<a class="post rv" href="clanok-bezpecnost-na-prvom-mieste-predvianocna-kontrola-vozidla-za-polovicu.html" data-more hidden><div class="im"><img src="img/blog/147a0137-1024x683.jpg" alt="" loading="lazy"></div><time>december 2025</time><h3>Bezpečnosť na prvom mieste: Predvianočná kontrola vozidla za polovicu!</h3></a>
+				<a class="post rv" href="clanok-darcekova-poukazka-ako-idealny-vianocny-darcek.html" data-more hidden><div class="im"><img src="img/blog/clanok-1024x427.jpg" alt="" loading="lazy"></div><time>november 2025</time><h3>Darčeková poukážka ako ideálny vianočný darček</h3></a>
+				<a class="post rv" href="clanok-pat-dovodov-preco-necakat-s-prezutim-pneumatik.html" data-more hidden><div class="im"><img src="img/blog/147a0100-1024x683.jpg" alt="" loading="lazy"></div><time>október 2025</time><h3>Päť dôvodov, prečo nečakať s prezutím pneumatík</h3></a>
+				<a class="post rv" href="clanok-specialna-ponuka-profesionalne-cistenie-a-hlbkove-tepovanie-so-zlavou.html" data-more hidden><div class="im"><img src="img/blog/pexels-isaac-mitchell-278678383-17356572-683x1024.jpg" alt="" loading="lazy"></div><time>september 2025</time><h3>Špeciálna ponuka: profesionálne čistenie a hĺbkové tepovanie so zľavou</h3></a>
+				<a class="post rv" href="clanok-letna-akcia-kontrola-auta-za-polovicu-len-za-15-e-do-konca-augusta.html" data-more hidden><div class="im"><img src="img/blog/147a0298-1-1024x683.jpg" alt="" loading="lazy"></div><time>august 2025</time><h3>Letná akcia: Kontrola auta za polovicu – len za 15 € do konca augusta!</h3></a>
+				<a class="post rv" href="clanok-preco-je-dolezite-menit-vsetky-filtre-pri-vymene-oleja.html" data-more hidden><div class="im"><img src="img/as-oil.jpg" alt="" loading="lazy"></div><time>júl 2025</time><h3>Prečo je dôležité meniť všetky filtre pri výmene oleja?</h3></a>
+				<a class="post rv" href="clanok-nahradne-vozidlo-a-pick-up-servis-od-pv-autoservis.html" data-more hidden><div class="im"><img src="img/blog/147a9035-1-1024x683.jpg" alt="" loading="lazy"></div><time>júl 2025</time><h3>Náhradné vozidlo a pick-up servis od PV Autoservis</h3></a>
+				<a class="post rv" href="clanok-akcia-jun-bezplatna-vseobecna-kontrola-vozidla.html" data-more hidden><div class="im"><img src="img/blog/147a0225-2-1024x683.jpg" alt="" loading="lazy"></div><time>jún 2025</time><h3>Len do konca júla: Bezplatná všeobecná kontrola vozidla</h3></a>
+				<a class="post rv" href="clanok-preco-si-prezut-zimne-pneumatiky-za-letne.html" data-more hidden><div class="im"><img src="img/as-tyre.jpg" alt="" loading="lazy"></div><time>apríl 2025</time><h3>Prečo si prezuť zimné pneumatiky za letné?</h3></a>
+				<a class="post rv" href="clanok-blokova-vynimka-ako-usetrit-na-servise-auta-v-zaruke-bez-straty-zaruky.html" data-more hidden><div class="im"><img src="img/as-bmw.jpg" alt="" loading="lazy"></div><time>december 2024</time><h3>Bloková výnimka: Ako ušetriť na servise auta v záruke bez straty záruky</h3></a>
 			</div>
+			<button type="button" class="btn btn-out" id="morePosts" style="align-self:center">Zobraziť staršie články</button>
 		</div>
 	</section>
 </main>
 <footer id="ftr"></footer>
 <script src="as.js"></script>
+<script>
+document.getElementById( 'morePosts' ).addEventListener( 'click', ( e ) => {
+	document.querySelectorAll( '[data-more]' ).forEach( ( a ) => ( a.hidden = false ) );
+	e.currentTarget.remove();
+} );
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="motion.js"></script>

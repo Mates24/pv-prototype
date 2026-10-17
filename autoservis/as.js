@@ -48,7 +48,7 @@
 		hdr.innerHTML = `<div class="wrap">
 			<div style="display:flex;align-items:center;gap:40px">
 				<a class="logo" href="index.html" aria-label="PV Autoservis – úvod"><img src="img/logo-as.png" alt="PV Autoservis" width="218" height="44"></a>
-				<a class="nav-call" href="tel:+421910623111"><svg width="30" height="30" viewBox="0 0 24 24" fill="#CC4133" aria-hidden="true"><path d="M6.6 10.8a15.2 15.2 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg><span style="display:flex;flex-direction:column;gap:3px"><span style="font-size:12px;color:#CC4133;font-weight:500">Telefonické objednávky</span><span style="font-size:20px;font-weight:500;letter-spacing:.01em;color:#141414">0910 623 111</span></span></a>
+				<a class="nav-call" href="tel:+421910623111"><svg width="30" height="30" viewBox="0 0 24 24" fill="#EF4136" aria-hidden="true"><path d="M6.6 10.8a15.2 15.2 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg><span style="display:flex;flex-direction:column;gap:3px"><span style="font-size:12px;color:#EF4136;font-weight:500">Telefonické objednávky</span><span style="font-size:20px;font-weight:500;letter-spacing:.01em;color:#000000">0910 623 111</span></span></a>
 			</div>
 			<nav class="navlinks" aria-label="Hlavná navigácia">${ links }</nav>
 			<div style="display:flex;align-items:center;gap:10px">
@@ -57,7 +57,7 @@
 				<button type="button" class="burger" aria-label="Otvoriť menu" aria-expanded="false"><span class="bl" aria-hidden="true"><i></i><i></i><i></i></span><span class="bt">Menu</span></button>
 			</div>
 		</div>
-		<div class="mnav"><div class="wrap">${ PAGES.map( ( [ h, n ] ) => `<a href="${ h }">${ n }</a>` ).join( '' ) }<a href="moj-ucet.html">Môj účet</a><a href="${ BOOK }" style="color:#CC4133">Rezervovať termín</a></div></div>`;
+		<div class="mnav"><div class="wrap">${ PAGES.map( ( [ h, n ] ) => `<a href="${ h }">${ n }</a>` ).join( '' ) }<a href="moj-ucet.html">Môj účet</a><a href="${ BOOK }" style="color:#EF4136">Rezervovať termín</a></div></div>`;
 		hdr.querySelector( '.burger' ).addEventListener( 'click', ( e ) => {
 			const open = hdr.classList.toggle( 'open' );
 			e.currentTarget.setAttribute( 'aria-expanded', String( open ) );
@@ -71,7 +71,7 @@
 			<div><img src="img/logo-as-inv.png" alt="PV Autoservis" style="display:block;height:48px;width:auto;margin-bottom:22px"><p style="margin:0;font-size:15px;line-height:1.6;max-width:280px">Profesionálny autoservis – spoľahlivá starostlivosť o vaše vozidlo.</p></div>
 			<div class="col"><span class="cols-h">Stránky</span>${ PAGES.map( ( [ h, n ] ) => `<a href="${ h }">${ n }</a>` ).join( '<br>' ) }<br><a href="moj-ucet.html">Môj účet</a></div>
 			<div class="col"><span class="cols-h">Kontakt</span><b>+421 910 623 111</b><br>pvsbratislava@gmail.com<br>Technická 5957/7A<br>821 04 Bratislava – Ružinov<br>Po – Št 7:00 – 16:00, Pi 7:00 – 14:00</div>
-			<div class="col"><span class="cols-h">Firma</span><b>PV-S1 s. r. o.</b><br>IČO: 55783660 · DIČ: 2122091917<br>IČ DPH: SK2122091917<br>OR Mestského súdu Bratislava III, oddiel Sro, vložka 173085/B<br><a href="#">Ochrana osobných údajov</a> · <a href="#">Cookies</a></div>
+			<div class="col"><span class="cols-h">Firma</span><b>PV-S1 s. r. o.</b><br>IČO: 55783660 · DIČ: 2122091917<br>IČ DPH: SK2122091917<br>OR Mestského súdu Bratislava III, oddiel Sro, vložka 173085/B<br><a href="ochrana-osobnych-udajov.html">Ochrana osobných údajov</a> · <a href="cookies.html">Cookies</a></div>
 		</div>
 		<div class="ftr-bar"><div class="wrap"><span>pvautoservis.sk © 2026</span><a href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false">Hore ↑</a></div></div>`;
 	}

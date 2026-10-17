@@ -18,10 +18,17 @@
 	.flights-box { display: flex; flex-direction: column; gap: 14px; padding-top: 8px; }
 	.fl-st { font-size: 12px; font-weight: 600; padding: 5px 10px; border-radius: 999px; background: #FFF1DB; color: #8a5300; }
 	.confirm { border: 1.5px solid var(--red); border-radius: 20px; padding: 20px; display: flex; flex-direction: column; gap: 14px; background: #FFF8F7; }
+	.mail { border: 1px solid var(--line); border-radius: 18px; background: var(--white); padding: 20px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 18px 40px -30px rgba(0, 0, 0, .5); }
+	.mail-h { display: flex; justify-content: space-between; font-size: 13px; color: var(--sub); }
+	.mail-h span { color: var(--ink); font-weight: 600; }
+	.mail p { margin: 0; font-size: 15px; line-height: 1.55; color: var(--muted); }
+	.mail .btn { align-self: flex-start; }
+	.next { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; counter-reset: n; }
+	.next li { counter-increment: n; display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 12px; padding: 18px 0; border-top: 1px solid var(--line2); font-size: 15px; line-height: 1.6; color: #3a3c40; }
+	.next li::before { content: counter(n); width: 32px; height: 32px; border-radius: 50%; background: var(--grey); display: grid; place-items: center; font-weight: 600; color: var(--ink); }
 </style>
 </head>
 <body data-page="upravit-rezervaciu.html">
-<div id="proto"></div>
 <header id="hdr"></header>
 <main>
 	<section class="phero">
@@ -42,33 +49,51 @@
 				<div class="f"><label for="mail">E-mail z rezervácie</label><input class="inp" id="mail" type="email" autocomplete="email"><span class="errt" hidden>Zadajte e-mail, na ktorý prišlo potvrdenie.</span></div>
 				<button class="btn btn-red" type="submit" style="align-self:flex-start">Poslať odkaz na rezerváciu</button>
 				<div class="ok-note" id="sent" hidden role="status">Ak rezervácia s týmto číslom a e-mailom existuje, odkaz sme vám práve poslali. Pozrite aj priečinok Spam.</div>
+				<div class="mail" id="mailPrev" hidden aria-label="Náhľad e-mailu">
+					<div class="mail-h"><span>PV airport parking</span><small>práve teraz</small></div>
+					<b>Vaša rezervácia <span id="mRef"></span></b>
+					<p>Dobrý deň, cez tento odkaz rezerváciu zobrazíte alebo zrušíte.</p>
+					<a class="btn btn-red btn-sm" id="mLink" href="#">Zobraziť rezerváciu</a>
+				</div>
 				<p class="hint" style="margin:0">Termín vám zmeníme na čísle <b style="color:var(--ink)">+421 904 440 660</b>, nonstop.</p>
 			</form>
 
-			<div class="box rv" id="ukazka">
-				<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><span class="lbl">Ukážka: stránka z odkazu v e-maile</span><span class="pill" id="state">● Aktívna</span></div>
-				<h2 class="h3" style="font-size:28px">Rezervácia <span class="red">P-20123</span></h2>
-				<div>
-					<div class="kv"><span>Príchod</span><b>st 21. 10. 2026, 05:30</b></div>
-					<div class="kv"><span>Návrat</span><b>st 28. 10. 2026, 22:15</b></div>
-					<div class="kv"><span>Autá</span><b>BL 123 AB (kryté VIP)</b></div>
-					<div class="kv"><span>Osoby v transfere</span><b>2</b></div>
-					<div class="kv"><span>Parkovanie · 8 dní</span><b>65,00 €</b></div>
-					<div class="kv"><span>Kryté VIP</span><b>40,00 €</b></div>
-					<div class="kv" style="font-size:18px"><span style="color:var(--ink)">Spolu, platíte na mieste</span><b>105,00 €</b></div>
-				</div>
-				<div class="flights-box">
-					<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><h3 class="h3" style="font-size:20px">Váš let späť</h3><span class="fl-st">Mešká 35 min</span></div>
-					<p class="txt num" style="margin:0">FR 8232 · Tenerife → BTS · prílet 22:50</p>
-					<p class="ok-note">Váš let späť mešká. Vidíme to aj my – vyzdvihneme vás podľa skutočného príletu, netreba nám volať kvôli zmene.</p>
+			<div class="box rv" id="view" hidden>
+				<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><span class="lbl">Vaša rezervácia</span><span class="pill" id="state">● Potvrdená</span></div>
+				<h2 class="h3" style="font-size:28px">Rezervácia <span class="red" id="vRef"></span></h2>
+				<div id="vRows"></div>
+				<div class="flights-box" id="vFlight" hidden>
+					<h3 class="h3" style="font-size:20px">Váš let späť</h3>
+					<p class="txt num" style="margin:0" id="vFlightTxt"></p>
 				</div>
 				<div style="display:flex;flex-wrap:wrap;gap:12px" id="acts"><button class="btn btn-line" type="button" id="cancel">Zrušiť rezerváciu</button><a class="btn btn-dark" href="tel:+421904440660">Zmeniť termín – zavolať</a></div>
+				<p class="hint" id="late" hidden style="margin:0">Do príchodu ostáva menej ako 24 hodín, rezerváciu už zrušíte len telefonicky na +421 904 440 660.</p>
 				<div class="confirm" id="conf" hidden>
-					<b style="font-size:17px">Naozaj zrušiť rezerváciu P-20123?</b>
+					<b style="font-size:17px">Naozaj zrušiť rezerváciu <span class="cRef"></span>?</b>
 					<p class="txt" style="font-size:15px;margin:0">Zrušenie je zdarma, lebo do príchodu ostáva viac ako 24 hodín. Potvrdenie pošleme e-mailom.</p>
 					<div style="display:flex;flex-wrap:wrap;gap:10px"><button class="btn btn-red btn-sm" type="button" id="yes">Áno, zrušiť</button><button class="btn btn-line btn-sm" type="button" id="no">Nechať rezerváciu</button></div>
 				</div>
-				<div class="ok-note" id="done" hidden role="status">Rezervácia P-20123 je zrušená. Potvrdenie sme poslali e-mailom.</div>
+				<div class="ok-note" id="done" hidden role="status">Rezervácia <span class="cRef"></span> je zrušená. Potvrdenie sme poslali e-mailom.</div>
+			</div>
+
+			<div class="box rv" id="help">
+				<h2 class="h3" style="font-size:28px">Ako to funguje</h2>
+				<ol class="next" style="margin:0">
+					<li>Zadajte číslo rezervácie z potvrdenia a e-mail, ktorý ste pri rezervácii uviedli.</li>
+					<li>Pošleme vám odkaz. Cez neho rezerváciu zobrazíte alebo ju zrušíte – zadarmo do 24 hodín pred príchodom.</li>
+					<li>Zmenu termínu alebo počtu áut vybavíme telefonicky na +421 904 440 660, nonstop.</li>
+				</ol>
+				<a class="btn btn-line" href="rezervacia.html" style="align-self:flex-start">Nová rezervácia</a>
+			</div>
+
+			<div class="box rv" id="trip" hidden>
+				<h2 class="h3" style="font-size:28px">Pred cestou</h2>
+				<ol class="next" style="margin:0">
+					<li>Prídite na Starú Vajnorskú 39 v čase príchodu. Zaplatíte na mieste – kartou alebo v hotovosti.</li>
+					<li>Odvezieme vás na terminál, cesta trvá asi 5 minút.</li>
+					<li>Po prílete zavolajte na +421 904 440 660 a vyzdvihneme vás.</li>
+				</ol>
+				<a class="btn btn-line" href="ako-sa-k-nam-dostat.html" style="align-self:flex-start">Ako sa k nám dostať</a>
 			</div>
 		</div>
 	</section>
@@ -78,18 +103,66 @@
 <script>
 ( function () {
 	const $ = ( id ) => document.getElementById( id );
+	const P = window.PV;
+	const DAYS = [ 'ne', 'po', 'ut', 'st', 'št', 'pi', 'so' ];
+	const when = ( d, t ) => `${ DAYS[ new Date( d + 'T12:00' ).getDay() ] } ${ P.sk( d ) }, ${ t }`;
+	const plate = ( p ) => p.replace( /^([A-Z]{2})(\d{3})([A-Z]{2})$/, '$1 $2 $3' );
+
 	$( 'find' ).addEventListener( 'submit', ( e ) => {
 		e.preventDefault();
-		const okRef = /^P-?\d{5,}$/i.test( $( 'ref' ).value.trim() );
+		const ref = $( 'ref' ).value.trim().toUpperCase().replace( /^P-?/, 'P-' );
+		const okRef = /^P-\d{5,}$/.test( ref );
 		const okMail = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test( $( 'mail' ).value );
 		[ [ 'ref', okRef ], [ 'mail', okMail ] ].forEach( ( [ id, ok ] ) => { $( id ).classList.toggle( 'err', ! ok ); $( id ).nextElementSibling.hidden = ok; } );
-		$( 'sent' ).hidden = ! ( okRef && okMail );
+		if ( ! okRef || ! okMail ) return;
+		$( 'sent' ).hidden = false;
+		// Same answer whether or not the booking exists; the email only comes when it does.
+		const b = window.PVB.get( ref );
+		const match = b && b.email.toLowerCase() === $( 'mail' ).value.trim().toLowerCase();
+		$( 'mailPrev' ).hidden = ! match;
+		if ( match ) {
+			$( 'mRef' ).textContent = b.ref;
+			$( 'mLink' ).href = `?ref=${ b.ref }&t=${ b.token }`;
+		}
 	} );
+
+	// Opened from the link in the email.
+	const q = new URLSearchParams( location.search );
+	const b = q.get( 'ref' ) && window.PVB.get( q.get( 'ref' ) );
+	if ( ! b || b.token !== q.get( 't' ) ) return;
+	$( 'find' ).hidden = true;
+	$( 'help' ).hidden = true;
+	$( 'view' ).hidden = false;
+	$( 'trip' ).hidden = false;
+	document.querySelectorAll( '.cRef' ).forEach( ( el ) => ( el.textContent = b.ref ) );
+	$( 'vRef' ).textContent = b.ref;
+	const row = ( l, v ) => `<div class="kv"><span>${ l }</span><b>${ v }</b></div>`;
+	const lines = new DOMParser().parseFromString( b.lines, 'text/html' );
+	$( 'vRows' ).innerHTML = row( 'Príchod', when( b.from, b.fromT ) ) + row( 'Návrat', when( b.to, b.toT ) )
+		+ row( b.cars.length > 1 ? 'Autá' : 'Auto', b.cars.map( ( c ) => plate( c.plate ) + ( c.vip ? ' (kryté VIP)' : '' ) ).join( ', ' ) )
+		+ row( 'Osoby v transfere', b.adults + ( b.kids !== '0' ? `, z toho deti ${ b.kids }` : '' ) )
+		+ [ ...lines.querySelectorAll( '.sumrow' ) ].filter( ( r ) => ! /^(Let |Flight )/.test( r.children[ 0 ].textContent ) ).map( ( r ) => row( r.children[ 0 ].textContent, r.children[ 1 ].textContent ) ).join( '' )
+		+ `<div class="kv" style="font-size:18px"><span style="color:var(--ink)">Spolu, platíte na mieste</span><b>${ b.total }</b></div>`;
+	if ( b.flIn ) {
+		$( 'vFlight' ).hidden = false;
+		$( 'vFlightTxt' ).textContent = `${ b.flIn } · v deň návratu tu uvidíte čas príletu a prípadné meškanie.`;
+	}
+	const cancelled = () => {
+		$( 'state' ).textContent = '● Zrušená'; $( 'state' ).classList.add( 'x' );
+		$( 'acts' ).hidden = true; $( 'late' ).hidden = true;
+	};
+	if ( b.status === 'cancelled' ) {
+		cancelled();
+	} else if ( new Date( b.from + 'T' + b.fromT ) - new Date() < 864e5 ) {
+		$( 'cancel' ).hidden = true; $( 'late' ).hidden = false;
+	}
 	$( 'cancel' ).onclick = () => { $( 'conf' ).hidden = false; $( 'acts' ).hidden = true; };
 	$( 'no' ).onclick = () => { $( 'conf' ).hidden = true; $( 'acts' ).hidden = false; };
 	$( 'yes' ).onclick = () => {
+		b.status = 'cancelled';
+		window.PVB.save( b );
 		$( 'conf' ).hidden = true; $( 'done' ).hidden = false;
-		$( 'state' ).textContent = '● Zrušená'; $( 'state' ).classList.add( 'x' );
+		cancelled();
 	};
 } )();
 </script>

@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Booking – PV airport parking</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="pk.css">
+<style>
+	.stepper { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 28px; }
+	.stp { display: flex; align-items: center; gap: 10px; padding: 8px 16px 8px 8px; border-radius: 999px; background: var(--grey); font-size: 14px; font-weight: 500; color: var(--muted); }
+	.stp i { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-style: normal; font-size: 13px; background: #fff; color: var(--ink); }
+	.stp.on { background: var(--ink); color: #fff; }
+	.stp.on i { background: var(--red); color: #fff; }
+	.stp.done i { background: var(--green); color: #fff; }
+	.panel { background: #fff; border-radius: 28px; padding: clamp(24px, 4vw, 40px); display: flex; flex-direction: column; gap: 28px; }
+	.panel h2 { margin: 0; font-size: 26px; font-weight: 600; letter-spacing: -.02em; }
+	.when { display: grid; grid-template-columns: 1.5fr 1fr 1.5fr 1fr; gap: 14px 18px; align-items: end; }
+	.car { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 16px; align-items: center; padding: 16px 0; border-top: 1px solid var(--line2); }
+	.car .no { width: 36px; height: 36px; border-radius: 12px; background: var(--grey); display: grid; place-items: center; font-weight: 600; }
+	.qty { display: inline-flex; align-items: center; gap: 4px; padding: 4px; border-radius: 999px; background: var(--grey); }
+	.qty button { width: 40px; height: 40px; border-radius: 50%; border: 0; background: #fff; cursor: pointer; font: 600 18px var(--font); color: var(--ink); }
+	.qty button:disabled { opacity: .4; cursor: not-allowed; }
+	.qty span { min-width: 32px; text-align: center; font-weight: 600; }
+	.radios { display: inline-flex; gap: 4px; padding: 4px; border-radius: 999px; background: var(--grey); }
+	.radios label { display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 999px; cursor: pointer; font-size: 14px; font-weight: 500; color: var(--muted); }
+	.radios input { position: absolute; opacity: 0; pointer-events: none; }
+	.radios label:has(input:checked) { background: var(--ink); color: #fff; }
+	.radios label:has(input:focus-visible) { outline: 2px solid var(--red); outline-offset: 2px; }
+	.ico-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; align-items: end; }
+	.code-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; }
+	.sumrow { display: flex; justify-content: space-between; gap: 12px; padding: 13px 0; border-top: 1px solid var(--line2); font-size: 15px; font-variant-numeric: tabular-nums; }
+	.sumrow span { color: var(--muted); }
+	.sumrow b { font-weight: 600; white-space: nowrap; }
+	.done-ic { width: 72px; height: 72px; border-radius: 50%; background: var(--green); display: grid; place-items: center; }
+	.next { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; counter-reset: n; }
+	.next li { counter-increment: n; display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 12px; padding: 18px 0; border-top: 1px solid var(--line2); font-size: 15px; line-height: 1.6; color: #3a3c40; }
+	.next li::before { content: counter(n); width: 32px; height: 32px; border-radius: 50%; background: var(--grey); display: grid; place-items: center; font-weight: 600; color: var(--ink); }
+	@media (max-width: 760px) { .when { grid-template-columns: 1.4fr 1fr; } }
+</style>
+</head>
+<body data-page="en-rezervacia.html">
+<header id="hdr"></header>
+<main>
+	<section class="phero" style="padding-bottom:40px">
+		<div class="wrap">
+			<nav class="crumbs in d1" aria-label="Breadcrumbs"><a href="en-index.html">Home</a><span>/</span><span>Booking</span></nav>
+			<h1 class="h1 in d2" style="font-size:clamp(38px,4.4vw,64px)">Book parking</h1>
+			<div class="stepper in d3" aria-label="Booking steps"><span class="stp on" data-s="1"><i>1</i>Dates and cars</span><span class="stp" data-s="2"><i>2</i>Your details</span><span class="stp" data-s="3"><i>3</i>Done</span></div>
+		</div>
+	</section>
+
+	<section class="sec-g" style="padding-block:56px 130px;--notch:var(--grey)">
+		<div class="wrap g-price">
+			<div style="display:flex;flex-direction:column;gap:20px;min-width:0">
+				<!-- STEP 1 -->
+				<form class="panel" id="s1" novalidate>
+					<div style="display:flex;flex-direction:column;gap:18px">
+						<h2>When are you parking?</h2>
+						<div class="when">
+							<label class="fld"><span class="lbl">Arrival</span><input class="pin" type="date" id="from"></label>
+							<label class="fld"><span class="lbl">Time</span><input class="pin" type="time" id="fromT" value="05:30" step="900"></label>
+							<label class="fld"><span class="lbl">Return</span><input class="pin" type="date" id="to"></label>
+							<label class="fld"><span class="lbl">Time</span><input class="pin" type="time" id="toT" value="22:15" step="900"></label>
+						</div>
+						<p role="alert" id="dateErr" class="errt" hidden>Return must be after arrival.</p>
+						<p class="hint" style="margin:0">Arrive at least 2 hours before take-off. Every started 24 hours count as 1 day.</p>
+					</div>
+					<div style="display:flex;flex-direction:column;gap:14px">
+						<h2>Your flight <span style="font-size:14px;font-weight:400;color:var(--sub);letter-spacing:0">optional</span></h2>
+						<p class="hint" style="margin:0">Your return flight number helps us if the flight is late – we will wait for you.</p>
+						<div class="f-grid" style="align-items:start">
+							<div class="f"><label for="flOut">Flight out</label><input class="inp" id="flOut" placeholder="e.g. FR 8231" autocomplete="off" style="text-transform:uppercase"></div>
+							<div class="f"><label for="flIn">Flight back</label><input class="inp" id="flIn" placeholder="e.g. FR 8232" autocomplete="off" style="text-transform:uppercase"></div>
+						</div>
+					</div>
+					<div>
+						<div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:6px">
+							<h2>How many cars?</h2>
+							<div class="qty"><button type="button" id="carMinus" aria-label="Fewer cars">−</button><span id="carN">1</span><button type="button" id="carPlus" aria-label="More cars">+</button></div>
+						</div>
+						<div id="cars"></div>
+					</div>
+					<div>
+						<h2 style="margin-bottom:10px">Extra services</h2>
+						<div id="extras"></div>
+					</div>
+					<div>
+						<h2 style="margin-bottom:12px">Discount code</h2>
+						<div class="code-row"><input class="inp" id="code" placeholder="e.g. LETO10" autocomplete="off" aria-label="Discount code"><button type="button" class="btn btn-line" id="codeBtn" style="min-height:54px">Apply</button></div>
+						<p class="hint" id="codeMsg" style="margin:8px 0 0">The discount applies to the parking price, not to extra services. To try it, use LETO10.</p>
+					</div>
+					<button class="btn btn-red" type="submit" style="align-self:flex-start">Continue – your details <svg class="arr" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+				</form>
+
+				<!-- STEP 2 -->
+				<form class="panel" id="s2" novalidate hidden>
+					<div style="display:flex;flex-direction:column;gap:18px">
+						<h2>Contact</h2>
+						<div class="f-grid">
+							<div class="f" style="grid-column:1/-1"><label for="name">Full name <b>*</b></label><input class="inp" id="name" autocomplete="name"><span class="errt" hidden>Enter your full name.</span></div>
+							<div class="f"><label for="phone">Phone <b>*</b></label><input class="inp" id="phone" type="tel" autocomplete="tel" placeholder="+421 9xx xxx xxx"><span class="errt" hidden>Enter your phone number, we send the confirmation by SMS.</span></div>
+							<div class="f"><label for="email">Email <b>*</b></label><input class="inp" id="email" type="email" autocomplete="email"><span class="errt" hidden>Enter a valid email.</span></div>
+						</div>
+					</div>
+					<div style="display:flex;flex-direction:column;gap:18px">
+						<h2>Car and passengers</h2>
+						<div class="f-grid" id="plates"></div>
+						<div class="f-grid">
+							<div class="f"><label for="adults">People in the shuttle</label><select class="inp" id="adults"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9 or more</option></select></div>
+							<div class="f"><label for="kids">Of them children (we have child seats)</label><select class="inp" id="kids"><option selected>0</option><option>1</option><option>2</option><option>3</option><option>4</option></select></div>
+						</div>
+					</div>
+					<div style="display:flex;flex-direction:column;gap:18px">
+						<div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap"><h2>Billing</h2>
+							<div class="radios" role="radiogroup" aria-label="Customer type"><label><input type="radio" name="who" value="p" checked>Private person</label><label><input type="radio" name="who" value="c">Company</label></div></div>
+						<p class="hint" style="margin:0" id="billHint">You get the receipt on site. Fill in company details if you want the receipt for a company.</p>
+						<div id="company" hidden style="display:flex;flex-direction:column;gap:18px">
+							<div class="ico-row"><div class="f"><label for="ico">Company ID</label><input class="inp" id="ico" inputmode="numeric" placeholder="8 digits"></div><button type="button" class="btn btn-dark" id="icoBtn" style="min-height:54px">Look up</button></div>
+							<div class="ok-note" id="icoOk" hidden>We filled in the company details from the register. Please check them.</div>
+							<div class="f-grid">
+								<div class="f" style="grid-column:1/-1"><label for="cName">Company name</label><input class="inp" id="cName"></div>
+								<div class="f"><label for="dic">Tax ID</label><input class="inp" id="dic"></div>
+								<div class="f"><label for="icdph">VAT ID</label><input class="inp" id="icdph"></div>
+								<div class="f" style="grid-column:1/-1"><label for="street">Street and number</label><input class="inp" id="street"></div>
+								<div class="f"><label for="zip">Postcode</label><input class="inp" id="zip"></div>
+								<div class="f"><label for="city">City</label><input class="inp" id="city"></div>
+							</div>
+						</div>
+					</div>
+					<div class="f"><label for="note">Note</label><textarea class="inp" id="note" placeholder="E.g. we travel with large luggage or a bicycle."></textarea></div>
+					<div style="display:flex;flex-direction:column;gap:12px">
+						<label class="chk"><input type="checkbox" id="terms"><span>I agree to the <a href="en-vop.html">terms and conditions</a> and the processing of personal data. <b style="color:var(--red);font-weight:500">*</b></span></label>
+						<span class="errt" id="termsErr" hidden>We can't make the booking without your consent to the terms.</span>
+						<label class="chk"><input type="checkbox" id="mkt"><span>Send me offers and discounts by email.</span></label>
+					</div>
+					<div style="display:flex;flex-wrap:wrap;gap:12px"><button class="btn btn-red" type="submit">Confirm booking</button><button class="btn btn-line" type="button" id="back">Back</button></div>
+				</form>
+
+				<!-- STEP 3 -->
+				<section class="panel" id="s3" hidden aria-live="polite">
+					<div class="done-ic"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></div>
+					<div><span class="lbl">Booking confirmed</span><h2 style="font-size:clamp(30px,3.4vw,44px);letter-spacing:-.035em;margin-top:8px">Thank you, <span id="dName">Jana</span>. Your number is <span class="red" id="dRef">P-20123</span>.</h2></div>
+					<p class="txt">We sent the confirmation to <b id="dMail" style="font-weight:600;color:var(--ink)"></b> and an SMS to <b id="dPhone" style="font-weight:600;color:var(--ink)"></b>. We'll remind you the day before you arrive.</p>
+					<ol class="next">
+						<li>Come to Stará Vajnorská 39 at your arrival time. You pay on site – by card or in cash.</li>
+						<li>We drive you to the terminal, it takes about 5 minutes.</li>
+						<li>When you land, call +421 904 440 660 and we pick you up. We watch your return flight – if it is late, we wait.</li>
+					</ol>
+					<div style="display:flex;flex-wrap:wrap;gap:12px"><a class="btn btn-red" href="en-upravit-rezervaciu.html" id="dLink">View booking</a><a class="btn btn-line" href="en-ako-sa-k-nam-dostat.html">How to get here</a></div>
+				</section>
+			</div>
+
+			<!-- SUMMARY -->
+			<aside class="sticky">
+				<div class="pass" style="padding:32px">
+					<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:22px"><span class="lbl">Your booking</span><span style="font-size:13px;color:var(--green);font-weight:500" id="free">● spaces free</span></div>
+					<div style="display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:center;margin-bottom:20px">
+						<div><div style="font-size:26px;font-weight:700;letter-spacing:-.03em;line-height:1">PV</div><div class="num" style="font-size:12px;color:var(--sub);margin-top:6px" id="sumFrom"></div></div>
+						<div style="position:relative;height:24px;display:flex;align-items:center"><div style="flex:1;border-top:2px dotted #C9CACF"></div><svg width="20" height="20" viewBox="0 0 24 24" fill="#C93C2E" aria-hidden="true" style="position:absolute;left:50%;margin-left:-10px;transform:rotate(90deg)"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z"></path></svg></div>
+						<div style="text-align:right"><div style="font-size:26px;font-weight:700;letter-spacing:-.03em;line-height:1">BTS</div><div class="num" style="font-size:12px;color:var(--sub);margin-top:6px" id="sumTo"></div></div>
+					</div>
+					<div id="sumLines"></div>
+					<div class="perf" style="margin:8px -8px 0"></div>
+					<div style="display:flex;justify-content:space-between;align-items:flex-end;padding:24px 0 20px"><span style="font-size:15px;color:var(--muted)">Total incl. VAT</span><span class="big" id="sumTotal"></span></div>
+					<div style="display:flex;align-items:center;justify-content:center;min-height:48px;padding:0 16px;border-radius:999px;background:var(--grey);font-size:14px;font-weight:500;text-align:center">Pay on site – by card or in cash</div>
+					<p style="margin:14px 0 0;text-align:center;font-size:12px;color:var(--sub)">Free cancellation up to 24 hours before arrival.</p>
+				</div>
+			</aside>
+		</div>
+	</section>
+</main>
+<footer id="ftr"></footer>
+<script src="pk.js"></script>
+<script>
+( function () {
+	const P = window.PV, $ = ( id ) => document.getElementById( id );
+	const a = new Date(); a.setDate( a.getDate() + 7 );
+	const b = new Date( a ); b.setDate( b.getDate() + 7 );
+	const st = { from: P.iso( a ), to: P.iso( b ), fromT: '05:30', toT: '22:15', cars: [ { vip: false } ], extras: {}, code: null, step: 1 };
+	// Dates and extras chosen in the price tool on the home page.
+	const q = new URLSearchParams( location.search );
+	if ( /^\d{4}-\d{2}-\d{2}$/.test( q.get( 'from' ) || '' ) && /^\d{4}-\d{2}-\d{2}$/.test( q.get( 'to' ) || '' ) ) {
+		st.from = q.get( 'from' ); st.to = q.get( 'to' );
+		if ( /^\d{2}:\d{2}$/.test( q.get( 'ft' ) || '' ) ) st.fromT = q.get( 'ft' );
+		if ( /^\d{2}:\d{2}$/.test( q.get( 'tt' ) || '' ) ) st.toT = q.get( 'tt' );
+	}
+	if ( q.get( 'vip' ) === '1' ) st.cars[ 0 ].vip = true;
+	( q.get( 'x' ) || '' ).split( ',' ).filter( Boolean ).forEach( ( i ) => ( st.extras[ i ] = true ) );
+	const X = [
+		{ t: 'VIP car pick-up at the airport', v: 20, pl: '20 €' },
+		{ t: 'General vehicle check', v: 50, pl: '50 €' },
+		{ t: 'Full car cleaning', v: 60, pl: 'from €60' },
+		{ t: 'Full cleaning with upholstery shampoo', v: 120, pl: 'from €120' },
+		{ t: 'EV charging', v: null, pl: 'on site' },
+	];
+	const CHECK = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+	const row = ( l, v, c ) => `<div class="sumrow"><span>${ l }</span><b${ c ? ` style="color:${ c }"` : '' }>${ v }</b></div>`;
+
+	const render = () => {
+		const s = new Date( st.from + 'T' + st.fromT ), e = new Date( st.to + 'T' + st.toT );
+		const bad = ! ( e - s > 0 ), days = bad ? 0 : P.days( s, e ), summer = P.isSummer( s );
+		const per = bad ? 0 : P.price( days, summer );
+		$( 'dateErr' ).hidden = ! bad;
+		$( 'carN' ).textContent = st.cars.length;
+		$( 'carMinus' ).disabled = st.cars.length < 2;
+		$( 'carPlus' ).disabled = st.cars.length > 5;
+		$( 'cars' ).innerHTML = st.cars.map( ( c, i ) => `<div class="car"><span class="no">${ i + 1 }</span><span style="font-size:15px">Car ${ i + 1 }<br><span class="hint">${ summer ? 'Summer' : 'Winter' } season · ${ bad ? '—' : P.eur( per ) }</span></span><button type="button" class="xtra${ c.vip ? ' on' : '' }" data-vip="${ i }" aria-pressed="${ c.vip }" style="border:0;width:auto;min-height:44px;padding:0"><span class="bx">${ CHECK }</span><span>Covered VIP</span><span class="pr">+€5 / day</span></button></div>` ).join( '' );
+		$( 'extras' ).innerHTML = X.map( ( x, i ) => `<button type="button" class="xtra${ st.extras[ i ] ? ' on' : '' }" data-x="${ i }" aria-pressed="${ !! st.extras[ i ] }"><span class="bx">${ CHECK }</span><span>${ x.t }</span><span class="pr">${ x.pl }</span></button>` ).join( '' );
+		$( 'plates' ).innerHTML = st.cars.map( ( c, i ) => `<div class="f"><label for="plate${ i }">Licence plate – car ${ i + 1 } <b>*</b></label><input class="inp" id="plate${ i }" value="${ c.plate || '' }" placeholder="e.g. BL 123 AB" style="text-transform:uppercase"><span class="errt" hidden>Enter the licence plate.</span></div>` ).join( '' );
+
+		const park = per * st.cars.length;
+		const vipN = st.cars.filter( ( c ) => c.vip ).length;
+		const vip = vipN * 5 * days;
+		const disc = st.code ? Math.round( park * st.code.pct ) / 100 : 0;
+		let lines = row( `Parking · ${ bad ? '— days' : P.dl( days ) }${ st.cars.length > 1 ? ' × ' + st.cars.length + ' cars' : '' }`, bad ? '—' : P.eur( park ) );
+		lines += row( 'Shuttle to the airport and back', 'free', 'var(--green)' );
+		if ( vip ) lines += row( `Covered VIP${ vipN > 1 ? ' × ' + vipN : '' }`, P.eur( vip ) );
+		let ex = 0;
+		X.forEach( ( x, i ) => { if ( st.extras[ i ] ) { if ( x.v ) ex += x.v; lines += row( x.t, x.v ? P.eur( x.v ) : 'on site' ); } } );
+		const flOut = $( 'flOut' ).value.trim().toUpperCase(), flIn = $( 'flIn' ).value.trim().toUpperCase();
+		if ( flOut ) lines += row( 'Flight out', flOut );
+		if ( flIn ) lines += row( 'Flight back', flIn );
+		if ( disc ) lines += row( `Discount ${ st.code.name } (−${ st.code.pct } % off parking)`, '−' + P.eur( disc ), 'var(--green)' );
+		$( 'sumLines' ).innerHTML = lines;
+		$( 'sumTotal' ).textContent = bad ? '—' : P.eur( park + vip + ex - disc );
+		$( 'sumFrom' ).textContent = `${ P.sk( st.from ) } · ${ st.fromT }`;
+		$( 'sumTo' ).textContent = `${ P.sk( st.to ) } · ${ st.toT }`;
+		[ 'from', 'to', 'fromT', 'toT' ].forEach( ( k ) => ( $( k ).value = st[ k ] ) );
+		$( 'from' ).min = P.iso( new Date() );
+		$( 'to' ).min = st.from;
+	};
+	const go = ( n ) => {
+		st.step = n;
+		[ 1, 2, 3 ].forEach( ( i ) => ( $( 's' + i ).hidden = i !== n ) );
+		document.querySelectorAll( '.stp' ).forEach( ( s ) => {
+			const i = Number( s.dataset.s );
+			s.classList.toggle( 'on', i === n );
+			s.classList.toggle( 'done', i < n );
+		} );
+		window.scrollTo( { top: 0, behavior: 'smooth' } );
+	};
+
+	document.addEventListener( 'click', ( e ) => {
+		const v = e.target.closest( '[data-vip]' );
+		if ( v ) { const c = st.cars[ v.dataset.vip ]; c.vip = ! c.vip; render(); return; }
+		const x = e.target.closest( '[data-x]' );
+		if ( x ) { st.extras[ x.dataset.x ] = ! st.extras[ x.dataset.x ]; render(); }
+	} );
+	[ 'flOut', 'flIn' ].forEach( ( id ) => $( id ).addEventListener( 'input', render ) );
+	$( 'carPlus' ).onclick = () => { st.cars.push( { vip: false } ); render(); };
+	$( 'carMinus' ).onclick = () => { st.cars.pop(); render(); };
+	[ 'from', 'to', 'fromT', 'toT' ].forEach( ( k ) => $( k ).addEventListener( 'change', ( e ) => {
+		st[ k ] = e.target.value;
+		render();
+	} ) );
+	$( 'codeBtn' ).onclick = () => {
+		const c = $( 'code' ).value.trim().toUpperCase();
+		$( 'code' ).value = c;
+		if ( c === 'LETO10' ) { st.code = { name: c, pct: 10 }; $( 'codeMsg' ).textContent = 'Code LETO10 applied: −10 % off the parking price.'; $( 'codeMsg' ).style.color = 'var(--green)'; }
+		else { st.code = null; $( 'codeMsg' ).textContent = c ? `We don't know code ${ c } or it has expired. Please check it.` : 'Enter a code.'; $( 'codeMsg' ).style.color = 'var(--red-dark)'; }
+		render();
+	};
+	$( 's1' ).addEventListener( 'submit', ( e ) => {
+		e.preventDefault();
+		const s = new Date( st.from + 'T' + st.fromT ), en = new Date( st.to + 'T' + st.toT );
+		if ( ! ( en - s > 0 ) ) { $( 'dateErr' ).hidden = false; return; }
+		go( 2 );
+	} );
+	$( 'back' ).onclick = () => go( 1 );
+
+	// Company: IČO lookup fills the billing data (in the real form it reads the public registry).
+	document.querySelectorAll( 'input[name=who]' ).forEach( ( r ) => r.addEventListener( 'change', () => {
+		$( 'company' ).hidden = r.value !== 'c' || ! r.checked;
+	} ) );
+	$( 'icoBtn' ).onclick = () => {
+		$( 'icoBtn' ).textContent = 'Loading…';
+		setTimeout( () => {
+			Object.entries( { cName: 'PV-S1 s. r. o.', dic: '2122091917', icdph: 'SK2122091917', street: 'Technická 5957/7A', zip: '821 04', city: 'Bratislava' } ).forEach( ( [ k, v ] ) => ( $( k ).value = v ) );
+			$( 'icoOk' ).hidden = false;
+			$( 'icoBtn' ).textContent = 'Look up';
+		}, 500 );
+	};
+
+	$( 's2' ).addEventListener( 'submit', ( e ) => {
+		e.preventDefault();
+		let ok = true;
+		const need = ( el, cond ) => {
+			const err = el.parentElement.querySelector( '.errt' );
+			el.classList.toggle( 'err', ! cond );
+			if ( err ) err.hidden = cond;
+			if ( ! cond ) ok = false;
+		};
+		need( $( 'name' ), $( 'name' ).value.trim().length > 2 );
+		need( $( 'phone' ), $( 'phone' ).value.replace( /\D/g, '' ).length >= 9 );
+		need( $( 'email' ), /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test( $( 'email' ).value ) );
+		st.cars.forEach( ( c, i ) => { c.plate = $( 'plate' + i ).value; need( $( 'plate' + i ), c.plate.trim().length > 3 ); } );
+		$( 'termsErr' ).hidden = $( 'terms' ).checked;
+		if ( ! $( 'terms' ).checked ) ok = false;
+		if ( ! ok ) return;
+		$( 'dName' ).textContent = $( 'name' ).value.trim().split( ' ' )[ 0 ];
+		$( 'dMail' ).textContent = $( 'email' ).value;
+		$( 'dPhone' ).textContent = $( 'phone' ).value;
+		// Saved in this browser so "Change booking" can find it (the real site stores it on the server).
+		const ref = 'P-' + ( 20200 + Math.floor( Math.random() * 9000 ) );
+		const token = Math.random().toString( 36 ).slice( 2, 12 );
+		const booking = {
+			ref, token, status: 'confirmed', created: new Date().toISOString(),
+			from: st.from, fromT: st.fromT, to: st.to, toT: st.toT,
+			cars: st.cars.map( ( c ) => ( { plate: c.plate.trim().toUpperCase(), vip: c.vip } ) ),
+			adults: $( 'adults' ).value, kids: $( 'kids' ).value,
+			name: $( 'name' ).value.trim(), email: $( 'email' ).value.trim(), phone: $( 'phone' ).value.trim(),
+			flOut: $( 'flOut' ).value.trim().toUpperCase(), flIn: $( 'flIn' ).value.trim().toUpperCase(),
+			lines: $( 'sumLines' ).innerHTML, total: $( 'sumTotal' ).textContent,
+		};
+		window.PVB.save( booking );
+		$( 'dRef' ).textContent = ref;
+		$( 'dLink' ).href = `en-upravit-rezervaciu.html?ref=${ ref }&t=${ token }`;
+		go( 3 );
+	} );
+	render();
+} )();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="motion.js"></script>
+</body>
+</html>

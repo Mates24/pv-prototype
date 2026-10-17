@@ -4,105 +4,97 @@
 <meta charset="utf-8">
 <meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>PV redesign prototyp</title>
+<title>PV airport parking a PV Autoservis – nové weby</title>
+<link rel="icon" href="autoservis/img/favicon-as.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Roboto+Condensed:wght@700;800&family=Roboto:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap">
 <style>
-	[hidden] { display: none !important; }
-	/* Hub: two sister sites side by side; parking speaks Poppins, autoservis condensed caps. */
+	/* Start page of the GitHub Pages preview: the two sister sites, each in its own look
+	   (parking: light, rounded, Poppins; Autoservis: black, square, Rink and the brand red). */
+	@font-face { font-family: 'Rink'; font-weight: 400; font-display: swap; src: url('autoservis/fonts/rink-400.woff2') format('woff2'); }
+	@font-face { font-family: 'Rink'; font-weight: 600; font-display: swap; src: url('autoservis/fonts/rink-600.woff2') format('woff2'); }
 	:root {
-		--bg: #FFFFFF;
 		--ink: #1A1A19;
 		--muted: #5A5C62;
 		--line: #E4E5E8;
 		--grey: #F3F4F6;
-		--red: #C93C2E;
-		--p: 'Poppins', system-ui, sans-serif;
-		--c: 'Roboto Condensed', 'Arial Narrow', sans-serif;
+		--pk: #C93C2E;
+		--as: #EF4136;
+		--p: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+		--r: 'Rink', 'DM Sans', system-ui, sans-serif;
 		color-scheme: light;
 	}
 	* { box-sizing: border-box; }
-	body { margin: 0; background: var(--bg); color: var(--ink); font-family: 'Roboto', system-ui, sans-serif; }
-	.wrap { max-width: 1240px; margin: 0 auto; padding-inline: 24px; padding-block: 56px 96px; }
-	h1 { margin: 0; font: 600 clamp(36px, 5vw, 64px)/1 var(--p); letter-spacing: -.035em; text-wrap: balance; }
-	.intro { max-width: 640px; margin: 18px 0 0; font-size: 17px; line-height: 1.65; color: var(--muted); }
+	body { margin: 0; background: #fff; color: var(--ink); font-family: var(--p); -webkit-font-smoothing: antialiased; }
+	.wrap { max-width: 1240px; margin: 0 auto; padding: 56px 24px 72px; }
+	h1 { margin: 0; font: 600 clamp(34px, 4.6vw, 58px)/1.05 var(--p); letter-spacing: -.035em; max-width: 18ch; text-wrap: balance; }
+	.intro { max-width: 620px; margin: 18px 0 0; font-size: 17px; line-height: 1.65; color: var(--muted); font-weight: 300; }
 	.sites { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: 48px; }
-	.site { border: 1px solid var(--line); display: flex; flex-direction: column; min-width: 0; }
-	.site.pk { border-radius: 28px; overflow: hidden; }
-	.site header { padding: 28px; display: flex; flex-direction: column; gap: 10px; background: var(--grey); }
-	.site.as header { background: var(--ink); color: #fff; }
-	.site h2 { margin: 0; }
-	.pk h2 { font: 600 30px/1 var(--p); letter-spacing: -.03em; }
-	.as h2 { font: 800 34px/1 var(--c); text-transform: uppercase; }
-	.site header p { margin: 0; font-size: 14px; line-height: 1.55; color: var(--muted); }
-	.site.as header p { color: #C9CCD0; }
-	.site ul { list-style: none; margin: 0; padding: 8px 28px 24px; }
-	.site li a { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--line); text-decoration: none; color: var(--ink); font-size: 16px; }
-	.site li a small { color: var(--muted); font-size: 13px; }
-	.site li a:hover { color: var(--red); }
-	.site li a:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
-	.go { display: inline-flex; align-self: flex-start; align-items: center; min-height: 46px; padding: 0 22px; background: var(--red); color: #fff; text-decoration: none; font-weight: 500; font-size: 15px; }
-	.pk .go { border-radius: 999px; font-family: var(--p); }
-	.as .go { font: 700 14px var(--c); letter-spacing: .05em; text-transform: uppercase; }
-	.notes { margin-top: 56px; border-top: 3px solid var(--ink); padding-top: 28px; display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 32px; }
-	.notes h2 { margin: 0; font: 600 26px/1.1 var(--p); letter-spacing: -.02em; }
-	.notes ol { margin: 0; padding-left: 20px; display: grid; gap: 14px; font-size: 16px; line-height: 1.6; }
-	.notes b { font-weight: 500; }
-	@media (max-width: 860px) { .sites, .notes { grid-template-columns: minmax(0, 1fr); } }
+	.site { display: flex; flex-direction: column; min-width: 0; overflow: hidden; }
+	.site .pic { position: relative; aspect-ratio: 16 / 9; overflow: hidden; }
+	.site .pic img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 900ms cubic-bezier(.23, 1, .32, 1); }
+	.site .body { padding: 28px; display: flex; flex-direction: column; gap: 18px; flex: 1; }
+	.site .logo { height: 34px; width: auto; align-self: flex-start; }
+	.site p { margin: 0; font-size: 16px; line-height: 1.6; }
+	.go { align-self: flex-start; display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 24px; color: #fff; text-decoration: none; font-weight: 600; font-size: 15px; transition: transform 160ms ease, filter 200ms ease; }
+	.go:hover { filter: brightness(.92); }
+	.go:active { transform: scale(.97); }
+	.try { list-style: none; margin: 4px 0 0; padding: 0; }
+	.try li { border-top: 1px solid var(--line); }
+	.try a { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 14px 0; text-decoration: none; color: inherit; font-size: 15px; }
+	.try small { display: block; margin-top: 2px; font-size: 13px; opacity: .7; }
+	.try a::after { content: "→"; opacity: .5; transition: transform 200ms ease; }
+	@media (hover: hover) { .site:hover .pic img { transform: scale(1.03); } .try a:hover::after { transform: translateX(4px); opacity: 1; } }
+	.pk { background: var(--grey); border-radius: 28px; }
+	.pk .go { background: var(--pk); border-radius: 999px; }
+	.pk p { color: var(--muted); font-weight: 300; }
+	.as { background: #000; color: #fff; font-family: var(--r); }
+	.as .go { background: var(--as); font-family: var(--r); }
+	.as p { color: #C9CCD0; }
+	.as .try li { border-color: rgba(255, 255, 255, .16); }
+	.note { margin: 40px 0 0; max-width: 760px; font-size: 14px; line-height: 1.6; color: var(--muted); }
+	:focus-visible { outline: 2px solid var(--pk); outline-offset: 3px; }
+	@media (max-width: 860px) { .sites { grid-template-columns: minmax(0, 1fr); } .wrap { padding-top: 40px; } }
+	@media (max-width: 640px) { .wrap { padding-inline: 16px; } .site .body { padding: 22px; } }
+	@media (prefers-reduced-motion: reduce) { .site .pic img, .go, .try a::after { transition: none; } }
 </style>
 </head>
 <body>
-
-<div class="wrap">
-	<h1>PV redesign – prototyp oboch webov</h1>
-	<p class="intro">Klikateľný návrh všetkých stránok PV airport parking a PV Autoservis podľa nového dizajnu. Funguje na počítači aj na mobile. Formuláre sú len ukážka – nič sa neodosiela.</p>
+<main class="wrap">
+	<h1>Nové weby PV airport parking a PV Autoservis</h1>
+	<p class="intro">Prejdite si oba weby ako zákazník – na počítači aj na mobile. Všetko funguje: rezervácia, zrušenie, prihlásenie aj anglická verzia parkovania.</p>
 
 	<div class="sites">
 		<section class="site pk">
-			<header><h2>PV airport parking</h2><p>pvparking.sk · zaoblené karty, palubný lístok, trasa na letisko</p><a class="go" href="parking/index.html">Otvoriť web</a></header>
-			<ul>
-				<li><a href="parking/index.html">Domov <small>cenník, výpočet ceny, FAQ</small></a></li>
-				<li><a href="parking/rezervacia.html">Rezervácia <small>3 kroky, IČO, zľavový kód</small></a></li>
-				<li><a href="parking/sluzby.html">Služby <small>VIP, čistenie, transfery</small></a></li>
-				<li><a href="parking/cennik.html">Cenník <small>zimná a letná sezóna</small></a></li>
-				<li><a href="parking/ako-sa-k-nam-dostat.html">Ako sa k nám dostať</a></li>
-				<li><a href="parking/upravit-rezervaciu.html">Upraviť rezerváciu <small>nájsť, zrušiť</small></a></li>
-				<li><a href="parking/kontakt.html">Kontakt</a></li>
-				<li><a href="parking/vop.html">Obchodné podmienky</a></li>
-				<li><a href="parking/404.html">Stránka 404</a></li>
-			</ul>
+			<div class="pic"><img src="parking/img/p-van.jpg" alt="Transferová dodávka PV airport parking"></div>
+			<div class="body">
+				<img class="logo" src="parking/img/logo-p.svg" alt="PV airport parking" style="height:26px">
+				<p>Parkovanie pri letisku Bratislava s transferom na terminál.</p>
+				<a class="go" href="parking/index.html">Otvoriť web pvparking.sk</a>
+				<ul class="try">
+					<li><a href="parking/rezervacia.html"><span>Rezervujte parkovanie<small>Zľavový kód na skúšku: LETO10</small></span></a></li>
+					<li><a href="parking/upravit-rezervaciu.html"><span>Nájdite a zrušte rezerváciu<small>Vlastnú, alebo P-20123 s e-mailom jana.novakova@example.sk</small></span></a></li>
+					<li><a href="parking/en-index.html"><span>English version<small>Prepínač SK / EN je v hlavičke každej stránky</small></span></a></li>
+				</ul>
+			</div>
 		</section>
+
 		<section class="site as">
-			<header><h2>PV Autoservis</h2><p>pvautoservis.sk · ostré hrany, kondenzované písmo, červená šikmá linka</p><a class="go" href="autoservis/index.html">Otvoriť web</a></header>
-			<ul>
-				<li><a href="autoservis/index.html">Úvod <small>služby, čísla, recenzie</small></a></li>
-				<li><a href="autoservis/sluzby.html">Služby</a></li>
-				<li><a href="autoservis/sluzba-pneuservis.html">Pneuservis a geometria</a></li>
-				<li><a href="autoservis/sluzba-kontrola.html">Všeobecná kontrola vozidla</a></li>
-				<li><a href="autoservis/sluzba-brzdy.html">Brzdy</a></li>
-				<li><a href="autoservis/sluzba-olej.html">Olej a filtre</a></li>
-				<li><a href="autoservis/zimne-baliky.html">Zimné balíky <small>Silver, Gold, Diamond</small></a></li>
-				<li><a href="autoservis/cennik.html">Cenník</a></li>
-				<li><a href="autoservis/blog.html">Blog</a></li>
-				<li><a href="autoservis/clanok.html">Článok <small>akcia kontrola za 50 €</small></a></li>
-				<li><a href="autoservis/kontakt.html">Kontakt <small>hodiny, formulár</small></a></li>
-				<li><a href="autoservis/moj-ucet.html">Môj účet <small>vernostný program</small></a></li>
-				<li><a href="autoservis/404.html">Stránka 404</a></li>
-			</ul>
+			<div class="pic"><img src="autoservis/img/as-sign.jpg" alt="Dielňa PV Autoservis"></div>
+			<div class="body">
+				<img class="logo" src="autoservis/img/logo-as-inv.png" alt="PV Autoservis">
+				<p>Autoservis v Ružinove – vo farbách a písme z dizajn manuálu.</p>
+				<a class="go" href="autoservis/index.html">Otvoriť web pvautoservis.sk</a>
+				<ul class="try">
+					<li><a href="autoservis/moj-ucet.html"><span>Vernostný program<small>Prihlásenie e-mailom, bez hesla</small></span></a></li>
+					<li><a href="autoservis/sluzby.html"><span>Služby<small>Každá služba má vlastnú stránku</small></span></a></li>
+					<li><a href="autoservis/blog.html"><span>Blog<small>Všetkých 21 článkov z doterajšieho webu</small></span></a></li>
+				</ul>
+			</div>
 		</section>
 	</div>
 
-	<section class="notes">
-		<h2>Na potvrdenie od majiteľa</h2>
-		<ol>
-			<li><b>Ceny parkovania.</b> V návrhu sú sezónne ceny z aktuálneho cenníka (zima od 24 €, leto od 28 €). Podklady pre dizajn uvádzali aj iný zoznam od 20 €. Ktorý platí?</li>
-			<li><b>Platba.</b> Všade je „platíte na mieste – kartou alebo v hotovosti“. Online platba nie je.</li>
-			<li><b>Kľúče.</b> Pri parkovaní si kľúče necháte; pri čistení a kontrole ich potrebujeme. Je to tak správne?</li>
-			<li><b>Vernostný program.</b> Koľko bodov za návštevu a aké odmeny? V návrhu sú ukážkové hodnoty.</li>
-			<li><b>Zimné balíky.</b> Dokedy platí ponuka?</li>
-			<li><b>Fotky a logá firiem.</b> Fotky sú zatiaľ zmenšené z webu – na spustenie pošlite originály a logá klientov do pásu „Firmy, ktoré nám zverili svoje vozidlá“.</li>
-		</ol>
-	</section>
-</div>
+	<p class="note">Nič sa naozaj neodosiela: rezervácie a prihlásenie sa ukladajú len vo vašom prehliadači a e-maily sa zobrazia ako náhľad priamo na stránke. Objednanie termínu v autoservise vedie do systému Apponio ako dnes. Hotové weby budú používať skutočný rezervačný systém.</p>
+</main>
 </body>
 </html>
