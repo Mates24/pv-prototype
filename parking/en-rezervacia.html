@@ -70,10 +70,11 @@
 					</div>
 					<div style="display:flex;flex-direction:column;gap:14px">
 						<h2>Your flight <span style="font-size:14px;font-weight:400;color:var(--sub);letter-spacing:0">optional</span></h2>
-						<p class="hint" style="margin:0">Your return flight number helps us if the flight is late – we will wait for you.</p>
+						<p class="hint" style="margin:0">Your return flight number helps us if the flight is late – we will wait for you. Don't know it yet? Tell us where you are flying and add the flight number later via the link in your email.</p>
 						<div class="f-grid" style="align-items:start">
 							<div class="f"><label for="flOut">Flight out</label><input class="inp" id="flOut" placeholder="e.g. FR 8231" autocomplete="off" style="text-transform:uppercase"></div>
 							<div class="f"><label for="flIn">Flight back</label><input class="inp" id="flIn" placeholder="e.g. FR 8232" autocomplete="off" style="text-transform:uppercase"></div>
+							<div class="f" style="grid-column:1/-1"><label for="dest">Where are you flying</label><input class="inp" id="dest" placeholder="e.g. London" autocomplete="off" maxlength="80"></div>
 						</div>
 					</div>
 					<div>
@@ -197,6 +198,7 @@
 		{ t: 'EV charging', v: null, pl: 'on site' },
 	];
 	const CHECK = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+	const esc = ( t ) => t.replace( /[&<>"]/g, ( ch ) => ( { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' } )[ ch ] );
 	const row = ( l, v, c ) => `<div class="sumrow"><span>${ l }</span><b${ c ? ` style="color:${ c }"` : '' }>${ v }</b></div>`;
 
 	const render = () => {
@@ -223,6 +225,8 @@
 		const flOut = $( 'flOut' ).value.trim().toUpperCase(), flIn = $( 'flIn' ).value.trim().toUpperCase();
 		if ( flOut ) lines += row( 'Flight out', flOut );
 		if ( flIn ) lines += row( 'Flight back', flIn );
+		const dest = $( 'dest' ).value.trim();
+		if ( dest ) lines += row( 'Destination', esc( dest ) );
 		if ( disc ) lines += row( `Discount ${ st.code.name } (−${ st.code.pct } % off parking)`, '−' + P.eur( disc ), 'var(--green)' );
 		$( 'sumLines' ).innerHTML = lines;
 		$( 'sumTotal' ).textContent = bad ? '—' : P.eur( park + vip + ex - disc );
@@ -249,7 +253,7 @@
 		const x = e.target.closest( '[data-x]' );
 		if ( x ) { st.extras[ x.dataset.x ] = ! st.extras[ x.dataset.x ]; render(); }
 	} );
-	[ 'flOut', 'flIn' ].forEach( ( id ) => $( id ).addEventListener( 'input', render ) );
+	[ 'flOut', 'flIn', 'dest' ].forEach( ( id ) => $( id ).addEventListener( 'input', render ) );
 	$( 'carPlus' ).onclick = () => { st.cars.push( { vip: false } ); render(); };
 	$( 'carMinus' ).onclick = () => { st.cars.pop(); render(); };
 	[ 'from', 'to', 'fromT', 'toT' ].forEach( ( k ) => $( k ).addEventListener( 'change', ( e ) => {
@@ -312,7 +316,7 @@
 			cars: st.cars.map( ( c ) => ( { plate: c.plate.trim().toUpperCase(), vip: c.vip } ) ),
 			adults: $( 'adults' ).value, kids: $( 'kids' ).value,
 			name: $( 'name' ).value.trim(), email: $( 'email' ).value.trim(), phone: $( 'phone' ).value.trim(),
-			flOut: $( 'flOut' ).value.trim().toUpperCase(), flIn: $( 'flIn' ).value.trim().toUpperCase(),
+			flOut: $( 'flOut' ).value.trim().toUpperCase(), flIn: $( 'flIn' ).value.trim().toUpperCase(), dest: $( 'dest' ).value.trim(),
 			lines: $( 'sumLines' ).innerHTML, total: $( 'sumTotal' ).textContent,
 		};
 		window.PVB.save( booking );

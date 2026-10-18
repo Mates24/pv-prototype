@@ -70,10 +70,11 @@
 					</div>
 					<div style="display:flex;flex-direction:column;gap:14px">
 						<h2>Váš let <span style="font-size:14px;font-weight:400;color:var(--sub);letter-spacing:0">nepovinné</span></h2>
-						<p class="hint" style="margin:0">Číslo letu späť nám pomôže, ak sa váš let oneskorí – počkáme na vás.</p>
+						<p class="hint" style="margin:0">Číslo letu späť nám pomôže, ak sa váš let oneskorí – počkáme na vás. Ak ho ešte neviete, napíšte, kam letíte. Číslo letu doplníte neskôr cez odkaz v e-maile.</p>
 						<div class="f-grid" style="align-items:start">
 							<div class="f"><label for="flOut">Let tam</label><input class="inp" id="flOut" placeholder="napr. FR 8231" autocomplete="off" style="text-transform:uppercase"></div>
 							<div class="f"><label for="flIn">Let späť</label><input class="inp" id="flIn" placeholder="napr. FR 8232" autocomplete="off" style="text-transform:uppercase"></div>
+							<div class="f" style="grid-column:1/-1"><label for="dest">Kam letíte</label><input class="inp" id="dest" placeholder="napr. Londýn" autocomplete="off" maxlength="80"></div>
 						</div>
 					</div>
 					<div>
@@ -197,6 +198,7 @@
 		{ t: 'Nabíjanie elektromobilu', v: null, pl: 'na mieste' },
 	];
 	const CHECK = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+	const esc = ( t ) => t.replace( /[&<>"]/g, ( ch ) => ( { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' } )[ ch ] );
 	const row = ( l, v, c ) => `<div class="sumrow"><span>${ l }</span><b${ c ? ` style="color:${ c }"` : '' }>${ v }</b></div>`;
 
 	const render = () => {
@@ -223,6 +225,8 @@
 		const flOut = $( 'flOut' ).value.trim().toUpperCase(), flIn = $( 'flIn' ).value.trim().toUpperCase();
 		if ( flOut ) lines += row( 'Let tam', flOut );
 		if ( flIn ) lines += row( 'Let späť', flIn );
+		const dest = $( 'dest' ).value.trim();
+		if ( dest ) lines += row( 'Destinácia', esc( dest ) );
 		if ( disc ) lines += row( `Zľava ${ st.code.name } (−${ st.code.pct } % z parkovania)`, '−' + P.eur( disc ), 'var(--green)' );
 		$( 'sumLines' ).innerHTML = lines;
 		$( 'sumTotal' ).textContent = bad ? '—' : P.eur( park + vip + ex - disc );
@@ -249,7 +253,7 @@
 		const x = e.target.closest( '[data-x]' );
 		if ( x ) { st.extras[ x.dataset.x ] = ! st.extras[ x.dataset.x ]; render(); }
 	} );
-	[ 'flOut', 'flIn' ].forEach( ( id ) => $( id ).addEventListener( 'input', render ) );
+	[ 'flOut', 'flIn', 'dest' ].forEach( ( id ) => $( id ).addEventListener( 'input', render ) );
 	$( 'carPlus' ).onclick = () => { st.cars.push( { vip: false } ); render(); };
 	$( 'carMinus' ).onclick = () => { st.cars.pop(); render(); };
 	[ 'from', 'to', 'fromT', 'toT' ].forEach( ( k ) => $( k ).addEventListener( 'change', ( e ) => {
@@ -312,7 +316,7 @@
 			cars: st.cars.map( ( c ) => ( { plate: c.plate.trim().toUpperCase(), vip: c.vip } ) ),
 			adults: $( 'adults' ).value, kids: $( 'kids' ).value,
 			name: $( 'name' ).value.trim(), email: $( 'email' ).value.trim(), phone: $( 'phone' ).value.trim(),
-			flOut: $( 'flOut' ).value.trim().toUpperCase(), flIn: $( 'flIn' ).value.trim().toUpperCase(),
+			flOut: $( 'flOut' ).value.trim().toUpperCase(), flIn: $( 'flIn' ).value.trim().toUpperCase(), dest: $( 'dest' ).value.trim(),
 			lines: $( 'sumLines' ).innerHTML, total: $( 'sumTotal' ).textContent,
 		};
 		window.PVB.save( booking );
