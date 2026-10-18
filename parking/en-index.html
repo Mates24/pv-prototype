@@ -181,7 +181,7 @@
 			<div style="display:flex;gap:6px" aria-hidden="true" id="bars"><span></span><span></span><span></span><span></span></div>
 		</div>
 		<div class="accs" data-single id="steps">
-			<div class="acc open"><button class="acc-b" aria-expanded="true"><span class="pl"></span><span>1. Choose your parking dates</span></button><div class="acc-p"><div><p>Pick the date and time of your arrival at the car park and of your return. You see the price including the shuttle right away.</p></div></div></div>
+			<div class="acc"><button class="acc-b" aria-expanded="false"><span class="pl"></span><span>1. Choose your parking dates</span></button><div class="acc-p"><div><p>Pick the date and time of your arrival at the car park and of your return. You see the price including the shuttle right away.</p></div></div></div>
 			<div class="acc"><button class="acc-b" aria-expanded="false"><span class="pl"></span><span>2. Fill in a short form</span></button><div class="acc-p"><div><p>Contact details, licence plate and flight number. If you park on company account, enter the company ID – we fill in the billing details.</p></div></div></div>
 			<div class="acc"><button class="acc-b" aria-expanded="false"><span class="pl"></span><span>3. Add extras</span></button><div class="acc-p"><div><p>If you like, add covered VIP parking, car pick-up at the airport, a car check or cleaning.</p></div></div></div>
 			<div class="acc"><button class="acc-b" aria-expanded="false"><span class="pl"></span><span>4. Finish the booking online</span></button><div class="acc-p"><div><p>The confirmation comes by email and text message, and we remind you the day before arrival. You pay only on site – by card or in cash.</p></div></div></div>
@@ -390,7 +390,7 @@
 		[ 'Do you have child car seats?', 'Yes, every shuttle van has child seats for different ages.' ],
 		[ 'What if I need help with my booking?', 'Call us on +421 904 440 660 or write to pvairportparking@gmail.com.' ],
 	];
-	$( 'faq' ).innerHTML = FAQ.map( ( q, i ) => `<div class="acc${ i === 1 ? ' open' : '' }"><button class="acc-b" aria-expanded="${ i === 1 }"><span class="pl"></span><span>${ q[ 0 ] }</span></button><div class="acc-p"><div><p>${ q[ 1 ] }</p></div></div></div>` ).join( '' );
+	$( 'faq' ).innerHTML = FAQ.map( ( q, i ) => `<div class="acc"><button class="acc-b" aria-expanded="false"><span class="pl"></span><span>${ q[ 0 ] }</span></button><div class="acc-p"><div><p>${ q[ 1 ] }</p></div></div></div>` ).join( '' );
 	$( 'faq' ).querySelectorAll( '.acc-b' ).forEach( ( b ) => b.addEventListener( 'click', () => {
 		const acc = b.closest( '.acc' ), open = ! acc.classList.contains( 'open' );
 		$( 'faq' ).querySelectorAll( '.acc' ).forEach( ( x ) => x.classList.remove( 'open' ) );

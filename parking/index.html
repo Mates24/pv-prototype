@@ -181,7 +181,7 @@
 			<div style="display:flex;gap:6px" aria-hidden="true" id="bars"><span></span><span></span><span></span><span></span></div>
 		</div>
 		<div class="accs" data-single id="steps">
-			<div class="acc open"><button class="acc-b" aria-expanded="true"><span class="pl"></span><span>1. Vyberiete si termín parkovania</span></button><div class="acc-p"><div><p>Zvolíte dátum a čas príchodu na parkovisko aj návratu. Cenu vrátane transferu vidíte okamžite.</p></div></div></div>
+			<div class="acc"><button class="acc-b" aria-expanded="false"><span class="pl"></span><span>1. Vyberiete si termín parkovania</span></button><div class="acc-p"><div><p>Zvolíte dátum a čas príchodu na parkovisko aj návratu. Cenu vrátane transferu vidíte okamžite.</p></div></div></div>
 			<div class="acc"><button class="acc-b" aria-expanded="false"><span class="pl"></span><span>2. Vyplníte krátky formulár</span></button><div class="acc-p"><div><p>Kontaktné údaje, ŠPZ vozidla a číslo letu. Ak parkujete na firmu, stačí zadať IČO – fakturačné údaje doplníme sami.</p></div></div></div>
 			<div class="acc"><button class="acc-b" aria-expanded="false"><span class="pl"></span><span>3. Zvolíte si doplnkové služby</span></button><div class="acc-p"><div><p>Podľa potreby pridáte kryté VIP parkovanie, vyzdvihnutie vozidla na letisku, kontrolu alebo čistenie vozidla.</p></div></div></div>
 			<div class="acc"><button class="acc-b" aria-expanded="false"><span class="pl"></span><span>4. Dokončíte rezerváciu online</span></button><div class="acc-p"><div><p>Potvrdenie príde e-mailom a SMS, deň pred príchodom vám pripomenieme termín. Platíte až na mieste – kartou alebo v hotovosti.</p></div></div></div>
@@ -390,7 +390,7 @@
 		[ 'Máte k dispozícii detské autosedačky?', 'Áno, každé transferové vozidlo je vybavené detskými sedačkami pre rôzne vekové kategórie.' ],
 		[ 'Čo ak potrebujem pomôcť s rezerváciou?', 'Zavolajte nám na +421 904 440 660 alebo napíšte na pvairportparking@gmail.com.' ],
 	];
-	$( 'faq' ).innerHTML = FAQ.map( ( q, i ) => `<div class="acc${ i === 1 ? ' open' : '' }"><button class="acc-b" aria-expanded="${ i === 1 }"><span class="pl"></span><span>${ q[ 0 ] }</span></button><div class="acc-p"><div><p>${ q[ 1 ] }</p></div></div></div>` ).join( '' );
+	$( 'faq' ).innerHTML = FAQ.map( ( q, i ) => `<div class="acc"><button class="acc-b" aria-expanded="false"><span class="pl"></span><span>${ q[ 0 ] }</span></button><div class="acc-p"><div><p>${ q[ 1 ] }</p></div></div></div>` ).join( '' );
 	$( 'faq' ).querySelectorAll( '.acc-b' ).forEach( ( b ) => b.addEventListener( 'click', () => {
 		const acc = b.closest( '.acc' ), open = ! acc.classList.contains( 'open' );
 		$( 'faq' ).querySelectorAll( '.acc' ).forEach( ( x ) => x.classList.remove( 'open' ) );
