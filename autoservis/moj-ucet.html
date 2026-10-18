@@ -28,6 +28,44 @@
 	.mail p { margin: 0; font-size: 15px; line-height: 1.55; color: var(--muted); }
 	.mail .btn { align-self: flex-start; }
 	#sent[hidden] { display: none !important; }
+	.box { background: #fff; padding: clamp(19px, 3.1vw, 31px); }
+	.box-h { font-size: 22px; margin-bottom: 12px; }
+	.small { font-size: 14px; }
+	.sub-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px 24px; margin-bottom: 16px; }
+	.sub-head .box-h { margin: 0; }
+	.linkbtn { border: 0; background: none; padding: 0; color: var(--red); font: inherit; cursor: pointer; text-decoration: underline; }
+	.due { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; align-items: center; padding: 16px 0; border-top: 1px solid var(--line); }
+	.due b { font: 600 18px/1.2 var(--cond); }
+	.due small { grid-column: 1; color: var(--muted); font-size: 14px; }
+	.due .state { grid-row: 1 / span 2; grid-column: 2; }
+	.due .state.soon { background: var(--red); color: #fff; }
+	.offers { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 16px; }
+	.offer { background: #fff; padding: 26px; border-top: 4px solid var(--red); display: flex; flex-direction: column; gap: 10px; }
+	.offer h4 { margin: 0; font: 600 22px/1.15 var(--cond); }
+	.offer p { margin: 0; font-size: 15px; line-height: 1.55; color: var(--muted); }
+	.offer .code { align-self: flex-start; font: 600 15px var(--cond); letter-spacing: .04em; padding: 6px 10px; border: 2px dashed var(--red); color: var(--red); }
+	.offer small { color: var(--sub); font-size: 13px; }
+	.cars { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr)); gap: 16px; align-items: start; }
+	.car { background: #fff; padding: 26px; display: flex; flex-direction: column; gap: 14px; }
+	.car-h { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+	.plate { font: 600 15px var(--cond); letter-spacing: .06em; padding: 6px 10px; border: 2px solid var(--ink); }
+	.car-name { font: 600 22px/1.15 var(--cond); }
+	.facts { margin: 0; display: grid; gap: 0; }
+	.facts div { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; padding: 12px 0; border-top: 1px solid var(--line); font-size: 15px; }
+	.facts dt { color: var(--muted); }
+	.facts dd { margin: 0; font-weight: 500; text-align: right; }
+	.facts dd small { display: block; font-weight: 400; color: var(--sub); font-size: 13px; }
+	.car details summary, .car-add summary { cursor: pointer; font: 600 15px var(--cond); color: var(--red); }
+	.car-add { background: transparent; border: 2px dashed #C9CCD0; padding: 26px; }
+	.car-add[open] { background: #fff; border-style: solid; border-color: #fff; }
+	.car-form { display: flex; flex-direction: column; gap: 14px; margin-top: 16px; }
+	.car-form .acts { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+	.hist-g { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 24px; margin-top: 56px; align-items: start; }
+	.hist th, .hist td { text-align: left !important; white-space: nowrap !important; }
+	.hist td.work { white-space: normal !important; }
+	.hist td:last-child, .hist th:last-child { text-align: right !important; white-space: nowrap !important; }
+	.hist td.work { min-width: 200px; }
+	@media (max-width: 1060px) { .hist-g { grid-template-columns: minmax(0, 1fr); } }
 </style>
 </head>
 <body data-page="moj-ucet.html">
@@ -81,24 +119,38 @@
 					<div style="height:6px;background:rgba(255,255,255,.12);max-width:420px"><b data-bar style="display:block;height:100%;width:84%;background:var(--red-light)"></b></div>
 					<p style="margin:0;color:#C9CCD0;font-size:16px">Ešte 160 bodov do zľavy 20 €.</p>
 				</div>
-				<div class="rv" style="background:#fff;padding:clamp(19px, 3.1vw, 31px)">
-					<h3 class="h3" style="font-size:22px;margin-bottom:12px">Odmeny</h3>
+				<div class="rv box">
+					<h3 class="h3 box-h">Najbližšie termíny</h3>
+					<div id="due"></div>
+					<p class="txt small">Pripomienky posielame e-mailom: STK a EK 30 a 7 dní vopred, servisnú prehliadku 2 týždne vopred, prezutie na jar a na jeseň. <button type="button" class="linkbtn" id="previewBtn">Ako vyzerá pripomienka</button></p>
+					<div class="mail" id="preview" hidden></div>
+				</div>
+			</div>
+
+			<div class="rv" id="offersWrap" style="margin-top:56px">
+				<div class="sub-head"><h3 class="h3 box-h">Akcie len pre členov</h3><span class="txt small">Pošleme vám ich aj e-mailom, ak si to v údajoch zapnete.</span></div>
+				<div class="offers" id="offers"></div>
+			</div>
+
+			<div class="rv" style="margin-top:56px">
+				<div class="sub-head"><h3 class="h3 box-h">Moje autá</h3><span class="txt small">Údaje o aute vám vyplníme aj my pri návšteve servisu.</span></div>
+				<div class="cars" id="cars"></div>
+			</div>
+
+			<div class="hist-g">
+				<div class="rv box">
+					<h3 class="h3 box-h">História návštev a opráv</h3>
+					<div class="tscroll"><table class="ptable hist" id="visits"></table></div>
+				</div>
+				<div class="rv box">
+					<h3 class="h3 box-h">Odmeny</h3>
 					<div class="rw"><span><span class="cond">Zľava 10 €</span><br><span class="txt" style="font-size:14px">500 bodov</span></span><span class="state ok">K dispozícii</span></div>
 					<div class="rw"><span><span class="cond">Zľava 20 €</span><br><span class="txt" style="font-size:14px">1 000 bodov</span></span><span class="state">Chýba 160</span></div>
 					<div class="rw" style="border-bottom:1px solid var(--line)"><span><span class="cond">Prezutie zdarma</span><br><span class="txt" style="font-size:14px">1 500 bodov</span></span><span class="state">Chýba 660</span></div>
 					<p class="txt" style="font-size:14px;margin-top:16px">Odmenu uplatníte pri platbe v servise.</p>
 				</div>
 			</div>
-			<div class="rv" style="background:#fff;padding:clamp(19px, 3.1vw, 31px);margin-top:24px">
-				<h3 class="h3" style="font-size:22px;margin-bottom:16px">História návštev</h3>
-				<div class="tscroll"><table class="ptable hist"><tr><th>Dátum</th><th>Služba</th><th>Vozidlo</th><th>Body</th></tr>
-					<tr><td>12. 10. 2026</td><td>Prezutie pneumatík</td><td>BL 123 AB</td><td>+55</td></tr>
-					<tr><td>3. 6. 2026</td><td>Olej a filtre, kontrola bŕzd</td><td>BL 123 AB</td><td>+80</td></tr>
-					<tr><td>18. 3. 2026</td><td>Všeobecná kontrola, výmena platničiek</td><td>BL 123 AB</td><td>+90</td></tr>
-					<tr><td>2. 11. 2025</td><td>Zimný balík Gold</td><td>BL 123 AB</td><td>+489</td></tr>
-				</table></div>
-				<div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:28px"><a class="btn btn-red" data-book href="#">Rezervovať ďalší termín</a><button class="btn btn-out" type="button" id="logout">Odhlásiť sa</button></div>
-			</div>
+			<div class="rv" style="display:flex;flex-wrap:wrap;gap:12px;margin-top:28px"><a class="btn btn-red" data-book href="#">Rezervovať ďalší termín</a><button class="btn btn-out" type="button" id="logout">Odhlásiť sa</button></div>
 		</div>
 	</section>
 </main>
@@ -127,6 +179,111 @@
 	$( 'demo' ).onclick = () => { store.set( $( 'lmail' ).value ); show( $( 'lmail' ).value ); };
 	$( 'logout' ).onclick = () => { store.set( null ); $( 'lf' ).hidden = false; $( 'sent' ).hidden = true; show( null ); };
 	if ( store.get() ) { show( store.get() ); }
+
+	// Cars, reminders, history and offers (kept in this browser; the real site keeps them on the server).
+	const iso = ( d ) => d.getFullYear() + '-' + String( d.getMonth() + 1 ).padStart( 2, '0' ) + '-' + String( d.getDate() ).padStart( 2, '0' );
+	const add = ( v, days, months = 0 ) => { const d = new Date( v + 'T12:00' ); d.setMonth( d.getMonth() + months ); d.setDate( d.getDate() + days ); return iso( d ); };
+	const today = iso( new Date() );
+	const sk = ( v ) => { const [ y, m, d ] = v.split( '-' ).map( Number ); return `${ d }. ${ m }. ${ y }`; };
+	const plate = ( v ) => v.replace( /^([A-Z]{2})(\d{3})([A-Z]{2})$/, '$1 $2 $3' );
+	const days = ( v ) => Math.round( ( new Date( v + 'T12:00' ) - new Date( today + 'T12:00' ) ) / 864e5 );
+	const inDays = ( n ) => ( n === 0 ? 'dnes' : n > 0 ? `o ${ n } ${ n === 1 ? 'deň' : n < 5 ? 'dni' : 'dní' }` : `pred ${ -n } dňami` );
+	const esc = ( v ) => String( v ?? '' ).replace( /[&<>"]/g, ( c ) => ( { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' } )[ c ] );
+	const CARS = 'pv-as-cars';
+	const load = () => {
+		try {
+			const saved = JSON.parse( localStorage.getItem( CARS ) || 'null' );
+			if ( saved ) return saved;
+		} catch ( e ) {}
+		return [ { id: 1, plate: 'BL123AB', make: 'Škoda', model: 'Octavia', year: '2019', stk_until: add( today, 25 ), service_last: add( today, -15, -10 ), service_km: '84300', service_next: '', reminders: true } ];
+	};
+	const save = ( list ) => { try { localStorage.setItem( CARS, JSON.stringify( list ) ); } catch ( e ) {} };
+	let cars = load();
+	const serviceDue = ( c ) => c.service_next || ( c.service_last ? add( c.service_last, 0, 11 ) : '' );
+	const carName = ( c ) => [ c.make, c.model ].filter( Boolean ).join( ' ' );
+
+	const VISITS = [
+		[ add( today, -4, -4 ), 'BL123AB', 'Prezutie na letné pneumatiky, vyváženie kolies', 81900, 55 ],
+		[ add( today, -15, -10 ), 'BL123AB', 'Ročná servisná prehliadka – olej a všetky filtre, kontrola bŕzd', 84300, 80 ],
+		[ add( today, -2, -13 ), 'BL123AB', 'Všeobecná kontrola, výmena predných platničiek', 78100, 90 ],
+	];
+	const OFFERS = [
+		[ 'Klimatizácia za 39 € namiesto 50 €', 'Kontrola a plnenie klimatizácie s chladivom R134a. Termín si rezervujte online a pri platbe povedzte kód.', 'KLIMA39', add( today, 20 ) ],
+		[ 'Zimný balík Gold o 10 % lacnejší', 'Servisná prehliadka, výmena kvapalín, prezutie a 3D geometria – pripravíme auto na zimu.', 'ZIMA10', add( today, 35 ) ],
+	];
+
+	const render = () => {
+		const due = [];
+		cars.filter( ( c ) => c.reminders ).forEach( ( c ) => {
+			if ( c.stk_until ) due.push( [ c.stk_until, `STK a EK · ${ plate( c.plate ) }`, `platí do ${ sk( c.stk_until ) }` ] );
+			const sv = serviceDue( c );
+			if ( sv ) due.push( [ sv, `Servisná prehliadka · ${ plate( c.plate ) }`, `približne ${ sk( sv ) }` ] );
+		} );
+		const y = Number( today.slice( 0, 4 ) );
+		const tyre = [ [ `${ y }-03-15`, 'letné' ], [ `${ y }-10-15`, 'zimné' ], [ `${ y + 1 }-03-15`, 'letné' ] ].find( ( [ d ] ) => d >= add( today, -6 ) );
+		if ( cars.some( ( c ) => c.reminders ) ) due.push( [ tyre[ 0 ], `Prezutie na ${ tyre[ 1 ] } pneumatiky`, `od ${ sk( tyre[ 0 ] ) }`, 'teraz' ] );
+		due.sort( ( a, b ) => a[ 0 ].localeCompare( b[ 0 ] ) );
+		$( 'due' ).innerHTML = due.length ? due.map( ( [ d, t, s, now ] ) => `<div class="due"><b>${ esc( t ) }</b><small>${ esc( s ) }</small><span class="state${ days( d ) <= 30 ? ' soon' : '' }">${ now && days( d ) <= 0 ? now : days( d ) < 0 ? 'po termíne' : inDays( days( d ) ) }</span></div>` ).join( '' ) : '<p class="txt small">Pridajte auto a vyplňte dátum STK a poslednej prehliadky – pripomenieme vám ich.</p>';
+
+		$( 'offers' ).innerHTML = OFFERS.map( ( [ t, b, c, to ] ) => `<article class="offer"><h4>${ t }</h4><p>${ b }</p><span class="code">${ c }</span><small>Platí do ${ sk( to ) }</small></article>` ).join( '' );
+
+		const field = ( c, k, label, type = 'text', extra = '' ) => `<div class="fld"><label for="${ k }-${ c.id || 'new' }">${ label }</label><input class="inp" id="${ k }-${ c.id || 'new' }" name="${ k }" type="${ type }" value="${ esc( c[ k ] ) }" ${ extra }></div>`;
+		const form = ( c ) => `<form class="car-form" data-car="${ c.id || '' }">
+			<div class="g-2f">${ field( c, 'plate', 'EČV *', 'text', 'required style="text-transform:uppercase"' ) }${ field( c, 'year', 'Rok výroby', 'number', 'min="1950" max="2027"' ) }${ field( c, 'make', 'Značka' ) }${ field( c, 'model', 'Model' ) }</div>
+			${ field( c, 'stk_until', 'STK a EK platná do', 'date' ) }
+			<div class="g-2f">${ field( c, 'service_last', 'Posledná servisná prehliadka', 'date' ) }${ field( c, 'service_km', 'Stav km pri prehliadke', 'number', 'min="0"' ) }</div>
+			${ field( c, 'service_next', 'Ďalšia prehliadka (ak vám ju určil servis)', 'date' ) }
+			<label class="chk"><input type="checkbox" name="reminders" ${ c.reminders !== false ? 'checked' : '' }><span>Posielať mi pripomienky k tomuto autu</span></label>
+			<div class="acts"><button class="btn btn-red btn-sm" type="submit">Uložiť</button>${ c.id ? '<button class="linkbtn" type="button" data-remove>Odstrániť auto</button>' : '' }</div>
+		</form>`;
+		$( 'cars' ).innerHTML = cars.map( ( c ) => {
+			const sv = serviceDue( c );
+			return `<article class="car">
+				<div class="car-h"><span class="plate">${ esc( plate( c.plate ) ) }</span><span class="state${ c.reminders ? ' ok' : '' }">${ c.reminders ? 'Pripomienky zapnuté' : 'Pripomienky vypnuté' }</span></div>
+				<span class="car-name">${ esc( [ carName( c ), c.year ].filter( Boolean ).join( ' · ' ) || 'Auto' ) }</span>
+				<dl class="facts">
+					<div><dt>STK a EK do</dt><dd>${ c.stk_until ? `${ sk( c.stk_until ) }<small>${ inDays( days( c.stk_until ) ) }</small>` : '—' }</dd></div>
+					<div><dt>Posledná prehliadka</dt><dd>${ c.service_last ? sk( c.service_last ) + ( c.service_km ? `<small>${ Number( c.service_km ).toLocaleString( 'sk' ) } km</small>` : '' ) : '—' }</dd></div>
+					<div><dt>Ďalšia prehliadka</dt><dd>${ sv ? `približne ${ sk( sv ) }` : '—' }</dd></div>
+				</dl>
+				<details><summary>Upraviť údaje</summary>${ form( c ) }</details>
+			</article>`;
+		} ).join( '' ) + `<details class="car-add"><summary>Pridať auto</summary>${ form( { reminders: true } ) }</details>`;
+
+		$( 'visits' ).innerHTML = '<tr><th>Dátum</th><th>Auto</th><th>Čo sme robili</th><th>Km</th><th>Body</th></tr>' +
+			VISITS.map( ( [ d, p, w, km, pts ] ) => `<tr><td>${ sk( d ) }</td><td>${ plate( p ) }</td><td class="work">${ w }</td><td>${ km.toLocaleString( 'sk' ) }</td><td>+${ pts }</td></tr>` ).join( '' );
+	};
+
+	$( 'cars' ).addEventListener( 'submit', ( e ) => {
+		e.preventDefault();
+		const f = e.target;
+		const v = Object.fromEntries( new FormData( f ) );
+		v.plate = ( v.plate || '' ).toUpperCase().replace( /[^A-Z0-9]/g, '' );
+		if ( v.plate.length < 2 ) { f.plate.classList.add( 'err' ); return; }
+		v.reminders = !! f.reminders.checked;
+		const id = Number( f.dataset.car );
+		cars = id ? cars.map( ( c ) => ( c.id === id ? { ...c, ...v } : c ) ) : cars.concat( { ...v, id: Date.now() } );
+		save( cars );
+		render();
+	} );
+	$( 'cars' ).addEventListener( 'click', ( e ) => {
+		if ( ! e.target.closest( '[data-remove]' ) ) return;
+		const id = Number( e.target.closest( 'form' ).dataset.car );
+		cars = cars.filter( ( c ) => c.id !== id );
+		save( cars );
+		render();
+	} );
+	$( 'previewBtn' ).onclick = () => {
+		const c = cars.find( ( x ) => x.stk_until ) || cars[ 0 ];
+		const box = $( 'preview' );
+		box.hidden = ! box.hidden;
+		box.innerHTML = c ? `<div class="mail-h"><span>PV Autoservis</span><small>${ c.stk_until ? sk( add( c.stk_until, -30 ) ) : 'ráno o 8:00' }</small></div>
+			<b>Blíži sa koniec platnosti STK a EK – ${ plate( c.plate ) }</b>
+			<p>Dobrý deň, ${ esc( $( 'who' ).textContent ) }, STK a emisná kontrola vášho auta ${ esc( carName( c ) ) } (${ plate( c.plate ) }) platí do ${ c.stk_until ? sk( c.stk_until ) : '…' }. Pred kontrolou auto skontrolujeme a nedostatky opravíme vopred, aby prešlo na prvýkrát.</p>
+			<a class="btn btn-red btn-sm" data-book href="${ window.AS_BOOK }">Objednať termín</a>
+			<p style="font-size:13px">Nechcem pripomienky pre toto auto</p>` : '';
+	};
+	render();
 } )();
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
