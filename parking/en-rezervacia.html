@@ -66,7 +66,7 @@
 							<label class="fld"><span class="lbl">Time</span><input class="pin" type="time" id="toT" value="22:15" step="900"></label>
 						</div>
 						<p role="alert" id="dateErr" class="errt" hidden>Return must be after arrival.</p>
-						<p class="hint" style="margin:0">Arrive at least 2 hours before take-off. Every started 24 hours count as 1 day.</p>
+						<p class="hint" style="margin:0">Arrive at least 2 hours before take-off. Every started 24-hour period counts as 1 day.</p>
 					</div>
 					<div style="display:flex;flex-direction:column;gap:14px">
 						<h2>Your flight <span style="font-size:14px;font-weight:400;color:var(--sub);letter-spacing:0">optional</span></h2>
@@ -190,8 +190,8 @@
 	if ( q.get( 'vip' ) === '1' ) st.cars[ 0 ].vip = true;
 	( q.get( 'x' ) || '' ).split( ',' ).filter( Boolean ).forEach( ( i ) => ( st.extras[ i ] = true ) );
 	const X = [
-		{ t: 'VIP car pick-up at the airport', v: 20, pl: '20 €' },
-		{ t: 'General vehicle check', v: 50, pl: '50 €' },
+		{ t: 'VIP car pick-up at the airport', v: 20, pl: '€20' },
+		{ t: 'General vehicle check', v: 50, pl: '€50' },
 		{ t: 'Full car cleaning', v: 60, pl: 'from €60' },
 		{ t: 'Full cleaning with upholstery shampoo', v: 120, pl: 'from €120' },
 		{ t: 'EV charging', v: null, pl: 'on site' },

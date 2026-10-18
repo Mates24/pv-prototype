@@ -124,7 +124,7 @@
 			<div class="proc-img rv"><img class="par" src="img/as-karoq.jpg" alt="Škoda Karoq s tabuľkou PV Autoservis v dielni"></div>
 			<div class="proc-steps">
 				<div class="rv step"><span class="cond">1</span><div><h3 class="h3">Rezervujte si termín</h3><p class="txt">Online alebo telefonicky za menej než minútu. Potom vás kontaktujeme s presnou cenovou ponukou.</p></div></div>
-				<div class="rv step"><span class="cond">2</span><div><h3 class="h3">Príďte do servisu</h3><p class="txt">Technická 5957/7A. Auto nám nechajte, alebo počkajte u nás pri káve v prijímacej kancelárii.</p></div></div>
+				<div class="rv step"><span class="cond">2</span><div><h3 class="h3">Príďte do servisu</h3><p class="txt">Technická 5957/7A. Auto nám nechajte alebo počkajte u nás pri káve v prijímacej kancelárii.</p></div></div>
 				<div class="rv step"><span class="cond">3</span><div><h3 class="h3">Vyzdvihnite si auto</h3><p class="txt">Všetko prehľadne vysvetlíme a body vernostného programu pripíšeme na váš účet.</p></div></div>
 				<div class="rv" style="display:flex;flex-wrap:wrap;gap:12px;padding-top:24px;border-top:1px solid #D7DADE"><a class="btn btn-red" data-book href="#">Rezervovať termín online</a><a class="btn btn-out" href="kontakt.html#form">Potrebujem konzultáciu</a></div>
 			</div>
@@ -167,15 +167,10 @@
 		.clients { padding-block: 64px; border-top: 1px solid var(--line2); border-bottom: 1px solid var(--line2); overflow: hidden; }
 		.logo-rail { -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
 		.logo-rail:hover .mq { animation-play-state: paused; }
-		.lg { flex: none; min-width: 200px; padding: 0 28px; height: 104px; margin-right: 16px; display: flex; align-items: center; justify-content: center; gap: 10px; border: 1px solid var(--line); background: #fff; color: #9A9FA6; filter: grayscale(1); transition: color 260ms ease, border-color 260ms ease, filter 260ms ease; }
-		.lg:hover { color: var(--ink); border-color: var(--ink); filter: none; }
-		.lg .mk { flex: none; width: 26px; height: 26px; background: currentColor; }
-		.lg .t { white-space: nowrap; }
-		.lg.s1 .t { font: 600 22px var(--cond); letter-spacing: .02em; } .lg.s1 .mk { border-radius: 50%; }
-		.lg.s2 .t { font: 700 21px var(--body); letter-spacing: -.03em; } .lg.s2 .mk { clip-path: polygon(50% 0, 100% 100%, 0 100%); }
-		.lg.s3 .t { font: italic 600 22px Georgia, 'Times New Roman', serif; } .lg.s3 .mk { transform: rotate(45deg) scale(.8); }
-		.lg.s4 .t { font: 500 18px var(--body); letter-spacing: .18em; } .lg.s4 .mk { width: 8px; height: 30px; transform: skewX(-20deg); }
-		.lg.s1:hover .mk, .lg.s3:hover .mk { color: var(--red); }
+		.lg { flex: none; width: 220px; padding: 0 26px; height: 104px; margin-right: 16px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--line); background: #fff; transition: border-color 260ms ease; }
+		.lg img { max-width: 100%; max-height: 46px; width: auto; height: auto; filter: grayscale(1); opacity: .8; transition: filter 260ms ease, opacity 260ms ease; }
+		.lg:hover { border-color: var(--ink); }
+		.lg:hover img { filter: none; opacity: 1; }
 	</style>
 </section>
 
@@ -210,7 +205,7 @@
 			</div>
 		<div class="place">
 				<div class="rv" id="hoursBox" style="background:var(--ink);color:#fff;padding:clamp(24px,4vw,36px)"></div>
-				<div class="addr rv"><div><span class="cond" style="font-size:13px;font-weight:700;letter-spacing: 0;color:var(--red)">ADRESA</span><p class="cond" style="margin:10px 0 0;font-size:29px;font-weight:600;line-height:1">Technická 5957/7A<br>821 04 Bratislava</p><p class="txt" style="margin-top:12px">Ružinov, areál pri Prievozskej. Parkovanie pred dielňou.</p></div><div style="display:flex;flex-wrap:wrap;gap:10px"><a class="btn btn-dark btn-sm" href="https://maps.google.com/?q=PV+Autoservis+Technick%C3%A1+5957%2F7A+Bratislava">Navigovať</a><span style="align-self:center;font-size:15px;color:var(--muted)">pvsbratislava@gmail.com</span></div></div>
+				<div class="addr rv"><div><span class="cond" style="font-size:13px;font-weight:700;letter-spacing: 0;color:var(--red)">Adresa</span><p class="cond" style="margin:10px 0 0;font-size:29px;font-weight:600;line-height:1">Technická 5957/7A<br>821 04 Bratislava</p><p class="txt" style="margin-top:12px">Ružinov, areál pri Prievozskej. Parkovanie pred dielňou.</p></div><div style="display:flex;flex-wrap:wrap;gap:10px"><a class="btn btn-dark btn-sm" href="https://maps.google.com/?q=PV+Autoservis+Technick%C3%A1+5957%2F7A+Bratislava">Navigovať</a><span style="align-self:center;font-size:15px;color:var(--muted)">pvsbratislava@gmail.com</span></div></div>
 			</div>
 	</div>
 </section>
@@ -271,9 +266,23 @@
 	document.getElementById( 'gPrev' ).onclick = () => scroll( -1 );
 	document.getElementById( 'gNext' ).onclick = () => scroll( 1 );
 
-	// Placeholder wordmarks until the real logo files arrive from the owner.
-	const C = [ 'Business Lease', 'Cars & Care', 'Globalcar', 'MT Autobutik', 'City Dental Clinic', 'Isper', 'Špecialisti', 'Elíz', 'Corado-Soat', 'Cortesa', 'Mediskin', 'Design JK', 'Bestrent' ];
-	const tile = ( c, i ) => `<span class="lg s${ ( i % 4 ) + 1 }" title="${ c }"><span class="mk" aria-hidden="true"></span><span class="t">${ c }</span></span>`;
+	// Logos of the companies whose cars the workshop services (from the current site).
+	const C = [
+		[ 'Business Lease', 'business-lease', 350, 120 ],
+		[ 'Cars & Care', 'cars-and-care', 295, 120 ],
+		[ 'Globalcar', 'globalcar', 600, 120 ],
+		[ 'MT Autobutik', 'mt-autobutik', 459, 120 ],
+		[ 'City Dental Clinic', 'city-dental-clinic', 255, 120 ],
+		[ 'Isper', 'isper', 360, 120 ],
+		[ 'Špecialisti', 'specialisti', 600, 73 ],
+		[ 'Elíz', 'eliz', 169, 120 ],
+		[ 'Corado-Soat', 'corado-soat', 555, 80 ],
+		[ 'Cortesa', 'cortesa', 526, 120 ],
+		[ 'Mediskin', 'mediskin', 477, 120 ],
+		[ 'Design JK', 'design-jk', 344, 120 ],
+		[ 'Bestrent', 'bestrent', 467, 120 ],
+	];
+	const tile = ( [ name, file, w, h ] ) => `<span class="lg" title="${ name }"><img src="img/clients/${ file }.png" alt="${ name }" width="${ w }" height="${ h }"></span>`;
 	document.getElementById( 'clients' ).innerHTML = C.concat( C ).map( tile ).join( '' );
 } )();
 </script>

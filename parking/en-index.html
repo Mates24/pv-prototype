@@ -37,7 +37,7 @@
 					</div>
 				</div>
 				<div class="perf"></div>
-				<div class="stub-f"><div><span class="lbl">Shuttle</span><b>5 min</b></div><div><span class="lbl">Shuttle price</span><b>0 €</b></div><div><span class="lbl">Parking</span><b>from €24</b></div></div>
+				<div class="stub-f"><div><span class="lbl">Shuttle</span><b>5 min</b></div><div><span class="lbl">Shuttle price</span><b>€0</b></div><div><span class="lbl">Parking</span><b>from €24</b></div></div>
 			</div>
 		</div>
 	</div>
@@ -123,8 +123,8 @@
 			<div style="display:flex;flex-direction:column;gap:48px;min-width:0">
 				<div style="display:flex;flex-direction:column;gap:16px">
 					<div class="seasons" role="group" aria-label="Season">
-						<button type="button" class="season" data-season="w"><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v20M4.9 6l14.2 12M19.1 6 4.9 18M9 3.5 12 6l3-2.5M9 20.5 12 18l3 2.5"></path></svg></span><span class="sn">Winter season</span><span class="sd">16. 9. – 31. 5.</span><span class="sp">from €24 / day</span><span class="now">applies now</span></button>
-						<button type="button" class="season" data-season="s"><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"></circle><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"></path></svg></span><span class="sn">Summer season</span><span class="sd">1. 6. – 15. 9.</span><span class="sp">from €28 / day</span><span class="now">applies now</span></button>
+						<button type="button" class="season" data-season="w"><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v20M4.9 6l14.2 12M19.1 6 4.9 18M9 3.5 12 6l3-2.5M9 20.5 12 18l3 2.5"></path></svg></span><span class="sn">Winter season</span><span class="sd">16 Sep – 31 May</span><span class="sp">from €24 / day</span><span class="now">applies now</span></button>
+						<button type="button" class="season" data-season="s"><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"></circle><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"></path></svg></span><span class="sn">Summer season</span><span class="sd">1 Jun – 15 Sep</span><span class="sp">from €28 / day</span><span class="now">applies now</span></button>
 					</div>
 					<style>
 						.seasons { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
@@ -158,11 +158,11 @@
 						<label class="fld"><span class="lbl">Arrival</span><input class="pin" type="date" id="sFrom"></label>
 						<label class="fld"><span class="lbl">Return</span><input class="pin" type="date" id="sTo"></label>
 					</div>
-					<div class="num" style="display:flex;justify-content:space-between;padding:14px 0;border-top:1px solid var(--line2);font-size:15px"><span style="color:var(--muted)" id="sParkL">Parking · 7 days</span><b style="font-weight:600" id="sPark">59,00 €</b></div>
+					<div class="num" style="display:flex;justify-content:space-between;padding:14px 0;border-top:1px solid var(--line2);font-size:15px"><span style="color:var(--muted)" id="sParkL">Parking · 7 days</span><b style="font-weight:600" id="sPark">€59.00</b></div>
 					<div style="display:flex;justify-content:space-between;padding:14px 0;border-top:1px solid var(--line2);font-size:15px"><span style="color:var(--muted)">Shuttle to the airport and back</span><b style="font-weight:600;color:var(--green)">free</b></div>
 					<div id="sLines"></div>
 					<div class="perf" style="margin:8px -8px 0"></div>
-					<div style="display:flex;justify-content:space-between;align-items:flex-end;padding:26px 0 22px"><span style="font-size:15px;color:var(--muted)">Total incl. VAT</span><span class="big" id="sTotal">59,00 €</span></div>
+					<div style="display:flex;justify-content:space-between;align-items:flex-end;padding:26px 0 22px"><span style="font-size:15px;color:var(--muted)">Total incl. VAT</span><span class="big" id="sTotal">€59.00</span></div>
 					<div style="display:flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 16px;border-radius:999px;background:var(--grey);margin-bottom:14px;font-size:14px;font-weight:500;text-align:center">Pay on site – by card or in cash</div>
 					<a class="btn btn-red btn-full" href="en-rezervacia.html" id="sGo">Continue to booking</a>
 					<p style="margin:14px 0 0;text-align:center;font-size:12px;color:var(--sub)">We send the confirmation by email and SMS. You can cancel through the link in the email.</p>
@@ -182,7 +182,7 @@
 		</div>
 		<div class="accs" data-single id="steps">
 			<div class="acc"><button class="acc-b" aria-expanded="false"><span class="pl"></span><span>1. Choose your parking dates</span></button><div class="acc-p"><div><p>Pick the date and time of your arrival at the car park and of your return. You see the price including the shuttle right away.</p></div></div></div>
-			<div class="acc"><button class="acc-b" aria-expanded="false"><span class="pl"></span><span>2. Fill in a short form</span></button><div class="acc-p"><div><p>Contact details, licence plate and flight number. If you park on company account, enter the company ID – we fill in the billing details.</p></div></div></div>
+			<div class="acc"><button class="acc-b" aria-expanded="false"><span class="pl"></span><span>2. Fill in a short form</span></button><div class="acc-p"><div><p>Contact details, licence plate and flight number. If you book for a company, enter the company ID – we fill in the billing details.</p></div></div></div>
 			<div class="acc"><button class="acc-b" aria-expanded="false"><span class="pl"></span><span>3. Add extras</span></button><div class="acc-p"><div><p>If you like, add covered VIP parking, car pick-up at the airport, a car check or cleaning.</p></div></div></div>
 			<div class="acc"><button class="acc-b" aria-expanded="false"><span class="pl"></span><span>4. Finish the booking online</span></button><div class="acc-p"><div><p>The confirmation comes by email and text message, and we remind you the day before arrival. You pay only on site – by card or in cash.</p></div></div></div>
 		</div>
@@ -241,7 +241,7 @@
 			<div style="padding:clamp(28px,5vw,56px);display:flex;flex-direction:column;justify-content:center;gap:20px">
 				<img src="img/logo-as.png" alt="PV Autoservis" style="height:44px;width:auto;align-self:flex-start">
 				<h3 style="margin:0;font-size:clamp(30px,3vw,44px);line-height:1.05;letter-spacing:-.03em;font-weight:600">While you are on holiday, <span class="red">your car can get serviced.</span></h3>
-				<p class="txt" style="font-weight:400;max-width:460px">Our sister workshop PV Autoservis on Technická street – diagnostics, tyre changes, air conditioning or getting ready for the MOT. Come back to a car that is ready for the road.</p>
+				<p class="txt" style="font-weight:400;max-width:460px">Our sister workshop PV Autoservis on Technická street – diagnostics, tyre changes, air conditioning or preparing for the vehicle inspection. Come back to a car that is ready for the road.</p>
 				<span style="display:inline-flex;align-items:center;gap:8px;font-weight:600">pvautoservis.sk <svg class="arr" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"></path></svg></span>
 			</div>
 		</a>
@@ -275,8 +275,8 @@
 
 	const X = [
 		{ t: 'Covered VIP parking', v: 5, day: true, pl: '€5 / day' },
-		{ t: 'VIP car pick-up at the airport', v: 20, pl: '20 €' },
-		{ t: 'General vehicle check', v: 50, pl: '50 €' },
+		{ t: 'VIP car pick-up at the airport', v: 20, pl: '€20' },
+		{ t: 'General vehicle check', v: 50, pl: '€50' },
 		{ t: 'Full car cleaning', v: 60, pl: 'from €60' },
 		{ t: 'Full cleaning with upholstery shampoo', v: 120, pl: 'from €120' },
 		{ t: 'EV charging', v: null, pl: 'on site' },
