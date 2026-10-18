@@ -196,6 +196,7 @@
 		{ t: 'Kompletné čistenie vozidla', v: 60, pl: 'od 60 €' },
 		{ t: 'Kompletné čistenie s tepovaním', v: 120, pl: 'od 120 €' },
 		{ t: 'Nabíjanie elektromobilu', v: null, pl: 'na mieste' },
+		{ t: 'Detská autosedačka', v: 0, pl: 'zdarma' },
 	];
 	const CHECK = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
 	const esc = ( t ) => t.replace( /[&<>"]/g, ( ch ) => ( { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' } )[ ch ] );
@@ -221,7 +222,7 @@
 		lines += row( 'Transfer na letisko a späť', 'zdarma', 'var(--green)' );
 		if ( vip ) lines += row( `Kryté VIP${ vipN > 1 ? ' × ' + vipN : '' }`, P.eur( vip ) );
 		let ex = 0;
-		X.forEach( ( x, i ) => { if ( st.extras[ i ] ) { if ( x.v ) ex += x.v; lines += row( x.t, x.v ? P.eur( x.v ) : 'na mieste' ); } } );
+		X.forEach( ( x, i ) => { if ( st.extras[ i ] ) { if ( x.v ) ex += x.v; lines += row( x.t, x.v == null ? 'na mieste' : x.v ? P.eur( x.v ) : 'zdarma', x.v === 0 ? 'var(--green)' : '' ); } } );
 		const flOut = $( 'flOut' ).value.trim().toUpperCase(), flIn = $( 'flIn' ).value.trim().toUpperCase();
 		if ( flOut ) lines += row( 'Let tam', flOut );
 		if ( flIn ) lines += row( 'Let späť', flIn );

@@ -211,14 +211,17 @@
 
 <!-- REVIEWS -->
 <section class="sec sec-g" id="recenzie">
-	<div class="wrap">
-		<div class="sec-head rv" style="align-items:center;margin-bottom:48px"><h2 class="h2">Our reviews</h2><span style="display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:#fff;background:#2E6B47;padding:8px 14px;border-radius:6px">Verified by Trustindex · Google</span></div>
-		<div class="rv" style="background:#fff;border-radius:32px;padding:clamp(28px,5vw,72px);display:flex;flex-direction:column;gap:40px">
-			<div style="display:flex;gap:4px" aria-label="5 out of 5 stars" id="stars"></div>
-			<div style="display:grid;min-height:190px" id="quotes"></div>
-			<div style="display:flex;flex-wrap:wrap;gap:10px" role="tablist" aria-label="Choose a review" id="whos"></div>
+	<div class="wrap" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:24px;align-items:stretch">
+		<div class="rv rv-sum">
+			<div class="num" data-count="135" style="font-size:clamp(86px, 10.1vw, 148px);font-weight:600;line-height:.8;letter-spacing:-.04em">135</div>
+			<div class="stars5" aria-hidden="true" style="display:flex;gap:4px;margin:28px 0 14px"><svg width="28" height="28" viewBox="0 0 24 24" fill="#F4B400" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"></path></svg><svg width="28" height="28" viewBox="0 0 24 24" fill="#F4B400" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"></path></svg><svg width="28" height="28" viewBox="0 0 24 24" fill="#F4B400" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"></path></svg><svg width="28" height="28" viewBox="0 0 24 24" fill="#F4B400" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"></path></svg><svg width="28" height="28" viewBox="0 0 24 24" fill="#F4B400" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"></path></svg></div>
+			<p style="margin:0 0 28px;font-size:18px;color:var(--muted)"><b style="color:var(--ink)">5.0 out of 5</b> – based on 135 Google reviews</p>
+			<a class="btn btn-red" href="https://share.google/eqRNYSZKibFhQgVB7">See all reviews</a>
 		</div>
+		<figure class="rv quote"><svg width="44" height="34" viewBox="0 0 44 34" fill="currentColor" aria-hidden="true"><path d="M0 34V20Q0 4 16 0l2 5Q9 8 8 16h9v18zm25 0V20q0-16 16-20l2 5q-9 3-10 11h9v18z"></path></svg><blockquote>„Parkovisko sme využili na 12 dní počas našej dovolenky. Perfektný prístup. Zaplatila som až na mieste v deň príchodu – kartou. Ihneď nás odviezli…“</blockquote><figcaption><span style="background:#6E7781">M</span><span><b>Marcela Krnacova</b><small>Google review</small></span></figcaption></figure>
+		<figure class="rv quote"><svg width="44" height="34" viewBox="0 0 44 34" fill="currentColor" aria-hidden="true"><path d="M0 34V20Q0 4 16 0l2 5Q9 8 8 16h9v18zm25 0V20q0-16 16-20l2 5q-9 3-10 11h9v18z"></path></svg><blockquote>„Všetko prebehlo hladko, načas, od prebratia auta na letisku až po jeho opätovné pristavenie po dovolenke na odovzdanie. Veľká spokojnosť.“</blockquote><figcaption><span style="background:#7D52C2">A</span><span><b>Aneta Vyšná</b><small>Google review</small></span></figcaption></figure>
 	</div>
+	<style>.rv-sum { padding: clamp(8px, 2vw, 24px) 0; } .quote { margin: 0; padding: 40px; background: var(--white); border-radius: 28px; display: flex; flex-direction: column; gap: 24px; min-height: 340px; color: var(--red); } .quote blockquote { margin: 0; font-size: 20px; line-height: 1.5; font-weight: 300; flex: 1; color: var(--ink); } .quote figcaption { display: flex; align-items: center; gap: 14px; color: var(--ink); } .quote figcaption > span:first-child { width: 44px; height: 44px; border-radius: 50%; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 600; } .quote small { display: block; font-size: 13px; color: var(--muted); }</style>
 </section>
 
 <!-- FAQ -->
@@ -280,6 +283,7 @@
 		{ t: 'Full car cleaning', v: 60, pl: 'from €60' },
 		{ t: 'Full cleaning with upholstery shampoo', v: 120, pl: 'from €120' },
 		{ t: 'EV charging', v: null, pl: 'on site' },
+		{ t: 'Child car seat', v: 0, pl: 'free' },
 	];
 	const CHECK = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
 
@@ -305,7 +309,7 @@
 			if ( on ) {
 				const cost = x.v == null ? null : x.day ? x.v * Math.max( c.days, 1 ) : x.v;
 				if ( cost != null ) sum += cost;
-				lines.push( `<div class="num" style="display:flex;justify-content:space-between;gap:12px;padding:14px 0;border-top:1px solid var(--line2);font-size:15px"><span style="color:var(--muted)">${ x.t }</span><b style="font-weight:600;white-space:nowrap">${ cost == null ? 'on site' : P.eur( cost ) }</b></div>` );
+				lines.push( `<div class="num" style="display:flex;justify-content:space-between;gap:12px;padding:14px 0;border-top:1px solid var(--line2);font-size:15px"><span style="color:var(--muted)">${ x.t }</span><b style="font-weight:600;white-space:nowrap">${ cost == null ? 'on site' : cost === 0 ? 'free' : P.eur( cost ) }</b></div>` );
 			}
 			return `<button type="button" class="xtra${ on ? ' on' : '' }" data-x="${ i }" aria-pressed="${ on }"><span class="bx">${ CHECK }</span><span>${ x.t }</span><span class="pr">${ x.pl }</span></button>`;
 		} ).join( '' );
@@ -357,23 +361,6 @@
 	const steps = [ ...$( 'steps' ).children ];
 	const paint = () => { const i = steps.findIndex( ( s ) => s.classList.contains( 'open' ) ); bars.forEach( ( b, j ) => { b.style.cssText = `height:4px;flex:1;border-radius:4px;transition:background-color 300ms ease;background:${ j <= i ? 'var(--red)' : 'var(--line)' }`; } ); };
 	$( 'steps' ).addEventListener( 'pv-acc', paint ); paint();
-
-	// Reviews.
-	const STAR = '<svg width="26" height="26" viewBox="0 0 24 24" fill="#F4B400" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg>';
-	$( 'stars' ).innerHTML = STAR.repeat( 5 );
-	const R = [
-		{ n: 'Marcela Krnacova', i: 'M', c: '#6E7781', q: 'Parkovisko sme využili na 12 dní počas našej dovolenky. Perfektný prístup. Zaplatila som až na mieste v deň príchodu – kartou. Ihneď nás odviezli…' },
-		{ n: 'Aneta Vyšná', i: 'A', c: '#7D52C2', q: 'Všetko prebehlo hladko, načas, od prebratia auta na letisku až po jeho opätovné pristavenie po dovolenke na odovzdanie. Veľká spokojnosť.' },
-		{ n: 'Ervin Virag', i: 'E', c: '#2F7D8C', q: 'Ochota, profesionalita! Najlepšia cena. Za nás majú títo páni 100 bodov zo 100. Ďakujeme a prajeme veľa úspechov, určite sa vrátime.' },
-		{ n: 'stefan mede', i: 'S', c: '#D9772B', q: 'Využili sme parkovanie u PV AIRPORT PARKING. Proste nie je čo vytknúť, 5 z 5 – bezpečné parkovanie, ústretový personál, rýchlosť a profesionalita.' },
-	];
-	let rev = 0;
-	const drawR = () => {
-		$( 'quotes' ).innerHTML = R.map( ( r, i ) => `<blockquote aria-hidden="${ i !== rev }" style="grid-area:1/1;margin:0;font-size:clamp(22px,2.6vw,38px);line-height:1.35;letter-spacing:-.02em;font-weight:400;transition:opacity 420ms ease,transform 520ms var(--ease),filter 420ms ease;${ i === rev ? 'opacity:1;transform:none;filter:none' : 'opacity:0;transform:translateY(16px);filter:blur(6px);pointer-events:none' }">„${ r.q }“</blockquote>` ).join( '' );
-		$( 'whos' ).innerHTML = R.map( ( r, i ) => `<button type="button" role="tab" aria-selected="${ i === rev }" data-r="${ i }" style="display:flex;align-items:center;gap:12px;padding:10px 18px 10px 10px;border-radius:999px;border:1px solid ${ i === rev ? 'var(--ink)' : 'var(--line)' };background:${ i === rev ? 'var(--ink)' : '#fff' };color:${ i === rev ? '#fff' : 'var(--ink)' };cursor:pointer;font:500 14px var(--font);transition:all 200ms ease"><span style="width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;background:${ r.c }">${ r.i }</span>${ r.n }</button>` ).join( '' );
-	};
-	$( 'whos' ).addEventListener( 'click', ( e ) => { const b = e.target.closest( '[data-r]' ); if ( b ) { rev = Number( b.dataset.r ); drawR(); } } );
-	drawR();
 
 	// FAQ.
 	const FAQ = [
