@@ -28,6 +28,9 @@
 	.mail p { margin: 0; font-size: 15px; line-height: 1.55; color: var(--muted); }
 	.mail .btn { align-self: flex-start; }
 	#sent[hidden] { display: none !important; }
+	.who-acts { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+	.me summary { cursor: pointer; font-size: 20px; font-weight: 600; }
+	#me { scroll-margin-top: 120px; }
 	.box { background: #fff; padding: clamp(19px, 3.1vw, 31px); }
 	.box-h { font-size: 22px; margin-bottom: 12px; }
 	.small { font-size: 14px; }
@@ -101,8 +104,8 @@
 					<h2 class="h3" style="font-size:24px">Ako to funguje</h2>
 					<ol class="how" style="list-style:none;margin:0;padding:0">
 						<li><span>01</span>Pri návšteve servisu nám poviete e-mail.</li>
-						<li><span>02</span>Za každé euro práce dostanete 1 bod. Pripíšeme ich po oprave a pošleme e-mail.</li>
-						<li><span>03</span>Body vymeníte za zľavu na ďalší servis alebo prezutie.</li>
+						<li><span>02</span>Za každé zaplatené euro dostanete 10 bodov. Pripíšeme ich po návšteve a pošleme e-mail.</li>
+						<li><span>03</span>Body uplatníte ako zľavu na ďalší servis: 1 000 bodov = 10 €.</li>
 					</ol>
 									</div>
 			</div>
@@ -111,13 +114,12 @@
 
 	<section class="sec sec-g" id="ucet" hidden>
 		<div class="wrap">
-			<div class="sec-head rv" style="margin-bottom:40px"><h2 class="h2" style="font-size:clamp(22px, 2.2vw, 31px)">Dobrý deň, <span id="who">Ján</span></h2><span class="state">Prihlásený</span></div>
+			<div class="sec-head rv" style="margin-bottom:40px"><h2 class="h2" style="font-size:clamp(22px, 2.2vw, 31px)">Dobrý deň<span id="who"></span></h2><div class="who-acts"><button type="button" class="linkbtn" id="editMe">Doplňte svoje meno</button><span class="state">Prihlásený</span></div></div>
 			<div class="dash">
 				<div class="pts rv">
 					<span style="font-size:13px;color:#A7ACB3;letter-spacing:.1em;">Vaše body</span>
-					<div class="cond num" style="font-size:clamp(47px, 5.1vw, 75px);font-weight:600;line-height:.85"><span data-count="840">840</span></div>
-					<div style="height:6px;background:rgba(255,255,255,.12);max-width:420px"><b data-bar style="display:block;height:100%;width:84%;background:var(--red-light)"></b></div>
-					<p style="margin:0;color:#C9CCD0;font-size:16px">Ešte 160 bodov do zľavy 20 €.</p>
+					<div class="cond num" style="font-size:clamp(47px, 5.1vw, 75px);font-weight:600;line-height:.85"><span data-count="3250">3 250</span></div>
+					<p style="margin:0;color:#C9CCD0;font-size:16px">= zľava 32,50 € na ďalší servis. Uplatníte ju pri platbe v servise.</p>
 				</div>
 				<div class="rv box">
 					<h3 class="h3 box-h">Najbližšie termíny</h3>
@@ -143,14 +145,25 @@
 					<div class="tscroll"><table class="ptable hist" id="visits"></table></div>
 				</div>
 				<div class="rv box">
-					<h3 class="h3 box-h">Odmeny</h3>
-					<div class="rw"><span><span class="cond">Zľava 10 €</span><br><span class="txt" style="font-size:14px">500 bodov</span></span><span class="state ok">K dispozícii</span></div>
-					<div class="rw"><span><span class="cond">Zľava 20 €</span><br><span class="txt" style="font-size:14px">1 000 bodov</span></span><span class="state">Chýba 160</span></div>
-					<div class="rw" style="border-bottom:1px solid var(--line)"><span><span class="cond">Prezutie zdarma</span><br><span class="txt" style="font-size:14px">1 500 bodov</span></span><span class="state">Chýba 660</span></div>
-					<p class="txt" style="font-size:14px;margin-top:16px">Odmenu uplatníte pri platbe v servise.</p>
+					<h3 class="h3 box-h">Pohyby bodov</h3>
+					<div id="moves"></div>
+					<p class="txt" style="font-size:14px;margin-top:16px">10 bodov za každé zaplatené euro · 1 000 bodov = 10 € zľava.</p>
 				</div>
 			</div>
 			<div class="rv" style="display:flex;flex-wrap:wrap;gap:12px;margin-top:28px"><a class="btn btn-red" data-book href="#">Rezervovať ďalší termín</a><button class="btn btn-out" type="button" id="logout">Odhlásiť sa</button></div>
+			<details class="rv box me" id="me" style="margin-top:24px">
+				<summary class="cond">Moje údaje a zrušenie účtu</summary>
+				<form id="meForm" novalidate style="display:flex;flex-direction:column;gap:18px;margin-top:20px">
+					<div class="g-2f">
+						<div class="fld"><label for="meFirst">Meno</label><input class="inp" id="meFirst" name="first" autocomplete="given-name"><span class="errt" hidden>Zadajte meno.</span></div>
+						<div class="fld"><label for="meLast">Priezvisko</label><input class="inp" id="meLast" name="last" autocomplete="family-name"></div>
+					</div>
+					<div class="fld"><label for="mePhone">Telefón</label><input class="inp" id="mePhone" name="phone" type="tel" autocomplete="tel"></div>
+					<div class="fld"><label for="meMail">E-mail</label><input class="inp" id="meMail" type="email" disabled><small class="txt">Pre zmenu e-mailu nás kontaktujte.</small></div>
+					<label class="chk"><input type="checkbox" name="marketing" id="meMk"><span>Chcem dostávať akcie a novinky e-mailom</span></label>
+					<div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap"><button type="submit" class="btn btn-dark btn-sm">Uložiť</button><span class="ok-note" id="meOk" hidden role="status">Údaje sú uložené.</span></div>
+				</form>
+			</details>
 		</div>
 	</section>
 </main>
@@ -162,11 +175,24 @@
 	// Signed in = the email is remembered in this browser (the real site uses a one-time link).
 	const KEY = 'pv-as-login';
 	const store = { get: () => { try { return localStorage.getItem( KEY ); } catch ( e ) { return null; } }, set: ( v ) => { try { v ? localStorage.setItem( KEY, v ) : localStorage.removeItem( KEY ); } catch ( e ) {} } };
-	const nameOf = ( mail ) => { const n = mail.split( '@' )[ 0 ].split( /[._-]/ )[ 0 ]; return n ? n[ 0 ].toUpperCase() + n.slice( 1 ) : 'Ján'; };
+	// Profile (name, phone, offers by email); the greeting uses the name, never the email.
+	const PROFILE = 'pv-as-profile';
+	const me = () => { try { return JSON.parse( localStorage.getItem( PROFILE ) || '{}' ); } catch ( e ) { return {}; } };
+	const greet = () => {
+		const p = me();
+		$( 'who' ).textContent = p.first ? `, ${ p.first }` : '';
+		$( 'editMe' ).textContent = p.first ? 'Upraviť moje údaje' : 'Doplňte svoje meno';
+	};
 	const show = ( mail ) => {
 		$( 'loginSec' ).hidden = !! mail;
 		$( 'ucet' ).hidden = ! mail;
-		if ( mail ) { $( 'who' ).textContent = nameOf( mail ); }
+		if ( mail ) {
+			const p = me();
+			greet();
+			$( 'meFirst' ).value = p.first || ''; $( 'meLast' ).value = p.last || ''; $( 'mePhone' ).value = p.phone || '';
+			$( 'meMk' ).checked = !! p.marketing; $( 'meMail' ).value = mail;
+			$( 'me' ).open = ! p.first;
+		}
 		window.scrollTo( { top: 0 } );
 		window.ScrollTrigger?.refresh();
 	};
@@ -175,6 +201,15 @@
 		const ok = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test( $( 'lmail' ).value );
 		$( 'lmail' ).classList.toggle( 'err', ! ok ); $( 'lmail' ).nextElementSibling.hidden = ok;
 		if ( ok ) { $( 'sentTo' ).textContent = $( 'lmail' ).value; $( 'sent' ).hidden = false; $( 'lf' ).hidden = true; }
+	} );
+	$( 'editMe' ).onclick = () => { $( 'me' ).open = true; $( 'me' ).scrollIntoView( { behavior: 'smooth', block: 'start' } ); $( 'meFirst' ).focus( { preventScroll: true } ); };
+	$( 'meForm' ).addEventListener( 'submit', ( e ) => {
+		e.preventDefault();
+		const first = $( 'meFirst' ).value.trim();
+		$( 'meFirst' ).classList.toggle( 'err', first.length < 2 ); $( 'meFirst' ).nextElementSibling.hidden = first.length >= 2;
+		if ( first.length < 2 ) return;
+		try { localStorage.setItem( PROFILE, JSON.stringify( { first, last: $( 'meLast' ).value.trim(), phone: $( 'mePhone' ).value.trim(), marketing: $( 'meMk' ).checked } ) ); } catch ( err ) {}
+		greet(); $( 'meOk' ).hidden = false;
 	} );
 	$( 'demo' ).onclick = () => { store.set( $( 'lmail' ).value ); show( $( 'lmail' ).value ); };
 	$( 'logout' ).onclick = () => { store.set( null ); $( 'lf' ).hidden = false; $( 'sent' ).hidden = true; show( null ); };
@@ -203,9 +238,9 @@
 	const carName = ( c ) => [ c.make, c.model ].filter( Boolean ).join( ' ' );
 
 	const VISITS = [
-		[ add( today, -4, -4 ), 'BL123AB', 'Prezutie na letné pneumatiky, vyváženie kolies', 81900, 55 ],
-		[ add( today, -15, -10 ), 'BL123AB', 'Ročná servisná prehliadka – olej a všetky filtre, kontrola bŕzd', 84300, 80 ],
-		[ add( today, -2, -13 ), 'BL123AB', 'Všeobecná kontrola, výmena predných platničiek', 78100, 90 ],
+		[ add( today, -4, -4 ), 'BL123AB', 'Prezutie na letné pneumatiky, vyváženie kolies', 81900, 550 ],
+		[ add( today, -15, -10 ), 'BL123AB', 'Ročná servisná prehliadka – olej a všetky filtre, kontrola bŕzd', 84300, 1800 ],
+		[ add( today, -2, -13 ), 'BL123AB', 'Všeobecná kontrola, výmena predných platničiek', 78100, 900 ],
 	];
 	const OFFERS = [
 		[ 'Klimatizácia za 39 € namiesto 50 €', 'Kontrola a plnenie klimatizácie s chladivom R134a. Termín si rezervujte online a pri platbe povedzte kód.', 'KLIMA39', add( today, 20 ) ],
@@ -250,8 +285,9 @@
 			</article>`;
 		} ).join( '' ) + `<details class="car-add"><summary>Pridať auto</summary>${ form( { reminders: true } ) }</details>`;
 
+		$( 'moves' ).innerHTML = VISITS.map( ( [ d, , w, , pts ] ) => `<div class="rw"><span>${ w.split( /[,–]/ )[ 0 ].trim() }<br><span class="txt" style="font-size:14px">${ sk( d ) }</span></span><span class="state ok">+${ pts.toLocaleString( 'sk' ) }</span></div>` ).join( '' );
 		$( 'visits' ).innerHTML = '<tr><th>Dátum</th><th>Auto</th><th>Čo sme robili</th><th>Km</th><th>Body</th></tr>' +
-			VISITS.map( ( [ d, p, w, km, pts ] ) => `<tr><td>${ sk( d ) }</td><td>${ plate( p ) }</td><td class="work">${ w }</td><td>${ km.toLocaleString( 'sk' ) }</td><td>+${ pts }</td></tr>` ).join( '' );
+			VISITS.map( ( [ d, p, w, km, pts ] ) => `<tr><td>${ sk( d ) }</td><td>${ plate( p ) }</td><td class="work">${ w }</td><td>${ km.toLocaleString( 'sk' ) }</td><td>+${ pts.toLocaleString( 'sk' ) }</td></tr>` ).join( '' );
 	};
 
 	$( 'cars' ).addEventListener( 'submit', ( e ) => {
@@ -279,7 +315,7 @@
 		box.hidden = ! box.hidden;
 		box.innerHTML = c ? `<div class="mail-h"><span>PV Autoservis</span><small>${ c.stk_until ? sk( add( c.stk_until, -30 ) ) : 'ráno o 8:00' }</small></div>
 			<b>Blíži sa koniec platnosti STK a EK – ${ plate( c.plate ) }</b>
-			<p>Dobrý deň, ${ esc( $( 'who' ).textContent ) }, STK a emisná kontrola vášho auta ${ esc( carName( c ) ) } (${ plate( c.plate ) }) platí do ${ c.stk_until ? sk( c.stk_until ) : '…' }. Pred kontrolou auto skontrolujeme a nedostatky opravíme vopred, aby prešlo na prvýkrát.</p>
+			<p>Dobrý deň${ esc( $( 'who' ).textContent ) }, STK a emisná kontrola vášho auta ${ esc( carName( c ) ) } (${ plate( c.plate ) }) platí do ${ c.stk_until ? sk( c.stk_until ) : '…' }. Pred kontrolou auto skontrolujeme a nedostatky opravíme vopred, aby prešlo na prvýkrát.</p>
 			<a class="btn btn-red btn-sm" data-book href="${ window.AS_BOOK }">Objednať termín</a>
 			<p style="font-size:13px">Nechcem pripomienky pre toto auto</p>` : '';
 	};

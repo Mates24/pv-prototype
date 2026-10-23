@@ -20,6 +20,12 @@
 	.when { display: grid; grid-template-columns: 1.5fr 1fr 1.5fr 1fr; gap: 14px 18px; align-items: end; }
 	.car { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 16px; align-items: center; padding: 16px 0; border-top: 1px solid var(--line2); }
 	.car .no { width: 36px; height: 36px; border-radius: 12px; background: var(--grey); display: grid; place-items: center; font-weight: 600; }
+	.paychoice { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+	.pay { display: flex; gap: 10px; align-items: flex-start; border: 1px solid var(--line); border-radius: 20px; padding: 16px; cursor: pointer; font-size: 15px; transition: border-color 200ms ease, box-shadow 200ms ease; }
+	.pay.on { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+	.pay input { margin-top: 4px; accent-color: var(--red); }
+	@media (max-width: 640px) { .paychoice { grid-template-columns: minmax(0, 1fr); } }
+	@media (max-width: 640px) { .car { grid-template-columns: auto minmax(0, 1fr); row-gap: 8px; } .car .xtra { grid-column: 2; justify-self: start; } }
 	.qty { display: inline-flex; align-items: center; gap: 4px; padding: 4px; border-radius: 999px; background: var(--grey); }
 	.qty button { width: 40px; height: 40px; border-radius: 50%; border: 0; background: #fff; cursor: pointer; font: 600 18px var(--font); color: var(--ink); }
 	.qty button:disabled { opacity: .4; cursor: not-allowed; }
@@ -114,6 +120,13 @@
 							<div class="f"><label for="kids">Of them children (we have child seats)</label><select class="inp" id="kids"><option selected>0</option><option>1</option><option>2</option><option>3</option><option>4</option></select></div>
 						</div>
 					</div>
+					<div style="display:flex;flex-direction:column;gap:14px">
+						<h2>Payment</h2>
+						<div class="paychoice" role="radiogroup" aria-label="Payment method">
+							<label class="pay on"><input type="radio" name="pay" value="onsite" checked><span><b>On site</b><br><span class="hint">By card or in cash when you arrive.</span></span></label>
+							<label class="pay"><input type="radio" name="pay" value="invoice"><span><b>By invoice</b><br><span class="hint">We email you the invoice; pay it by bank transfer right after booking.</span></span></label>
+						</div>
+					</div>
 					<div style="display:flex;flex-direction:column;gap:18px">
 						<div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap"><h2>Billing</h2>
 							<div class="radios" role="radiogroup" aria-label="Customer type"><label><input type="radio" name="who" value="p" checked>Private person</label><label><input type="radio" name="who" value="c">Company</label></div></div>
@@ -125,10 +138,12 @@
 								<div class="f" style="grid-column:1/-1"><label for="cName">Company name</label><input class="inp" id="cName"></div>
 								<div class="f"><label for="dic">Tax ID</label><input class="inp" id="dic"></div>
 								<div class="f"><label for="icdph">VAT ID</label><input class="inp" id="icdph"></div>
-								<div class="f" style="grid-column:1/-1"><label for="street">Street and number</label><input class="inp" id="street"></div>
-								<div class="f"><label for="zip">Postcode</label><input class="inp" id="zip"></div>
-								<div class="f"><label for="city">City</label><input class="inp" id="city"></div>
 							</div>
+						</div>
+						<div class="f-grid" id="addr" hidden>
+							<div class="f" style="grid-column:1/-1"><label for="street">Street and number <b style="color:var(--red);font-weight:500">*</b></label><input class="inp" id="street" autocomplete="address-line1"><span class="errt" hidden>Enter your address.</span></div>
+							<div class="f"><label for="zip">Postcode <b style="color:var(--red);font-weight:500">*</b></label><input class="inp" id="zip" autocomplete="postal-code"><span class="errt" hidden>Enter the postal code.</span></div>
+							<div class="f"><label for="city">City <b style="color:var(--red);font-weight:500">*</b></label><input class="inp" id="city" autocomplete="address-level2"><span class="errt" hidden>Enter the city.</span></div>
 						</div>
 					</div>
 					<div class="f"><label for="note">Note</label><textarea class="inp" id="note" placeholder="E.g. we travel with large luggage or a bicycle."></textarea></div>
@@ -146,7 +161,8 @@
 					<div><span class="lbl">Booking confirmed</span><h2 style="font-size:clamp(30px,3.4vw,44px);letter-spacing:-.035em;margin-top:8px">Thank you, <span id="dName">Jana</span>. Your number is <span class="red" id="dRef">P-20123</span>.</h2></div>
 					<p class="txt">We sent the confirmation to <b id="dMail" style="font-weight:600;color:var(--ink)"></b> and an SMS to <b id="dPhone" style="font-weight:600;color:var(--ink)"></b>. We'll remind you the day before you arrive.</p>
 					<ol class="next">
-						<li>Come to Stará Vajnorská 39 at your arrival time. You pay on site – by card or in cash.</li>
+						<li id="dInv" hidden>We email you the invoice with the payment details in a few minutes. Please pay it by bank transfer before you arrive.</li>
+						<li id="dPay">Come to Stará Vajnorská 39 at your arrival time. You pay on site – by card or in cash.</li>
 						<li>We drive you to the terminal, it takes about 5 minutes.</li>
 						<li>When you land, call +421 904 440 660 and we pick you up. We watch your return flight – if it is late, we wait.</li>
 					</ol>
@@ -166,7 +182,7 @@
 					<div id="sumLines"></div>
 					<div class="perf" style="margin:8px -8px 0"></div>
 					<div style="display:flex;justify-content:space-between;align-items:flex-end;padding:24px 0 20px"><span style="font-size:15px;color:var(--muted)">Total incl. VAT</span><span class="big" id="sumTotal"></span></div>
-					<div style="display:flex;align-items:center;justify-content:center;min-height:48px;padding:0 16px;border-radius:999px;background:var(--grey);font-size:14px;font-weight:500;text-align:center">Pay on site – by card or in cash</div>
+					<div style="display:flex;align-items:center;justify-content:center;min-height:48px;padding:0 16px;border-radius:999px;background:var(--grey);font-size:14px;font-weight:500;text-align:center" id="payLbl">Pay on site – by card or in cash</div>
 					<p style="margin:14px 0 0;text-align:center;font-size:12px;color:var(--sub)">Free cancellation up to 24 hours before arrival.</p>
 				</div>
 			</aside>
@@ -277,13 +293,23 @@
 	$( 'back' ).onclick = () => go( 1 );
 
 	// Company: IČO lookup fills the billing data (in the real form it reads the public registry).
-	document.querySelectorAll( 'input[name=who]' ).forEach( ( r ) => r.addEventListener( 'change', () => {
-		$( 'company' ).hidden = r.value !== 'c' || ! r.checked;
-	} ) );
+	// Payment: on site, or by invoice (the real site issues it in KROS Fakturácia and emails it).
+	const invoice = () => document.querySelector( 'input[name=pay]:checked' ).value === 'invoice';
+	const company = () => document.querySelector( 'input[name=who]:checked' ).value === 'c';
+	const billing = () => {
+		$( 'company' ).hidden = ! company();
+		$( 'addr' ).hidden = ! company() && ! invoice();
+		$( 'billHint' ).textContent = invoice()
+			? 'We make out the invoice to these details and email it to you right after booking.'
+			: 'You get the receipt on site. Fill in company details if you want it made out to a company.';
+		$( 'payLbl' ).textContent = invoice() ? 'Pay by invoice – bank transfer in advance' : 'Pay on site – by card or in cash';
+		document.querySelectorAll( '.pay' ).forEach( ( l ) => l.classList.toggle( 'on', l.querySelector( 'input' ).checked ) );
+	};
+	document.querySelectorAll( 'input[name=who], input[name=pay]' ).forEach( ( r ) => r.addEventListener( 'change', billing ) );
 	$( 'icoBtn' ).onclick = () => {
 		$( 'icoBtn' ).textContent = 'Loading…';
 		setTimeout( () => {
-			Object.entries( { cName: 'PV-S1 s. r. o.', dic: '2122091917', icdph: 'SK2122091917', street: 'Technická 5957/7A', zip: '821 04', city: 'Bratislava' } ).forEach( ( [ k, v ] ) => ( $( k ).value = v ) );
+			Object.entries( { cName: 'PV Autoservis s. r. o.', dic: '2122401303', icdph: 'SK2122401303', street: 'Technická 5957/7A', zip: '821 04', city: 'Bratislava' } ).forEach( ( [ k, v ] ) => ( $( k ).value = v ) );
 			$( 'icoOk' ).hidden = false;
 			$( 'icoBtn' ).textContent = 'Look up';
 		}, 500 );
@@ -302,12 +328,15 @@
 		need( $( 'phone' ), $( 'phone' ).value.replace( /\D/g, '' ).length >= 9 );
 		need( $( 'email' ), /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test( $( 'email' ).value ) );
 		st.cars.forEach( ( c, i ) => { c.plate = $( 'plate' + i ).value; need( $( 'plate' + i ), c.plate.trim().length > 3 ); } );
+		if ( invoice() || company() ) { [ 'street', 'zip', 'city' ].forEach( ( id ) => need( $( id ), $( id ).value.trim().length > 1 ) ); }
 		$( 'termsErr' ).hidden = $( 'terms' ).checked;
 		if ( ! $( 'terms' ).checked ) ok = false;
 		if ( ! ok ) return;
 		$( 'dName' ).textContent = $( 'name' ).value.trim().split( ' ' )[ 0 ];
 		$( 'dMail' ).textContent = $( 'email' ).value;
 		$( 'dPhone' ).textContent = $( 'phone' ).value;
+		$( 'dInv' ).hidden = ! invoice();
+		$( 'dPay' ).textContent = invoice() ? 'Come to Stará Vajnorská 39 at your arrival time.' : 'Come to Stará Vajnorská 39 at your arrival time. You pay on site – by card or in cash.';
 		// Saved in this browser so "Change booking" can find it (the real site stores it on the server).
 		const ref = 'P-' + ( 20200 + Math.floor( Math.random() * 9000 ) );
 		const token = Math.random().toString( 36 ).slice( 2, 12 );
@@ -319,6 +348,8 @@
 			name: $( 'name' ).value.trim(), email: $( 'email' ).value.trim(), phone: $( 'phone' ).value.trim(),
 			flOut: $( 'flOut' ).value.trim().toUpperCase(), flIn: $( 'flIn' ).value.trim().toUpperCase(), dest: $( 'dest' ).value.trim(),
 			lines: $( 'sumLines' ).innerHTML, total: $( 'sumTotal' ).textContent,
+			pay: invoice() ? 'invoice' : 'onsite',
+			invoice: invoice() ? { number: '2026' + String( 100 + Math.floor( Math.random() * 900 ) ).padStart( 4, '0' ), due: P.iso( new Date( Date.now() + 3 * 864e5 ) ), status: 'issued' } : null,
 		};
 		window.PVB.save( booking );
 		$( 'dRef' ).textContent = ref;

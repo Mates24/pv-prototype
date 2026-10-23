@@ -20,6 +20,12 @@
 	.when { display: grid; grid-template-columns: 1.5fr 1fr 1.5fr 1fr; gap: 14px 18px; align-items: end; }
 	.car { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 16px; align-items: center; padding: 16px 0; border-top: 1px solid var(--line2); }
 	.car .no { width: 36px; height: 36px; border-radius: 12px; background: var(--grey); display: grid; place-items: center; font-weight: 600; }
+	.paychoice { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+	.pay { display: flex; gap: 10px; align-items: flex-start; border: 1px solid var(--line); border-radius: 20px; padding: 16px; cursor: pointer; font-size: 15px; transition: border-color 200ms ease, box-shadow 200ms ease; }
+	.pay.on { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+	.pay input { margin-top: 4px; accent-color: var(--red); }
+	@media (max-width: 640px) { .paychoice { grid-template-columns: minmax(0, 1fr); } }
+	@media (max-width: 640px) { .car { grid-template-columns: auto minmax(0, 1fr); row-gap: 8px; } .car .xtra { grid-column: 2; justify-self: start; } }
 	.qty { display: inline-flex; align-items: center; gap: 4px; padding: 4px; border-radius: 999px; background: var(--grey); }
 	.qty button { width: 40px; height: 40px; border-radius: 50%; border: 0; background: #fff; cursor: pointer; font: 600 18px var(--font); color: var(--ink); }
 	.qty button:disabled { opacity: .4; cursor: not-allowed; }
@@ -114,6 +120,13 @@
 							<div class="f"><label for="kids">Z toho deti (autosedačky máme)</label><select class="inp" id="kids"><option selected>0</option><option>1</option><option>2</option><option>3</option><option>4</option></select></div>
 						</div>
 					</div>
+					<div style="display:flex;flex-direction:column;gap:14px">
+						<h2>Platba</h2>
+						<div class="paychoice" role="radiogroup" aria-label="Spôsob platby">
+							<label class="pay on"><input type="radio" name="pay" value="onsite" checked><span><b>Na mieste</b><br><span class="hint">Kartou alebo v hotovosti pri príchode.</span></span></label>
+							<label class="pay"><input type="radio" name="pay" value="invoice"><span><b>Faktúrou</b><br><span class="hint">Faktúru pošleme e-mailom, uhradíte ju prevodom hneď po rezervácii.</span></span></label>
+						</div>
+					</div>
 					<div style="display:flex;flex-direction:column;gap:18px">
 						<div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap"><h2>Fakturácia</h2>
 							<div class="radios" role="radiogroup" aria-label="Typ zákazníka"><label><input type="radio" name="who" value="p" checked>Súkromná osoba</label><label><input type="radio" name="who" value="c">Firma</label></div></div>
@@ -125,10 +138,12 @@
 								<div class="f" style="grid-column:1/-1"><label for="cName">Obchodné meno</label><input class="inp" id="cName"></div>
 								<div class="f"><label for="dic">DIČ</label><input class="inp" id="dic"></div>
 								<div class="f"><label for="icdph">IČ DPH</label><input class="inp" id="icdph"></div>
-								<div class="f" style="grid-column:1/-1"><label for="street">Ulica a číslo</label><input class="inp" id="street"></div>
-								<div class="f"><label for="zip">PSČ</label><input class="inp" id="zip"></div>
-								<div class="f"><label for="city">Mesto</label><input class="inp" id="city"></div>
 							</div>
+						</div>
+						<div class="f-grid" id="addr" hidden>
+							<div class="f" style="grid-column:1/-1"><label for="street">Ulica a číslo <b style="color:var(--red);font-weight:500">*</b></label><input class="inp" id="street" autocomplete="address-line1"><span class="errt" hidden>Vyplňte adresu.</span></div>
+							<div class="f"><label for="zip">PSČ <b style="color:var(--red);font-weight:500">*</b></label><input class="inp" id="zip" autocomplete="postal-code"><span class="errt" hidden>Vyplňte PSČ.</span></div>
+							<div class="f"><label for="city">Mesto <b style="color:var(--red);font-weight:500">*</b></label><input class="inp" id="city" autocomplete="address-level2"><span class="errt" hidden>Vyplňte mesto.</span></div>
 						</div>
 					</div>
 					<div class="f"><label for="note">Poznámka</label><textarea class="inp" id="note" placeholder="Napr. cestujeme s veľkou batožinou alebo bicyklom."></textarea></div>
@@ -146,7 +161,8 @@
 					<div><span class="lbl">Rezervácia potvrdená</span><h2 style="font-size:clamp(30px,3.4vw,44px);letter-spacing:-.035em;margin-top:8px">Ďakujeme, <span id="dName">Jana</span>. Vaše číslo je <span class="red" id="dRef">P-20123</span>.</h2></div>
 					<p class="txt">Potvrdenie sme poslali na <b id="dMail" style="font-weight:600;color:var(--ink)"></b> a SMS na <b id="dPhone" style="font-weight:600;color:var(--ink)"></b>. Deň pred príchodom vám pripomenieme termín.</p>
 					<ol class="next">
-						<li>Prídite na Starú Vajnorskú 39 v čase príchodu. Zaplatíte na mieste – kartou alebo v hotovosti.</li>
+						<li id="dInv" hidden>Faktúru s platobnými údajmi vám pošleme e-mailom o pár minút. Uhraďte ju prevodom ešte pred príchodom.</li>
+						<li id="dPay">Prídite na Starú Vajnorskú 39 v čase príchodu. Zaplatíte na mieste – kartou alebo v hotovosti.</li>
 						<li>Odvezieme vás na terminál, cesta trvá asi 5 minút.</li>
 						<li>Po prílete zavolajte na +421 904 440 660 a vyzdvihneme vás. Váš let späť sledujeme – ak bude meškať, počkáme.</li>
 					</ol>
@@ -166,7 +182,7 @@
 					<div id="sumLines"></div>
 					<div class="perf" style="margin:8px -8px 0"></div>
 					<div style="display:flex;justify-content:space-between;align-items:flex-end;padding:24px 0 20px"><span style="font-size:15px;color:var(--muted)">Spolu s DPH</span><span class="big" id="sumTotal"></span></div>
-					<div style="display:flex;align-items:center;justify-content:center;min-height:48px;padding:0 16px;border-radius:999px;background:var(--grey);font-size:14px;font-weight:500;text-align:center">Platíte na mieste – kartou alebo v hotovosti</div>
+					<div style="display:flex;align-items:center;justify-content:center;min-height:48px;padding:0 16px;border-radius:999px;background:var(--grey);font-size:14px;font-weight:500;text-align:center" id="payLbl">Platíte na mieste – kartou alebo v hotovosti</div>
 					<p style="margin:14px 0 0;text-align:center;font-size:12px;color:var(--sub)">Zrušenie zdarma do 24 hodín pred príchodom.</p>
 				</div>
 			</aside>
@@ -277,13 +293,23 @@
 	$( 'back' ).onclick = () => go( 1 );
 
 	// Company: IČO lookup fills the billing data (in the real form it reads the public registry).
-	document.querySelectorAll( 'input[name=who]' ).forEach( ( r ) => r.addEventListener( 'change', () => {
-		$( 'company' ).hidden = r.value !== 'c' || ! r.checked;
-	} ) );
+	// Payment: on site, or by invoice (the real site issues it in KROS Fakturácia and emails it).
+	const invoice = () => document.querySelector( 'input[name=pay]:checked' ).value === 'invoice';
+	const company = () => document.querySelector( 'input[name=who]:checked' ).value === 'c';
+	const billing = () => {
+		$( 'company' ).hidden = ! company();
+		$( 'addr' ).hidden = ! company() && ! invoice();
+		$( 'billHint' ).textContent = invoice()
+			? 'Faktúru vystavíme na tieto údaje a pošleme vám ju e-mailom hneď po rezervácii.'
+			: 'Doklad dostanete na mieste. Firemné údaje vyplníte, ak chcete doklad na firmu.';
+		$( 'payLbl' ).textContent = invoice() ? 'Platíte faktúrou – prevodom vopred' : 'Platíte na mieste – kartou alebo v hotovosti';
+		document.querySelectorAll( '.pay' ).forEach( ( l ) => l.classList.toggle( 'on', l.querySelector( 'input' ).checked ) );
+	};
+	document.querySelectorAll( 'input[name=who], input[name=pay]' ).forEach( ( r ) => r.addEventListener( 'change', billing ) );
 	$( 'icoBtn' ).onclick = () => {
 		$( 'icoBtn' ).textContent = 'Načítavam…';
 		setTimeout( () => {
-			Object.entries( { cName: 'PV-S1 s. r. o.', dic: '2122091917', icdph: 'SK2122091917', street: 'Technická 5957/7A', zip: '821 04', city: 'Bratislava' } ).forEach( ( [ k, v ] ) => ( $( k ).value = v ) );
+			Object.entries( { cName: 'PV Autoservis s. r. o.', dic: '2122401303', icdph: 'SK2122401303', street: 'Technická 5957/7A', zip: '821 04', city: 'Bratislava' } ).forEach( ( [ k, v ] ) => ( $( k ).value = v ) );
 			$( 'icoOk' ).hidden = false;
 			$( 'icoBtn' ).textContent = 'Načítať údaje';
 		}, 500 );
@@ -302,12 +328,15 @@
 		need( $( 'phone' ), $( 'phone' ).value.replace( /\D/g, '' ).length >= 9 );
 		need( $( 'email' ), /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test( $( 'email' ).value ) );
 		st.cars.forEach( ( c, i ) => { c.plate = $( 'plate' + i ).value; need( $( 'plate' + i ), c.plate.trim().length > 3 ); } );
+		if ( invoice() || company() ) { [ 'street', 'zip', 'city' ].forEach( ( id ) => need( $( id ), $( id ).value.trim().length > 1 ) ); }
 		$( 'termsErr' ).hidden = $( 'terms' ).checked;
 		if ( ! $( 'terms' ).checked ) ok = false;
 		if ( ! ok ) return;
 		$( 'dName' ).textContent = $( 'name' ).value.trim().split( ' ' )[ 0 ];
 		$( 'dMail' ).textContent = $( 'email' ).value;
 		$( 'dPhone' ).textContent = $( 'phone' ).value;
+		$( 'dInv' ).hidden = ! invoice();
+		$( 'dPay' ).textContent = invoice() ? 'Prídite na Starú Vajnorskú 39 v čase príchodu.' : 'Prídite na Starú Vajnorskú 39 v čase príchodu. Zaplatíte na mieste – kartou alebo v hotovosti.';
 		// Saved in this browser so "Upraviť rezerváciu" can find it (the real site stores it on the server).
 		const ref = 'P-' + ( 20200 + Math.floor( Math.random() * 9000 ) );
 		const token = Math.random().toString( 36 ).slice( 2, 12 );
@@ -319,6 +348,8 @@
 			name: $( 'name' ).value.trim(), email: $( 'email' ).value.trim(), phone: $( 'phone' ).value.trim(),
 			flOut: $( 'flOut' ).value.trim().toUpperCase(), flIn: $( 'flIn' ).value.trim().toUpperCase(), dest: $( 'dest' ).value.trim(),
 			lines: $( 'sumLines' ).innerHTML, total: $( 'sumTotal' ).textContent,
+			pay: invoice() ? 'invoice' : 'onsite',
+			invoice: invoice() ? { number: '2026' + String( 100 + Math.floor( Math.random() * 900 ) ).padStart( 4, '0' ), due: P.iso( new Date( Date.now() + 3 * 864e5 ) ), status: 'issued' } : null,
 		};
 		window.PVB.save( booking );
 		$( 'dRef' ).textContent = ref;

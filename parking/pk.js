@@ -63,7 +63,7 @@
 				</div>
 			</div>
 			<div class="col"><b>${ t( 'Služby', 'Services' ) }</b><a href="${ page( 'sluzby.html' ) }">${ t( 'Parkovanie a transfer', 'Parking and shuttle' ) }</a><br><a href="${ page( 'sluzby.html' ) }#vip">${ t( 'Kryté VIP parkovanie', 'Covered VIP parking' ) }</a><br><a href="${ page( 'sluzby.html' ) }#cistenie">${ t( 'Čistenie vozidla', 'Car cleaning' ) }</a><br><a href="${ page( 'vop.html' ) }">${ t( 'Všeobecné obchodné podmienky', 'Terms and conditions' ) }</a></div>
-			<div class="col"><b>${ t( 'Sídlo', 'Registered office' ) }</b>PV Airport Parking s. r. o.<br>Technická 5957/7A<br>821 04 Bratislava – Ružinov<br>${ t( 'IČO', 'Company ID' ) } 57630089</div>
+			<div class="col"><b>${ t( 'Sídlo', 'Registered office' ) }</b>PV Airport Parking s. r. o.<br>Technická 5957/7A<br>821 04 Bratislava – Ružinov<br>${ t( 'IČO', 'Company ID' ) } 57630089 · ${ t( 'DIČ', 'Tax ID' ) } 2122855515<br>${ t( 'IČ DPH', 'VAT ID' ) } SK2122855515</div>
 			<div class="col"><b>${ t( 'Prevádzka', 'Car park' ) }</b>Stará Vajnorská 39, 831 04 Bratislava<br>pvairportparking@gmail.com<br>+421 904 440 660<br>${ t( 'Po – Ne: 00:00 – 23:59', 'Mon – Sun: 00:00 – 23:59' ) }</div>
 		</div>
 		<div class="ftr-bar">© 2026 PV Airport Parking s. r. o. · ${ t( 'Všetky práva vyhradené.', 'All rights reserved.' ) }</div>`;

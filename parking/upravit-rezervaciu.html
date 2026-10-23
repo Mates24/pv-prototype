@@ -62,6 +62,11 @@
 				<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><span class="lbl">Vaša rezervácia</span><span class="pill" id="state">● Potvrdená</span></div>
 				<h2 class="h3" style="font-size:28px">Rezervácia <span class="red" id="vRef"></span></h2>
 				<div id="vRows"></div>
+				<div class="flights-box" id="vInv" hidden>
+					<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><h3 class="h3" style="font-size:20px">Faktúra <span id="invNo"></span></h3><span class="pill x" id="invState">● Nezaplatená</span></div>
+					<div id="invRows"></div>
+					<a class="btn btn-line btn-sm" href="ukazka-faktura.pdf" download style="align-self:flex-start">Stiahnuť faktúru (PDF)</a>
+				</div>
 				<div class="flights-box" id="vFlight">
 					<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><h3 class="h3" style="font-size:20px">Váš let</h3><button class="btn btn-line btn-sm" type="button" id="flEdit">Doplniť číslo letu</button></div>
 					<div id="vFlRows"></div>
@@ -152,7 +157,12 @@
 		+ row( b.cars.length > 1 ? 'Autá' : 'Auto', b.cars.map( ( c ) => plate( c.plate ) + ( c.vip ? ' (kryté VIP)' : '' ) ).join( ', ' ) )
 		+ row( 'Osoby v transfere', b.adults + ( b.kids !== '0' ? `, z toho deti ${ b.kids }` : '' ) )
 		+ [ ...lines.querySelectorAll( '.sumrow' ) ].filter( ( r ) => ! /^(Let |Flight |Destinácia|Destination)/.test( r.children[ 0 ].textContent ) ).map( ( r ) => row( r.children[ 0 ].textContent, r.children[ 1 ].textContent ) ).join( '' )
-		+ `<div class="kv" style="font-size:18px"><span style="color:var(--ink)">Spolu, platíte na mieste</span><b>${ b.total }</b></div>`;
+		+ `<div class="kv" style="font-size:18px"><span style="color:var(--ink)">${ b.pay === 'invoice' ? 'Spolu, platíte faktúrou' : 'Spolu, platíte na mieste' }</span><b style="white-space:nowrap">${ b.total }</b></div>`;
+	if ( b.pay === 'invoice' && b.invoice ) {
+		$( 'vInv' ).hidden = false;
+		$( 'invNo' ).textContent = 'č. ' + b.invoice.number;
+		$( 'invRows' ).innerHTML = row( 'IBAN', 'SK29 1100 0000 0029 4219 4864' ) + row( 'Variabilný symbol', b.invoice.number ) + row( 'Suma', b.total ) + row( 'Splatnosť', P.sk( b.invoice.due ) );
+	}
 	// Flight numbers can be added later: many customers know them only a few days before the trip.
 	const flights = () => {
 		$( 'vFlRows' ).innerHTML = row( 'Let tam', b.flOut || '—' ) + row( 'Let späť', b.flIn || '—' ) + ( b.dest ? row( 'Destinácia', b.dest.replace( /[&<>]/g, ( ch ) => ( { '&': '&amp;', '<': '&lt;', '>': '&gt;' } )[ ch ] ) ) : '' );
@@ -178,6 +188,7 @@
 	const cancelled = () => {
 		$( 'state' ).textContent = '● Zrušená'; $( 'state' ).classList.add( 'x' );
 		$( 'acts' ).hidden = true; $( 'late' ).hidden = true; $( 'flEdit' ).hidden = true; $( 'flForm' ).hidden = true;
+		$( 'invState' ).textContent = '● Stornovaná';
 	};
 	if ( b.status === 'cancelled' ) {
 		cancelled();
