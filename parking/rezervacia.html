@@ -108,7 +108,7 @@
 						<h2>Kontakt</h2>
 						<div class="f-grid">
 							<div class="f" style="grid-column:1/-1"><label for="name">Meno a priezvisko <b>*</b></label><input class="inp" id="name" autocomplete="name"><span class="errt" hidden>Zadajte meno a priezvisko.</span></div>
-							<div class="f"><label for="phone">Telefón <b>*</b></label><input class="inp" id="phone" type="tel" autocomplete="tel" placeholder="+421 9xx xxx xxx"><span class="errt" hidden>Zadajte telefón, pošleme naň SMS s potvrdením.</span></div>
+							<div class="f"><label for="phone">Telefón <b>*</b></label><input class="inp" id="phone" type="tel" autocomplete="tel" placeholder="+421 9xx xxx xxx"><span class="errt" hidden>Zadajte telefón, aby sme vás mohli kontaktovať.</span></div>
 							<div class="f"><label for="email">E-mail <b>*</b></label><input class="inp" id="email" type="email" autocomplete="email"><span class="errt" hidden>Zadajte platný e-mail.</span></div>
 						</div>
 					</div>
@@ -159,7 +159,7 @@
 				<section class="panel" id="s3" hidden aria-live="polite">
 					<div class="done-ic"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
 					<div><span class="lbl">Rezervácia potvrdená</span><h2 style="font-size:clamp(30px,3.4vw,44px);letter-spacing:-.035em;margin-top:8px">Ďakujeme, <span id="dName">Jana</span>. Vaše číslo je <span class="red" id="dRef">P-20123</span>.</h2></div>
-					<p class="txt">Potvrdenie sme poslali na <b id="dMail" style="font-weight:600;color:var(--ink)"></b> a SMS na <b id="dPhone" style="font-weight:600;color:var(--ink)"></b>. Deň pred príchodom vám pripomenieme termín.</p>
+					<p class="txt">Potvrdenie sme poslali na <b id="dMail" style="font-weight:600;color:var(--ink)"></b>. Deň pred príchodom vám pripomenieme termín.</p>
 					<ol class="next">
 						<li id="dInv" hidden>Faktúru s platobnými údajmi vám pošleme e-mailom o pár minút. Uhraďte ju prevodom ešte pred príchodom.</li>
 						<li id="dPay">Prídite na Starú Vajnorskú 39 v čase príchodu. Zaplatíte na mieste – kartou alebo v hotovosti.</li>
@@ -334,7 +334,6 @@
 		if ( ! ok ) return;
 		$( 'dName' ).textContent = $( 'name' ).value.trim().split( ' ' )[ 0 ];
 		$( 'dMail' ).textContent = $( 'email' ).value;
-		$( 'dPhone' ).textContent = $( 'phone' ).value;
 		$( 'dInv' ).hidden = ! invoice();
 		$( 'dPay' ).textContent = invoice() ? 'Prídite na Starú Vajnorskú 39 v čase príchodu.' : 'Prídite na Starú Vajnorskú 39 v čase príchodu. Zaplatíte na mieste – kartou alebo v hotovosti.';
 		// Saved in this browser so "Upraviť rezerváciu" can find it (the real site stores it on the server).
