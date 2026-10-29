@@ -309,11 +309,18 @@
 	$( 'icoBtn' ).onclick = () => {
 		$( 'icoBtn' ).textContent = 'Načítavam…';
 		setTimeout( () => {
-			Object.entries( { cName: 'PV Autoservis s. r. o.', dic: '2122401303', icdph: 'SK2122401303', street: 'Technická 5957/7A', zip: '821 04', city: 'Bratislava' } ).forEach( ( [ k, v ] ) => ( $( k ).value = v ) );
+			Object.entries( { cName: 'PV Autoservis s. r. o.', dic: '2122401303', icdph: 'SK2122401303', street: 'Technická 5957/7A', zip: '821 04', city: 'Bratislava' } ).forEach( ( [ k, v ] ) => { if ( ! $( k ).value ) { $( k ).value = v; } } );
 			$( 'icoOk' ).hidden = false;
 			$( 'icoBtn' ).textContent = 'Načítať údaje';
 		}, 500 );
 	};
+	// A complete IČO fills the company details without a click (fields already typed stay).
+	$( 'ico' ).addEventListener( 'input', () => {
+		$( 'icoOk' ).hidden = true;
+		if ( $( 'ico' ).value.replace( /\D/g, '' ).length === 8 ) {
+			$( 'icoBtn' ).click();
+		}
+	} );
 
 	$( 's2' ).addEventListener( 'submit', ( e ) => {
 		e.preventDefault();
