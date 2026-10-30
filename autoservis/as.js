@@ -79,4 +79,32 @@
 	// Shared snippet: the three-step process strip used on service pages.
 	window.AS_ARR = '<svg class="arr" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>';
 	document.querySelectorAll( '[data-book]' ).forEach( ( a ) => ( a.href = BOOK ) );
+
+	// Apponio's form on the booking page reports its height and steps (docs/apponio/custom-code.html).
+	const bookFrame = document.querySelector( '.book-frame' );
+	if ( bookFrame ) {
+		window.addEventListener( 'message', ( e ) => {
+			const d = e.data;
+			if ( e.origin !== 'https://pv-autoservis.myapponio.com' || ! d || d.type !== 'pv-apponio' ) {
+				return;
+			}
+			if ( d.height > 0 ) {
+				bookFrame.style.height = `${ Math.ceil( d.height ) }px`;
+			}
+			if ( d.scrollTop ) {
+				const top = bookFrame.getBoundingClientRect().top - ( document.querySelector( 'header' )?.offsetHeight || 0 );
+				if ( top < 0 ) {
+					window.scrollBy( { top, behavior: 'smooth' } );
+				}
+			}
+			if ( d.event === 'apponio_step' ) {
+				window.dataLayer = window.dataLayer || [];
+				window.dataLayer.push( { event: d.event, stepId: Number( d.stepId ), stepTitle: String( d.stepTitle ) } );
+			}
+			if ( d.event === 'created_reservation' ) {
+				window.dataLayer = window.dataLayer || [];
+				window.dataLayer.push( { event: d.event, reservationValue: Number( d.reservationValue ), reservationService: String( d.reservationService ) } );
+			}
+		} );
+	}
 } )();

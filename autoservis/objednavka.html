@@ -7,17 +7,13 @@
 <title>Objednať sa – PV Autoservis</title>
 <link rel="stylesheet" href="as.css">
 <style>
-	.book-head { padding-block: 48px 28px; }
+	.book-head { padding-block: 40px 24px; }
 	.book-head .h1 { margin-bottom: 0; }
-	.book-sec { padding-bottom: 56px; }
-	.book-frame { display: block; width: 100%; height: clamp(760px, calc(100svh - 120px), 1100px); border: 0; background: var(--grey); }
-	.book-alt { margin: 18px 0 0; font-size: 15px; color: var(--sub); }
+	.book-sec { background: var(--grey); }
+	.book-frame { display: block; width: 100%; height: calc(100svh - 96px); min-height: 640px; border: 0; }
+	.book-alt { margin: 0; padding-block: 20px; font-size: 15px; color: var(--muted); }
 	.book-alt a { color: var(--ink); text-decoration: underline; }
-	@media (max-width: 760px) {
-		.book-head { padding-block: 32px 20px; }
-		.book-sec .wrap { padding-inline: 0; }
-		.book-alt { padding-inline: 16px; }
-	}
+	@media (max-width: 760px) { .book-head { padding-block: 28px 16px; } }
 </style>
 </head>
 <body data-page="objednavka.html">
@@ -29,8 +25,10 @@
 		</div>
 	</section>
 	<section class="book-sec">
+		<iframe class="book-frame" src="https://pv-autoservis.myapponio.com/" title="Rezervačný formulár PV Autoservis"></iframe>
+	</section>
+	<section>
 		<div class="wrap">
-			<iframe class="book-frame" src="https://pv-autoservis.myapponio.com/" title="Rezervačný formulár PV Autoservis"></iframe>
 			<p class="book-alt">Formulár sa nezobrazuje? <a href="https://pv-autoservis.myapponio.com/" target="_blank" rel="noopener">Otvorte ho v novom okne</a> alebo zavolajte na <a href="tel:+421910623111">+421 910 623 111</a>.</p>
 		</div>
 	</section>
