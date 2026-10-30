@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Objednať sa – PV Autoservis</title>
+<link rel="stylesheet" href="as.css">
+<style>
+	.book-head { padding-block: 48px 28px; }
+	.book-head .h1 { margin-bottom: 0; }
+	.book-sec { padding-bottom: 56px; }
+	.book-frame { display: block; width: 100%; height: clamp(760px, calc(100svh - 120px), 1100px); border: 0; background: var(--grey); }
+	.book-alt { margin: 18px 0 0; font-size: 15px; color: var(--sub); }
+	.book-alt a { color: var(--ink); text-decoration: underline; }
+	@media (max-width: 760px) {
+		.book-head { padding-block: 32px 20px; }
+		.book-sec .wrap { padding-inline: 0; }
+		.book-alt { padding-inline: 16px; }
+	}
+</style>
+</head>
+<body data-page="objednavka.html">
+<header id="hdr"></header>
+<main>
+	<section class="book-head">
+		<div class="wrap">
+			<h1 class="h1 in d2">Objednať sa<span class="red">.</span></h1>
+		</div>
+	</section>
+	<section class="book-sec">
+		<div class="wrap">
+			<iframe class="book-frame" src="https://pv-autoservis.myapponio.com/" title="Rezervačný formulár PV Autoservis"></iframe>
+			<p class="book-alt">Formulár sa nezobrazuje? <a href="https://pv-autoservis.myapponio.com/" target="_blank" rel="noopener">Otvorte ho v novom okne</a> alebo zavolajte na <a href="tel:+421910623111">+421 910 623 111</a>.</p>
+		</div>
+	</section>
+</main>
+<footer id="ftr"></footer>
+<script src="as.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="motion.js"></script>
+</body>
+</html>

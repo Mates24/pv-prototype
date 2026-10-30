@@ -1,7 +1,7 @@
 /* PV Autoservis — prototype behaviour shared by every page: live open/closed status, header,
-   footer, mobile menu. Booking stays on Apponio (the owner's decision). */
+   footer, mobile menu. Booking is Apponio's form inside objednavka.html. */
 ( function () {
-	const BOOK = 'https://pv-autoservis.myapponio.com';
+	const BOOK = 'objednavka.html';
 	window.AS_BOOK = BOOK;
 	const PAGES = [
 		[ 'index.html', 'Úvod' ],
@@ -13,7 +13,7 @@
 	];
 	const EXTRA = [
 		[ 'sluzba-pneuservis.html', 'Pneuservis' ], [ 'sluzba-kontrola.html', 'Kontrola' ], [ 'sluzba-brzdy.html', 'Brzdy' ], [ 'sluzba-olej.html', 'Olej a filtre' ], [ 'sluzba-klima.html', 'Klimatizácia' ], [ 'sluzba-stk.html', 'STK a EK' ],
-		[ 'clanok.html', 'Článok' ], [ 'moj-ucet.html', 'Môj účet' ], [ '404.html', '404' ],
+		[ 'clanok.html', 'Článok' ], [ 'objednavka.html', 'Objednať sa' ], [ 'moj-ucet.html', 'Môj účet' ], [ '404.html', '404' ],
 	];
 	const icon = document.createElement( 'link' );
 	icon.rel = 'icon';
