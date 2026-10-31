@@ -13,7 +13,6 @@
 	.pkg.best { background: var(--ink); color: #fff; }
 	.pkg .tag { position: absolute; top: -2px; right: -2px; background: var(--red); color: #fff; font: 600 13px var(--cond); letter-spacing: 0; padding: 8px 14px; }
 	.pkg h2 { margin: 0; font: 600 37px/.9 var(--cond); }
-	.pkg .old { font-size: 18px; color: var(--sub); text-decoration: line-through; }
 	.pkg .now { font: 600 61px/.85 var(--cond); color: var(--red); }
 	.pkg.best .now { color: var(--red-light); }
 	.pkg ul { list-style: none; margin: 0; padding: 0; flex: 1; }
@@ -23,7 +22,7 @@
 	.pkg li.gift { color: var(--red); font-weight: 500; }
 	.pkg.best li.gift { color: var(--red-light); }
 	.dur { font-size: 14px; color: var(--sub); }
-	@media (max-width: 1060px) { .pk { grid-template-columns: minmax(0, 1fr); } .pkg + .pkg { border-left: 0; border-top: 2px solid var(--ink); } }
+	media (max-width: 1060px) { .pk { grid-template-columns: minmax(0, 1fr); } .pkg + .pkg { border-left: 0; border-top: 2px solid var(--ink); } }
 </style>
 </head>
 <body data-page="zimne-baliky.html">
@@ -44,20 +43,20 @@
 			<div class="pk rv">
 				<article class="pkg">
 					<div><span class="dur">Trvanie približne 3 hodiny</span><h2 style="margin-top:12px">Silver</h2></div>
-					<div><span class="old">479 €</span><div class="now num">389 €</div></div>
+					<div><div class="now num">489 €</div></div>
 					<ul><li>Ročná servisná prehliadka – výmena oleja + všetkých filtrov</li><li>Výmena brzdovej kvapaliny</li><li>Výmena chladiacej kvapaliny (zimná zmes do −35 °C)</li><li>Prezutie vozidla</li><li>3D geometria náprav a kolies</li><li>Kontrola podvozku</li><li class="gift">Darček: zimná náplň do ostrekovačov</li></ul>
 					<a class="btn btn-out" data-book href="#">Objednať Silver</a>
 				</article>
 				<article class="pkg best">
 					<span class="tag">Najobľúbenejší</span>
 					<div><span class="dur">Trvanie 4 – 4,5 hodiny</span><h2 style="margin-top:12px">Gold</h2></div>
-					<div><span class="old">589 €</span><div class="now num">489 €</div></div>
+					<div><div class="now num">589 €</div></div>
 					<ul><li>Ročná servisná prehliadka – výmena oleja + všetkých filtrov</li><li>Výmena brzdovej kvapaliny</li><li>Výmena chladiacej kvapaliny (zimná zmes do −35 °C)</li><li>Prezutie vozidla</li><li>3D geometria náprav a kolies</li><li>Všeobecná kontrola vozidla</li><li>Základné čistenie vozidla</li><li class="gift">Darček: zimná náplň do ostrekovačov</li></ul>
 					<a class="btn btn-red" data-book href="#">Objednať Gold</a>
 				</article>
 				<article class="pkg">
 					<div><span class="dur">Trvanie 5 – 6 hodín</span><h2 style="margin-top:12px">Diamond</h2></div>
-					<div><span class="old">689 €</span><div class="now num">589 €</div></div>
+					<div><div class="now num">689 €</div></div>
 					<ul><li>Ročná servisná prehliadka – výmena oleja + všetkých filtrov</li><li>Výmena brzdovej kvapaliny</li><li>Výmena chladiacej kvapaliny (zimná zmes do −35 °C)</li><li>Prezutie vozidla</li><li>3D geometria náprav a kolies</li><li>Všeobecná kontrola vozidla</li><li>Základné čistenie + hĺbkové tepovanie</li><li class="gift">Darček: zimná náplň do ostrekovačov</li><li class="gift">Darček: dezinfekcia vozidla ozónom</li></ul>
 					<a class="btn btn-out" data-book href="#">Objednať Diamond</a>
 				</article>
