@@ -10,6 +10,9 @@
 	.cat { display: grid; grid-template-columns: 320px minmax(0, 1fr); gap: 56px; padding-block: 64px; border-top: 1px solid var(--line); scroll-margin-top: 110px; }
 	.cat h2 { margin: 0; font: 600 34px/.95 var(--cond); }
 	.cat .n { font: 600 15px var(--cond); color: var(--red); display: block; margin-bottom: 18px; }
+	.cat-body { min-width: 0; }
+	.tip { margin-top: 20px; padding: 16px 20px; border-left: 4px solid var(--red); background: var(--grey); color: var(--ink); font-size: 15px; font-weight: 500; line-height: 1.5; display: flex; gap: 12px; align-items: flex-start; }
+	.tip svg { flex: none; }
 	.warn { background: var(--red); color: #fff; padding: 20px 24px; font-size: 15px; line-height: 1.5; display: flex; gap: 14px; align-items: flex-start; }
 	@media (max-width: 1060px) { .cat { grid-template-columns: minmax(0, 1fr); gap: 24px; } }
 </style>
@@ -42,8 +45,8 @@
 <script>
 ( function () {
 	const D = [
-		{ id: 'pneu', t: 'Výmena pneumatík s vyvážením', note: 'Cena za 4 ks', cols: [ 'Rozmer', 'Osobné auto', 'SUV' ], rows: [ [ '12″, 13″, 14″', '50 €', '55 €' ], [ '15″, 16″', '55 €', '60 €' ], [ '17″, 18″', '65 €', '70 €' ], [ '19″, 20″', '75 €', '80 €' ], [ '21″, 22″ a viac', '85 €', '90 €' ] ] },
-		{ id: 'kolesa', t: 'Výmena kolies s vyvážením', note: 'Cena za 4 ks', cols: [ 'Rozmer', 'Osobné auto', 'SUV' ], rows: [ [ '12″, 13″, 14″', '40 €', '45 €' ], [ '15″, 16″', '45 €', '50 €' ], [ '17″, 18″', '55 €', '60 €' ], [ '19″, 20″', '65 €', '70 €' ], [ '21″, 22″ a viac', '75 €', '80 €' ] ] },
+		{ id: 'pneu', tip: true, t: 'Výmena pneumatík s vyvážením', note: 'Cena za 4 ks', cols: [ 'Rozmer', 'Osobné auto', 'SUV' ], rows: [ [ '12″, 13″, 14″', '50 €', '55 €' ], [ '15″, 16″', '55 €', '60 €' ], [ '17″, 18″', '65 €', '70 €' ], [ '19″, 20″', '75 €', '80 €' ], [ '21″, 22″ a viac', '85 €', '90 €' ] ] },
+		{ id: 'kolesa', tip: true, t: 'Výmena kolies s vyvážením', note: 'Cena za 4 ks', cols: [ 'Rozmer', 'Osobné auto', 'SUV' ], rows: [ [ '12″, 13″, 14″', '40 €', '45 €' ], [ '15″, 16″', '45 €', '50 €' ], [ '17″, 18″', '55 €', '60 €' ], [ '19″, 20″', '65 €', '70 €' ], [ '21″, 22″ a viac', '75 €', '80 €' ] ] },
 		{ id: 'uskladnenie', t: 'Uskladnenie', cols: [ 'Služba', 'Cena' ], rows: [ [ 'Sezónne uskladnenie pneumatík (4 ks)', '50 €' ], [ 'Sezónne uskladnenie pneumatík s diskom (4 ks)', '60 €' ], [ 'Uskladnenie vozidla <small>na 1 deň (24 h)</small>', '30 €' ] ] },
 		{ id: 'geometria', t: 'Geometria kolies', cols: [ 'Služba', 'Cena' ], rows: [ [ 'Kontrola nastavenia geometrie', '25 €' ], [ 'Geometria prednej nápravy – osobné auto', '35 €' ], [ 'Geometria prednej a zadnej nápravy – osobné auto', '65 €' ], [ 'Geometria prednej nápravy – SUV, VAN, dodávka', '45 €' ], [ 'Geometria prednej a zadnej nápravy – SUV, VAN, dodávka', '80 €' ] ] },
 		{ id: 'kontrola', t: 'Kontrola vozidla', cols: [ 'Služba', 'Cena' ], rows: [ [ 'Všeobecná kontrola vozidla', '50 €' ], [ 'Dymová skúška netesností v motorovom priestore', '30 €' ], [ 'Kontrola podvozku a náprav', '30 €' ], [ 'Kontrola pred STK + EK', '30 €' ], [ 'Diagnostika vozidla – autodiagnostika', '30 €' ], [ 'Kontrola motorového priestoru', '30 €' ], [ 'Kontrola elektriky a osvetlenia vozidla', '30 €' ] ] },
@@ -55,7 +58,8 @@
 		{ id: 'naplne', t: 'Výmena náplní', note: 'Cena za prácu, materiál naceníme po zaslaní EČV', cols: [ 'Služba', 'Práca' ], rows: [ [ 'Automatická prevodovka', 'od 60 €' ], [ 'Manuálna prevodovka', 'od 60 €' ], [ 'Diferenciál', '60 €' ], [ 'Rozvodovka', '60 €' ], [ 'Haldex', '60 €' ] ] },
 		{ id: 'cistenie', t: 'Čistenie a umývanie', cols: [ 'Služba', 'Malé auto', 'Stredné', 'Veľké' ], rows: [ [ 'Čistenie vozidla <small>Exteriér, interiér, plasty, koža, okná, rámy dverí</small>', '40 €', '50 €', '60 €' ], [ 'Tepovanie vozidla <small>Hĺbkové tepovanie, vyčistenie a ošetrenie kože</small>', '70 €', '80 €', '90 €' ], [ 'Čistenie + tepovanie <small>Zvýhodnená ponuka</small>', '100 €', '120 €', '140 €' ] ] },
 	];
-	document.getElementById( 'cats' ).innerHTML = D.map( ( c, i ) => `<section class="cat rv" id="${ c.id }"><div><span class="n">${ String( i + 1 ).padStart( 2, '0' ) }</span><h2>${ c.t }</h2>${ c.note ? `<p class="txt" style="margin-top:12px;font-size:14px">${ c.note }</p>` : '' }</div><div class="tscroll"><table class="ptable"><tr>${ c.cols.map( ( h ) => `<th>${ h }</th>` ).join( '' ) }</tr>${ c.rows.map( ( r ) => `<tr>${ r.map( ( v ) => `<td>${ v }</td>` ).join( '' ) }</tr>` ).join( '' ) }</table></div></section>` ).join( '' );
+	const TIP = '<div class="tip"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#EF4136" stroke-width="2.2" aria-hidden="true"><path d="M12 3 2 21h20L12 3z"></path><path d="M12 10v5M12 18v.5"></path></svg><span>Po najazdení 100 km od prezutia pneumatík je nutné skontrolovať a dotiahnuť kolesá.</span></div>';
+	document.getElementById( 'cats' ).innerHTML = D.map( ( c, i ) => `<section class="cat rv" id="${ c.id }"><div><span class="n">${ String( i + 1 ).padStart( 2, '0' ) }</span><h2>${ c.t }</h2>${ c.note ? `<p class="txt" style="margin-top:12px;font-size:14px">${ c.note }</p>` : '' }</div><div class="cat-body"><div class="tscroll"><table class="ptable"><tr>${ c.cols.map( ( h ) => `<th>${ h }</th>` ).join( '' ) }</tr>${ c.rows.map( ( r ) => `<tr>${ r.map( ( v ) => `<td>${ v }</td>` ).join( '' ) }</tr>` ).join( '' ) }</table></div>${ c.tip ? TIP : '' }</div></section>` ).join( '' );
 } )();
 </script>
 <script src="as.js"></script>
