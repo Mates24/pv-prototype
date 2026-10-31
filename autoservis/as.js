@@ -101,6 +101,8 @@
 			if ( d.event === 'apponio_step' ) {
 				window.dataLayer = window.dataLayer || [];
 				window.dataLayer.push( { event: d.event, stepId: Number( d.stepId ), stepTitle: String( d.stepTitle ) } );
+				// Tag Manager has no tag for the steps; the Google tag it loads takes this directly.
+				( function () { window.dataLayer.push( arguments ); } )( 'event', 'booking_step', { send_to: 'G-8ZS2GFCV88', step_id: Number( d.stepId ), step_title: String( d.stepTitle ) } );
 			}
 			if ( d.event === 'created_reservation' ) {
 				window.dataLayer = window.dataLayer || [];
