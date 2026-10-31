@@ -98,12 +98,13 @@
 							<button type="button" class="btn btn-red btn-sm" id="demo">Prihlásiť sa</button>
 						</div>
 					</div>
-					<p class="txt" style="font-size:14px">Ešte nie ste členom? Povedzte nám e-mail pri ďalšej návšteve servisu a body vám začneme pripisovať.</p>
+					<h2 class="h3" style="font-size:24px;margin-top:24px">Nový člen? Zaregistrujte sa</h2>
+					<form id="sf" style="display:flex;flex-direction:column;gap:18px"><div class="fld"><label for="sn">Meno a priezvisko</label><input class="inp" id="sn" required></div><div class="fld"><label for="sm">E-mail</label><input class="inp" id="sm" type="email" required></div><div class="fld"><label for="sp">Telefón (nepovinné)</label><input class="inp" id="sp" type="tel"></div><label class="chk"><input type="checkbox" required><span>Súhlasím s podmienkami vernostného programu.</span></label><label class="chk"><input type="checkbox"><span>Chcem dostávať akcie a zľavové kódy e-mailom.</span></label><button class="btn btn-red" type="submit">Zaregistrovať sa</button><p class="ok-note" id="sfok" hidden>Poslali sme vám e-mail s odkazom na potvrdenie registrácie.</p></form>
 				</div>
 				<div>
 					<h2 class="h3" style="font-size:24px">Ako to funguje</h2>
 					<ol class="how" style="list-style:none;margin:0;padding:0">
-						<li><span>01</span>Pri návšteve servisu nám poviete e-mail.</li>
+						<li><span>01</span>Zaregistrujte sa tu, alebo nám povedzte e-mail v servise.</li>
 						<li><span>02</span>Za každé zaplatené euro dostanete 10 bodov. Pripíšeme ich po návšteve a pošleme e-mail.</li>
 						<li><span>03</span>Body uplatníte ako zľavu na ďalší servis: 1 000 bodov = 10 €.</li>
 					</ol>
@@ -196,6 +197,10 @@
 		window.scrollTo( { top: 0 } );
 		window.ScrollTrigger?.refresh();
 	};
+	$( 'sf' ).addEventListener( 'submit', ( e ) => {
+		e.preventDefault();
+		$( 'sfok' ).hidden = false;
+	} );
 	$( 'lf' ).addEventListener( 'submit', ( e ) => {
 		e.preventDefault();
 		const ok = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test( $( 'lmail' ).value );

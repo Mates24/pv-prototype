@@ -80,6 +80,25 @@
 	window.AS_ARR = '<svg class="arr" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>';
 	document.querySelectorAll( '[data-book]' ).forEach( ( a ) => ( a.href = BOOK ) );
 
+	// Map on the contact sections: Google's iframe only after marketing consent or a click.
+	const showMaps = () => document.querySelectorAll( '.map[data-map]' ).forEach( ( box ) => {
+		const frame = document.createElement( 'iframe' );
+		frame.src = box.dataset.map;
+		frame.title = 'Mapa – PV Autoservis, Technická 5957/7A, Bratislava';
+		frame.loading = 'lazy';
+		frame.referrerPolicy = 'no-referrer-when-downgrade';
+		box.replaceChildren( frame );
+		box.removeAttribute( 'data-map' );
+	} );
+	document.querySelectorAll( '.map-load' ).forEach( ( b ) => b.addEventListener( 'click', showMaps ) );
+	const mapConsent = () => {
+		if ( document.cookie.includes( 'cmplz_marketing=allow' ) ) {
+			showMaps();
+		}
+	};
+	document.addEventListener( 'cmplz_fire_categories', mapConsent );
+	mapConsent();
+
 	// Apponio's form on the booking page reports its height and steps (docs/apponio/custom-code.html).
 	const bookFrame = document.querySelector( '.book-frame' );
 	if ( bookFrame ) {
