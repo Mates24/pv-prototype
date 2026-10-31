@@ -92,10 +92,11 @@
 				bookFrame.style.height = `${ Math.ceil( d.height ) }px`;
 			}
 			if ( d.scrollTop ) {
-				const top = bookFrame.getBoundingClientRect().top - ( document.querySelector( 'header' )?.offsetHeight || 0 );
-				if ( top < 0 ) {
+				// A new step starts right under the sticky header; after the form's own scrolling.
+				setTimeout( () => {
+					const top = bookFrame.getBoundingClientRect().top - ( document.querySelector( 'header' )?.offsetHeight || 0 );
 					window.scrollBy( { top, behavior: 'smooth' } );
-				}
+				}, 300 );
 			}
 			if ( d.event === 'apponio_step' ) {
 				window.dataLayer = window.dataLayer || [];
