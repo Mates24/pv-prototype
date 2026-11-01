@@ -99,7 +99,7 @@
 						</div>
 					</div>
 					<h2 class="h3" style="font-size:24px;margin-top:24px">Nový člen? Zaregistrujte sa</h2>
-					<form id="sf" style="display:flex;flex-direction:column;gap:18px"><div class="fld"><label for="sn">Meno a priezvisko</label><input class="inp" id="sn" required></div><div class="fld"><label for="sm">E-mail</label><input class="inp" id="sm" type="email" required></div><div class="fld"><label for="sp">Telefón</label><input class="inp" id="sp" type="tel" required minlength="9"></div><label class="chk"><input type="checkbox" required><span>Súhlasím s podmienkami vernostného programu.</span></label><p class="txt" style="font-size:14px">Členom posielame e-mailom akcie a zľavové kódy. Odhlásiť sa môžete kedykoľvek jedným kliknutím v každom e-maile alebo v časti Moje údaje.</p><button class="btn btn-red" type="submit">Zaregistrovať sa</button><p class="ok-note" id="sfok" hidden>Poslali sme vám e-mail s odkazom na potvrdenie registrácie.</p></form>
+					<form id="sf" style="display:flex;flex-direction:column;gap:18px"><div class="fld"><label for="sn">Meno a priezvisko</label><input class="inp" id="sn" required></div><div class="fld"><label for="sm">E-mail</label><input class="inp" id="sm" type="email" required></div><div class="fld"><label for="sp">Telefón</label><input class="inp" id="sp" type="tel" required minlength="9"></div><div class="fld"><label for="sr">Odporúčací kód od priateľa (nepovinné)</label><input class="inp" id="sr"></div><label class="chk"><input type="checkbox" required><span>Súhlasím s podmienkami vernostného programu.</span></label><p class="txt" style="font-size:14px">Členom posielame e-mailom akcie a zľavové kódy. Odhlásiť sa môžete kedykoľvek jedným kliknutím v každom e-maile alebo v časti Moje údaje.</p><button class="btn btn-red" type="submit">Zaregistrovať sa</button><p class="ok-note" id="sfok" hidden>Poslali sme vám e-mail s odkazom na potvrdenie registrácie.</p></form>
 				</div>
 				<div>
 					<h2 class="h3" style="font-size:24px">Ako to funguje</h2>
@@ -152,6 +152,7 @@
 				</div>
 			</div>
 			<div class="rv" style="display:flex;flex-wrap:wrap;gap:12px;margin-top:28px"><a class="btn btn-red" data-book href="#">Rezervovať ďalší termín</a><button class="btn btn-out" type="button" id="logout">Odhlásiť sa</button></div>
+			<div class="dash" style="margin-bottom:24px"><div class="box"><h3 class="h3 box-h">Odporučte nás priateľovi</h3><p class="txt small">Keď sa priateľ zaregistruje s vaším kódom a príde prvýkrát do servisu, dostanete 1 000 bodov. Platí pre 10 priateľov.</p><p style="font-size:22px;margin:12px 0"><span class="code">PV-K7M2Q9</span></p><p class="txt small">Doteraz odporučení: 2 z 10</p></div><div class="box"><h3 class="h3 box-h">Odťah pre členov</h3><ul style="margin:0 0 12px;padding-left:18px"><li><b>V Bratislave zadarmo</b></li><li><b>Po Slovensku so zľavou 50 %, alebo za 5 000 bodov</b></li></ul><p><a class="btn btn-dark btn-sm" href="tel:+421910623111">Zavolať 0910 623 111</a></p></div></div>
 			<details class="rv box me" id="me" style="margin-top:24px">
 				<summary class="cond">Moje údaje a zrušenie účtu</summary>
 				<form id="meForm" novalidate style="display:flex;flex-direction:column;gap:18px;margin-top:20px">
