@@ -204,15 +204,15 @@
 		}
 	} );
 	show( 'prehlad' );
-	// The tile repeats the first date from the list.
-	window.addEventListener( 'load', () => {
+	// The tile repeats the first date from the list, which is filled in after signing in.
+	new MutationObserver( () => {
 		const first = document.querySelector( '#due .due' );
 		const tile = acc.querySelector( '.pvb-tile' );
 		if ( first ) {
 			tile.querySelector( '.pvb-tile__v' ).textContent = first.querySelector( 'b' ).textContent;
 			tile.querySelector( '.pvb-tile__s' ).textContent = first.querySelector( 'small' ).textContent;
 		}
-	} );
+	} ).observe( document.getElementById( 'due' ), { childList: true } );
 } )();
 </script>
 <script>
