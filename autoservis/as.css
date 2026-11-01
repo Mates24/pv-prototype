@@ -509,3 +509,18 @@ textarea.inp { height: 140px; padding: 14px 16px; resize: vertical; }
 /* Buttons inside articles: their own colours, not the red link text. */
 .art .wp-block-button__link { display: inline-block; padding: 14px 24px; background: var(--red); color: #fff; font-weight: 600; text-decoration: none; }
 .art .is-style-outline > .wp-block-button__link { background: transparent; border: 2px solid currentColor; color: var(--red); }
+
+/* Footer bar: one line on wide screens; on phones the copyright and Hore above the links. */
+.ftr-bar .wrap { height: auto; min-height: 56px; padding-block: 10px; flex-wrap: wrap; }
+.ftr-links { flex: 1; display: flex; flex-wrap: wrap; align-items: center; }
+.ftr-links a { display: inline-flex; align-items: center; min-height: 32px; }
+.ftr-links a + a::before { content: "·"; margin-inline: 8px; }
+.ftr-top { white-space: nowrap; }
+@media (max-width: 640px) {
+	.ftr-bar .wrap { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 16px; padding-block: 16px; font-size: 14px; }
+	.ftr-links { grid-column: 1 / -1; grid-row: 2; display: flex; flex-direction: column; align-items: flex-start; }
+	.ftr-links a { min-height: 40px; }
+	.ftr-links a + a::before { content: none; }
+	.ftr-top { min-height: 32px; display: inline-flex; align-items: center; }
+	.ftr-copy { display: inline-flex; align-items: center; min-height: 32px; }
+}
