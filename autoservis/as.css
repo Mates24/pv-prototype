@@ -505,3 +505,7 @@ textarea.inp { height: 140px; padding: 14px 16px; resize: vertical; }
 	.hero-img.cut .band { bottom: auto; height: 340px; }
 	.hero-img.cut .badge24 { position: static; box-shadow: none; padding: 18px 16px; border-bottom: 1px solid var(--line2, var(--line)); }
 }
+
+/* Buttons inside articles: their own colours, not the red link text. */
+.art .wp-block-button__link { display: inline-block; padding: 14px 24px; background: var(--red); color: #fff; font-weight: 600; text-decoration: none; }
+.art .is-style-outline > .wp-block-button__link { background: transparent; border: 2px solid currentColor; color: var(--red); }
