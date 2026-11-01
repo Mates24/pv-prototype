@@ -57,7 +57,7 @@
 				<button type="button" class="burger" aria-label="Otvoriť menu" aria-expanded="false"><span class="bl" aria-hidden="true"><i></i><i></i><i></i></span><span class="bt">Menu</span></button>
 			</div>
 		</div>
-		<div class="mnav"><div class="wrap">${ PAGES.map( ( [ h, n ] ) => `<a href="${ h }">${ n }</a>` ).join( '' ) }<a href="moj-ucet.html">Môj účet</a><a href="${ BOOK }" style="color:#EF4136">Rezervovať termín</a></div></div>`;
+		<div class="mnav"><div class="wrap">${ PAGES.map( ( [ h, n ] ) => `<a href="${ h }">${ n }</a>` ).join( '' ) }<a class="mnav-acc" href="moj-ucet.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4.5 4-6.5 8-6.5s7 2 8 6.5"/></svg>Môj účet</a><a class="mnav-cta" href="${ BOOK }">Rezervovať termín</a></div></div>`;
 		hdr.querySelector( '.burger' ).addEventListener( 'click', ( e ) => {
 			const open = hdr.classList.toggle( 'open' );
 			e.currentTarget.setAttribute( 'aria-expanded', String( open ) );

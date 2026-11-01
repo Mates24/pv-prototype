@@ -524,3 +524,8 @@ textarea.inp { height: 140px; padding: 14px 16px; resize: vertical; }
 	.ftr-top { min-height: 32px; display: inline-flex; align-items: center; }
 	.ftr-copy { display: inline-flex; align-items: center; min-height: 32px; }
 }
+
+/* Mobile menu: the account and booking are buttons, not more menu lines. */
+.mnav .mnav-acc, .mnav .mnav-cta { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 56px; padding: 12px 16px; border: 0; font-size: 19px; }
+.mnav .mnav-acc { margin-top: 18px; background: var(--ink); color: var(--white); }
+.mnav .mnav-cta { margin-top: 10px; background: var(--red); color: var(--white); }
