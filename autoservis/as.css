@@ -517,12 +517,12 @@ textarea.inp { height: 140px; padding: 14px 16px; resize: vertical; }
 .ftr-links a + a::before { content: "·"; margin-inline: 8px; }
 .ftr-top { white-space: nowrap; }
 @media (max-width: 640px) {
-	.ftr-bar .wrap { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 16px; padding-block: 16px; font-size: 14px; }
-	.ftr-links { grid-column: 1 / -1; grid-row: 2; display: flex; flex-direction: column; align-items: flex-start; }
-	.ftr-links a { min-height: 40px; }
+	.ftr-bar .wrap { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 16px; padding-block: 12px; font-size: 13px; }
+	.ftr-links { grid-column: 1 / -1; grid-row: 1; column-gap: 18px; padding-bottom: 8px; border-bottom: 1px solid rgba(255, 255, 255, .28); }
+	.ftr-links a { min-height: 32px; }
 	.ftr-links a + a::before { content: none; }
-	.ftr-top { min-height: 32px; display: inline-flex; align-items: center; }
-	.ftr-copy { display: inline-flex; align-items: center; min-height: 32px; }
+	.ftr-copy { grid-row: 2; opacity: .85; }
+	.ftr-top { grid-row: 2; }
 }
 
 /* Mobile menu: the account and booking are buttons, not more menu lines. */
