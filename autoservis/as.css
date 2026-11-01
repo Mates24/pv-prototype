@@ -208,6 +208,8 @@ textarea.inp { height: 140px; padding: 14px 16px; resize: vertical; }
 /* Grids */
 .g-hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr); min-height: 760px; }
 .g-stats { display: grid; grid-template-columns: 1.4fr repeat(4, minmax(0, 1fr)); }
+/* The section is a flex column: without this the width follows the longest text shown. */
+.svc-sec > .wrap { width: 100%; }
 .g-svc { display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); gap: 72px; align-items: start; }
 .g-why { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .g-proc { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 80px; }
