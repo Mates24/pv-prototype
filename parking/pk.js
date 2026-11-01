@@ -95,7 +95,7 @@
 		}
 		const d = dateOf( v );
 		const wd = DAYS[ d.getDay() ];
-		return en ? `${ wd } ${ d.getDate() }/${ d.getMonth() + 1 }/${ d.getFullYear() }` : `${ wd } ${ d.getDate() }. ${ d.getMonth() + 1 }. ${ d.getFullYear() }`;
+		return `${ wd } ${ pad( d.getDate() ) }.${ pad( d.getMonth() + 1 ) }.${ d.getFullYear() }`;
 	};
 	const nativeValue = Object.getOwnPropertyDescriptor( HTMLInputElement.prototype, 'value' );
 	const ARROW = ( d ) => `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${ d }"/></svg>`;

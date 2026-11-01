@@ -130,3 +130,319 @@
 		} );
 	}
 } )();
+
+/* Date fields: the same calendar as the WordPress theme. */
+( function () {
+	const $$ = ( q, r = document ) => [ ...r.querySelectorAll( q ) ];
+	/* Date fields: our own calendar instead of the browser's picker (same look on every phone and
+	   in the site's design). The date input stays in the form (value, events, min); a button shows
+	   "št 22. 10. 2026" and opens the calendar. Two date fields in one form are a range: the days
+	   between arrival and return are marked, and after the arrival the return calendar opens. */
+	const en = document.documentElement.lang.startsWith( 'en' );
+	const DAYS = en ? [ 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat' ] : [ 'ne', 'po', 'ut', 'st', 'št', 'pi', 'so' ];
+	const MONTHS = en
+		? [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ]
+		: [ 'január', 'február', 'marec', 'apríl', 'máj', 'jún', 'júl', 'august', 'september', 'október', 'november', 'december' ];
+	const T = en
+		? { pick: 'Choose a date', prev: 'Previous month', next: 'Next month', from: 'Arrival', to: 'Return', close: 'Close', ph: 'DD.MM.YYYY', month: 'Month', year: 'Year' }
+		: { pick: 'Vyberte dátum', prev: 'Predchádzajúci mesiac', next: 'Nasledujúci mesiac', from: 'Príchod', to: 'Návrat', close: 'Zavrieť', ph: 'DD.MM.RRRR', month: 'Mesiac', year: 'Rok' };
+	const pad = ( n ) => String( n ).padStart( 2, '0' );
+	const isoOf = ( d ) => `${ d.getFullYear() }-${ pad( d.getMonth() + 1 ) }-${ pad( d.getDate() ) }`;
+	const dateOf = ( v ) => {
+		const [ y, m, d ] = v.split( '-' ).map( Number );
+		return new Date( y, m - 1, d );
+	};
+	const fmtDate = ( v ) => {
+		if ( ! v ) {
+			return T.pick;
+		}
+		const d = dateOf( v );
+		const wd = DAYS[ d.getDay() ];
+		return `${ wd } ${ pad( d.getDate() ) }.${ pad( d.getMonth() + 1 ) }.${ d.getFullYear() }`;
+	};
+	const nativeValue = Object.getOwnPropertyDescriptor( HTMLInputElement.prototype, 'value' );
+	const ARROW = ( d ) => `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${ d }"/></svg>`;
+
+	const cal = document.createElement( 'div' );
+	cal.className = 'pvcal';
+	cal.setAttribute( 'role', 'dialog' );
+	cal.hidden = true;
+	const sheet = document.createElement( 'div' );
+	sheet.className = 'pvcal-back';
+	sheet.hidden = true;
+	let open = null; // { inp, show, view: Date (first of month), focus: iso }
+	const today = isoOf( new Date() );
+
+	// The other date field of the same form: [start, end] or null.
+	const pairOf = ( inp ) => {
+		const box = inp.closest( 'form, .pvq, .pvb-pk, .pass' );
+		const all = box ? $$( 'input[type=date]', box ) : [];
+		return all.length === 2 ? all : null;
+	};
+	const fire = ( inp ) => {
+		inp.dispatchEvent( new Event( 'input', { bubbles: true } ) );
+		inp.dispatchEvent( new Event( 'change', { bubbles: true } ) );
+	};
+
+	const render = () => {
+		const { inp, view } = open;
+		const pair = pairOf( inp );
+		const isEnd = pair && pair[ 1 ] === inp;
+		const startV = pair ? pair[ 0 ].value : '';
+		const endV = pair ? pair[ 1 ].value : '';
+		const min = inp.min || '';
+		const max = inp.max || '';
+		const y = view.getFullYear();
+		const m = view.getMonth();
+		const lead = ( new Date( y, m, 1 ).getDay() + 6 ) % 7; // Monday first
+		const days = new Date( y, m + 1, 0 ).getDate();
+		const minView = min ? dateOf( min ) : null;
+		const prevOff = minView && ( y < minView.getFullYear() || ( y === minView.getFullYear() && m <= minView.getMonth() ) );
+		const maxView = max ? dateOf( max ) : null;
+		const nextOff = maxView && ( y > maxView.getFullYear() || ( y === maxView.getFullYear() && m >= maxView.getMonth() ) );
+		// Birth dates are decades back: jump straight to the month and year.
+		let title = `${ MONTHS[ m ] } ${ y }`;
+		if ( inp.autocomplete === 'bday' ) {
+			const lastY = maxView ? maxView.getFullYear() : new Date().getFullYear();
+			let years = '';
+			for ( let i = lastY; i >= 1900; i-- ) {
+				years += `<option value="${ i }"${ i === y ? ' selected' : '' }>${ i }</option>`;
+			}
+			title = `<select class="pvcal-sel" data-sel="m" aria-label="${ T.month }">${ MONTHS.map( ( name, i ) => `<option value="${ i }"${ i === m ? ' selected' : '' }>${ name }</option>` ).join( '' ) }</select><select class="pvcal-sel" data-sel="y" aria-label="${ T.year }">${ years }</select>`;
+		}
+		let cells = '';
+		for ( let i = 0; i < lead; i++ ) {
+			cells += '<span class="pvcal-x"></span>';
+		}
+		for ( let d = 1; d <= days; d++ ) {
+			const v = `${ y }-${ pad( m + 1 ) }-${ pad( d ) }`;
+			const off = ( min && v < min ) || ( max && v > max );
+			const cls = [ 'pvcal-d' ];
+			if ( v === today ) {
+				cls.push( 'is-today' );
+			}
+			if ( v === inp.value ) {
+				cls.push( 'is-sel' );
+			}
+			if ( pair && startV && endV && startV < endV ) {
+				if ( v === startV ) {
+					cls.push( 'is-start' );
+				}
+				if ( v === endV ) {
+					cls.push( 'is-end' );
+				}
+				if ( v > startV && v < endV ) {
+					cls.push( 'is-in' );
+				}
+			}
+			cells += `<button type="button" class="${ cls.join( ' ' ) }" data-v="${ v }"${ off ? ' disabled' : '' } tabindex="${ v === open.focus ? 0 : -1 }" aria-label="${ fmtDate( v ) }"${ v === inp.value ? ' aria-pressed="true"' : '' }>${ d }</button>`;
+		}
+		const label = pair ? ( isEnd ? T.to : T.from ) : '';
+		cal.setAttribute( 'aria-label', label || T.pick );
+		cal.innerHTML = `<div class="pvcal-h">
+				<button type="button" class="pvcal-nav" data-nav="-1" aria-label="${ T.prev }"${ prevOff ? ' disabled' : '' }>${ ARROW( 'M15 6l-6 6 6 6' ) }</button>
+				<span class="pvcal-m" aria-live="polite">${ label ? `<small>${ label }</small>` : '' }${ title }</span>
+				<button type="button" class="pvcal-nav" data-nav="1" aria-label="${ T.next }"${ nextOff ? ' disabled' : '' }>${ ARROW( 'M9 6l6 6-6 6' ) }</button>
+			</div>
+			<div class="pvcal-w" aria-hidden="true">${ [ 1, 2, 3, 4, 5, 6, 0 ].map( ( i ) => `<span>${ DAYS[ i ] }</span>` ).join( '' ) }</div>
+			<div class="pvcal-g">${ cells }</div>
+			<button type="button" class="pvcal-close">${ T.close }</button>`;
+	};
+
+	const place = () => {
+		if ( ! open ) {
+			return;
+		}
+		const mobile = window.matchMedia( '(max-width: 640px)' ).matches;
+		cal.classList.toggle( 'is-sheet', mobile );
+		sheet.hidden = ! mobile;
+		if ( mobile ) {
+			cal.style.left = cal.style.top = '';
+			return;
+		}
+		const r = open.show.getBoundingClientRect();
+		const w = cal.offsetWidth;
+		const left = Math.min( Math.max( 8, r.left ), window.innerWidth - w - 8 );
+		const below = r.bottom + 8 + cal.offsetHeight < window.innerHeight || r.top < cal.offsetHeight + 16;
+		cal.style.left = `${ left + window.scrollX }px`;
+		cal.style.top = `${ ( below ? r.bottom + 8 : r.top - cal.offsetHeight - 8 ) + window.scrollY }px`;
+	};
+
+	const focusDay = () => cal.querySelector( `.pvcal-d[data-v="${ open.focus }"]` )?.focus( { preventScroll: true } );
+
+	const openCal = ( inp, show ) => {
+		const pair = pairOf( inp );
+		let base = inp.value || ( pair && pair[ 1 ] === inp && pair[ 0 ].value ) || ( inp.min > today ? inp.min : today );
+		if ( ! inp.value && inp.autocomplete === 'bday' ) {
+			base = `${ Number( today.slice( 0, 4 ) ) - 30 }-01-01`;
+		}
+		const d = dateOf( base );
+		open = { inp, show, view: new Date( d.getFullYear(), d.getMonth(), 1 ), focus: base };
+		if ( ! cal.isConnected ) {
+			document.body.append( sheet, cal );
+		}
+		$$( '.dshow[aria-expanded="true"]' ).forEach( ( b ) => b.setAttribute( 'aria-expanded', 'false' ) );
+		show.setAttribute( 'aria-expanded', 'true' );
+		render();
+		cal.hidden = false;
+		place();
+		focusDay();
+	};
+	const closeCal = ( back ) => {
+		if ( ! open ) {
+			return;
+		}
+		cal.hidden = true;
+		sheet.hidden = true;
+		open.show.setAttribute( 'aria-expanded', 'false' );
+		if ( back ) {
+			open.show.focus();
+		}
+		open = null;
+	};
+	const pick = ( v ) => {
+		const { inp } = open;
+		const pair = pairOf( inp );
+		inp.value = v;
+		fire( inp );
+		closeCal( false );
+		// After the arrival, go straight on to the return (once the form has adjusted it).
+		if ( pair && pair[ 0 ] === inp ) {
+			const end = pair[ 1 ];
+			setTimeout( () => openCal( end, end.closest( '.dfield' ).querySelector( '.dshow' ) ), 60 );
+		} else {
+			inp.closest( '.dfield' )?.querySelector( '.dshow' )?.focus();
+		}
+	};
+	const move = ( days ) => {
+		const d = dateOf( open.focus );
+		d.setDate( d.getDate() + days );
+		open.focus = isoOf( d );
+		if ( d.getMonth() !== open.view.getMonth() || d.getFullYear() !== open.view.getFullYear() ) {
+			open.view = new Date( d.getFullYear(), d.getMonth(), 1 );
+		}
+		render();
+		focusDay();
+	};
+
+	cal.addEventListener( 'change', ( e ) => {
+		const sel = e.target.closest( '[data-sel]' );
+		if ( sel ) {
+			const n = Number( sel.value );
+			open.view = sel.dataset.sel === 'm' ? new Date( open.view.getFullYear(), n, 1 ) : new Date( n, open.view.getMonth(), 1 );
+			open.focus = isoOf( open.view );
+			const which = sel.dataset.sel;
+			render();
+			place();
+			cal.querySelector( `[data-sel="${ which }"]` ).focus();
+		}
+	} );
+	cal.addEventListener( 'click', ( e ) => {
+		const nav = e.target.closest( '[data-nav]' );
+		if ( nav ) {
+			open.view = new Date( open.view.getFullYear(), open.view.getMonth() + Number( nav.dataset.nav ), 1 );
+			open.focus = isoOf( open.view );
+			render();
+			place();
+			return;
+		}
+		const day = e.target.closest( '.pvcal-d' );
+		if ( day && ! day.disabled ) {
+			pick( day.dataset.v );
+			return;
+		}
+		if ( e.target.closest( '.pvcal-close' ) ) {
+			closeCal( true );
+		}
+	} );
+	// Return calendar: the range follows the pointer. Only classes change – redrawing the days
+	// under the pointer would swallow the click.
+	const paintRange = ( endV ) => {
+		const pair = open && pairOf( open.inp );
+		const startV = pair ? pair[ 0 ].value : '';
+		if ( ! pair || pair[ 1 ] !== open.inp || ! startV || ! endV || endV <= startV ) {
+			return;
+		}
+		$$( '.pvcal-d', cal ).forEach( ( b ) => {
+			const v = b.dataset.v;
+			b.classList.toggle( 'is-start', v === startV );
+			b.classList.toggle( 'is-end', v === endV );
+			b.classList.toggle( 'is-in', v > startV && v < endV );
+		} );
+	};
+	cal.addEventListener( 'mouseover', ( e ) => {
+		const day = e.target.closest( '.pvcal-d' );
+		if ( day && ! day.disabled ) {
+			paintRange( day.dataset.v );
+		}
+	} );
+	cal.addEventListener( 'mouseleave', () => open && paintRange( open.inp.value ) );
+	cal.addEventListener( 'keydown', ( e ) => {
+		const keys = { ArrowLeft: -1, ArrowRight: 1, ArrowUp: -7, ArrowDown: 7 };
+		if ( keys[ e.key ] && e.target.classList.contains( 'pvcal-d' ) ) {
+			e.preventDefault();
+			move( keys[ e.key ] );
+		} else if ( e.key === 'Escape' ) {
+			e.preventDefault();
+			closeCal( true );
+		} else if ( e.key === 'Tab' ) {
+			// Keep the focus inside the calendar while it is open.
+			const f = $$( 'button:not([disabled])[tabindex="0"], .pvcal-nav:not([disabled]), .pvcal-sel, .pvcal-close', cal );
+			const i = f.indexOf( document.activeElement );
+			if ( e.shiftKey && i <= 0 ) {
+				e.preventDefault();
+				f[ f.length - 1 ].focus();
+			} else if ( ! e.shiftKey && i === f.length - 1 ) {
+				e.preventDefault();
+				f[ 0 ].focus();
+			}
+		}
+	} );
+	sheet.addEventListener( 'click', () => closeCal( true ) );
+	document.addEventListener( 'mousedown', ( e ) => {
+		if ( open && ! cal.contains( e.target ) && ! open.show.contains( e.target ) ) {
+			closeCal( false );
+		}
+	} );
+	window.addEventListener( 'resize', place );
+	window.addEventListener( 'scroll', () => open && ! cal.classList.contains( 'is-sheet' ) && place(), { passive: true } );
+
+	const enhanceDate = ( inp ) => {
+		if ( inp.closest( '.dfield' ) ) {
+			return;
+		}
+		const wrap = document.createElement( 'span' );
+		wrap.className = 'dfield';
+		inp.before( wrap );
+		const show = document.createElement( 'button' );
+		show.type = 'button';
+		// Parking fields show the weekday too; the others are just DD.MM.YYYY.
+		const plain = ! inp.classList.contains( 'pin' );
+		show.className = `${ inp.className } pin dshow`;
+		show.setAttribute( 'aria-haspopup', 'dialog' );
+		show.setAttribute( 'aria-expanded', 'false' );
+		const label = inp.closest( 'label' )?.querySelector( '.lbl' )?.textContent || inp.labels?.[ 0 ]?.textContent || inp.getAttribute( 'aria-label' ) || '';
+		wrap.append( show, inp );
+		inp.tabIndex = -1;
+		inp.setAttribute( 'aria-hidden', 'true' );
+		const upd = () => {
+			const v = nativeValue.get.call( inp );
+			show.textContent = plain ? ( v ? fmtDate( v ).replace( /^\S+ /, '' ) : T.ph ) : fmtDate( v );
+			show.classList.toggle( 'is-empty', ! v );
+			show.setAttribute( 'aria-label', `${ label ? label + ': ' : '' }${ fmtDate( v ) }` );
+		};
+		Object.defineProperty( inp, 'value', {
+			configurable: true,
+			get: () => nativeValue.get.call( inp ),
+			set: ( v ) => {
+				nativeValue.set.call( inp, v );
+				upd();
+			},
+		} );
+		inp.addEventListener( 'input', upd );
+		inp.addEventListener( 'change', upd );
+		show.addEventListener( 'click', () => ( open && open.inp === inp ? closeCal( false ) : openCal( inp, show ) ) );
+		upd();
+	};
+	$$( 'input[type=date]' ).forEach( enhanceDate );
+} )();

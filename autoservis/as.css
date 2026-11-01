@@ -272,3 +272,228 @@ textarea.inp { height: 140px; padding: 14px 16px; resize: vertical; }
 /* Hero text on phones and tablets: no large gaps around it. */
 @media (max-width: 1060px) { .hero-tx { padding: 40px 32px 36px !important; } }
 @media (max-width: 640px) { .hero-tx { padding: 24px 16px 28px !important; } .hero-tx .lead { margin-bottom: 24px !important; } }
+
+.pvcal {
+	position: absolute;
+	z-index: 1000;
+	width: 324px;
+	padding: 18px;
+	border-radius: calc(14px + 10px);
+	background: var(--white);
+	color: var(--ink);
+	box-shadow: 0 2px 0 rgba(29, 29, 27, .04), 0 30px 70px -24px rgba(29, 29, 27, .45);
+	border: 1px solid var(--line2, var(--line));
+	animation: pvcalIn 220ms var(--ease) both;
+}
+
+@keyframes pvcalIn {
+	from { opacity: 0; transform: translateY(8px); }
+}
+
+.pvcal-h {
+	display: grid;
+	grid-template-columns: 40px minmax(0, 1fr) 40px;
+	align-items: center;
+	gap: 8px;
+	margin-bottom: 12px;
+}
+
+.pvcal-m {
+	text-align: center;
+	font-size: 17px;
+	font-weight: 600;
+	letter-spacing: -.01em;
+	line-height: 1.2;
+	text-transform: capitalize;
+}
+
+.pvcal-m small {
+	display: block;
+	font-size: 11px;
+	font-weight: 600;
+	letter-spacing: .14em;
+	text-transform: uppercase;
+	color: var(--red);
+}
+
+.pvcal-nav {
+	width: 40px;
+	height: 40px;
+	display: grid;
+	place-items: center;
+	border: 0;
+	border-radius: 999px;
+	background: var(--grey);
+	color: var(--ink);
+	cursor: pointer;
+	transition: background-color 200ms ease, color 200ms ease;
+}
+
+.pvcal-nav:hover:not(:disabled) {
+	background: var(--ink);
+	color: var(--white);
+}
+
+.pvcal-nav:disabled {
+	opacity: .35;
+	cursor: default;
+}
+
+.pvcal-w,
+.pvcal-g {
+	display: grid;
+	grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+.pvcal-w span {
+	padding: 6px 0;
+	text-align: center;
+	font-size: 11px;
+	font-weight: 600;
+	letter-spacing: .08em;
+	text-transform: uppercase;
+	color: var(--sub);
+}
+
+.pvcal-g {
+	row-gap: 2px;
+}
+
+.pvcal-d {
+	position: relative;
+	height: 40px;
+	border: 0;
+	border-radius: 14px;
+	background: transparent;
+	color: var(--ink);
+	font: inherit;
+	font-size: 15px;
+	font-weight: 500;
+	font-variant-numeric: tabular-nums;
+	cursor: pointer;
+	transition: background-color 160ms ease, color 160ms ease;
+}
+
+.pvcal-d:hover:not(:disabled) {
+	background: var(--grey);
+}
+
+.pvcal-d:disabled {
+	color: #C9CACF;
+	cursor: default;
+}
+
+.pvcal-d.is-today::after {
+	content: "";
+	position: absolute;
+	left: 50%;
+	bottom: 5px;
+	width: 4px;
+	height: 4px;
+	margin-left: -2px;
+	border-radius: 50%;
+	background: var(--red);
+}
+
+.pvcal-d.is-in {
+	border-radius: 0;
+	background: #FDECEA;
+}
+
+.pvcal-d.is-start,
+.pvcal-d.is-end,
+.pvcal-d.is-sel,
+.pvcal-d.is-start:hover,
+.pvcal-d.is-end:hover,
+.pvcal-d.is-sel:hover {
+	background: var(--red);
+	color: var(--white);
+}
+
+.pvcal-d.is-start {
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+.pvcal-d.is-end {
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+.pvcal-d.is-start.is-today::after,
+.pvcal-d.is-end.is-today::after,
+.pvcal-d.is-sel.is-today::after {
+	background: var(--white);
+}
+
+.pvcal-d:focus-visible {
+	outline: 2px solid var(--ink);
+	outline-offset: 1px;
+	z-index: 1;
+}
+
+.pvcal-close {
+	display: none;
+}
+
+/* Phones: a sheet from the bottom of the screen. */
+.pvcal-back {
+	position: fixed;
+	inset: 0;
+	z-index: 999;
+	background: rgba(29, 29, 27, .45);
+	animation: pvcalFade 200ms ease both;
+}
+
+@keyframes pvcalFade {
+	from { opacity: 0; }
+}
+
+.pvcal.is-sheet {
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	top: auto;
+	width: auto;
+	padding: 20px 16px calc(16px + env(safe-area-inset-bottom, 0px));
+	border-radius: calc(14px + 10px) calc(14px + 10px) 0 0;
+	animation-name: pvcalUp;
+	animation-duration: 320ms;
+}
+
+@keyframes pvcalUp {
+	from { transform: translateY(100%); }
+}
+
+.pvcal.is-sheet .pvcal-d {
+	height: 46px;
+	font-size: 16px;
+}
+
+.pvcal.is-sheet .pvcal-close {
+	display: block;
+	width: 100%;
+	min-height: 50px;
+	margin-top: 14px;
+	border: 0;
+	border-radius: 999px;
+	background: var(--grey);
+	color: var(--ink);
+	font: inherit;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+/* Our date fields and calendar outside the parking form: the same shapes as the other fields. */
+.dfield { position: relative; display: block; }
+.dfield input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; border: 0; pointer-events: none; }
+.dfield .dshow { display: flex; align-items: center; width: 100%; font: inherit; text-align: left; white-space: nowrap; cursor: pointer; }
+.dfield .dshow.is-empty { color: var(--muted); }
+.dfield .dshow::after { content: ""; margin-left: auto; width: 18px; height: 18px; flex: none; opacity: .55; background: currentColor; -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2'%3E%3Crect x='3' y='5' width='18' height='16'/%3E%3Cpath d='M3 10h18M8 3v4M16 3v4'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2'%3E%3Crect x='3' y='5' width='18' height='16'/%3E%3Cpath d='M3 10h18M8 3v4M16 3v4'/%3E%3C/svg%3E") center / contain no-repeat; }
+.pvcal, .pvcal.is-sheet { border-radius: 0; border: 2px solid var(--ink); }
+.pvcal-nav, .pvcal-d, .pvcal-d.is-start, .pvcal-d.is-end, .pvcal.is-sheet .pvcal-close { border-radius: 0; }
+.pvcal-d.is-sel, .pvcal-d.is-sel:hover { background: var(--red); color: var(--white); }
+
+.pvcal-m { min-width: 0; }
+.pvcal-sel { height: 36px; max-width: 110px; margin: 0 2px; padding: 0 4px; border: 1px solid var(--line); border-radius: 0; background: var(--white); color: var(--ink); font: 600 14px inherit; font-family: inherit; }
