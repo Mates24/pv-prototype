@@ -619,8 +619,7 @@ a.pvb-tile:hover { background: var(--grey); }
 @media (max-width: 640px) { .pvb-acc .pvb-scroll { max-height: 320px; } }
 
 /* Home page: what the loyalty points give. */
-.pts-how__h { margin: 0; color: #fff; font: 600 clamp(30px, 3.4vw, 46px)/1.05 var(--cond); }
-.pts-how__sub { margin: 8px 0 0; color: var(--red-light); font-size: 16px; font-weight: 500; }
+.pts-how__h { margin: 0; color: #fff; font: 600 clamp(26px, 2.9vw, 38px)/1.1 var(--cond); }
 .pts-how { margin: 12px 0 0; }
 .pts-how div { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; padding: 11px 0; border-top: 1px solid rgba(255, 255, 255, .16); }
 .pts-how dt { color: #fff; font-size: 15px; }
