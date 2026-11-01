@@ -446,3 +446,13 @@
 	};
 	$$( 'input[type=date]' ).forEach( enhanceDate );
 } )();
+
+/* Phone and email buttons in articles call or write (the theme does this on the site). */
+document.querySelectorAll( '.art a.wp-block-button__link:not([href])' ).forEach( ( a ) => {
+	const text = a.textContent.replace( /[\s\u200B-\u200D\uFEFF]+/g, '' );
+	if ( /^\+?\d{9,}$/.test( text ) ) {
+		a.href = `tel:${ text.replace( /^0/, '+421' ) }`;
+	} else if ( /^[^@]+@[^@]+\.[a-z]+$/i.test( text ) ) {
+		a.href = `mailto:${ text }`;
+	}
+} );
