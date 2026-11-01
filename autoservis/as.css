@@ -608,3 +608,12 @@ a.pvb-tile:hover { background: var(--grey); }
 	.pvb-tabs a[aria-current] { background: var(--red); }
 	.pvb-bar__hi { font-size: 24px; }
 }
+
+/* Long lists scroll inside their box; the bar and the fade show there is more. */
+.pvb-acc .pvb-scroll { max-height: 400px; overflow: auto; scrollbar-width: thin; scrollbar-color: var(--ink) var(--grey); background: linear-gradient(#fff, #fff) bottom / 100% 28px local no-repeat, linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, .14)) bottom / 100% 16px scroll no-repeat; }
+.pvb-acc .pvb-scroll:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+.pvb-acc .pvb-scroll::-webkit-scrollbar { width: 8px; height: 8px; }
+.pvb-acc .pvb-scroll::-webkit-scrollbar-track { background: var(--grey); }
+.pvb-acc .pvb-scroll::-webkit-scrollbar-thumb { background: var(--ink); }
+.pvb-acc .pvb-scroll .ptable th { position: sticky; top: 0; z-index: 1; background: #fff; }
+@media (max-width: 640px) { .pvb-acc .pvb-scroll { max-height: 320px; } }
