@@ -113,50 +113,61 @@
 		</div>
 	</section>
 
-	<section class="sec sec-g" id="ucet" hidden>
-		<div class="wrap">
-			<div class="sec-head rv" style="margin-bottom:40px"><h2 class="h2" style="font-size:clamp(22px, 2.2vw, 31px)">Dobrý deň<span id="who"></span></h2><div class="who-acts"><button type="button" class="linkbtn" id="editMe">Doplňte svoje meno</button><span class="state">Prihlásený</span></div></div>
-			<div class="dash">
-				<div class="pts rv">
+	<section class="sec sec-g acct-sec" id="ucet" hidden>
+		<div class="wrap pvb-acc">
+			<div class="sec-head " style="margin-bottom:16px"><h2 class="h2" style="font-size:clamp(22px, 2.2vw, 31px)">Dobrý deň<span id="who"></span></h2><div class="who-acts"><button type="button" class="linkbtn" id="editMe">Doplňte svoje meno</button><span class="state">Prihlásený</span></div></div>
+			<div class="pvb-sum">
+<div class="pts ">
 					<span style="font-size:13px;color:#A7ACB3;letter-spacing:.1em;">Vaše body</span>
 					<div class="cond num" style="font-size:clamp(47px, 5.1vw, 75px);font-weight:600;line-height:.85"><span data-count="3250">3 250</span></div>
 					<p style="margin:0;color:#C9CCD0;font-size:16px">= zľava 32,50 € na ďalší servis. Uplatníte ju pri platbe v servise.</p>
 				</div>
-				<div class="rv box">
+<a class="pvb-tile" href="#" data-tab="prehlad"><span class="pvb-tile__k">Najbližší termín</span><b class="pvb-tile__v">STK a EK · BL 123 AB</b><span class="pvb-tile__s">o 30 dní</span></a>
+<div class="pvb-tile is-on"><span class="pvb-tile__k">Pneumatiky</span><b class="pvb-tile__v">Uskladnené u nás</b><span class="pvb-tile__s">Máte ich uskladnené v našom servise</span></div>
+<a class="pvb-tile" href="#" data-tab="vyhody"><span class="pvb-tile__k">PV Asistencia</span><b class="pvb-tile__v">Nemáte</b><span class="pvb-tile__s">Odťah a náhradné auto od 19,99 € mesačne</span></a>
+</div>
+<nav class="pvb-tabs" aria-label="Časti účtu"><a href="#" data-tab="prehlad">Prehľad</a><a href="#" data-tab="auta">Moje autá</a><a href="#" data-tab="historia">História</a><a href="#" data-tab="vyhody">Výhody</a><a href="#" data-tab="udaje">Moje údaje</a></nav>
+<div class="pvb-tab" data-panel="prehlad">
+<div class="pvb-over">
+<div class="box">
 					<h3 class="h3 box-h">Najbližšie termíny</h3>
 					<div id="due"></div>
 					<p class="txt small">Pripomienky posielame e-mailom: STK a EK 30 a 7 dní vopred, servisnú prehliadku 2 týždne vopred, prezutie na jar a na jeseň. <button type="button" class="linkbtn" id="previewBtn">Ako vyzerá pripomienka</button></p>
 					<div class="mail" id="preview" hidden></div>
 				</div>
-			</div>
-
-			<div class="rv" id="offersWrap" style="margin-top:56px">
+<div  id="offersWrap">
 				<div class="sub-head"><h3 class="h3 box-h">Akcie len pre členov</h3><span class="txt small">Pošleme vám ich aj e-mailom, ak si to v údajoch zapnete.</span></div>
 				<div class="offers" id="offers"></div>
 			</div>
-
-			<div class="rv" style="margin-top:56px">
+</div>
+</div>
+<div class="pvb-tab" data-panel="auta">
+<div >
 				<div class="sub-head"><h3 class="h3 box-h">Moje autá</h3><span class="txt small">Údaje o aute vám vyplníme aj my pri návšteve servisu.</span></div>
 				<div class="cars" id="cars"></div>
 			</div>
-
-			<div class="hist-g">
-				<div class="rv box">
+</div>
+<div class="pvb-tab" data-panel="historia">
+<div class="hist-g">
+				<div class="box">
 					<h3 class="h3 box-h">História návštev a opráv</h3>
 					<div class="tscroll"><table class="ptable hist" id="visits"></table></div>
 				</div>
-				<div class="rv box">
+				<div class="box">
 					<h3 class="h3 box-h">Pohyby bodov</h3>
 					<div id="moves"></div>
 					<p class="txt" style="font-size:14px;margin-top:16px">10 bodov za každé zaplatené euro · 1 000 bodov = 10 € zľava.</p>
 				</div>
 			</div>
-			<div class="rv" style="display:flex;flex-wrap:wrap;gap:12px;margin-top:28px"><a class="btn btn-red" data-book href="#">Rezervovať ďalší termín</a><button class="btn btn-out" type="button" id="logout">Odhlásiť sa</button></div>
-			<section style="margin:24px 0;padding:clamp(22px,3.9vw,40px);background:var(--ink);color:#fff;border-top:6px solid var(--red);display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px 48px"><div><h3 style="margin:0 0 18px;color:#fff;font:600 clamp(32px,3.6vw,48px)/1 var(--cond)">PV Asistencia</h3><p style="margin:0;font-size:17px;line-height:1.8">Odťah v Bratislave zadarmo<br>Výjazd na opravu defektu zadarmo<br>Náhradné vozidlo zadarmo</p><a class="btn btn-red" href="#" style="margin-top:24px">Objednať PV Asistenciu</a></div><div style="display:flex;flex-direction:column;gap:4px;color:#C9CCD0;font-size:15px"><span>od</span><b style="color:#fff;font:600 clamp(44px,5vw,64px)/1 var(--cond)">19,99 €</b><span>mesačne, na jedno auto</span></div></section>
+</div>
+<div class="pvb-tab" data-panel="vyhody">
+<section style="margin:24px 0;padding:clamp(22px,3.9vw,40px);background:var(--ink);color:#fff;border-top:6px solid var(--red);display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px 48px"><div><h3 style="margin:0 0 18px;color:#fff;font:600 clamp(32px,3.6vw,48px)/1 var(--cond)">PV Asistencia</h3><p style="margin:0;font-size:17px;line-height:1.8">Odťah v Bratislave zadarmo<br>Výjazd na opravu defektu zadarmo<br>Náhradné vozidlo zadarmo</p><a class="btn btn-red" href="#" style="margin-top:24px">Objednať PV Asistenciu</a></div><div style="display:flex;flex-direction:column;gap:4px;color:#C9CCD0;font-size:15px"><span>od</span><b style="color:#fff;font:600 clamp(44px,5vw,64px)/1 var(--cond)">19,99 €</b><span>mesačne, na jedno auto</span></div></section>
 <div class="dash" style="margin-bottom:24px"><div class="box"><h3 class="h3 box-h">Odporučte nás priateľovi</h3><p class="txt small">Keď sa priateľ zaregistruje s vaším kódom a príde prvýkrát do servisu, obaja dostanete 1 000 bodov. Platí pre 10 priateľov.</p><p style="font-size:22px;margin:12px 0"><span class="code">PV-K7M2Q9</span></p><p class="txt small">Doteraz odporučení: 2 z 10</p></div><div class="box"><h3 class="h3 box-h">Odťah pre členov</h3><ul style="margin:0 0 12px;padding-left:18px"><li><b>V Bratislave so zľavou 50 %, alebo za 4 000 bodov</b></li><li><b>Po Slovensku so zľavou 50 %, alebo za 5 000 bodov</b></li></ul><p><a class="btn btn-dark btn-sm" href="tel:+421910623111">Zavolať 0910 623 111</a></p></div></div>
 			<div class="box" style="margin-top:24px"><h3 class="h3 box-h">Narodeninový darček: 1 500 bodov</h3><p class="txt small">Zadajte dátum narodenia a na narodeniny vám každý rok pripíšeme 1 500 bodov. Neskôr ho môžeme zmeniť len my v servise.</p><div class="fld" style="margin-top:14px"><label for="bbirth">Dátum narodenia</label><input class="inp" id="bbirth" type="date"></div><p style="margin:14px 0 0"><button type="button" class="btn btn-dark btn-sm">Uložiť dátum</button></p></div>
 			<div class="box" style="margin-top:24px"><h3 class="h3 box-h">Napísali ste nám recenziu na Google?</h3><p class="txt small">Pošlite nám jej snímku na WhatsApp spolu s e-mailom, ktorým ste prihlásení, a pripíšeme vám 1 000 bodov. Body dostanete za pozitívnu aj negatívnu recenziu. Platí raz na zákazníka.</p><p style="display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;margin:16px 0 0"><a class="btn btn-dark btn-sm" href="https://wa.me/421910623111" target="_blank" rel="noopener">Poslať na WhatsApp</a><a class="txt small" href="https://maps.google.com/?q=PV+Autoservis+Technick%C3%A1+5957%2F7A+Bratislava" target="_blank" rel="noopener">Napísať recenziu na Google</a></p></div>
-			<details class="rv box me" id="me" style="margin-top:24px">
+</div>
+<div class="pvb-tab" data-panel="udaje">
+<details class="box me" id="me" open>
 				<summary class="cond">Moje údaje a zrušenie účtu</summary>
 				<form id="meForm" novalidate style="display:flex;flex-direction:column;gap:18px;margin-top:20px">
 					<div class="g-2f">
@@ -169,11 +180,41 @@
 					<div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap"><button type="submit" class="btn btn-dark btn-sm">Uložiť</button><span class="ok-note" id="meOk" hidden role="status">Údaje sú uložené.</span></div>
 				</form>
 			</details>
+</div>
+
 		</div>
 	</section>
 </main>
 <footer id="ftr"></footer>
 <script src="as.js"></script>
+<script>
+/* Client zone tabs. */
+( function () {
+	const acc = document.querySelector( '.pvb-acc' );
+	const show = ( name ) => {
+		acc.querySelectorAll( '[data-panel]' ).forEach( ( p ) => p.classList.toggle( 'on', p.dataset.panel === name ) );
+		acc.querySelectorAll( '.pvb-tabs a' ).forEach( ( a ) => ( a.dataset.tab === name ? a.setAttribute( 'aria-current', 'page' ) : a.removeAttribute( 'aria-current' ) ) );
+	};
+	acc.classList.add( 'has-tabs' );
+	acc.addEventListener( 'click', ( e ) => {
+		const a = e.target.closest( '[data-tab]' );
+		if ( a ) {
+			e.preventDefault();
+			show( a.dataset.tab );
+		}
+	} );
+	show( 'prehlad' );
+	// The tile repeats the first date from the list.
+	window.addEventListener( 'load', () => {
+		const first = document.querySelector( '#due .due' );
+		const tile = acc.querySelector( '.pvb-tile' );
+		if ( first ) {
+			tile.querySelector( '.pvb-tile__v' ).textContent = first.querySelector( 'b' ).textContent;
+			tile.querySelector( '.pvb-tile__s' ).textContent = first.querySelector( 'small' ).textContent;
+		}
+	} );
+} )();
+</script>
 <script>
 ( function () {
 	const $ = ( id ) => document.getElementById( id );
