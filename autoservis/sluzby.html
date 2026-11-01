@@ -9,6 +9,8 @@
 <style>
 	.big4 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
 	.big4 .sc:last-child { grid-column: 1 / -1; }
+	.sec.sec:has(.big4) { padding-bottom: 16px; }
+	.sec:has(.big4) + .sec { padding-top: 0; }
 	@media (max-width: 1060px) { .big4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 	.sc { position: relative; display: flex; flex-direction: column; justify-content: flex-end; min-height: 380px; overflow: hidden; color: #fff; text-decoration: none; }
 	.sc img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 900ms var(--ease); }
