@@ -66,7 +66,7 @@
 			<div class="col"><b>${ t( 'Sídlo', 'Registered office' ) }</b>PV Airport Parking s. r. o.<br>Technická 5957/7A<br>821 04 Bratislava – Ružinov<br>${ t( 'IČO', 'Company ID' ) } 57630089 · ${ t( 'DIČ', 'Tax ID' ) } 2122855515<br>${ t( 'IČ DPH', 'VAT ID' ) } SK2122855515<br>${ t( 'OR MS Bratislava III, vložka 199436/B', 'Commercial Register Bratislava III, no. 199436/B' ) }</div>
 			<div class="col"><b>${ t( 'Prevádzka', 'Car park' ) }</b>Stará Vajnorská 39, 831 04 Bratislava<br>pvairportparking@gmail.com<br>+421 904 440 660<br>${ t( 'Po – Ne: 00:00 – 23:59', 'Mon – Sun: 00:00 – 23:59' ) }</div>
 		</div>
-		<div class="ftr-bar">© 2026 PV Airport Parking s. r. o. · ${ t( 'Všetky práva vyhradené.', 'All rights reserved.' ) }</div>`;
+		<div class="ftr-bar">© 2026 PV Airport Parking s. r. o. · ${ t( 'Všetky práva vyhradené.', 'All rights reserved.' ) } · <a class="ftr-by" href="https://www.linkedin.com/in/mathiasmatejcik" target="_blank" rel="noopener">Design &amp; code · Mathias.dev</a></div>`;
 	}
 
 	const $$ = ( sel, root = document ) => Array.from( root.querySelectorAll( sel ) );

@@ -73,7 +73,7 @@
 			<div class="col"><span class="cols-h">Kontakt</span><b>+421 910 623 111</b><br>pvsbratislava@gmail.com<br>Technická 5957/7A<br>821 04 Bratislava – Ružinov<br>Po – Št 7:00 – 16:00, Pi 7:00 – 14:00</div>
 			<div class="col"><span class="cols-h">Firma</span><b>PV Autoservis s. r. o.</b><br>IČO: 56706201 · DIČ: 2122401303<br>IČ DPH: SK2122401303<br>OR Mestského súdu Bratislava III, oddiel Sro, vložka 184288/B<br>IBAN: SK29 1100 0000 0029 4219 4864<br><a href="ochrana-osobnych-udajov.html">Ochrana osobných údajov</a> · <a href="cookies.html">Cookies</a></div>
 		</div>
-		<div class="ftr-bar"><div class="wrap"><span class="ftr-copy">pvautoservis.sk © 2026</span><span class="ftr-links"><a href="ochrana-osobnych-udajov.html">Ochrana osobných údajov</a><a href="cookies.html">Cookies</a><a href="moj-ucet.html">Vernostný program</a></span><a class="ftr-top" href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false">Hore ↑</a></div></div>`;
+		<div class="ftr-bar"><div class="wrap"><span class="ftr-copy">pvautoservis.sk © 2026 · <a class="ftr-by" href="https://www.linkedin.com/in/mathiasmatejcik" target="_blank" rel="noopener">Design &amp; code · Mathias.dev</a></span><span class="ftr-links"><a href="ochrana-osobnych-udajov.html">Ochrana osobných údajov</a><a href="cookies.html">Cookies</a><a href="moj-ucet.html">Vernostný program</a></span><a class="ftr-top" href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false">Hore ↑</a></div></div>`;
 	}
 
 	// Shared snippet: the three-step process strip used on service pages.
