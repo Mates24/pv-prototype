@@ -286,8 +286,9 @@
 		[ 'Mediskin', 'mediskin', 477, 120 ],
 		[ 'Design JK', 'design-jk', 344, 120 ],
 		[ 'Bestrent', 'bestrent', 467, 120 ],
+		[ 'VAM System', 'vam-system.svg', 335, 120 ],
 	];
-	const tile = ( [ name, file, w, h ] ) => `<span class="lg" title="${ name }"><img src="img/clients/${ file }.png" alt="${ name }" width="${ w }" height="${ h }"></span>`;
+	const tile = ( [ name, file, w, h ] ) => `<span class="lg" title="${ name }"><img src="img/clients/${ file.includes( '.' ) ? file : file + '.png' }" alt="${ name }" width="${ w }" height="${ h }"></span>`;
 	document.getElementById( 'clients' ).innerHTML = C.concat( C ).map( tile ).join( '' );
 } )();
 </script>
