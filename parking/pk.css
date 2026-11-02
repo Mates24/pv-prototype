@@ -212,6 +212,7 @@ select.inp { appearance: none; background-image: url("data:image/svg+xml,%3Csvg 
 .soc { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; }
 .ftr-bar { background: var(--red); color: var(--white); text-align: center; font-size: 13px; padding: 18px 16px; }
 .ftr-by { white-space: nowrap; }
+@media (max-width: 640px) { .ftr-sep { display: none; } .ftr-by { display: block; margin-top: 4px; } }
 
 /* Legal */
 .legal h2 { font-size: 24px; letter-spacing: -.02em; margin: 48px 0 14px; font-weight: 600; }

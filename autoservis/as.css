@@ -229,6 +229,7 @@ textarea.inp { height: 140px; padding: 14px 16px; resize: vertical; }
 .ftr .cols-h { font: 600 13px var(--cond); letter-spacing: 0; color: var(--red-light); margin-bottom: 10px; display: block; }
 .ftr-bar { background: var(--red); color: var(--white); font-size: 13px; }
 .ftr-by { white-space: nowrap; }
+@media (max-width: 640px) { .ftr-sep { display: none; } .ftr-by { display: block; margin-top: 4px; } }
 .ftr-bar .wrap { height: 56px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 .ftr-bar a { color: var(--white); text-decoration: none; }
 
