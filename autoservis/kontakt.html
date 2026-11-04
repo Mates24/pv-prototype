@@ -56,7 +56,7 @@
 							<div class="fld"><label for="f-priez">Priezvisko <b>*</b></label><input id="f-priez" class="inp" autocomplete="family-name"><span class="errt" hidden>Zadajte priezvisko.</span></div>
 							<div class="fld"><label for="f-email">E-mail <b>*</b></label><input id="f-email" type="email" class="inp" autocomplete="email"><span class="errt" hidden>Zadajte platný e-mail.</span></div>
 							<div class="fld"><label for="f-tel">Telefón <b>*</b></label><input id="f-tel" type="tel" class="inp" autocomplete="tel"><span class="errt" hidden>Zadajte telefón.</span></div>
-							<div class="fld"><label for="f-spz">ŠPZ auta <b>*</b></label><input id="f-spz" class="inp" autocomplete="off" placeholder="Napr. BA123AB"><span class="errt" hidden>Zadajte ŠPZ auta, napríklad BA123AB.</span></div>
+							<div class="fld"><label for="f-spz">ŠPZ auta (ak ide o konkrétne auto)</label><input id="f-spz" class="inp" autocomplete="off" placeholder="Napr. BA123AB"><span class="errt" hidden>Skontrolujte ŠPZ, napríklad BA123AB. Ak správa nie je o konkrétnom aute, pole nechajte prázdne.</span></div>
 						</div>
 						<div class="fld"><label for="f-msg">Vaša správa <b>*</b></label><textarea id="f-msg" class="inp" placeholder="Napr. Škoda Octavia 2019, pri brzdení piští predná náprava…"></textarea><span class="errt" hidden>Opíšte, s čím potrebujete pomôcť.</span></div>
 						<label class="chk"><input type="checkbox" id="f-fin">Mám záujem o financovanie s 0 % úrokom.</label>
@@ -77,7 +77,7 @@
 	const $ = ( id ) => document.getElementById( id );
 	$( 'cf' ).addEventListener( 'submit', ( e ) => {
 		e.preventDefault();
-		const checks = [ [ 'f-meno', $( 'f-meno' ).value.trim() ], [ 'f-priez', $( 'f-priez' ).value.trim() ], [ 'f-email', /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test( $( 'f-email' ).value ) ], [ 'f-tel', $( 'f-tel' ).value.replace( /\D/g, '' ).length >= 9 ], [ 'f-spz', /^[A-Z0-9]{4,10}$/.test( $( 'f-spz' ).value.toUpperCase().replace( /[^A-Z0-9]/g, '' ) ) ], [ 'f-msg', $( 'f-msg' ).value.trim().length > 2 ] ];
+		const checks = [ [ 'f-meno', $( 'f-meno' ).value.trim() ], [ 'f-priez', $( 'f-priez' ).value.trim() ], [ 'f-email', /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test( $( 'f-email' ).value ) ], [ 'f-tel', $( 'f-tel' ).value.replace( /\D/g, '' ).length >= 9 ], [ 'f-spz', /^([A-Z0-9]{4,10})?$/.test( $( 'f-spz' ).value.toUpperCase().replace( /[^A-Z0-9]/g, '' ) ) ], [ 'f-msg', $( 'f-msg' ).value.trim().length > 2 ] ];
 		let ok = true;
 		checks.forEach( ( [ id, v ] ) => { const good = !! v; $( id ).classList.toggle( 'err', ! good ); $( id ).nextElementSibling.hidden = good; if ( ! good ) ok = false; } );
 		$( 'gdprErr' ).hidden = $( 'f-gdpr' ).checked; if ( ! $( 'f-gdpr' ).checked ) ok = false;
