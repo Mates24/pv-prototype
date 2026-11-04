@@ -52,7 +52,7 @@
 			</div>
 			<nav class="navlinks" aria-label="Hlavná navigácia">${ links }</nav>
 			<div style="display:flex;align-items:center;gap:10px">
-				<a class="btn btn-out btn-sm tb-hide" href="moj-ucet.html" title="Vernostný program">Môj účet</a>
+				<a class="btn btn-out btn-sm hdr-acc" href="moj-ucet.html" title="Vernostný program" aria-label="Môj účet"><svg class="acc-i" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4.5 4-6.5 8-6.5s7 2 8 6.5"/></svg><span class="acc-t">Môj účet</span></a>
 				<a class="btn btn-red btn-sm hdr-cta" href="${ BOOK }">Rezervovať</a>
 				<button type="button" class="burger" aria-label="Otvoriť menu" aria-expanded="false"><span class="bl" aria-hidden="true"><i></i><i></i><i></i></span><span class="bt">Menu</span></button>
 			</div>

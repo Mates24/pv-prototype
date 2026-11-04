@@ -632,3 +632,46 @@ a.pvb-tile:hover { background: var(--grey); }
 .pts-how__note { margin: 4px 0 0; padding-top: 12px; border-top: 1px solid rgba(255, 255, 255, .16); color: #A7ACB3; font-size: 13px; }
 #f-spz { text-transform: uppercase; }
 #f-spz::placeholder { text-transform: none; }
+/* Môj účet stays in the header on every width: text on desktop, a square icon next to Menu once the menu collapses. */
+.hdr-acc .acc-i { display: none; }
+@media (max-width: 1060px) {
+	.hdr-acc { width: 48px; padding: 0; }
+	.hdr-acc .acc-i { display: block; }
+	.hdr-acc .acc-t { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+	.hdr-r .btn { white-space: nowrap; }
+}
+.pvb-guide { margin: 20px 0 0; font-weight: 600; }
+.pvb-guide a { color: var(--red); }
+
+/* Client zone guide (Ako funguje klientska zóna). */
+.pvp-as-navod .nav-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+.pvp-as-navod .phero .h1 { margin: 20px 0 24px; }
+.pvp-as-navod .phero .lead { max-width: 640px; }
+.pvp-as-navod .sticky .h2, .pvp-as-navod .sec-ink .h2 { margin: 0 0 28px; }
+.pvp-as-navod .inc { display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 16px; padding: 28px 0; border-top: 1px solid var(--line); }
+.pvp-as-navod .inc:last-child { border-bottom: 1px solid var(--line); }
+.pvp-as-navod .inc .cond { font-size: 22px; font-weight: 600; color: var(--red); }
+.pvp-as-navod .inc h3 { margin: 0 0 6px; font: 600 24px/1.05 var(--cond); }
+.pvp-as-navod .inc .txt { margin: 0; }
+.pvp-as-navod .sec-ink { background: var(--ink); color: var(--white); }
+.pvp-as-navod .sec-ink .h2 { color: var(--white); }
+.pvp-as-navod .login-steps { margin: 0; padding: 0; list-style: none; display: grid; gap: 18px; }
+.pvp-as-navod .login-steps li { position: relative; padding-left: 28px; font-size: 18px; line-height: 1.6; font-weight: 300; }
+.pvp-as-navod .login-steps li::before { content: ""; position: absolute; left: 0; top: .62em; width: 12px; height: 3px; background: var(--red); }
+.pvp-as-navod .sec-h { margin: 0 0 40px; }
+.pvp-as-navod .tabs-g { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 0 40px; }
+.pvp-as-navod .tab-c { padding: 24px 0; border-top: 3px solid var(--ink); }
+.pvp-as-navod .tab-c .h3 { margin: 0 0 8px; }
+.pvp-as-navod .tab-c .txt { margin: 0; }
+.pvp-as-navod .ptable { margin: 0; }
+.pvp-as-navod .ptable td:last-child { font-weight: 600; }
+.pvp-as-navod .faq-w { max-width: 860px; }
+.pvp-as-navod .qa { border-top: 1px solid var(--line); }
+.pvp-as-navod .qa:last-of-type { border-bottom: 1px solid var(--line); }
+.pvp-as-navod .qa summary { display: flex; justify-content: space-between; gap: 16px; padding: 20px 0; font: 600 20px/1.2 var(--cond); cursor: pointer; list-style: none; }
+.pvp-as-navod .qa summary::-webkit-details-marker { display: none; }
+.pvp-as-navod .qa summary::after { content: "+"; color: var(--red); font-size: 26px; line-height: .8; }
+.pvp-as-navod .qa[open] summary::after { content: "–"; }
+.pvp-as-navod .qa .txt { margin: 0 0 20px; max-width: 680px; }
+@media (max-width: 640px) { .pvp-as-navod .login-steps li { font-size: 16px; } .pvp-as-navod .qa summary { font-size: 18px; } }
+/* End of client zone guide. */
