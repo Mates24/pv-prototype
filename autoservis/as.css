@@ -630,3 +630,5 @@ a.pvb-tile:hover { background: var(--grey); }
 .pts-how dt small { display: block; margin-top: 2px; color: #A7ACB3; font-size: 12px; }
 .pts-how dd { flex: none; margin: 0; color: #fff; font: 600 17px var(--cond); }
 .pts-how__note { margin: 4px 0 0; padding-top: 12px; border-top: 1px solid rgba(255, 255, 255, .16); color: #A7ACB3; font-size: 13px; }
+#f-spz { text-transform: uppercase; }
+#f-spz::placeholder { text-transform: none; }
