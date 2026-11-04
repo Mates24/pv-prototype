@@ -675,3 +675,7 @@ a.pvb-tile:hover { background: var(--grey); }
 .pvp-as-navod .qa .txt { margin: 0 0 20px; max-width: 680px; }
 @media (max-width: 640px) { .pvp-as-navod .login-steps li { font-size: 16px; } .pvp-as-navod .qa summary { font-size: 18px; } }
 /* End of client zone guide. */
+/* Login screen: how it works first, the forms under it. */
+#loginSec .login { grid-template-columns: minmax(0, 1fr); }
+#loginSec .login > div:last-child { order: -1; }
+@media (min-width: 761px) { #loginSec .login > div:last-child .how { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 32px; } }
