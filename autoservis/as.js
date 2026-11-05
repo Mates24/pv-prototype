@@ -22,12 +22,11 @@
 	const here = document.body.dataset.page || 'index.html';
 	const parent = document.body.dataset.parent;
 
-	// Mon–Thu 7–16, Fri 7–14, lunch 12–13, weekend closed.
+	// Mon–Thu 7–17, Fri 7–15, weekend closed.
 	const status = () => {
 		const d = new Date(), day = d.getDay(), m = d.getHours() * 60 + d.getMinutes();
-		const wk = day >= 1 && day <= 5, close = day === 5 ? 840 : 960;
-		if ( wk && m >= 720 && m < 780 ) return { label: 'Obedná prestávka', sub: 'späť o 13:00', color: '#F4B400' };
-		if ( wk && m >= 420 && m < close ) return { label: 'Práve otvorené', sub: day === 5 ? 'dnes do 14:00' : 'dnes do 16:00', color: '#34C27A' };
+		const wk = day >= 1 && day <= 5, close = day === 5 ? 900 : 1020;
+		if ( wk && m >= 420 && m < close ) return { label: 'Práve otvorené', sub: day === 5 ? 'dnes do 15:00' : 'dnes do 17:00', color: '#34C27A' };
 		const next = wk && m < 420 ? 'otvárame dnes o 7:00' : ( day >= 1 && day <= 4 ) || day === 0 ? 'otvárame zajtra o 7:00' : 'otvárame v pondelok o 7:00';
 		return { label: 'Zatvorené', sub: next, color: '#8A8F96' };
 	};
@@ -70,7 +69,7 @@
 		ftr.innerHTML = `<div class="wrap g-foot">
 			<div><img src="img/logo-as-inv.png" alt="PV Autoservis" style="display:block;height:48px;width:auto;margin-bottom:22px"><p style="margin:0;font-size:15px;line-height:1.6;max-width:280px">Profesionálny autoservis – spoľahlivá starostlivosť o vaše vozidlo.</p></div>
 			<div class="col"><span class="cols-h">Stránky</span>${ PAGES.map( ( [ h, n ] ) => `<a href="${ h }">${ n }</a>` ).join( '<br>' ) }<br><a href="moj-ucet.html">Môj účet</a></div>
-			<div class="col"><span class="cols-h">Kontakt</span><b>+421 910 623 111</b><br>pvsbratislava@gmail.com<br>Technická 5957/7A<br>821 04 Bratislava – Ružinov<br>Po – Št 7:00 – 16:00, Pi 7:00 – 14:00</div>
+			<div class="col"><span class="cols-h">Kontakt</span><b>+421 910 623 111</b><br>pvsbratislava@gmail.com<br>Technická 5957/7A<br>821 04 Bratislava – Ružinov<br>Po – Št 7:00 – 17:00, Pi 7:00 – 15:00</div>
 			<div class="col"><span class="cols-h">Firma</span><b>PV Autoservis s. r. o.</b><br>IČO: 56706201 · DIČ: 2122401303<br>IČ DPH: SK2122401303<br>OR Mestského súdu Bratislava III, oddiel Sro, vložka 184288/B<br>IBAN: SK29 1100 0000 0029 4219 4864<br><a href="ochrana-osobnych-udajov.html">Ochrana osobných údajov</a> · <a href="cookies.html">Cookies</a></div>
 		</div>
 		<div class="ftr-bar"><div class="wrap"><span class="ftr-copy">pvautoservis.sk © 2026<span class="ftr-sep"> · </span><a class="ftr-by" href="https://www.linkedin.com/in/mathiasmatejcik" target="_blank" rel="noopener">Design &amp; code · Mathias.dev</a></span><span class="ftr-links"><a href="ochrana-osobnych-udajov.html">Ochrana osobných údajov</a><a href="cookies.html">Cookies</a><a href="moj-ucet.html">Vernostný program</a></span><a class="ftr-top" href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false">Hore ↑</a></div></div>`;
