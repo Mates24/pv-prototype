@@ -208,10 +208,10 @@
 	( q.get( 'x' ) || '' ).split( ',' ).filter( Boolean ).forEach( ( i ) => ( st.extras[ i ] = true ) );
 	const X = [
 		{ t: 'VIP car pick-up at the airport', v: 20, pl: '€20' },
-		{ t: 'General vehicle check', v: 50, pl: '€50' },
-		{ t: 'Full car cleaning', v: 60, pl: 'from €60' },
-		{ t: 'Full cleaning with upholstery shampoo', v: 120, pl: 'from €120' },
-		{ t: 'EV charging', v: null, pl: 'on site' },
+		{ t: 'Full car cleaning', v: 70, pl: '€70' },
+		{ t: 'Full cleaning with upholstery shampoo', v: 140, pl: '€140' },
+		{ t: 'EV charging', v: null, pl: '€0.50/kWh on site' },
+		{ t: 'Flying out and back via different airports', v: 0, pl: 'free' },
 		{ t: 'Child car seat', v: 0, pl: 'free' },
 	];
 	const CHECK = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';

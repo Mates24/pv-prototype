@@ -37,7 +37,7 @@
 					</div>
 				</div>
 				<div class="perf"></div>
-				<div class="stub-f"><div><span class="lbl">Transfer</span><b>5 min</b></div><div><span class="lbl">Cena transferu</span><b>0 €</b></div><div><span class="lbl">Parkovanie</span><b>od 24 €</b></div></div>
+				<div class="stub-f"><div><span class="lbl">Transfer</span><b>5 min</b></div><div><span class="lbl">Cena transferu</span><b>0 €</b></div><div><span class="lbl">Parkovanie</span><b>od 16 €</b></div></div>
 			</div>
 		</div>
 	</div>
@@ -123,7 +123,7 @@
 			<div style="display:flex;flex-direction:column;gap:48px;min-width:0">
 				<div style="display:flex;flex-direction:column;gap:16px">
 					<div class="seasons" role="group" aria-label="Sezóna">
-						<button type="button" class="season" data-season="w"><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v20M4.9 6l14.2 12M19.1 6 4.9 18M9 3.5 12 6l3-2.5M9 20.5 12 18l3 2.5"/></svg></span><span class="sn">Zimná sezóna</span><span class="sd">16. 9. – 31. 5.</span><span class="sp">od 24 € / deň</span><span class="now">platí teraz</span></button>
+						<button type="button" class="season" data-season="w"><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v20M4.9 6l14.2 12M19.1 6 4.9 18M9 3.5 12 6l3-2.5M9 20.5 12 18l3 2.5"/></svg></span><span class="sn">Zimná sezóna</span><span class="sd">16. 9. – 31. 5.</span><span class="sp">od 16 € / deň</span><span class="now">platí teraz</span></button>
 						<button type="button" class="season" data-season="s"><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg></span><span class="sn">Letná sezóna</span><span class="sd">1. 6. – 15. 9.</span><span class="sp">od 28 € / deň</span><span class="now">platí teraz</span></button>
 					</div>
 					<style>
@@ -143,7 +143,7 @@
 						@media (max-width: 520px) { .seasons { grid-template-columns: minmax(0, 1fr); } }
 					</style>
 					<div class="g-tiles rv" id="tiles"></div>
-					<p class="hint" style="margin:0">Nad 16 dní: každý ďalší začatý deň + 5 € (zima) / + 6 € (leto). Sezónu určuje deň príchodu.</p>
+					<p class="hint" style="margin:0">Nad 16 dní: každý ďalší začatý deň + 4 € (zima) / + 6 € (leto). Sezónu určuje deň príchodu.</p>
 				</div>
 				<div class="rv">
 					<h3 class="h3" style="margin-bottom:8px">Prémiové služby</h3>
@@ -183,7 +183,7 @@
 		<div class="accs" data-single id="steps">
 			<div class="acc"><button class="acc-b" aria-expanded="false"><span class="pl"></span><span>1. Vyberiete si termín parkovania</span></button><div class="acc-p"><div><p>Zvolíte dátum a čas príchodu na parkovisko aj návratu. Cenu vrátane transferu vidíte okamžite.</p></div></div></div>
 			<div class="acc"><button class="acc-b" aria-expanded="false"><span class="pl"></span><span>2. Vyplníte krátky formulár</span></button><div class="acc-p"><div><p>Kontaktné údaje, ŠPZ vozidla a číslo letu. Ak parkujete na firmu, stačí zadať IČO – fakturačné údaje doplníme sami.</p></div></div></div>
-			<div class="acc"><button class="acc-b" aria-expanded="false"><span class="pl"></span><span>3. Zvolíte si doplnkové služby</span></button><div class="acc-p"><div><p>Podľa potreby pridáte kryté VIP parkovanie, vyzdvihnutie vozidla na letisku, kontrolu alebo čistenie vozidla.</p></div></div></div>
+			<div class="acc"><button class="acc-b" aria-expanded="false"><span class="pl"></span><span>3. Zvolíte si doplnkové služby</span></button><div class="acc-p"><div><p>Podľa potreby pridáte kryté VIP parkovanie, vyzdvihnutie vozidla na letisku alebo čistenie vozidla.</p></div></div></div>
 			<div class="acc"><button class="acc-b" aria-expanded="false"><span class="pl"></span><span>4. Dokončíte rezerváciu online</span></button><div class="acc-p"><div><p>Potvrdenie príde e-mailom, deň pred príchodom vám termín pripomenieme SMS. Platíte až na mieste – kartou alebo v hotovosti.</p></div></div></div>
 		</div>
 	</div>
@@ -279,10 +279,10 @@
 	const X = [
 		{ t: 'Kryté VIP parkovanie', v: 5, day: true, pl: '5 € / deň' },
 		{ t: 'VIP vyzdvihnutie vozidla na letisku', v: 20, pl: '20 €' },
-		{ t: 'Všeobecná kontrola vozidla', v: 50, pl: '50 €' },
-		{ t: 'Kompletné čistenie vozidla', v: 60, pl: 'od 60 €' },
-		{ t: 'Kompletné čistenie s tepovaním', v: 120, pl: 'od 120 €' },
-		{ t: 'Nabíjanie elektromobilu', v: null, pl: 'na mieste' },
+		{ t: 'Kompletné čistenie vozidla', v: 70, pl: '70 €' },
+		{ t: 'Kompletné čistenie s tepovaním', v: 140, pl: '140 €' },
+		{ t: 'Nabíjanie elektromobilu', v: null, pl: '0,50 €/kWh na mieste' },
+		{ t: 'Odlet a prílet na rôznych letiskách', v: 0, pl: 'zdarma' },
 		{ t: 'Detská autosedačka', v: 0, pl: 'zdarma' },
 	];
 	const CHECK = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
@@ -371,7 +371,7 @@
 		[ 'Je parkovisko strážené a monitorované?', 'Áno. Areál je uzavretý a pod kamerovým dohľadom so záznamom.' ],
 		[ 'Môžem si rezerváciu upraviť alebo zrušiť?', 'Áno. Zrušiť ju môžete cez odkaz v potvrdzovacom e-maile, zmenu termínu vybavíme telefonicky. Bezplatne do 24 hodín pred príchodom.' ],
 		[ 'Ako prebieha platba?', 'Platíte na mieste pri príchode – kartou alebo v hotovosti. Online nič neplatíte.' ],
-		[ 'Aké doplnkové služby ponúkate?', 'Kryté VIP parkovanie, VIP vyzdvihnutie vozidla na letisku, všeobecnú kontrolu vozidla, kompletné čistenie s tepovaním aj bez neho a nabíjanie elektromobilov.' ],
+		[ 'Aké doplnkové služby ponúkate?', 'Kryté VIP parkovanie, VIP vyzdvihnutie vozidla na letisku, kompletné čistenie s tepovaním aj bez neho a nabíjanie elektromobilov.' ],
 		[ 'Je parkovanie vhodné aj na dlhšie cesty?', 'Áno, ponúkame krátkodobé aj dlhodobé parkovanie – na dovolenku aj na pracovnú cestu.' ],
 		[ 'Môžem parkovanie využiť aj pri skorom rannom alebo neskorom prílete?', 'Áno. Sme otvorení nonstop, 7 dní v týždni, vrátane víkendov a sviatkov.' ],
 		[ 'Máte k dispozícii detské autosedačky?', 'Áno, každé transferové vozidlo je vybavené detskými sedačkami pre rôzne vekové kategórie.' ],

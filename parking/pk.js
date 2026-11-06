@@ -384,8 +384,8 @@
 		} );
 	} );
 
-	// Price rules from the current price list: season by arrival day, +5/6 € per started day after 16.
-	const WINTER = [ 24, 30, 36, 42, 48, 54, 59, 65, 71, 77, 83, 89, 95, 101, 107, 113 ];
+	// Price rules from Parkflow's price list (2026-11-06): season by arrival day, +4/6 € per started day after 16.
+	const WINTER = [ 16, 22, 26, 31, 35, 39, 43, 48, 53, 57, 61, 65, 69, 72, 76, 79 ];
 	const SUMMER = [ 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, 98, 105, 112, 119, 126, 133 ];
 	const isSummer = ( d ) => {
 		const md = ( d.getMonth() + 1 ) * 100 + d.getDate();
@@ -402,8 +402,8 @@
 			ref: 'P-20123', token: 'ukazka', status: 'confirmed', from: iso( a ), fromT: '05:30', to: iso( b ), toT: '22:15',
 			cars: [ { plate: 'BL123AB', vip: true } ], adults: '2', kids: '0', name: 'Jana Nováková', email: 'jana.novakova@example.sk',
 			phone: '+421 905 123 456', flOut: 'FR 8231', flIn: 'FR 8232',
-			lines: '<div class="sumrow"><span>Parkovanie · 8 dní</span><b>65,00 €</b></div><div class="sumrow"><span>Transfer na letisko a späť</span><b style="color:var(--green)">zdarma</b></div><div class="sumrow"><span>Kryté VIP</span><b>40,00 €</b></div>',
-			total: '105,00 €',
+			lines: '<div class="sumrow"><span>Parkovanie · 8 dní</span><b>48,00 €</b></div><div class="sumrow"><span>Transfer na letisko a späť</span><b style="color:var(--green)">zdarma</b></div><div class="sumrow"><span>Kryté VIP</span><b>40,00 €</b></div>',
+			total: '88,00 €',
 		};
 	};
 	const all = () => {
@@ -431,7 +431,7 @@
 		table: ( summer ) => ( summer ? SUMMER : WINTER ),
 		price: ( n, summer ) => {
 			const t = summer ? SUMMER : WINTER;
-			return n <= 16 ? t[ n - 1 ] : t[ 15 ] + ( n - 16 ) * ( summer ? 6 : 5 );
+			return n <= 16 ? t[ n - 1 ] : t[ 15 ] + ( n - 16 ) * ( summer ? 6 : 4 );
 		},
 		days: ( a, b ) => Math.max( 1, Math.ceil( ( b - a ) / 86400000 ) ),
 		eur: ( n ) => ( EN ? '€' + n.toFixed( 2 ) : n.toFixed( 2 ).replace( '.', ',' ) + ' €' ),

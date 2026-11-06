@@ -37,7 +37,7 @@
 					</div>
 				</div>
 				<div class="perf"></div>
-				<div class="stub-f"><div><span class="lbl">Shuttle</span><b>5 min</b></div><div><span class="lbl">Shuttle price</span><b>€0</b></div><div><span class="lbl">Parking</span><b>from €24</b></div></div>
+				<div class="stub-f"><div><span class="lbl">Shuttle</span><b>5 min</b></div><div><span class="lbl">Shuttle price</span><b>€0</b></div><div><span class="lbl">Parking</span><b>from €16</b></div></div>
 			</div>
 		</div>
 	</div>
@@ -123,7 +123,7 @@
 			<div style="display:flex;flex-direction:column;gap:48px;min-width:0">
 				<div style="display:flex;flex-direction:column;gap:16px">
 					<div class="seasons" role="group" aria-label="Season">
-						<button type="button" class="season" data-season="w"><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v20M4.9 6l14.2 12M19.1 6 4.9 18M9 3.5 12 6l3-2.5M9 20.5 12 18l3 2.5"></path></svg></span><span class="sn">Winter season</span><span class="sd">16 Sep – 31 May</span><span class="sp">from €24 / day</span><span class="now">applies now</span></button>
+						<button type="button" class="season" data-season="w"><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v20M4.9 6l14.2 12M19.1 6 4.9 18M9 3.5 12 6l3-2.5M9 20.5 12 18l3 2.5"></path></svg></span><span class="sn">Winter season</span><span class="sd">16 Sep – 31 May</span><span class="sp">from €16 / day</span><span class="now">applies now</span></button>
 						<button type="button" class="season" data-season="s"><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"></circle><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"></path></svg></span><span class="sn">Summer season</span><span class="sd">1 Jun – 15 Sep</span><span class="sp">from €28 / day</span><span class="now">applies now</span></button>
 					</div>
 					<style>
@@ -143,7 +143,7 @@
 						@media (max-width: 520px) { .seasons { grid-template-columns: minmax(0, 1fr); } }
 					</style>
 					<div class="g-tiles rv" id="tiles"></div>
-					<p class="hint" style="margin:0">Over 16 days: each further started day + €5 (winter) / + €6 (summer). The season is set by the arrival day.</p>
+					<p class="hint" style="margin:0">Over 16 days: each further started day + €4 (winter) / + €6 (summer). The season is set by the arrival day.</p>
 				</div>
 				<div class="rv">
 					<h3 class="h3" style="margin-bottom:8px">Premium services</h3>
@@ -183,7 +183,7 @@
 		<div class="accs" data-single id="steps">
 			<div class="acc"><button class="acc-b" aria-expanded="false"><span class="pl"></span><span>1. Choose your parking dates</span></button><div class="acc-p"><div><p>Pick the date and time of your arrival at the car park and of your return. You see the price including the shuttle right away.</p></div></div></div>
 			<div class="acc"><button class="acc-b" aria-expanded="false"><span class="pl"></span><span>2. Fill in a short form</span></button><div class="acc-p"><div><p>Contact details, licence plate and flight number. If you book for a company, enter the company ID – we fill in the billing details.</p></div></div></div>
-			<div class="acc"><button class="acc-b" aria-expanded="false"><span class="pl"></span><span>3. Add extras</span></button><div class="acc-p"><div><p>If you like, add covered VIP parking, car pick-up at the airport, a car check or cleaning.</p></div></div></div>
+			<div class="acc"><button class="acc-b" aria-expanded="false"><span class="pl"></span><span>3. Add extras</span></button><div class="acc-p"><div><p>If you like, add covered VIP parking, car pick-up at the airport or cleaning.</p></div></div></div>
 			<div class="acc"><button class="acc-b" aria-expanded="false"><span class="pl"></span><span>4. Finish the booking online</span></button><div class="acc-p"><div><p>The confirmation comes by email, and we send an SMS reminder the day before arrival. You pay only on site – by card or in cash.</p></div></div></div>
 		</div>
 	</div>
@@ -279,10 +279,10 @@
 	const X = [
 		{ t: 'Covered VIP parking', v: 5, day: true, pl: '€5 / day' },
 		{ t: 'VIP car pick-up at the airport', v: 20, pl: '€20' },
-		{ t: 'General vehicle check', v: 50, pl: '€50' },
-		{ t: 'Full car cleaning', v: 60, pl: 'from €60' },
-		{ t: 'Full cleaning with upholstery shampoo', v: 120, pl: 'from €120' },
-		{ t: 'EV charging', v: null, pl: 'on site' },
+		{ t: 'Full car cleaning', v: 70, pl: '€70' },
+		{ t: 'Full cleaning with upholstery shampoo', v: 140, pl: '€140' },
+		{ t: 'EV charging', v: null, pl: '€0.50/kWh on site' },
+		{ t: 'Flying out and back via different airports', v: 0, pl: 'free' },
 		{ t: 'Child car seat', v: 0, pl: 'free' },
 	];
 	const CHECK = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
@@ -371,7 +371,7 @@
 		[ 'Is the car park guarded and monitored?', 'Yes. The car park is closed and watched by recording cameras.' ],
 		[ 'Can I change or cancel my booking?', 'Yes. You can cancel through the link in the confirmation email, and we change dates by phone. Free of charge up to 24 hours before arrival.' ],
 		[ 'How do I pay?', 'You pay on site when you arrive – by card or in cash. Nothing is paid online.' ],
-		[ 'What extras do you offer?', 'Covered VIP parking, VIP car pick-up at the airport, a general car check, full cleaning with or without upholstery shampooing, and electric car charging.' ],
+		[ 'What extras do you offer?', 'Covered VIP parking, VIP car pick-up at the airport, full cleaning with or without upholstery shampooing, and electric car charging.' ],
 		[ 'Is the parking suitable for longer trips too?', 'Yes, we offer short and long-term parking – for holidays and business trips alike.' ],
 		[ 'Can I use the parking for an early morning or late-night flight?', 'Yes. We are open around the clock, 7 days a week, including weekends and holidays.' ],
 		[ 'Do you have child car seats?', 'Yes, every shuttle van has child seats for different ages.' ],

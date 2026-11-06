@@ -183,6 +183,7 @@ select.pin.tsel { appearance: none; -webkit-appearance: none; cursor: pointer; b
 .g-tiles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
 .g-2 { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 72px; align-items: start; }
 .g-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.g-3.n2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .g-foot { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.2fr; gap: 40px; }
 .sticky { position: sticky; top: 120px; }
 
@@ -231,7 +232,7 @@ select.inp { appearance: none; background-image: url("data:image/svg+xml,%3Csvg 
 @media (max-width: 640px) {
 	.wrap { padding-inline: 16px; }
 	.sec { padding-block: 84px; }
-	.g-bento, .g-foot, .g-3, .f-grid { grid-template-columns: minmax(0, 1fr); }
+	.g-bento, .g-foot, .g-3, .g-3.n2, .f-grid { grid-template-columns: minmax(0, 1fr); }
 	.g-bento > * { grid-column: auto !important; }
 	.g-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 	.hide-sm { display: none !important; }
