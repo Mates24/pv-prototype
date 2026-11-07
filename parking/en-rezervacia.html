@@ -18,6 +18,10 @@
 	.panel { background: #fff; border-radius: 28px; padding: clamp(24px, 4vw, 40px); display: flex; flex-direction: column; gap: 28px; }
 	.panel h2 { margin: 0; font-size: 26px; font-weight: 600; letter-spacing: -.02em; }
 	.when { display: grid; grid-template-columns: 1.5fr 1fr 1.5fr 1fr; gap: 14px 18px; align-items: end; }
+	.pvx-cars { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 0 4px 14px 42px; }
+	.pvx-cars .hint { margin-right: 4px; }
+	.chip { min-height: 36px; padding: 6px 14px; border-radius: 999px; border: 1px solid var(--line); background: #fff; color: var(--ink); font: 500 14px var(--font, inherit); cursor: pointer; }
+	.chip.on { background: var(--ink); border-color: var(--ink); color: #fff; }
 	.car { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 16px; align-items: center; padding: 16px 0; border-top: 1px solid var(--line2); }
 	.car .no { width: 36px; height: 36px; border-radius: 12px; background: var(--grey); display: grid; place-items: center; font-weight: 600; }
 	.paychoice { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
@@ -196,7 +200,7 @@
 	const P = window.PV, $ = ( id ) => document.getElementById( id );
 	const a = new Date(); a.setDate( a.getDate() + 7 );
 	const b = new Date( a ); b.setDate( b.getDate() + 7 );
-	const st = { from: P.iso( a ), to: P.iso( b ), fromT: '05:30', toT: '22:15', cars: [ { vip: false } ], extras: {}, code: null, step: 1 };
+	const st = { from: P.iso( a ), to: P.iso( b ), fromT: '05:30', toT: '22:15', cars: [ { vip: false } ], extras: {}, xc: {}, code: null, step: 1 };
 	// Dates and extras chosen in the price tool on the home page.
 	const q = new URLSearchParams( location.search );
 	if ( /^\d{4}-\d{2}-\d{2}$/.test( q.get( 'from' ) || '' ) && /^\d{4}-\d{2}-\d{2}$/.test( q.get( 'to' ) || '' ) ) {
@@ -207,13 +211,15 @@
 	if ( q.get( 'vip' ) === '1' ) st.cars[ 0 ].vip = true;
 	( q.get( 'x' ) || '' ).split( ',' ).filter( Boolean ).forEach( ( i ) => ( st.extras[ i ] = true ) );
 	const X = [
-		{ t: 'VIP car pick-up at the airport', v: 20, pl: '€20' },
-		{ t: 'Full car cleaning', v: 70, pl: '€70' },
-		{ t: 'Full cleaning with upholstery shampoo', v: 140, pl: '€140' },
-		{ t: 'EV charging', v: null, pl: '€0.50/kWh on site' },
+		{ t: 'VIP car pick-up at the airport', car: true, v: 20, pl: '€20' },
+		{ t: 'Full car cleaning', car: true, v: 70, pl: '€70' },
+		{ t: 'Full cleaning with upholstery shampoo', car: true, v: 140, pl: '€140' },
+		{ t: 'EV charging', car: true, v: null, pl: '€0.50/kWh on site' },
 		{ t: 'Flying out and back via different airports', v: 0, pl: 'free' },
 		{ t: 'Child car seat', v: 0, pl: 'free' },
 	];
+	// Per-car extras: which cars (owner 2026-11-07); the first car until the customer picks.
+	const sel = ( i ) => { const v = ( st.xc[ i ] || [ 0 ] ).filter( ( j ) => j < st.cars.length ); return v.length ? v : [ 0 ]; };
 	const CHECK = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
 	const esc = ( t ) => t.replace( /[&<>"]/g, ( ch ) => ( { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' } )[ ch ] );
 	const row = ( l, v, c ) => `<div class="sumrow"><span>${ l }</span><b${ c ? ` style="color:${ c }"` : '' }>${ v }</b></div>`;
@@ -227,8 +233,8 @@
 		$( 'carMinus' ).disabled = st.cars.length < 2;
 		$( 'carPlus' ).disabled = st.cars.length > 5;
 		$( 'cars' ).innerHTML = st.cars.map( ( c, i ) => `<div class="car"><span class="no">${ i + 1 }</span><span style="font-size:15px">Car ${ i + 1 }<br><span class="hint">${ summer ? 'Summer' : 'Winter' } season · ${ bad ? '—' : P.eur( per ) }</span></span><button type="button" class="xtra${ c.vip ? ' on' : '' }" data-vip="${ i }" aria-pressed="${ c.vip }" style="border:0;width:auto;min-height:44px;padding:0"><span class="bx">${ CHECK }</span><span>Covered VIP</span><span class="pr">+€5 / day</span></button></div>` ).join( '' );
-		$( 'extras' ).innerHTML = X.map( ( x, i ) => `<button type="button" class="xtra${ st.extras[ i ] ? ' on' : '' }" data-x="${ i }" aria-pressed="${ !! st.extras[ i ] }"><span class="bx">${ CHECK }</span><span>${ x.t }</span><span class="pr">${ x.pl }</span></button>` ).join( '' );
-		$( 'plates' ).innerHTML = st.cars.map( ( c, i ) => `<div class="f"><label for="plate${ i }">Licence plate – car ${ i + 1 } <b>*</b></label><input class="inp" id="plate${ i }" value="${ c.plate || '' }" placeholder="e.g. BL 123 AB" style="text-transform:uppercase"><span class="errt" hidden>Enter the licence plate.</span></div>` ).join( '' );
+		$( 'extras' ).innerHTML = X.map( ( x, i ) => `<div class="pvx"><button type="button" class="xtra${ st.extras[ i ] ? ' on' : '' }" data-x="${ i }" aria-pressed="${ !! st.extras[ i ] }"><span class="bx">${ CHECK }</span><span>${ x.t }</span><span class="pr">${ x.pl }</span></button>${ x.car && st.extras[ i ] && st.cars.length > 1 ? `<div class="pvx-cars"><span class="hint">For which car?</span>${ st.cars.map( ( c, j ) => `<button type="button" class="chip${ sel( i ).includes( j ) ? ' on' : '' }" data-xc="${ i }:${ j }" aria-pressed="${ sel( i ).includes( j ) }">Car ${ j + 1 }</button>` ).join( '' ) }</div>` : '' }</div>` ).join( '' );
+		$( 'plates' ).innerHTML = st.cars.map( ( c, i ) => `<div class="f"><label for="plate${ i }">Licence plate – car ${ i + 1 } <span class="hint">(optional)</span></label><input class="inp" id="plate${ i }" value="${ c.plate || '' }" placeholder="e.g. BL 123 AB" style="text-transform:uppercase"><span class="errt" hidden>Enter the licence plate.</span></div>` ).join( '' );
 
 		const park = per * st.cars.length;
 		const vipN = st.cars.filter( ( c ) => c.vip ).length;
@@ -238,7 +244,7 @@
 		lines += row( 'Shuttle to the airport and back', 'free', 'var(--green)' );
 		if ( vip ) lines += row( `Covered VIP${ vipN > 1 ? ' × ' + vipN : '' }`, P.eur( vip ) );
 		let ex = 0;
-		X.forEach( ( x, i ) => { if ( st.extras[ i ] ) { if ( x.v ) ex += x.v; lines += row( x.t, x.v == null ? 'on site' : x.v ? P.eur( x.v ) : 'free', x.v === 0 ? 'var(--green)' : '' ); } } );
+		X.forEach( ( x, i ) => { if ( st.extras[ i ] ) { const n = x.car ? sel( i ).length : 1; if ( x.v ) ex += x.v * n; const lbl = x.t + ( x.car && st.cars.length > 1 ? ' – car ' + sel( i ).map( ( j ) => j + 1 ).join( ', ' ) : '' ); lines += row( lbl, x.v == null ? 'on site' : x.v ? P.eur( x.v * n ) : 'free', x.v === 0 ? 'var(--green)' : '' ); } } );
 		const flOut = $( 'flOut' ).value.trim().toUpperCase(), flIn = $( 'flIn' ).value.trim().toUpperCase();
 		if ( flOut ) lines += row( 'Flight out', flOut );
 		if ( flIn ) lines += row( 'Flight back', flIn );
@@ -268,7 +274,15 @@
 		const v = e.target.closest( '[data-vip]' );
 		if ( v ) { const c = st.cars[ v.dataset.vip ]; c.vip = ! c.vip; render(); return; }
 		const x = e.target.closest( '[data-x]' );
-		if ( x ) { st.extras[ x.dataset.x ] = ! st.extras[ x.dataset.x ]; render(); }
+		const xc = e.target.closest( '[data-xc]' );
+		if ( xc ) {
+			const [ i, j ] = xc.dataset.xc.split( ':' ).map( Number );
+			const cur = sel( i );
+			const next = cur.includes( j ) ? cur.filter( ( k ) => k !== j ) : [ ...cur, j ];
+			if ( next.length ) st.xc[ i ] = next; else { st.extras[ i ] = false; delete st.xc[ i ]; }
+			render(); return;
+		}
+		if ( x ) { st.extras[ x.dataset.x ] = ! st.extras[ x.dataset.x ]; delete st.xc[ x.dataset.x ]; render(); }
 	} );
 	[ 'flOut', 'flIn', 'dest' ].forEach( ( id ) => $( id ).addEventListener( 'input', render ) );
 	$( 'carPlus' ).onclick = () => { st.cars.push( { vip: false } ); render(); };
@@ -334,7 +348,7 @@
 		need( $( 'name' ), $( 'name' ).value.trim().length > 2 );
 		need( $( 'phone' ), $( 'phone' ).value.replace( /\D/g, '' ).length >= 9 );
 		need( $( 'email' ), /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test( $( 'email' ).value ) );
-		st.cars.forEach( ( c, i ) => { c.plate = $( 'plate' + i ).value; need( $( 'plate' + i ), c.plate.trim().length > 3 ); } );
+		st.cars.forEach( ( c, i ) => { c.plate = $( 'plate' + i ).value; } );
 		if ( invoice() || company() ) { [ 'street', 'zip', 'city' ].forEach( ( id ) => need( $( id ), $( id ).value.trim().length > 1 ) ); }
 		$( 'termsErr' ).hidden = $( 'terms' ).checked;
 		if ( ! $( 'terms' ).checked ) ok = false;
