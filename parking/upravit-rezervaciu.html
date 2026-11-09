@@ -82,10 +82,10 @@
 					<div class="ok-note" id="flSaved" hidden role="status">Let je uložený. Ďakujeme.</div>
 				</div>
 				<div style="display:flex;flex-wrap:wrap;gap:12px" id="acts"><button class="btn btn-line" type="button" id="cancel">Zrušiť rezerváciu</button><a class="btn btn-dark" href="tel:+421904440660">Zmeniť termín – zavolať</a></div>
-				<p class="hint" id="late" hidden style="margin:0">Do príchodu ostáva menej ako 24 hodín, rezerváciu už zrušíte len telefonicky na +421 904 440 660.</p>
+				<p class="hint" id="late" hidden style="margin:0">Parkovanie sa už začalo, rezerváciu už nie je možné zrušiť online. Zavolajte nám na +421 904 440 660.</p>
 				<div class="confirm" id="conf" hidden>
 					<b style="font-size:17px">Naozaj zrušiť rezerváciu <span class="cRef"></span>?</b>
-					<p class="txt" style="font-size:15px;margin:0">Zrušenie je zdarma, lebo do príchodu ostáva viac ako 24 hodín. Potvrdenie pošleme e-mailom.</p>
+					<p class="txt" style="font-size:15px;margin:0">Zrušenie je zdarma. Potvrdenie pošleme e-mailom.</p>
 					<div style="display:flex;flex-wrap:wrap;gap:10px"><button class="btn btn-red btn-sm" type="button" id="yes">Áno, zrušiť</button><button class="btn btn-line btn-sm" type="button" id="no">Nechať rezerváciu</button></div>
 				</div>
 				<div class="ok-note" id="done" hidden role="status">Rezervácia <span class="cRef"></span> je zrušená. Potvrdenie sme poslali e-mailom.</div>
@@ -95,7 +95,7 @@
 				<h2 class="h3" style="font-size:28px">Ako to funguje</h2>
 				<ol class="next" style="margin:0">
 					<li>Zadajte číslo rezervácie z potvrdenia a e-mail, ktorý ste pri rezervácii uviedli.</li>
-					<li>Pošleme vám odkaz. Cez neho rezerváciu zobrazíte alebo ju zrušíte – zadarmo do 24 hodín pred príchodom.</li>
+					<li>Pošleme vám odkaz. Cez neho rezerváciu zobrazíte alebo ju zrušíte – zadarmo kedykoľvek pred príchodom.</li>
 					<li>Zmenu termínu alebo počtu áut vybavíme telefonicky na +421 904 440 660, nonstop.</li>
 				</ol>
 				<a class="btn btn-line" href="rezervacia.html" style="align-self:flex-start">Nová rezervácia</a>
@@ -192,7 +192,7 @@
 	};
 	if ( b.status === 'cancelled' ) {
 		cancelled();
-	} else if ( new Date( b.from + 'T' + b.fromT ) - new Date() < 864e5 ) {
+	} else if ( new Date( b.from + 'T' + b.fromT ) - new Date() < 0 ) {
 		$( 'cancel' ).hidden = true; $( 'late' ).hidden = false;
 	}
 	$( 'cancel' ).onclick = () => { $( 'conf' ).hidden = false; $( 'acts' ).hidden = true; };
