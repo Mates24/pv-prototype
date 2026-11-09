@@ -384,6 +384,16 @@
 		} );
 	} );
 
+	// Google map of the car park: the real site loads it after marketing consent or a click.
+	document.querySelectorAll( '.map-load' ).forEach( ( b ) => b.addEventListener( 'click', () => {
+		const box = b.closest( '.map' );
+		const frame = document.createElement( 'iframe' );
+		frame.src = box.dataset.map;
+		frame.title = box.getAttribute( 'aria-label' ) || 'Mapa';
+		frame.loading = 'lazy';
+		box.replaceChildren( frame );
+	} ) );
+
 	// Price rules from Parkflow's price list (2026-11-06): season by arrival day, +4/6 € per started day after 16.
 	const WINTER = [ 16, 22, 26, 31, 35, 39, 43, 48, 53, 57, 61, 65, 69, 72, 76, 79 ];
 	const SUMMER = [ 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, 98, 105, 112, 119, 126, 133 ];
