@@ -455,3 +455,57 @@ document.querySelectorAll( '.art a.wp-block-button__link:not([href])' ).forEach(
 		a.href = `mailto:${ text }`;
 	}
 } );
+
+/* Promo banner, as pv-site renders it on the real site (texts from Settings → PV banner there). */
+( function () {
+	if ( document.body.dataset.page === 'moj-ucet.html' ) {
+		return;
+	}
+	var store = 'pvpop-proto-500';
+	try {
+		var closed = Number( localStorage.getItem( store ) || 0 );
+		if ( closed && Date.now() - closed < 7 * 864e5 ) {
+			return;
+		}
+	} catch ( e ) {}
+	var box = document.createElement( 'div' );
+	box.className = 'pvpop';
+	box.id = 'pvpop';
+	box.hidden = true;
+	box.setAttribute( 'role', 'dialog' );
+	box.setAttribute( 'aria-modal', 'true' );
+	box.setAttribute( 'aria-labelledby', 'pvpop-h' );
+	box.innerHTML = '<div class="pvpop__card"><button type="button" class="pvpop__x" data-close aria-label="Zavrieť"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg></button>' +
+		'<div class="pvpop__badge" aria-hidden="true"><b>+500</b><span>bodov</span></div>' +
+		'<div class="pvpop__body"><h2 class="pvpop__h" id="pvpop-h">Zaregistrujte sa a získajte 500 bodov</h2>' +
+		'<p class="pvpop__t">Za každé zaplatené 1 € dostanete 10 bodov, 1 000 bodov = 10 € zľava na servis.<br>Na narodeniny vám pošleme 1 500 bodov a pripomenieme STK aj servisnú prehliadku.</p>' +
+		'<div class="pvpop__acts"><a class="btn btn-red" href="moj-ucet.html" data-go>Zaregistrovať sa</a><button type="button" class="pvpop__later" data-close>Teraz nie</button></div></div></div>';
+	document.body.appendChild( box );
+	var remember = function () {
+		try { localStorage.setItem( store, String( Date.now() ) ); } catch ( e ) {}
+	};
+	var onKey = function ( e ) {
+		if ( 'Escape' === e.key ) {
+			close();
+		}
+	};
+	var close = function () {
+		box.classList.remove( 'is-open' );
+		setTimeout( function () { box.hidden = true; }, 300 );
+		remember();
+		document.removeEventListener( 'keydown', onKey );
+	};
+	box.addEventListener( 'click', function ( e ) {
+		if ( e.target === box || e.target.closest( '[data-close]' ) ) {
+			close();
+		} else if ( e.target.closest( '[data-go]' ) ) {
+			remember();
+		}
+	} );
+	setTimeout( function () {
+		box.hidden = false;
+		requestAnimationFrame( function () { box.classList.add( 'is-open' ); } );
+		box.querySelector( '.pvpop__x' ).focus();
+		document.addEventListener( 'keydown', onKey );
+	}, 4000 );
+}() );

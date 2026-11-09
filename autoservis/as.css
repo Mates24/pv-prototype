@@ -679,3 +679,30 @@ a.pvb-tile:hover { background: var(--grey); }
 #loginSec .login { grid-template-columns: minmax(0, 1fr); }
 #loginSec .login > div:last-child { order: -1; }
 @media (min-width: 761px) { #loginSec .login > div:last-child .how { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 32px; } }
+
+/* Promo banner (pv-site Popup): black panel with the big number, white panel with the offer. */
+.pvpop { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 16px; background: rgba(0, 0, 0, .62); opacity: 0; transition: opacity 280ms ease; }
+.pvpop[hidden] { display: none; }
+.pvpop.is-open { opacity: 1; }
+.pvpop__card { position: relative; display: grid; grid-template-columns: minmax(0, 250px) minmax(0, 1fr); width: min(780px, 100%); max-height: calc(100dvh - 32px); overflow: auto; background: var(--white); transform: translateY(28px); transition: transform 420ms var(--ease); }
+.pvpop.is-open .pvpop__card { transform: none; }
+.pvpop__badge { display: flex; flex-direction: column; justify-content: flex-end; gap: 6px; padding: 28px 24px; background: var(--ink); color: var(--white); clip-path: polygon(0 0, 100% 0, 93% 100%, 0 100%); }
+.pvpop__badge b { font: 700 clamp(56px, 9vw, 84px)/.85 var(--cond); color: var(--red); letter-spacing: -0.02em; }
+.pvpop__badge span { font: 600 18px var(--cond); }
+.pvpop__body { padding: 40px 40px 32px 24px; }
+.pvpop__h { margin: 0 0 14px; padding-right: 32px; font: 600 clamp(26px, 3vw, 34px)/1.05 var(--cond); }
+.pvpop__t { margin: 0 0 26px; color: var(--muted); font-size: 16px; line-height: 1.6; }
+.pvpop__acts { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
+.pvpop__later { padding: 0; border: 0; background: none; color: var(--muted); font: 500 14px var(--cond); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.pvpop__x { position: absolute; z-index: 2; top: 10px; right: 10px; display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; padding: 0; border: 0; background: none; color: var(--ink); cursor: pointer; }
+.pvpop__x:hover, .pvpop__later:hover { color: var(--red); }
+.pvpop :focus-visible { outline: 3px solid var(--red); outline-offset: 2px; }
+@media (max-width: 640px) {
+	.pvpop { align-items: flex-end; padding: 0; }
+	.pvpop__card { grid-template-columns: minmax(0, 1fr); max-height: 92dvh; }
+	.pvpop__badge { flex-direction: row; justify-content: flex-start; align-items: baseline; gap: 10px; padding: 22px 64px 18px 20px; clip-path: polygon(0 0, 100% 0, 100% 82%, 0 100%); }
+	.pvpop__x { color: var(--white); }
+	.pvpop__body { padding: 22px 20px 28px; }
+	.pvpop__h { padding-right: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .pvpop, .pvpop__card { transition: none; transform: none; } }
