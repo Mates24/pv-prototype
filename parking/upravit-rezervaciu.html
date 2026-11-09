@@ -161,7 +161,7 @@
 	if ( b.pay === 'invoice' && b.invoice ) {
 		$( 'vInv' ).hidden = false;
 		$( 'invNo' ).textContent = 'č. ' + b.invoice.number;
-		$( 'invRows' ).innerHTML = row( 'IBAN', 'SK29 1100 0000 0029 4219 4864' ) + row( 'Variabilný symbol', b.invoice.number ) + row( 'Suma', b.total ) + row( 'Splatnosť', P.sk( b.invoice.due ) );
+		$( 'invRows' ).innerHTML = row( 'IBAN', 'LT74 3250 0373 5291 2676' ) + row( 'Variabilný symbol', b.invoice.number ) + row( 'Suma', b.total ) + row( 'Splatnosť', P.sk( b.invoice.due ) );
 	}
 	// Flight numbers can be added later: many customers know them only a few days before the trip.
 	const flights = () => {
