@@ -101,7 +101,7 @@
 					<div>
 						<h2 style="margin-bottom:12px">Zľavový kód</h2>
 						<div class="code-row"><input class="inp" id="code" placeholder="napr. LETO10" autocomplete="off" aria-label="Zľavový kód"><button type="button" class="btn btn-line" id="codeBtn" style="min-height:54px">Použiť</button></div>
-						<p class="hint" id="codeMsg" style="margin:8px 0 0">Zľava platí na cenu parkovania, nie na doplnkové služby. Na ukážku skúste LETO10.</p>
+						<p class="hint" id="codeMsg" style="margin:8px 0 0">Zľava platí na celú cenu vrátane doplnkových služieb. Na ukážku skúste LETO10.</p>
 					</div>
 					<button class="btn btn-red" type="submit" style="align-self:flex-start">Pokračovať – vaše údaje <svg class="arr" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
 				</form>
@@ -239,18 +239,18 @@
 		const park = per * st.cars.length;
 		const vipN = st.cars.filter( ( c ) => c.vip ).length;
 		const vip = vipN * 5 * days;
-		const disc = st.code ? Math.round( park * st.code.pct ) / 100 : 0;
 		let lines = row( `Parkovanie · ${ bad ? '— dní' : P.dl( days ) }${ st.cars.length > 1 ? ' × ' + st.cars.length + ' autá' : '' }`, bad ? '—' : P.eur( park ) );
 		lines += row( 'Transfer na letisko a späť', 'zdarma', 'var(--green)' );
 		if ( vip ) lines += row( `Kryté VIP${ vipN > 1 ? ' × ' + vipN : '' }`, P.eur( vip ) );
 		let ex = 0;
 		X.forEach( ( x, i ) => { if ( st.extras[ i ] ) { const n = x.car ? sel( i ).length : 1; if ( x.v ) ex += x.v * n; const lbl = x.t + ( x.car && st.cars.length > 1 ? ' – auto ' + sel( i ).map( ( j ) => j + 1 ).join( ', ' ) : '' ); lines += row( lbl, x.v == null ? 'na mieste' : x.v ? P.eur( x.v * n ) : 'zdarma', x.v === 0 ? 'var(--green)' : '' ); } } );
+		const disc = st.code ? Math.round( ( park + vip + ex ) * st.code.pct ) / 100 : 0;
 		const flOut = $( 'flOut' ).value.trim().toUpperCase(), flIn = $( 'flIn' ).value.trim().toUpperCase();
 		if ( flOut ) lines += row( 'Let tam', flOut );
 		if ( flIn ) lines += row( 'Let späť', flIn );
 		const dest = $( 'dest' ).value.trim();
 		if ( dest ) lines += row( 'Destinácia', esc( dest ) );
-		if ( disc ) lines += row( `Zľava ${ st.code.name } (−${ st.code.pct } % z parkovania)`, '−' + P.eur( disc ), 'var(--green)' );
+		if ( disc ) lines += row( `Zľava ${ st.code.name } (−${ st.code.pct } %)`, '−' + P.eur( disc ), 'var(--green)' );
 		$( 'sumLines' ).innerHTML = lines;
 		$( 'sumTotal' ).textContent = bad ? '—' : P.eur( park + vip + ex - disc );
 		$( 'sumFrom' ).textContent = `${ P.sk( st.from ) } · ${ st.fromT }`;
