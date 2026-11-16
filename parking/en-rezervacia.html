@@ -199,7 +199,7 @@
 	const P = window.PV, $ = ( id ) => document.getElementById( id );
 	const a = new Date(); a.setDate( a.getDate() + 7 );
 	const b = new Date( a ); b.setDate( b.getDate() + 7 );
-	const st = { from: P.iso( a ), to: P.iso( b ), fromT: '05:30', toT: '22:15', cars: [ { vip: false } ], extras: {}, xc: {}, code: null, step: 1 };
+	const st = { from: P.iso( a ), to: P.iso( b ), fromT: '05:30', toT: '22:15', cars: [ { vip: false } ], extras: {}, xc: {}, xo: {}, code: null, step: 1 };
 	// Dates and extras chosen in the price tool on the home page.
 	const q = new URLSearchParams( location.search );
 	if ( /^\d{4}-\d{2}-\d{2}$/.test( q.get( 'from' ) || '' ) && /^\d{4}-\d{2}-\d{2}$/.test( q.get( 'to' ) || '' ) ) {
@@ -210,13 +210,14 @@
 	if ( q.get( 'vip' ) === '1' ) st.cars[ 0 ].vip = true;
 	( q.get( 'x' ) || '' ).split( ',' ).filter( Boolean ).forEach( ( i ) => ( st.extras[ i ] = true ) );
 	const X = [
+		{ t: 'Child car seat', v: 0, pl: 'free' },
+		{ t: 'EV charging', car: true, v: null, pl: '€0.50/kWh on site' },
 		{ t: 'VIP car pick-up at the airport', car: true, v: 20, pl: '€20' },
+		// One row with a choice (owner 2026-11-16), cheapest option first.
+		{ t: 'Transfer to/from Vienna airport', pl: 'from €60', o: [ { t: 'up to 4 people', v: 60, pl: '€60' }, { t: 'up to 8 people', v: 90, pl: '€90' } ] },
 		{ t: 'Full car cleaning', car: true, v: 70, pl: '€70' },
 		{ t: 'Full cleaning with upholstery shampoo', car: true, v: 140, pl: '€140' },
-		{ t: 'EV charging', car: true, v: null, pl: '€0.50/kWh on site' },
-		{ t: 'Transfer to/from Vienna airport – up to 4 people', v: 60, pl: '€60' },
-		{ t: 'Transfer to/from Vienna airport – up to 8 people', v: 90, pl: '€90' },
-		{ t: 'Child car seat', v: 0, pl: 'free' },
+		{ t: 'Transfer to/from Budapest airport', pl: 'from €220', o: [ { t: 'up to 4 people', v: 220, pl: '€220' }, { t: 'up to 8 people', v: 260, pl: '€260' } ] },
 	];
 	// Per-car extras: which cars (owner 2026-11-07); the first car until the customer picks.
 	const sel = ( i ) => { const v = ( st.xc[ i ] || [ 0 ] ).filter( ( j ) => j < st.cars.length ); return v.length ? v : [ 0 ]; };
@@ -233,7 +234,7 @@
 		$( 'carMinus' ).disabled = st.cars.length < 2;
 		$( 'carPlus' ).disabled = st.cars.length > 5;
 		$( 'cars' ).innerHTML = st.cars.map( ( c, i ) => `<div class="car"><span class="no">${ i + 1 }</span><span style="font-size:15px">Car ${ i + 1 }<br><span class="hint">${ summer ? 'Summer' : 'Winter' } season · ${ bad ? '—' : P.eur( per ) }</span></span><button type="button" class="xtra${ c.vip ? ' on' : '' }" data-vip="${ i }" aria-pressed="${ c.vip }" style="border:0;width:auto;min-height:44px;padding:0"><span class="bx">${ CHECK }</span><span>Covered VIP</span><span class="pr">+€5 / day</span></button></div>` ).join( '' );
-		$( 'extras' ).innerHTML = X.map( ( x, i ) => `<div class="pvx"><button type="button" class="xtra${ st.extras[ i ] ? ' on' : '' }" data-x="${ i }" aria-pressed="${ !! st.extras[ i ] }"><span class="bx">${ CHECK }</span><span>${ x.t }</span><span class="pr">${ x.pl }</span></button>${ x.car && st.extras[ i ] && st.cars.length > 1 ? `<div class="pvx-cars"><span class="hint">For which car?</span>${ st.cars.map( ( c, j ) => `<button type="button" class="chip${ sel( i ).includes( j ) ? ' on' : '' }" data-xc="${ i }:${ j }" aria-pressed="${ sel( i ).includes( j ) }">Car ${ j + 1 }</button>` ).join( '' ) }</div>` : '' }</div>` ).join( '' );
+		$( 'extras' ).innerHTML = X.map( ( x, i ) => `<div class="pvx"><button type="button" class="xtra${ st.extras[ i ] ? ' on' : '' }" data-x="${ i }" aria-pressed="${ !! st.extras[ i ] }"><span class="bx">${ CHECK }</span><span>${ x.t }</span><span class="pr">${ x.pl }</span></button>${ x.car && st.extras[ i ] && st.cars.length > 1 ? `<div class="pvx-cars"><span class="hint">For which car?</span>${ st.cars.map( ( c, j ) => `<button type="button" class="chip${ sel( i ).includes( j ) ? ' on' : '' }" data-xc="${ i }:${ j }" aria-pressed="${ sel( i ).includes( j ) }">Car ${ j + 1 }</button>` ).join( '' ) }</div>` : '' }${ x.o && st.extras[ i ] ? `<div class="pvx-cars"><span class="hint">Choose:</span>${ x.o.map( ( o, k ) => `<button type="button" class="chip${ ( st.xo[ i ] || 0 ) === k ? ' on' : '' }" data-xo="${ i }:${ k }" aria-pressed="${ ( st.xo[ i ] || 0 ) === k }">${ o.t } · ${ o.pl }</button>` ).join( '' ) }</div>` : '' }</div>` ).join( '' );
 		$( 'plates' ).innerHTML = st.cars.map( ( c, i ) => `<div class="f"><label for="plate${ i }">Licence plate – car ${ i + 1 } <span class="hint">(optional)</span></label><input class="inp" id="plate${ i }" value="${ c.plate || '' }" placeholder="e.g. BL 123 AB" style="text-transform:uppercase"><span class="errt" hidden>Enter the licence plate.</span></div>` ).join( '' );
 
 		const park = per * st.cars.length;
@@ -243,7 +244,7 @@
 		lines += row( 'Shuttle to the airport and back', 'free', 'var(--green)' );
 		if ( vip ) lines += row( `Covered VIP${ vipN > 1 ? ' × ' + vipN : '' }`, P.eur( vip ) );
 		let ex = 0;
-		X.forEach( ( x, i ) => { if ( st.extras[ i ] ) { const n = x.car ? sel( i ).length : 1; if ( x.v ) ex += x.v * n; const lbl = x.t + ( x.car && st.cars.length > 1 ? ' – car ' + sel( i ).map( ( j ) => j + 1 ).join( ', ' ) : '' ); lines += row( lbl, x.v == null ? 'on site' : x.v ? P.eur( x.v * n ) : 'free', x.v === 0 ? 'var(--green)' : '' ); } } );
+		X.forEach( ( x, i ) => { if ( st.extras[ i ] ) { const xv = x.o ? x.o[ st.xo[ i ] || 0 ].v : x.v; const xt = x.o ? x.t + ' – ' + x.o[ st.xo[ i ] || 0 ].t : x.t; const n = x.car ? sel( i ).length : 1; if ( xv ) ex += xv * n; const lbl = xt + ( x.car && st.cars.length > 1 ? ' – car ' + sel( i ).map( ( j ) => j + 1 ).join( ', ' ) : '' ); lines += row( lbl, xv == null ? 'on site' : xv ? P.eur( xv * n ) : 'free', xv === 0 ? 'var(--green)' : '' ); } } );
 		const disc = st.code ? Math.round( ( park + vip + ex ) * st.code.pct ) / 100 : 0;
 		const flOut = $( 'flOut' ).value.trim().toUpperCase(), flIn = $( 'flIn' ).value.trim().toUpperCase();
 		if ( flOut ) lines += row( 'Flight out', flOut );
@@ -275,6 +276,8 @@
 		if ( v ) { const c = st.cars[ v.dataset.vip ]; c.vip = ! c.vip; render(); return; }
 		const x = e.target.closest( '[data-x]' );
 		const xc = e.target.closest( '[data-xc]' );
+		const xo = e.target.closest( '[data-xo]' );
+		if ( xo ) { const [ i, k ] = xo.dataset.xo.split( ':' ).map( Number ); st.xo[ i ] = k; render(); return; }
 		if ( xc ) {
 			const [ i, j ] = xc.dataset.xc.split( ':' ).map( Number );
 			const cur = sel( i );
